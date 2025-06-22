@@ -1,0 +1,97 @@
+class AppApis {
+  AppApis._();
+
+  static String baseUrl = "https://healthhive.me";
+
+  // authentications
+  static String register = "/api/burzakh/register";
+  static String login = "/api/burzakh/login";
+  static String sendOtp = "/api/burzakh/send-otp";
+  static String verifyOtp = "/api/burzakh/verify-otp";
+  static String resetPassword = "/api/burzakh/set-new-password";
+
+  //user side
+  static String documentSubmission = "/api/burzakh/user-documents-submission";
+  static String graveSupervisorSubmission =
+      "/api/burzakh/submission-to-grave-supervisor";
+  static String cda = "/api/burzakh/cda-submission";
+  static String cancelRta = "/api/burzakh/rta-cancellation";
+  static String cancelCda = "/api/burzakh/cda-cancellation";
+  static String getCda = "/api/burzakh/cda/pending";
+  static String getRta = "/api/burzakh/rta/pending";
+  static String rta = "/api/burzakh/rta-submission";
+  //// in end add user id
+  static String getCase = "/api/burzakh/list-cases/";
+  static String recentActivity = "/api/burzakh/recent-activities/";
+
+  static String caseDetail({required String userId, required String caseId}) =>
+      "/api/burzakh/user/$userId/case/$caseId";
+  static String caseGraveyardDetail(
+          {required String userId, required String caseId}) =>
+      "/api/burzakh/list-graveyard-statuses/$caseId";
+
+  static String sendChat({required String id}) => "/api/burzakh/$id";
+  static String recieveChat({required String id}) =>
+      "/api/burzakh/get-support-messages";
+
+  // sharedpref keys
+
+  static String user = 'user_login';
+
+  static String isFirstTime = "isFirstTime";
+
+  //  Admin Side Apis
+  // Police Side Apis
+  static String policeCassesCountApi =
+      "${baseUrl}/api/burzakh-police/cases-count";
+  static String policeFilterCassesApi(String? filter) =>
+      "${baseUrl}/api/burzakh-police/filter-cases?filter=$filter";
+  static String policeVideoCallScheduleApi =
+      "${baseUrl}/api/burzakh-police/schedule-calling";
+
+  static String rtarequestApi = "${baseUrl}/api/burzakh-rta/get-requests";
+  static String rtarequestDetailApi(id) =>
+      "${baseUrl}/api/burzakh-rta/case-detail/$id";
+  static String cdarequestDetailApi(id) =>
+      "${baseUrl}/api/burzakh-cda/case-detail/$id";
+  static String policeQuickActionApi =
+      "${baseUrl}/api/burzakh-police/quick-actions";
+  static String approvePoliceCaseApi(caseId, userId) =>
+      "${baseUrl}/api/burzakh-police/cases/$caseId/approve/$userId";
+
+  static String updateRtaRequestStatus(id) =>
+      "${baseUrl}/api/burzakh-rta/rta-requests/$id/update-status";
+
+  // Filter Api For Rta
+  static String rtaFilterApi(String? filter) =>
+      "${baseUrl}/api/burzakh-rta/filter-requests?filter=$filter";
+  static String sendrtaChatApi(userId, message) =>
+      "${baseUrl}/api/burzakh-rta/send-support-message?user_id=$userId&message=$message";
+  static String getRtaChatApi(id) =>
+      "${baseUrl}/api/burzakh-rta/support/messages/user/$id";
+  static String getCdaChatApi(id) =>
+      "${baseUrl}/api/burzakh-cda/support/messages/user/$id";
+  static String sendCdaChatApi(userId, message) =>
+      "${baseUrl}/api/burzakh-cda/send-support-message?user_id=$userId&message=$message";
+
+  // Cda Side Apis
+  static String cdaRequestApi = "${baseUrl}/api/burzakh-cda/get-requests";
+  static String cdaRequestDetailApi(id) =>
+      "${baseUrl}/api/burzakh-cda/case-detail/$id";
+  static String updateCdaRequestStatus(id) =>
+      "${baseUrl}/api/burzakh-cda/cda-requests/$id/update-status";
+
+  // Filter Api For Cda
+  static String cdaFilterApi(String? filter) =>
+      "${baseUrl}/api/burzakh-cda/filter-requests?filter=$filter";
+
+  // Notifications
+  static String notificationsApi(userId) =>
+      "${baseUrl}/api/burzakh/get-notifications/$userId";
+
+  static String sendUserChatMessageApi =
+      "${baseUrl}/api/burzakh/send-support-message";
+
+  static String uploadAdditionalDoc(caseid) =>
+      "${baseUrl}/api/burzakh/upload-addtional-document/$caseid";
+}

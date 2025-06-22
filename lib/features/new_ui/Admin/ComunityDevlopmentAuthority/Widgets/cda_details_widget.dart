@@ -1,0 +1,485 @@
+import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../Controller/cda_controller.dart';
+
+class MapPatternPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.blue.withOpacity(0.1)
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+
+    final double gridSize = 20;
+    for (double i = 0; i < size.width; i += gridSize) {
+      canvas.drawLine(
+        Offset(i, 0),
+        Offset(i, size.height),
+        paint,
+      );
+    }
+    for (double i = 0; i < size.height; i += gridSize) {
+      canvas.drawLine(
+        Offset(0, i),
+        Offset(size.width, i),
+        paint,
+      );
+    }
+
+    final roadPaint = Paint()
+      ..color = Colors.green.withOpacity(0.2)
+      ..strokeWidth = 3
+      ..style = PaintingStyle.stroke;
+
+    canvas.drawLine(
+      Offset(size.width * 0.2, size.height * 0.3),
+      Offset(size.width * 0.8, size.height * 0.7),
+      roadPaint,
+    );
+
+    canvas.drawLine(
+      Offset(size.width * 0.1, size.height * 0.8),
+      Offset(size.width * 0.6, size.height * 0.2),
+      roadPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
+}
+
+class CdaRequestDetailsWidget extends StatelessWidget {
+  final String name;
+  final String caseId;
+  final String submittedDate;
+  final String statusBadgeText;
+  final Color? statusBadgeColor;
+  final String signText;
+  final String location;
+  final String mapPreviewText;
+  final VoidCallback? onApprove;
+  final VoidCallback? onReject;
+  final VoidCallback? onEdit;
+  final VoidCallback? onOpenChat;
+  final VoidCallback? onMapTap;
+  final Color? primaryColor;
+  final Color? backgroundColor;
+
+  const CdaRequestDetailsWidget({
+    super.key,
+    required this.name,
+    required this.caseId,
+    required this.submittedDate,
+    this.statusBadgeText = 'Missing required documents',
+    this.statusBadgeColor,
+    required this.signText,
+    required this.location,
+    this.mapPreviewText = 'Map Preview (Google Maps)',
+    this.onApprove,
+    this.onReject,
+    this.onEdit,
+    this.onOpenChat,
+    this.onMapTap,
+    this.primaryColor,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final Color mainColor = primaryColor ?? const Color(0xFF1e40af);
+    final Color bgColor = backgroundColor ?? Colors.white;
+    final Color badgeColor = statusBadgeColor ?? Colors.orange[100]!;
+    final controller = Get.find<CdaController>();
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(context.mw * 0.04),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header with name, case ID and status badge
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: context.mh * 0.022,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    0.005.ph(context),
+                    Text(
+                      'Submitted on $submittedDate',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    caseId,
+                    style: TextStyle(
+                      color: mainColor,
+                      fontSize: context.mh * 0.014,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  0.01.ph(context),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.mw * 0.025,
+                      vertical: context.mh * 0.006,
+                    ),
+                    decoration: BoxDecoration(
+                      color: badgeColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      statusBadgeText,
+                      style: TextStyle(
+                        color: Colors.orange[800],
+                        fontSize: context.mh * 0.011,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
+          0.03.ph(context),
+
+          // Request Details Section
+          Text(
+            'Request Details',
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: context.mh * 0.016,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          0.02.ph(context),
+
+          // Location
+          _buildDetailRow(
+            context,
+            Icons.location_on_outlined,
+            'Location',
+            location,
+          ),
+
+          0.03.ph(context),
+          // Location Preview Section
+          Text(
+            'Location Preview',
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: context.mh * 0.016,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
+          0.015.ph(context),
+
+          // Map Preview Container
+          // Map Preview Container
+          GestureDetector(
+            onTap: onMapTap,
+            child: Container(
+              width: double.infinity,
+              height: context.mh * 0.15,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.blue[50]!,
+                    Colors.green[50]!,
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.blue.withOpacity(0.2),
+                  width: 1.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Stack(
+                children: [
+                  // Background pattern
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: MapPatternPainter(),
+                    ),
+                  ),
+                  // Content
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(context.mw * 0.025),
+                          decoration: BoxDecoration(
+                            color: Colors.blue[600],
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.blue.withOpacity(0.3),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                            size: context.mh * 0.025,
+                          ),
+                        ),
+                        0.015.ph(context),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: context.mw * 0.04,
+                            vertical: context.mh * 0.008,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.9),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.blue.withOpacity(0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.map,
+                                color: Colors.blue[700],
+                                size: context.mh * 0.016,
+                              ),
+                              0.01.pw(context),
+                              Text(
+                                mapPreviewText,
+                                style: TextStyle(
+                                  color: Colors.blue[700],
+                                  fontSize: context.mh * 0.014,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              0.01.pw(context),
+                              Icon(
+                                Icons.open_in_new,
+                                color: Colors.blue[700],
+                                size: context.mh * 0.014,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          0.04.ph(context),
+
+          // Action Buttons
+          Row(
+            children: [
+              // Approve Button
+              Obx(
+                () {
+                  return Visibility(
+                    visible: statusBadgeText == "Approved" ? false : true,
+                    child: Expanded(
+                      child: GestureDetector(
+                        onTap: onApprove,
+                        child: Container(
+                          height: context.mh * 0.055,
+                          decoration: BoxDecoration(
+                            color: mainColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: controller.approvedloading.value
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'Approve Request',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: context.mh * 0.014,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              0.02.pw(context),
+
+              // Reject Button
+              Obx(
+                () {
+                  return Visibility(
+                    visible: statusBadgeText == "Approved" ? false : true,
+                    child: Expanded(
+                      child: GestureDetector(
+                        onTap: onReject,
+                        child: Container(
+                          height: context.mh * 0.055,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: controller.rejectloading.value
+                              ? Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    'Reject Request',
+                                    style: TextStyle(
+                                      color: Colors.grey[700],
+                                      fontSize: context.mh * 0.014,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+
+              0.02.pw(context),
+
+              // Chat Button
+              Expanded(
+                child: GestureDetector(
+                  onTap: onOpenChat,
+                  child: Container(
+                    height: context.mh * 0.055,
+                    width: context.mw * 0.25,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Open Chat',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailRow(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String content, {
+    bool isMultiline = false,
+    bool isDocuments = false,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          icon,
+          color: Colors.grey[600],
+          size: context.mh * 0.02,
+        ),
+        0.015.pw(context),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: context.mh * 0.015,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              if (!isDocuments) ...[
+                0.005.ph(context),
+                Text(
+                  content,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: context.mh * 0.014,
+                    fontWeight: FontWeight.w400,
+                    height: isMultiline ? 1.3 : 1.0,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "66616310517",
+    "project_id": "burzakh-5a5a8",
+    "storage_bucket": "burzakh-5a5a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66616310517:android:5f6d45c579759e0af763bc",
+        "android_client_info": {
+          "package_name": "com.example.burzakh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDjuMy_gwKvAwwho9CShPjexXuLqFfdI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
