@@ -83,7 +83,7 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                           statusBadgeText: data.status ?? "",
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "brz#${data.id ?? ""}",
+                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
                           submittedDate: DateFormat('yyyy-MM-dd').format(
                             DateTime.parse(data.createdAt ??
                                 DateTime.now().toIso8601String()),

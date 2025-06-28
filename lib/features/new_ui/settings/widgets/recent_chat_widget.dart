@@ -102,13 +102,14 @@ class _RecentChatWidgetState extends State<RecentChatWidget> {
                           color: Colors.grey[100],
                         ),
                         UserChatWidget(
-                            adminType: "cda",
-                            id: "send-support-message",
-                            name: "CDA Assistance",
-                            time: '10:52 AM',
-                            image: "assets/images/png/cdalogo.png",
-                            lastMessage:
-                                "👋 Welcome! Let us know how we can assist you. We're here to help!"),
+                          adminType: "cda",
+                          id: "send-support-message",
+                          name: "CDA Assistance",
+                          time: '10:52 AM',
+                          image: "assets/images/png/cdalogo.png",
+                          lastMessage:
+                              "👋 Welcome! Let us know how we can assist you. We're here to help!",
+                        ),
                       ],
                     )
                   : SizedBox(),

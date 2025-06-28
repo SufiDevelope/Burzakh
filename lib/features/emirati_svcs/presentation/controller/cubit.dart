@@ -219,9 +219,10 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
     CdaModel model = CdaModel(
       address: locationController.text.isEmpty ? "" : locationController.text,
       // time: "${time!.hour}:${time!.minute}",
-      dateTime: mourningStartDate!,
+      dateTime: mourningStartDate ?? DateTime.now(),
       userId: _authenticationCubit.userModel!.id.toString(),
       case_name: selectedCaseName ?? "",
+      mourningEndDate: mourningEndDate,
     );
     var response = await _useCase.uploadCda(model: model);
     if (response is Left) {

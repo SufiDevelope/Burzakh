@@ -134,7 +134,11 @@ class CDADashboardHeaderWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.logout, size: 20),
+                      Icon(
+                        Icons.logout,
+                        size: 20,
+                        color: Colors.white,
+                      ),
                       0.02.pw(context),
                       Text(
                         'Logout',

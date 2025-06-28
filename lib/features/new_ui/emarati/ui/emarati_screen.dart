@@ -127,22 +127,22 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                             : ServiceWidget(
                                 onTap: () {
                                   if (_emiratiScvCubit.rtaGetModel != null) {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) =>
-                                    //         RtaServiceRequestScreen(),
-                                    //   ),
-                                    // );
-                                    showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      constraints: BoxConstraints(
-                                          maxHeight: mdHeight(context) * 1),
-                                      backgroundColor: Colors.transparent,
-                                      barrierColor: AppColor.blurWhiteColor(),
-                                      builder: (context) => SignAgeSheet(),
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            RtaServiceRequestScreen(id: 'RTA',),
+                                      ),
                                     );
+                                    // showModalBottomSheet(
+                                    //   context: context,
+                                    //   isScrollControlled: true,
+                                    //   constraints: BoxConstraints(
+                                    //       maxHeight: mdHeight(context) * 1),
+                                    //   backgroundColor: Colors.transparent,
+                                    //   barrierColor: AppColor.blurWhiteColor(),
+                                    //   builder: (context) => SignAgeSheet(),
+                                    // );
                                   } else {
                                     showModalBottomSheet(
                                       context: context,
@@ -207,7 +207,7 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                             .cdaGetModel?.locationOfTent ??
                                         "",
                                     ref:
-                                        "${"CDA".tr()}-${_emiratiScvCubit.cdaGetModel!.id}",
+                                        "Case ID: BUR-${DateTime.now().year}-${_emiratiScvCubit.cdaGetModel?.id ?? ""}",
                                     emiratiScvCubit: _emiratiScvCubit,
                                   )
                                 : SizedBox(),
@@ -220,7 +220,7 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                             "",
                                     text1: "Road Signage",
                                     ref:
-                                        "${"RTA".tr()}-${_emiratiScvCubit.rtaGetModel!.id}",
+                                        "Case ID: BUR-${DateTime.now().year}-${_emiratiScvCubit.rtaGetModel?.id ?? ""}",
                                     emiratiScvCubit: _emiratiScvCubit,
                                   )
                                 : SizedBox(),

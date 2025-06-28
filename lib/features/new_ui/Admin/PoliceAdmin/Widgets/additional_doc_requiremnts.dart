@@ -66,10 +66,13 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                   ),
                 ),
                 0.01.pw(context),
-                Icon(
-                  Icons.close,
-                  color: Color(0xFF2E3A59),
-                  size: 24,
+                GestureDetector(
+                  onTap: () => onClose(),
+                  child: Icon(
+                    Icons.close,
+                    color: Color(0xFF2E3A59),
+                    size: 24,
+                  ),
                 ),
               ],
             ),

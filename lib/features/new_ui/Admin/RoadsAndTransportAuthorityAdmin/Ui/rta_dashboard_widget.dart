@@ -196,7 +196,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                         return FilterListCardWidget(
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "Case ID: ${data.id}",
+                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
                           location: data.locationOfHouse ?? "",
                           signCount: data.signsRequired.toString(),
                           rta: 'rta',

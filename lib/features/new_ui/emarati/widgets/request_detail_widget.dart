@@ -30,7 +30,8 @@ class RequestDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String date;
+    String startDate;
+    String endDate;
 
     if (cdaGetModel != null) {
       isApproved = cdaGetModel?.status == "Pending"
@@ -38,15 +39,20 @@ class RequestDetailWidget extends StatelessWidget {
           : cdaGetModel!.status == "Rejected"
               ? 2
               : 1;
-      date = DateFormat('MM dd, yyyy')
+      startDate = DateFormat('MM dd, yyyy')
           .format(cdaGetModel?.mourningStartDate ?? DateTime.now());
+      endDate = DateFormat('MM dd, yyyy')
+          .format(cdaGetModel?.mourningEndDate ?? DateTime.now());
     } else {
       isApproved = rtaGetModel?.status == "Pending"
           ? 0
           : rtaGetModel!.status == "Rejected"
               ? 2
               : 1;
-      date = DateFormat('MM dd, yyyy').format(rtaGetModel!.mourningStartDate);
+      startDate =
+          DateFormat('MM dd, yyyy').format(rtaGetModel!.mourningStartDate);
+      endDate = DateFormat('MM dd, yyyy')
+          .format(rtaGetModel?.mourningEndDate ?? DateTime.now());
     }
 
     return Container(
@@ -87,7 +93,7 @@ class RequestDetailWidget extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: AppText(
                         text:
-                            "${"Reference Number:".tr()} ${rtaGetModel == null ? "CDA".tr() : "RTA".tr()}-${rtaGetModel == null ? cdaGetModel?.id : rtaGetModel?.id}",
+                            "Case ID: BUR-${DateTime.now().year}-${cdaGetModel?.id ?? rtaGetModel?.id}",
                         fontSize: context.mh * 0.015,
                         color: Colors.grey[500],
                       ),
@@ -127,7 +133,9 @@ class RequestDetailWidget extends StatelessWidget {
                       context,
                     ),
                     const SizedBox(height: 12),
-                    _buildDetailRow("Date:", date, context),
+                    _buildDetailRow("Start Date:", startDate, context),
+                    const SizedBox(height: 12),
+                    _buildDetailRow("End Date:", endDate, context),
                     const SizedBox(height: 12),
                     Visibility(
                       visible: cdaGetModel == null ? true : false,

@@ -130,7 +130,11 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.logout, size: 20),
+                      Icon(
+                        Icons.logout,
+                        size: 20,
+                        color: Colors.white,
+                      ),
                       0.02.pw(context),
                       Text(
                         'Logout',
@@ -178,13 +182,13 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                     )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                    child: Image(
+                      child: Image(
                         image: AssetImage(imageurl ?? ""),
                         fit: BoxFit.cover,
                         width: context.mw * 0.1,
                         height: context.mw * 0.1,
                       ),
-                  ),
+                    ),
             ),
             0.03.pw(context),
 

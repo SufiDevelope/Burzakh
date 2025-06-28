@@ -83,10 +83,14 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                           return CdaRequestDetailsWidget(
                             name:
                                 "${data?.user?.firstName} ${data?.user?.lastName}",
-                            caseId: 'brz# ${data?.id}',
+                            caseId:
+                                "Case ID: BUR-${DateTime.now().year}-${data?.id ?? ""}",
                             submittedDate: DateFormat('yyyy-MM-dd').format(
-                                DateTime.parse(data?.createdAt ??
-                                    DateTime.now().toIso8601String())),
+                              DateTime.parse(
+                                data?.createdAt ??
+                                    DateTime.now().toIso8601String(),
+                              ),
+                            ),
                             statusBadgeText: data?.status ?? '',
                             onApprove: () {
                               controller.updateCdaRequestStatusApi(

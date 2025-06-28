@@ -295,32 +295,42 @@ class CaseDetailsDialog extends StatelessWidget {
                               additionalDocumentUrl == null
                           ? false
                           : true,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            additionalDocument ?? "",
-                            style: TextStyle(
-                              fontSize: context.mh * 0.016,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              _downloadFile(additionalDocumentUrl ?? "");
-                            },
-                            child: Text(
-                              "Download",
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[50],
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              additionalDocument ?? "",
                               style: TextStyle(
                                 fontSize: context.mh * 0.016,
-                                color: const Color(0xFF4A7C59),
+                                color: Colors.black87,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ),
-                          0.04.pw(context),
-                        ],
+                            InkWell(
+                              onTap: () {
+                                _showDocumentViewer(
+                                    context,
+                                    additionalDocumentUrl ?? "",
+                                    additionalDocument ?? "");
+                              },
+                              child: Text(
+                                "(Tap to view)",
+                                style: TextStyle(
+                                  fontSize: context.mh * 0.012,
+                                  fontStyle: FontStyle.italic,
+                                  color: const Color(0xFF4A7C59),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     0.03.ph(context),

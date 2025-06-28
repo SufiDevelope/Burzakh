@@ -408,6 +408,7 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
           "Hospital Report": data.hospitalCertificate,
           "Passport Copy": data.user.passportCopy,
         },
+        
       ),
     );
   }

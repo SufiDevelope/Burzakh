@@ -302,7 +302,8 @@
   "Details": "详情",
   "Name:": "姓名：",
   "Location:": "地点：",
-  "Date:": "日期：",
+  "Start Date:": "开始日期：",
+  "End Date:": "结束日期：",
   "Time:": "时间：",
   "Status:": "状态：",
 

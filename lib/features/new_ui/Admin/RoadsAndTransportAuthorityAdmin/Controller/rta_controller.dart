@@ -205,11 +205,13 @@ class RtaController extends GetxController {
   // Filter on the basis of status
   void filterCassesApiAccordingToStatus(String status) {
     try {
+      log(status);
       if (status == "All") {
         filterList.value = allFilterList.toList();
       } else {
         filterList.value =
-            allFilterList.where((element) => element.status == status).toList();
+            allFilterList.where((element) => element.status?.toLowerCase() == status.toLowerCase()).toList();
+        log(filterList.length.toString());
       }
     } catch (e) {
       log(e.toString());

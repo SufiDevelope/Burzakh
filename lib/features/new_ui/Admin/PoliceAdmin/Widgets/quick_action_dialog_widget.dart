@@ -68,7 +68,7 @@ class QuickActionsDialog extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: onIssueReleaseForm,
+                    onTap: onScheduleVideoCall,
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.all(context.mw * 0.04),

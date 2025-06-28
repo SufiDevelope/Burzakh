@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:burzakh/constants/app_text_style.dart';
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/core/extensions/show_message.dart';
@@ -82,14 +84,21 @@ class _RiderSendChatFieldState extends State<RiderSendChatField> {
                         UserShareprefController pref =
                             UserShareprefController();
                         UserModel? model = await pref.getData();
+                        log(widget.adminType);
                         if (widget.adminType == 'rta') {
                           rtaController.sendUserMessageApi(
                               model?.id ?? 0, "rta_help", controller.text);
                           controller.clear();
-                        } else {
-                          rtaController.sendUserMessageApi(
-                              model?.id ?? 0, "cda_assistence", controller.text);
-                          cdaController.getCdaChatApi(model?.id ?? 0);    
+                        } else if (widget.adminType == 'cda') {
+                          rtaController.sendUserMessageApi(model?.id ?? 0,
+                              "cda_assistence", controller.text);
+                          cdaController.getCdaChatApi(model?.id ?? 0);
+                          controller.clear();
+                        } else if (widget.adminType == 'police_support') {
+                          log("police_support Called");
+                          rtaController.sendUserMessageApi(model?.id ?? 0,
+                              "police_support", controller.text);
+                          cdaController.getCdaChatApi(model?.id ?? 0);
                           controller.clear();
                         }
                       },

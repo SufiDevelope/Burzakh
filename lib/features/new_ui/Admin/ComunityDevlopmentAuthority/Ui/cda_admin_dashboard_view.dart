@@ -194,7 +194,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                         return FilterListCardWidget(
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "Case ID: ${data.id.toString()}",
+                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
                           location: data.locationOfTent ?? "",
                           signCount: "",
                           messageCount: 2,

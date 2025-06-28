@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Model/AdminModels/FilterRtaRequestModel/filter_rta_requestModel.dart';
 import 'package:burzakh/Model/AdminModels/RtaChatModel/rta_chat_model.dart';
 import 'package:burzakh/Model/AdminModels/RtaRequestDetailsModel/rta_request_details_model.dart';
@@ -59,6 +61,8 @@ class RtaAdminHttpRepo implements RtaAdminRepo {
       "admin_type": admin_type,
       "message": message
     };
+
+    log(data.toString());
     final response = await _api.getPostApiResponse(
         AppApis.sendUserChatMessageApi, data, false);
     return response["message"];
