@@ -4,7 +4,9 @@ import 'package:burzakh/Model/AdminModels/CasesCountModel/cases_count_model.dart
 import 'package:burzakh/Model/AdminModels/FilterCassesModel/filter_casses_model.dart';
 import 'package:burzakh/Repository/AdminRepos/PoliceAdminRepo/police_admin_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/PoliceAdminRepo/police_admin_repo.dart';
+import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/data/Response/status.dart';
+import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -191,6 +193,8 @@ class PoliceAdminController extends GetxController {
     }
   }
 
+  var documentCubit = DiContainer().sl<HomeCubit>();
+
   void policeQuickActionApi(
       adminId,
       userId,
@@ -215,22 +219,29 @@ class PoliceAdminController extends GetxController {
         .then((value) {
       log(value.toString());
       filterCassesApi();
+      documentCubit.getUserCases();
       // Show snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(value.toString()),
-          backgroundColor: Colors.green,
+          content: Center(child: Text(value.toString())),
+          backgroundColor: Color(0xFF00734B),
           duration: Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
       );
     }).onError((error, stackTrace) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(error.toString()),
+          content: Center(child: Text(error.toString())),
           backgroundColor: Colors.red,
           duration: Duration(seconds: 2),
           behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
       );
       log("error ${error.toString()}");
@@ -266,22 +277,32 @@ class PoliceAdminController extends GetxController {
     }
   }
 
+  // Loading indicator
+  var isApprovedLoading = false.obs;
+
   void approvedPoliceCaseApi(
       caseId, userId, File clearanceForm, BuildContext context) async {
     try {
+      isApprovedLoading.value = true;
       repo.approvePoliceCaseApi(caseId, userId, clearanceForm).then((value) {
         log(value.toString());
         getCassesCountApi();
         filterCassesApi();
-        Get.snackbar(
-          'Success',
-          'Case Approved',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Center(child: Text("Case Approved Successfully")),
+            backgroundColor: Color(0xFF00734B),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
         );
+        isApprovedLoading.value = false;
         Navigator.pop(context);
       }).onError((error, stackTrace) {
+        log(error.toString());
         log("error ${error.toString()}");
         Get.snackbar(
           'Error',
@@ -292,6 +313,7 @@ class PoliceAdminController extends GetxController {
         );
       });
     } catch (e) {
+      isApprovedLoading.value = false;
       log(e.toString());
       Get.snackbar(
         'Error',

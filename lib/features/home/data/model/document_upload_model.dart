@@ -9,7 +9,6 @@ class DocumentUploadModel {
   File passportOrEmirateIdBack;
   final String nameofdeceased;
   final String dateofdeath;
-  final String causeofdeath;
   final String locationofdeath;
 
   DocumentUploadModel({
@@ -21,7 +20,6 @@ class DocumentUploadModel {
     required this.passportOrEmirateIdBack,
     required this.nameofdeceased,
     required this.dateofdeath,
-    required this.causeofdeath,
     required this.locationofdeath,
   });
 }

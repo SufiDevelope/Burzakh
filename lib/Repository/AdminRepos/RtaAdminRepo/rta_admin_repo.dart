@@ -6,7 +6,7 @@ import 'package:burzakh/Model/AdminModels/RtaRequestModel/rta_request_model.dart
 abstract class RtaAdminRepo {
   Future<RtaRequestModel> getRtaRequest();
   Future<RtaRequestDetailsModel> getRtaRequestDetails(id);
-  Future<dynamic> updateRtaRequestStatus(id, status);
+  Future<dynamic> updateRtaRequestStatus(id, status, String? rejectionReason);
   Future<FilterRtaRequestModel> filterRtaRequest(filter);
   Future<RtaChatModel> getRtaChat(id);
   Future<dynamic> sendRtaChatMessage(id, message);

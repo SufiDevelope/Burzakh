@@ -28,15 +28,17 @@ class CdaAdminHttpRepo implements CdaAdminRepo {
   }
 
   @override
-  Future updateCdaRequestStatus(id, status) async {
+  Future updateCdaRequestStatus(id, status, String? rejectionReason) async {
     Map<String, dynamic> data = {"action": status};
+    if (rejectionReason != null) {
+      data["rejection_reason"] = rejectionReason;
+    }
     final response = await _api.getPostApiResponse(
         AppApis.updateCdaRequestStatus(id), data, false);
     return response["message"];
   }
 
   @override
-
   Future<RtaChatModel> getCdaChat(id) async {
     final response = await _api.getGetApiResponse(AppApis.getCdaChatApi(id));
     return RtaChatModel.fromJson(response);

@@ -25,7 +25,7 @@ class StatusCardWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: context.mw * 0.65,
-        height: context.mh * 0.2,
+        height: context.mh * 0.21,
         padding: EdgeInsets.all(context.mw * 0.045),
         margin: EdgeInsets.symmetric(
             horizontal: context.mw * 0.02, vertical: context.mh * 0.01),
@@ -39,7 +39,7 @@ class StatusCardWidget extends StatelessWidget {
               Colors.grey[50]!,
             ],
           ),
-          borderRadius: BorderRadius.circular(20), // More rounded corners
+          borderRadius: BorderRadius.circular(10), // More rounded corners
           border: Border.all(
             color: Colors.grey[100]!,
             width: 1.5,
@@ -78,13 +78,15 @@ class StatusCardWidget extends StatelessWidget {
                       end: Alignment.bottomRight,
                       colors: [
                         iconBackgroundColor ?? const Color(0xFF4A7C59),
-                        (iconBackgroundColor ?? const Color(0xFF4A7C59)).withOpacity(0.8),
+                        (iconBackgroundColor ?? const Color(0xFF4A7C59))
+                            .withOpacity(0.8),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: (iconBackgroundColor ?? const Color(0xFF4A7C59)).withOpacity(0.3),
+                        color: (iconBackgroundColor ?? const Color(0xFF4A7C59))
+                            .withOpacity(0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -114,9 +116,7 @@ class StatusCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            
-            SizedBox(height: context.mh * 0.02),
-            
+            0.01.ph(context),
             // Count with better typography
             Text(
               count.toString(),
@@ -127,9 +127,9 @@ class StatusCardWidget extends StatelessWidget {
                 letterSpacing: -0.5,
               ),
             ),
-            
-            SizedBox(height: context.mh * 0.008),
-            
+
+            // SizedBox(height: context.mh * 0.008),
+
             // Title with improved styling
             Text(
               title,
@@ -142,6 +142,7 @@ class StatusCardWidget extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
+            0.02.ph(context),
           ],
         ),
       ),

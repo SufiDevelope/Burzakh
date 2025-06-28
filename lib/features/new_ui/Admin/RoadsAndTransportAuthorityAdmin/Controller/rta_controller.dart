@@ -7,11 +7,14 @@ import 'package:burzakh/Model/AdminModels/RtaRequestModel/rta_request_model.dart
 import 'package:burzakh/Repository/AdminRepos/RtaAdminRepo/rta_admin_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/RtaAdminRepo/rta_admin_repo.dart';
 import 'package:burzakh/data/Response/status.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/dashboard_overview_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RtaController extends GetxController {
+  final notification = NotificationService();
+
   @override
   void onInit() {
     getRequestApi();
@@ -63,6 +66,7 @@ class RtaController extends GetxController {
   // Get the Contact List From Api
   void setRxRequestStatusForAllRtaRequest(Status value) =>
       rxRequestStatusForAllRtaRequest.value = value;
+
   void setGetRequestApiResponse(RtaRequestModel data) {
     model.value = data;
   }
@@ -112,14 +116,15 @@ class RtaController extends GetxController {
     rejectloading.value = value;
   }
 
-  void updateRtaRequestStatusApi(id, status, BuildContext context) async {
+  void updateRtaRequestStatusApi(
+      id, status, BuildContext context, String? rejectionReason) async {
     try {
       if (status == "approve") {
         setapprovedLoading(true);
       } else {
         setrejectLoading(true);
       }
-      repo.updateRtaRequestStatus(id, status).then((value) {
+      repo.updateRtaRequestStatus(id, status, rejectionReason).then((value) {
         if (status == "approve") {
           setapprovedLoading(false);
         } else {
@@ -262,15 +267,22 @@ class RtaController extends GetxController {
   }
 
   // Send Chat Message
-  void sendChatMessageApi(int userId, String message) async {
-    setLoading(true);
-    repo.sendRtaChatMessage(userId, message).then((value) {
+  void sendChatMessageApi(int userId, String message, deviceToken) async {
+    try {
+      setLoading(true);
+      notification.sendNotification(
+          "New Message from RTA", message, deviceToken);
+      repo.sendRtaChatMessage(userId, message).then((value) {
+        setLoading(false);
+        getRtaChatApi(userId);
+      }).onError((error, stackTrace) {
+        setLoading(false);
+        log(error.toString());
+      });
+    } catch (e) {
       setLoading(false);
-      getRtaChatApi(userId);
-    }).onError((error, stackTrace) {
-      setLoading(false);
-      log(error.toString());
-    });
+      log(e.toString());
+    }
   }
 
   // loading

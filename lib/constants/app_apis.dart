@@ -94,4 +94,9 @@ class AppApis {
 
   static String uploadAdditionalDoc(caseid) =>
       "${baseUrl}/api/burzakh/upload-addtional-document/$caseid";
+
+  static String getCaseName = "/api/burzakh/get-case-name";    
+
+  static String updateRtaRequest = "/api/burzakh/rta/update-user";
+  static String updateCdaRequest = "/api/burzakh/cda/update-user";
 }

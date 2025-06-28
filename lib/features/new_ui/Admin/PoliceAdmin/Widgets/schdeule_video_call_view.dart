@@ -131,7 +131,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                       style: TextStyle(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
-                        color: const Color(0xFF4A7C59),
+                        color: const Color(0xFF00734B),
                       ),
                     ),
 
@@ -183,7 +183,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                             },
                             child: Icon(
                               Icons.refresh,
-                              color: const Color(0xFF4A7C59),
+                              color: const Color(0xFF00734B),
                               size: context.mh * 0.024,
                             ),
                           ),
@@ -202,10 +202,10 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                     Container(
                       padding: EdgeInsets.all(context.mw * 0.04),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF4A7C59).withOpacity(0.1),
+                        color: const Color(0xFF00734B).withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: const Color(0xFF4A7C59).withOpacity(0.3),
+                          color: const Color(0xFF00734B).withOpacity(0.3),
                           width: 1,
                         ),
                       ),
@@ -222,7 +222,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                               "The applicant will receive a notification with the meeting details and link.",
                               style: TextStyle(
                                 fontSize: context.mh * 0.014,
-                                color: const Color(0xFF4A7C59),
+                                color: const Color(0xFF00734B),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -294,7 +294,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                       child: Container(
                         height: context.mh * 0.055,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF4A7C59),
+                          color: const Color(0xFF00734B),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(

@@ -67,7 +67,6 @@ class QuickActionsDialog extends StatelessWidget {
               padding: EdgeInsets.all(context.mw * 0.05),
               child: Column(
                 children: [
-                  // Issue Release Form - Primary Action
                   GestureDetector(
                     onTap: onIssueReleaseForm,
                     child: Container(
@@ -87,7 +86,7 @@ class QuickActionsDialog extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Icon(
-                              Icons.description,
+                              Icons.video_call,
                               color: Colors.white,
                               size: context.mh * 0.022,
                             ),
@@ -98,7 +97,7 @@ class QuickActionsDialog extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Issue Release Form",
+                                  "Video Call",
                                   style: TextStyle(
                                     fontSize: context.mh * 0.018,
                                     fontWeight: FontWeight.bold,
@@ -107,7 +106,7 @@ class QuickActionsDialog extends StatelessWidget {
                                 ),
                                 0.005.ph(context),
                                 Text(
-                                  "Generate and issue the official release form for afterlife passage",
+                                  "Schedule a video verification call with the applicant",
                                   style: TextStyle(
                                     fontSize: context.mh * 0.014,
                                     color: Colors.white.withOpacity(0.9),
@@ -119,19 +118,6 @@ class QuickActionsDialog extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
-
-                  0.02.ph(context),
-
-                  // Schedule Video Call
-                  _buildActionItem(
-                    context: context,
-                    icon: Icons.videocam,
-                    // title: "Schedule Video Call",
-                    title: "Video Call",
-                    description:
-                        "Schedule a video verification call with the applicant",
-                    onTap: onScheduleVideoCall,
                   ),
 
                   0.02.ph(context),

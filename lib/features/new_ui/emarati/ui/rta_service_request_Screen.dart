@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/emarati/widgets/request_confirmation_topbar.dart';
 import 'package:burzakh/features/new_ui/emarati/widgets/request_detail_widget.dart';
@@ -10,10 +12,12 @@ import '../../../../core/app/di_container.dart';
 import '../../../emirati_svcs/presentation/controller/cubit.dart';
 
 class RtaServiceRequestScreen extends StatelessWidget {
-  const RtaServiceRequestScreen({super.key});
+  final String id;
+  const RtaServiceRequestScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
+    log("");
     return Container(
       decoration: BoxDecoration(
           gradient: AppColor.bgGradient
@@ -32,8 +36,8 @@ class RtaServiceRequestScreen extends StatelessWidget {
                       children: [
                         RequestConfirmationTopbar(text: "Request Confirmation",),
                         SizedBox(height: 10,),
-                        RequestSubmittedGreenContainer(),
-                        RequestDetailWidget(isApproved: 0,rtaGetModel: _emiratiScvCubit.rtaGetModel!,),
+                        RequestSubmittedGreenContainer(id: id,),
+                        RequestDetailWidget(isApproved: 0,rtaGetModel: _emiratiScvCubit.rtaGetModel!, id: id,),
                         ServiceRequestScreenFooter(),
                       ],
                     ),

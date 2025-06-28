@@ -91,6 +91,7 @@ class User {
   String? adminType;
   String? createdAt;
   String? updatedAt;
+  String? deviceToken;
 
   User(
       {this.id,
@@ -104,7 +105,7 @@ class User {
       this.uaePass,
       this.adminType,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt, this.deviceToken});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -119,6 +120,7 @@ class User {
     adminType = json['admin_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    deviceToken = json['device_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -135,6 +137,7 @@ class User {
     data['admin_type'] = this.adminType;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['device_token'] = this.deviceToken;
     return data;
   }
 }

@@ -57,7 +57,6 @@ class DocumentProcess extends DocumentDataSource {
       request.fields['user_id'] = model.userId;
       request.fields['resting_place'] = model.restingPlace;
       request.fields['name_of_deceased'] = model.nameofdeceased;
-      request.fields['cause_of_death'] = model.causeofdeath;
       request.fields['date_of_death'] = model.dateofdeath;
       request.fields['location'] = model.locationofdeath;
 

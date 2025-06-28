@@ -795,5 +795,9 @@
   "Download Release Form": "下载释放表格",
   "Download Police Clearance": "下载警察清关",
   "Upload Document": "上传文件",
-  "Admin has requested an additional document": "管理员要求提供额外的文件"
+  "Admin has requested an additional document": "管理员要求提供额外的文件",
+  "Your request has been sent to the Road Transport Authority.": "您的请求已发送至交通管理局。",
+  "Case Name": "案件名称",
+  "Rejection Reason: ": "拒绝原因：",
+  "Update Services": "更新服务"
 }

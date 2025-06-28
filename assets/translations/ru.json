@@ -708,5 +708,9 @@
   "Download Release Form": "Скачать форму освобождения",
   "Download Police Clearance": "Скачать удостоверение о прохождении проверки полиции",
   "Upload Document": "Загрузить документ",
-  "Admin has requested an additional document": "Администратор запросил дополнительный документ"
+  "Admin has requested an additional document": "Администратор запросил дополнительный документ",
+  "Your request has been sent to the Road Transport Authority.": "Ваш запрос был отправлен на управление дорожного транспорта.",
+  "Case Name": "Название дела",
+  "Rejection Reason: ": "Причина отклонения:",
+  "Update Services": "Обновить услуги"
 }

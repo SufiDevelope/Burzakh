@@ -28,18 +28,34 @@ class EmaratiScreen extends StatefulWidget {
 }
 
 class _EmaratiScreenState extends State<EmaratiScreen> {
+  var _emiratiScvCubit = DiContainer().sl<EmirateSvcsCubit>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _emiratiScvCubit.getCdaModel();
+      _emiratiScvCubit.getRtaModel();
+      _emiratiScvCubit.getCaseName();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: BlocBuilder(
-              bloc: _emiratiScvCubit,
-              builder: (context, state) {
-                return RefreshIndicator(
-                  onRefresh: () async {},
-                  child: Container(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await _emiratiScvCubit.getCdaModel();
+            await _emiratiScvCubit.getRtaModel();
+          },
+          child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: BlocBuilder(
+                bloc: _emiratiScvCubit,
+                builder: (context, state) {
+                  return Container(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,12 +87,21 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                             : ServiceWidget(
                                 onTap: () {
                                   if (_emiratiScvCubit.cdaGetModel != null) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ServiceRequestConfirmationScreen(),
-                                        ));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           ServiceRequestConfirmationScreen(),
+                                    //     ));
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      constraints: BoxConstraints(
+                                          maxHeight: mdHeight(context) * 1),
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: AppColor.blurWhiteColor(),
+                                      builder: (context) => TentRequestSheet(),
+                                    );
                                   } else {
                                     showModalBottomSheet(
                                       context: context,
@@ -94,36 +119,49 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                     "Provided by Community Development Authority",
                                 text3:
                                     "Request comfortable tent facilities for receiving condolences from visitors.",
-                                iconData: "assets/images/jpg/cda.jpg",
+                                iconData: "assets/images/png/cdalogo.png",
                               ),
                         0.01.ph(context),
-                        ServiceWidget(
-                          onTap: () {
-                            if (_emiratiScvCubit.rtaGetModel != null) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        RtaServiceRequestScreen(),
-                                  ));
-                            } else {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                constraints: BoxConstraints(
-                                    maxHeight: mdHeight(context) * 1),
-                                backgroundColor: Colors.transparent,
-                                barrierColor: AppColor.blurWhiteColor(),
-                                builder: (context) => SignAgeSheet(),
-                              );
-                            }
-                          },
-                          text1: "Road Signage Assistance",
-                          text2: "Provided by Roads and Transport Authority",
-                          text3:
-                              "Request directional signs to guide visitors to the mourning location.",
-                          iconData: "assets/images/jpg/rta.jpg",
-                        ),
+                        _emiratiScvCubit.isGetRtaLoading
+                            ? CdaShimmer()
+                            : ServiceWidget(
+                                onTap: () {
+                                  if (_emiratiScvCubit.rtaGetModel != null) {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) =>
+                                    //         RtaServiceRequestScreen(),
+                                    //   ),
+                                    // );
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      constraints: BoxConstraints(
+                                          maxHeight: mdHeight(context) * 1),
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: AppColor.blurWhiteColor(),
+                                      builder: (context) => SignAgeSheet(),
+                                    );
+                                  } else {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      constraints: BoxConstraints(
+                                          maxHeight: mdHeight(context) * 1),
+                                      backgroundColor: Colors.transparent,
+                                      barrierColor: AppColor.blurWhiteColor(),
+                                      builder: (context) => SignAgeSheet(),
+                                    );
+                                  }
+                                },
+                                text1: "Road Signage Assistance",
+                                text2:
+                                    "Provided by Roads and Transport Authority",
+                                text3:
+                                    "Request directional signs to guide visitors to the mourning location.",
+                                iconData: "assets/images/png/rtalogo.png",
+                              ),
 
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,13 +234,11 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                         ),
                       ],
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+          ),
         ),
       ),
     );
   }
 }
-
-var _emiratiScvCubit = DiContainer().sl<EmirateSvcsCubit>();

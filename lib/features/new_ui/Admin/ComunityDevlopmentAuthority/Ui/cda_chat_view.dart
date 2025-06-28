@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 
 class CdaChatView extends StatefulWidget {
   final int userId;
-  const CdaChatView({super.key, required this.userId});
+  final String deviceToken;
+  const CdaChatView({super.key, required this.userId, required this.deviceToken});
 
   @override
   State<CdaChatView> createState() => _CdaChatViewState();
@@ -146,7 +147,7 @@ void initState() {
                         onPressed: () {
                           if (messageController.text.trim().isNotEmpty) {
                             controller.sendChatMessageApi(
-                                widget.userId, messageController.text.trim());
+                                widget.userId, messageController.text.trim(), widget.deviceToken);
                             messageController.clear();
                           }
                         },

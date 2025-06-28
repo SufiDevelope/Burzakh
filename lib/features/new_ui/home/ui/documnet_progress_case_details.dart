@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:burzakh/widgets/app_text.dart';
@@ -25,7 +26,9 @@ class _DocumnetProgressCaseDetailsState
     extends State<DocumnetProgressCaseDetails> {
   @override
   void initState() {
-    _homeCubit.getCaseDetails(widget.caseId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _homeCubit.getCaseDetails(widget.caseId);
+    });
     super.initState();
   }
 
@@ -57,7 +60,7 @@ class _DocumnetProgressCaseDetailsState
                 title: AppText(
                   text: "Documents & Progress",
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: context.mh * 0.020,
                   color: AppColor.black(),
                 ),
               ),
@@ -68,333 +71,355 @@ class _DocumnetProgressCaseDetailsState
                       ),
                     )
                   : Container(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColor.white(),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ],
-                                ),
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppText(
-                                      text: "Required Documents",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: AppColor.black(),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    _documentItem(
-                                        "Death Notification",
-                                        _homeCubit.caseDetailModel?.caseStatus
-                                                .toString() ??
-                                            "",
-                                        Icons.description,
-                                        _homeCubit.caseDetailModel!
-                                                    .deathNotificationFileStatus ==
-                                                "completed"
-                                            ? AppColor.lightGreen1
-                                            : AppColor.lightOrange1,
-                                        _homeCubit.caseDetailModel!
-                                                    .deathNotificationFileStatus ==
-                                                "completed"
-                                            ? AppColor.green()
-                                            : AppColor.orange),
-                                    const SizedBox(height: 12),
-                                    _documentItem(
-                                        "Hospital Report",
-                                        _homeCubit.caseDetailModel?.caseStatus
-                                                .toString() ??
-                                            "",
-                                        Icons.local_hospital,
-                                        _homeCubit.caseDetailModel!
-                                                    .hospitalCertificateStatus ==
-                                                "completed"
-                                            ? AppColor.lightGreen1
-                                            : AppColor.lightOrange1,
-                                        _homeCubit.caseDetailModel!
-                                                    .hospitalCertificateStatus ==
-                                                "completed"
-                                            ? AppColor.green()
-                                            : AppColor.orange),
-                                    const SizedBox(height: 12),
-                                    _documentItem(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          return _homeCubit.getCaseDetails(widget.caseId);
+                        },
+                        child: SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white(),
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.05),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      )
+                                    ],
+                                  ),
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      AppText(
+                                        text: "Required Documents",
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: AppColor.black(),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      _documentItem(
+                                          "Death Notification",
+                                          _homeCubit.caseDetailModel?.caseStatus
+                                                  .toString() ??
+                                              "",
+                                          Icons.description,
+                                          _homeCubit.caseDetailModel
+                                                      ?.deathNotificationFileStatus ==
+                                                  "completed"
+                                              ? AppColor.lightGreen1
+                                              : AppColor.lightOrange1,
+                                          _homeCubit.caseDetailModel
+                                                      ?.deathNotificationFileStatus ==
+                                                  "completed"
+                                              ? AppColor.green()
+                                              : AppColor.orange),
+                                      const SizedBox(height: 12),
+                                      _documentItem(
+                                          "Hospital Report",
+                                          _homeCubit.caseDetailModel?.caseStatus
+                                                  .toString() ??
+                                              "",
+                                          Icons.local_hospital,
+                                          _homeCubit.caseDetailModel
+                                                      ?.hospitalCertificateStatus ==
+                                                  "completed"
+                                              ? AppColor.lightGreen1
+                                              : AppColor.lightOrange1,
+                                          _homeCubit.caseDetailModel
+                                                      ?.hospitalCertificateStatus ==
+                                                  "completed"
+                                              ? AppColor.green()
+                                              : AppColor.orange),
+                                      const SizedBox(height: 12),
+                                      _documentItem(
                                         "EID & Passport",
                                         _homeCubit.caseDetailModel?.caseStatus
                                                 .toString() ??
                                             "",
                                         Icons.badge,
-                                        _homeCubit.caseDetailModel!
-                                                        .passportOrEmirateIdBackStatus ==
+                                        (_homeCubit.caseDetailModel
+                                                        ?.passportOrEmirateIdFrontStatus ==
                                                     "completed" &&
-                                                _homeCubit.caseDetailModel!
-                                                        .passportOrEmirateIdFrontStatus ==
-                                                    "completed"
+                                                _homeCubit.caseDetailModel
+                                                        ?.passportOrEmirateIdBackStatus ==
+                                                    "completed")
                                             ? AppColor.lightGreen1
                                             : AppColor.lightOrange1,
-                                        _homeCubit.caseDetailModel!
-                                                        .passportOrEmirateIdBackStatus ==
+                                        (_homeCubit.caseDetailModel
+                                                        ?.passportOrEmirateIdFrontStatus ==
                                                     "completed" &&
-                                                _homeCubit.caseDetailModel!
-                                                        .passportOrEmirateIdFrontStatus ==
-                                                    "completed"
+                                                _homeCubit.caseDetailModel
+                                                        ?.passportOrEmirateIdBackStatus ==
+                                                    "completed")
                                             ? AppColor.green()
-                                            : AppColor.orange),
+                                            : AppColor.orange,
+                                      ),
 
-                                    // Row(
-                                    //   mainAxisAlignment: MainAxisAlignment.center,
-                                    //   children: [
-                                    //     SvgPicture.asset(AppAssets.uploadIcon,color: AppColor.blue,),
-                                    //     SizedBox(width: 5,),
-                                    //     AppText(
-                                    //       text: "Emirates ID",
-                                    //       color: AppColor.blue,
-                                    //       fontSize: 13,
-                                    //       fontWeight: FontWeight.bold,
-                                    //     ),
-                                    //
-                                    //     Container(margin: EdgeInsets.symmetric(horizontal: 10),width: .5,height: 30,color: AppColor.greyLight1(),),
-                                    //     SvgPicture.asset(AppAssets.uploadIcon,color: AppColor.blue,),
-                                    //     SizedBox(width: 5,),
-                                    //     AppText(
-                                    //       text: "Passport",
-                                    //       color: AppColor.blue,
-                                    //       fontSize: 13,
-                                    //       fontWeight: FontWeight.bold,
-                                    //     ),
-                                    //   ],
-                                    // ),
-                                    const SizedBox(height: 12),
-                                    _documentItem(
-                                        "Police Clearance",
-                                        _homeCubit.caseDetailModel?.caseStatus
-                                                .toString() ??
-                                            "",
-                                        Icons.security,
-                                        AppColor.lightOrange1,
-                                        AppColor.orange,
-                                        subtitle: "Dubai Police"),
-                                    const SizedBox(height: 6),
-                                    Visibility(
-                                      visible: _homeCubit
-                                                  .caseDetailModel!.caseStatus
-                                                  .toString() ==
-                                              "approved"
-                                          ? true
-                                          : false,
-                                      child: InkWell(
-                                        onTap: () {
-                                          _downloadFile(_homeCubit
-                                                  .caseDetailModel
-                                                  ?.policeClearance ??
-                                              "");
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.download_outlined,
-                                                color: AppColor.blue),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            AppText(
-                                              text: "Download Police Clearance",
-                                              color: AppColor.blue,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ],
+                                      // Row(
+                                      //   mainAxisAlignment: MainAxisAlignment.center,
+                                      //   children: [
+                                      //     SvgPicture.asset(AppAssets.uploadIcon,color: AppColor.blue,),
+                                      //     SizedBox(width: 5,),
+                                      //     AppText(
+                                      //       text: "Emirates ID",
+                                      //       color: AppColor.blue,
+                                      //       fontSize: 13,
+                                      //       fontWeight: FontWeight.bold,
+                                      //     ),
+                                      //
+                                      //     Container(margin: EdgeInsets.symmetric(horizontal: 10),width: .5,height: 30,color: AppColor.greyLight1(),),
+                                      //     SvgPicture.asset(AppAssets.uploadIcon,color: AppColor.blue,),
+                                      //     SizedBox(width: 5,),
+                                      //     AppText(
+                                      //       text: "Passport",
+                                      //       color: AppColor.blue,
+                                      //       fontSize: 13,
+                                      //       fontWeight: FontWeight.bold,
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      const SizedBox(height: 12),
+                                      _documentItem(
+                                          "Police Clearance",
+                                          _homeCubit.caseDetailModel?.caseStatus
+                                                  .toString() ??
+                                              "",
+                                          Icons.security,
+                                          AppColor.lightOrange1,
+                                          AppColor.orange,
+                                          subtitle: "Dubai Police"),
+                                      const SizedBox(height: 6),
+                                      Visibility(
+                                        visible: _homeCubit
+                                                    .caseDetailModel?.caseStatus
+                                                    .toString() ==
+                                                "approved"
+                                            ? true
+                                            : false,
+                                        child: InkWell(
+                                          onTap: () {
+                                            _downloadFile(_homeCubit
+                                                    .caseDetailModel
+                                                    ?.policeClearance ??
+                                                "");
+                                          },
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Icon(Icons.download_outlined,
+                                                  color: AppColor.blue),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              AppText(
+                                                text:
+                                                    "Download Police Clearance",
+                                                color: AppColor.blue,
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    _documentItem(
-                                        "Burial Permit",
-                                        "Not Started",
-                                        Icons.lock,
-                                        AppColor.grey().withOpacity(0.1),
-                                        AppColor.grey(),
-                                        subtitle: "Dubai Municipality"),
-                                  ],
+                                      const SizedBox(height: 20),
+                                      _documentItem(
+                                          "Burial Permit",
+                                          "Not Started",
+                                          Icons.lock,
+                                          AppColor.grey().withOpacity(0.1),
+                                          AppColor.grey(),
+                                          subtitle: "Dubai Municipality"),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: AppColor.white(),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ],
-                                ),
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    /// Header Row
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AppText(
-                                          text: "Burial Process",
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 4),
-                                          decoration: BoxDecoration(
-                                            color:
-                                                AppColor.grey().withOpacity(.1),
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                              Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white(),
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.05),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      )
+                                    ],
+                                  ),
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      /// Header Row
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          AppText(
+                                            text: "Burial Process",
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          child: AppText(
-                                            text: "Not started",
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
-                                            color: AppColor.grey(),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: AppColor.grey()
+                                                  .withOpacity(.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                            child: AppText(
+                                              text: "Not started",
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: AppColor.grey(),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 20),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 20),
 
-                                    /// Step 1 - Death Notification
-                                    _buildStepItem(
-                                      // icon: Icons.check_circle,
-                                      // iconColor: AppColor.darkGreen,
-                                      icon: Icons.error_outline,
-                                      iconColor: AppColor.yellow(),
-                                      title: "Death Notification",
-                                      subtitle:
-                                          "Document verified and approved by authorities",
-                                      statusText: "Not started",
-                                      statusTextColor: AppColor.grey(),
-                                      statusColor:
-                                          AppColor.grey().withOpacity(.1),
-                                    ),
+                                      /// Step 1 - Death Notification
+                                      _buildStepItem(
+                                        // icon: Icons.check_circle,
+                                        // iconColor: AppColor.darkGreen,
+                                        icon: Icons.error_outline,
+                                        iconColor: AppColor.yellow(),
+                                        title: "Death Notification",
+                                        subtitle:
+                                            "Document verified and approved by authorities",
+                                        statusText: _homeCubit.caseDetailModel
+                                                ?.deathNotificationFileStatus
+                                                .toString() ??
+                                            "",
+                                        statusTextColor: AppColor.grey(),
+                                        statusColor:
+                                            AppColor.grey().withOpacity(.1),
+                                      ),
 
-                                    /// Step 2 - Hospital Report
-                                    _buildStepItem(
-                                      icon: Icons.error_outline,
-                                      iconColor: AppColor.yellow(),
-                                      title: "Hospital Report",
-                                      subtitle:
-                                          "Medical documentation verified",
-                                      statusText: "Not started",
-                                      statusTextColor: AppColor.grey(),
-                                      statusColor:
-                                          AppColor.grey().withOpacity(.1),
-                                    ),
+                                      /// Step 2 - Hospital Report
+                                      _buildStepItem(
+                                        icon: Icons.error_outline,
+                                        iconColor: AppColor.yellow(),
+                                        title: "Hospital Report",
+                                        subtitle:
+                                            "Medical documentation verified",
+                                        statusText: _homeCubit.caseDetailModel
+                                                ?.hospitalCertificateStatus
+                                                .toString() ??
+                                            "",
+                                        statusTextColor: AppColor.grey(),
+                                        statusColor:
+                                            AppColor.grey().withOpacity(.1),
+                                      ),
 
-                                    /// Step 3 - EID & Passport
-                                    _buildStepItem(
-                                      icon: Icons.error_outline,
-                                      iconColor: AppColor.yellow(),
-                                      title: "EID & Passport",
-                                      subtitle:
-                                          "Required for identity verification",
-                                      statusText: "Not started",
-                                      statusTextColor: AppColor.grey(),
-                                      statusColor:
-                                          AppColor.grey().withOpacity(.1),
-                                    ),
+                                      /// Step 3 - EID & Passport
+                                      _buildStepItem(
+                                        icon: Icons.error_outline,
+                                        iconColor: AppColor.yellow(),
+                                        title: "EID & Passport",
+                                        subtitle:
+                                            "Required for identity verification",
+                                        statusText: _homeCubit.caseDetailModel
+                                                ?.passportOrEmirateIdFrontStatus
+                                                .toString() ??
+                                            "",
+                                        statusTextColor: AppColor.grey(),
+                                        statusColor:
+                                            AppColor.grey().withOpacity(.1),
+                                      ),
 
-                                    /// Step 4 - Police Verification
-                                    _buildStepItem(
-                                      icon: Icons.error_outline,
-                                      iconColor: AppColor.yellow(),
-                                      title: "Police Verification",
-                                      subtitle:
-                                          "Required video call with Dubai Police officer",
-                                      statusText: "Not started",
-                                      statusTextColor: AppColor.grey(),
-                                      statusColor:
-                                          AppColor.grey().withOpacity(.1),
-                                    ),
+                                      /// Step 4 - Police Verification
+                                      _buildStepItem(
+                                        icon: Icons.error_outline,
+                                        iconColor: AppColor.yellow(),
+                                        title: "Police Verification",
+                                        subtitle:
+                                            "Required video call with Dubai Police officer",
+                                        statusText: _homeCubit.caseDetailModel
+                                                ?.passportOrEmirateIdFrontStatus
+                                                .toString() ??
+                                            "",
+                                        statusTextColor: AppColor.grey(),
+                                        statusColor:
+                                            AppColor.grey().withOpacity(.1),
+                                      ),
 
-                                    /// Step 5 - Burial Permit
-                                    _buildStepItem(
-                                      iconColor: AppColor.greyLight(),
-                                      title: "Burial Permit",
-                                      burialPermitText: '5',
-                                      subtitle:
-                                          "Issued after police verification is complete",
-                                      statusText: "Not started",
-                                      statusTextColor: AppColor.grey(),
-                                      statusColor:
-                                          AppColor.grey().withOpacity(.1),
-                                    ),
-                                  ],
+                                      /// Step 5 - Burial Permit
+                                      _buildStepItem(
+                                        iconColor: AppColor.greyLight(),
+                                        title: "Burial Permit",
+                                        burialPermitText: '5',
+                                        subtitle:
+                                            "Issued after police verification is complete",
+                                        statusText: "Not started",
+                                        statusTextColor: AppColor.grey(),
+                                        statusColor:
+                                            AppColor.grey().withOpacity(.1),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Container(
-                                padding: EdgeInsets.all(14),
-                                decoration: BoxDecoration(
-                                  color: AppColor.white(),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.05),
-                                      blurRadius: 10,
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ],
-                                ),
-                                child: Column(
-                                  children: [
-                                    AppText(
-                                      text:
-                                          "\"O reassured soul, return to your Lord,\nwell-pleased and pleasing [to Him]. Enter among My servants, and enter My\n Paradise.\"",
-                                      textAlign: TextAlign.center,
-                                      color: AppColor.grey(),
-                                      fontFamily: 'ni',
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    AppText(
-                                      text: "— Surah Al-Fajr 89:27-30",
-                                      textAlign: TextAlign.center,
-                                      color: AppColor.greyLight1(),
-                                      fontWeight: FontWeight.w100,
-                                      fontSize: 13,
-                                    ),
-                                  ],
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(16),
+                                child: Container(
+                                  padding: EdgeInsets.all(14),
+                                  decoration: BoxDecoration(
+                                    color: AppColor.white(),
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.05),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      )
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      AppText(
+                                        text:
+                                            "\"O reassured soul, return to your Lord,\nwell-pleased and pleasing [to Him]. Enter among My servants, and enter My\n Paradise.\"",
+                                        textAlign: TextAlign.center,
+                                        color: AppColor.grey(),
+                                        fontFamily: 'ni',
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      AppText(
+                                        text: "— Surah Al-Fajr 89:27-30",
+                                        textAlign: TextAlign.center,
+                                        color: AppColor.greyLight1(),
+                                        fontWeight: FontWeight.w100,
+                                        fontSize: 13,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 25,
-                            )
-                          ],
+                              SizedBox(
+                                height: 25,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

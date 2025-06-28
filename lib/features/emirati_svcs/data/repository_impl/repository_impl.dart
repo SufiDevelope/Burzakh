@@ -40,5 +40,20 @@ class EmiratiRepositoryImpl extends EmiratiRepository{
   Future<Either<String,Response>> cancelCda({required String id,required String userId,}) {
     return dataSourceName.cancelCda(id: id, userId: userId);
   }
+  
+  @override
+  Future<Either<String, Response>> getCaseName({required String userId}) async{
+    return dataSourceName.getCaseName(userId: userId);
+  }
+  
+  @override
+  Future<Either<String, Response>> updateCdaRequest({required String caseId, required CdaModel? model}) {
+    return dataSourceName.updateCdaRequest(caseId: caseId, model: model);
+  }
+  
+  @override
+  Future<Either<String, Response>> updateRtaRequest({required String caseId, required RtaModel? model}) {
+    return dataSourceName.updateRtaRequest(caseId: caseId, model: model);
+  }
 
 }

@@ -8,13 +8,17 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
   final String initials;
   final String email;
   final VoidCallback? onLogoutPressed;
+  final String? imageurl;
 
   const PoliceDashboardHeaderWidget({
     super.key,
     required this.title,
     required this.subtitle,
     required this.officerName,
-    required this.initials, required this.email, this.onLogoutPressed,
+    required this.initials,
+    required this.email,
+    this.onLogoutPressed,
+    this.imageurl,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -45,13 +49,13 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 ),
               ),
               0.03.ph(context),
-              
+
               // Profile section
               Container(
                 width: context.mw * 0.2,
                 height: context.mw * 0.2,
                 decoration: BoxDecoration(
-                  color:  Color(0xFF00734B),
+                  color: Color(0xFF00734B),
                   borderRadius: BorderRadius.circular(context.mw * 0.1),
                   boxShadow: [
                     BoxShadow(
@@ -73,7 +77,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 ),
               ),
               0.02.ph(context),
-              
+
               // Admin name
               Text(
                 officerName,
@@ -85,7 +89,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               0.01.ph(context),
-              
+
               // Email
               Text(
                 email,
@@ -96,14 +100,14 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               0.03.ph(context),
-              
+
               // Divider
               Divider(
                 color: Colors.grey[300],
                 thickness: 1,
               ),
               0.02.ph(context),
-              
+
               // Logout button
               SizedBox(
                 width: double.infinity,
@@ -115,7 +119,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor:  Color(0xFF00734B),
+                    backgroundColor: Color(0xFF00734B),
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: context.mh * 0.015),
                     shape: RoundedRectangleBorder(
@@ -166,11 +170,21 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                Icons.security,
-                color: Colors.white,
-                size: context.mh * 0.025,
-              ),
+              child: imageurl == null
+                  ? Icon(
+                      Icons.security,
+                      color: Colors.white,
+                      size: context.mh * 0.025,
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                    child: Image(
+                        image: AssetImage(imageurl ?? ""),
+                        fit: BoxFit.cover,
+                        width: context.mw * 0.1,
+                        height: context.mw * 0.1,
+                      ),
+                  ),
             ),
             0.03.pw(context),
 
@@ -181,7 +195,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style:  TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.02,
                       fontWeight: FontWeight.bold,

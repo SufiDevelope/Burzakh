@@ -1,13 +1,17 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/data/Response/status.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/rta_chat_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RtaChatView extends StatefulWidget {
   final int userId;
-  const RtaChatView({super.key, required this.userId});
+  final String deviceToken;
+  const RtaChatView(
+      {super.key, required this.userId, required this.deviceToken});
 
   @override
   State<RtaChatView> createState() => _RtaChatViewState();
@@ -16,13 +20,12 @@ class RtaChatView extends StatefulWidget {
 class _RtaChatViewState extends State<RtaChatView> {
   final controller = Get.put(RtaController());
   @override
-void initState() {
-  super.initState();
-  WidgetsBinding.instance.addPostFrameCallback((_)  {
-     controller.getRtaChatApi(widget.userId);
-  });
-}
-
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.getRtaChatApi(widget.userId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +77,10 @@ void initState() {
                       itemBuilder: (context, index) {
                         var data = controller.rtafilterChatList[index];
                         return RtaChatWidget(
-                          message: data?.message ?? "No message found",
-                          timestamp: "2025-05-20 09:18",
-                          isCurrentUser: data?.role == "rta" ? true : false,
+                          message: data.message ?? "No message found",
+                          timestamp: DateFormat('dd MMM, hh:mm a')
+                              .format(DateTime.parse(data.createdAt ?? "")),
+                          isCurrentUser: data.role == "rta" ? true : false,
                           onTap: () {},
                         );
                       },
@@ -142,11 +146,12 @@ void initState() {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (messageController.text.trim().isNotEmpty) {
                             controller.sendChatMessageApi(
-                                widget.userId, messageController.text.trim());
-                            messageController.clear();
+                                  widget.userId, messageController.text.trim(), widget.deviceToken);
+                              messageController.clear();
+                            
                           }
                         },
                         icon: controller.loading == true

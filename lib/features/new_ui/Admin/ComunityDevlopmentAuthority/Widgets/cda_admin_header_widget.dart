@@ -10,6 +10,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
   final VoidCallback? onrtaLogoPressed;
   final VoidCallback? onLogoutPressed;
   final String email;
+  final String? imageUrl;
 
   const CDADashboardHeaderWidget({
     super.key,
@@ -21,6 +22,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
     this.onrtaLogoPressed,
     this.onLogoutPressed,
     required this.email,
+    this.imageUrl,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -181,16 +183,24 @@ class CDADashboardHeaderWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Text(
-                    'CDA',
-                    style: TextStyle(
-                      color: const Color(0xFF1e40af),
-                      fontSize: context.mh * 0.018,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                child: imageUrl == null
+                    ? Center(
+                        child: Text(
+                          'CDA',
+                          style: TextStyle(
+                            color: const Color(0xFF1e40af),
+                            fontSize: context.mh * 0.018,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          imageUrl ?? "",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
               ),
             ),
             0.03.pw(context),

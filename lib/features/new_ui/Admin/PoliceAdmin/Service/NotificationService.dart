@@ -317,17 +317,19 @@ class NotificationService {
   }
 
   void handleMessage(BuildContext context, RemoteMessage message) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CallPage(
-          callID: message.data['callID'],
-          userName: message.data['userName'],
-          isCaller: false,
-          receiverID: "123",
+    if (message.data['callID'] != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CallPage(
+            callID: message.data['callID'],
+            userName: message.data['userName'],
+            isCaller: false,
+            receiverID: "123",
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Future forgroundMessage() async {

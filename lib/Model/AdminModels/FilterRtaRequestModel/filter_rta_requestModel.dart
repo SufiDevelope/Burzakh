@@ -99,6 +99,7 @@ class User {
   String? adminType;
   String? createdAt;
   String? updatedAt;
+  String? token;
 
   User(
       {this.id,
@@ -127,6 +128,7 @@ class User {
     adminType = json['admin_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    token = json['device_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -143,6 +145,7 @@ class User {
     data['admin_type'] = this.adminType;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['device_token'] = this.token;
     return data;
   }
 }

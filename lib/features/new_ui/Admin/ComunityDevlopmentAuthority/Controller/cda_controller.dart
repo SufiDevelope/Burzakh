@@ -7,12 +7,14 @@ import 'package:burzakh/Model/AdminModels/RtaChatModel/rta_chat_model.dart';
 import 'package:burzakh/Repository/AdminRepos/CdaAdminRepo/cda_admin_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/CdaAdminRepo/cda_admin_repo.dart';
 import 'package:burzakh/data/Response/status.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../RoadsAndTransportAuthorityAdmin/Widgets/dashboard_overview_widget.dart';
 
 class CdaController extends GetxController {
+  final notification = NotificationService();
   @override
   void onInit() {
     getRequestApi();
@@ -178,14 +180,49 @@ class CdaController extends GetxController {
     rejectloading.value = value;
   }
 
-  void updateCdaRequestStatusApi(id, status, BuildContext context) async {
+
+  // void updateRtaRequestStatusApi(
+  //     id, status, BuildContext context, String? rejectionReason) async {
+  //   try {
+  //     if (status == "approve") {
+  //       setapprovedLoading(true);
+  //     } else {
+  //       setrejectLoading(true);
+  //     }
+  //     repo.updateRtaRequestStatus(id, status, rejectionReason).then((value) {
+  //       if (status == "approve") {
+  //         setapprovedLoading(false);
+  //       } else {
+  //         setrejectLoading(false);
+  //       }
+  //       getRequestApi();
+  //       Navigator.pop(context);
+  //     }).onError((error, stackTrace) {
+  //       if (status == "approve") {
+  //         setapprovedLoading(false);
+  //       } else {
+  //         setrejectLoading(false);
+  //       }
+  //       log(error.toString());
+  //     });
+  //   } catch (e) {
+  //     if (status == "approve") {
+  //       setapprovedLoading(false);
+  //     } else {
+  //       setrejectLoading(false);
+  //     }
+  //     log(e.toString());
+  //   }
+  // }
+
+  void updateCdaRequestStatusApi(id, status, BuildContext context, String ? rejectionReason) async {
     try {
       if (status == "approve") {
         setapprovedLoading(true);
       } else {
         setrejectLoading(true);
       }
-      repo.updateCdaRequestStatus(id, status).then((value) {
+      repo.updateCdaRequestStatus(id, status, rejectionReason).then((value) {
         if (status == "approve") {
           setapprovedLoading(false);
         } else {
@@ -261,14 +298,26 @@ class CdaController extends GetxController {
   }
 
   // // Send Chat Message
-  void sendChatMessageApi(int userId, String message) async {
-    setLoading(true);
-    repo.sendCdaChatMessage(userId, message).then((value) {
+  void sendChatMessageApi(int userId, String message, deviceToken) async {
+    try {
+      setLoading(true);
+      notification
+          .sendNotification("New Message From CDA", message, deviceToken)
+          .then((value) {
+        repo.sendCdaChatMessage(userId, message).then((value) {
+          setLoading(false);
+          getCdaChatApi(userId);
+        }).onError((error, stackTrace) {
+          setLoading(false);
+          log(error.toString());
+        });
+      }).onError((error, stackTrace) {
+        setLoading(false);
+        log(error.toString());
+      });
+    } catch (e) {
       setLoading(false);
-      getCdaChatApi(userId);
-    }).onError((error, stackTrace) {
-      setLoading(false);
-      log(error.toString());
-    });
+      log(e.toString());
+    }
   }
 }

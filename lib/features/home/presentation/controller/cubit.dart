@@ -325,7 +325,6 @@ class HomeCubit extends Cubit<HomeState> {
         passportOrEmirateIdBack: passportBack!,
         nameofdeceased: nameOfDeceased.text,
         dateofdeath: deathDate.text,
-        causeofdeath: causeOfDeath.text,
         locationofdeath: deathLocation.text,
       );
       var response = await _useCase.uploadDocument(model: model);

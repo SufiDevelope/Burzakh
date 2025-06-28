@@ -22,8 +22,12 @@ class RtaAdminHttpRepo implements RtaAdminRepo {
   }
 
   @override
-  Future updateRtaRequestStatus(id, status) async {
+  Future updateRtaRequestStatus(id, status, String? rejectionReason) async {
     Map<String, dynamic> data = {"action": status};
+
+    if (rejectionReason != null) {
+      data["rejection_reason"] = rejectionReason;
+    }
     final response = await _api.getPostApiResponse(
         AppApis.updateRtaRequestStatus(id), data, false);
     return response["message"];

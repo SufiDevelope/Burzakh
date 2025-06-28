@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/data/Response/status.dart';
@@ -7,6 +9,7 @@ import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Contro
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_chat_view.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widgets/cda_admin_header_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widgets/cda_details_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/reject_reason_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,52 +69,78 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                   Status.completed) {
                 return Column(
                   children: [
-                    SizedBox(
-                      height: context.mh * 0.8,
-                      child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount:
-                              controller.cdaDetailsModel.value.data?.length,
-                          itemBuilder: (context, index) {
-                            var data =
-                                controller.cdaDetailsModel.value.data?[index];
-                            return CdaRequestDetailsWidget(
-                              name:
-                                  "${data?.user?.firstName} ${data?.user?.lastName}",
-                              caseId: 'CASE Id: ${data?.id}',
-                              submittedDate: DateFormat('yyyy-MM-dd').format(
-                                  DateTime.parse(data?.createdAt ??
-                                      DateTime.now().toIso8601String())),
-                              statusBadgeText: data?.status ?? '',
-                              onApprove: () {
+                    ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        physics:
+                            NeverScrollableScrollPhysics(), // Keep outer scroll
+                        itemCount:
+                            controller.cdaDetailsModel.value.data?.length,
+                        itemBuilder: (context, index) {
+                          var data =
+                              controller.cdaDetailsModel.value.data?[index];
+                          log(data?.caseDetail?[index].policeClearance ?? "");
+                          return CdaRequestDetailsWidget(
+                            name:
+                                "${data?.user?.firstName} ${data?.user?.lastName}",
+                            caseId: 'brz# ${data?.id}',
+                            submittedDate: DateFormat('yyyy-MM-dd').format(
+                                DateTime.parse(data?.createdAt ??
+                                    DateTime.now().toIso8601String())),
+                            statusBadgeText: data?.status ?? '',
+                            onApprove: () {
+                              controller.updateCdaRequestStatusApi(
+                                  widget.requestId, "approve", context, null);
+                            },
+                            onReject: () {
+                              RejectReasonDialog.show(
+                                  context, Color(0xFF1e40af), onSend: (body) {
                                 controller.updateCdaRequestStatusApi(
-                                    widget.requestId, "approve", context);
-                              },
-                              onReject: () {
-                                controller.updateCdaRequestStatusApi(
-                                    widget.requestId, "reject", context);
-                              },
-                              onEdit: () {},
-                              onOpenChat: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CdaChatView(
-                                        userId: data?.user?.id ?? -1,
-                                      ),
-                                    ));
-                              },
-                              onMapTap: () {
-                                Uri url = Uri.parse(
-                                    "https://www.google.com/maps/search/?api=1&query=${data?.locationOfTent}");
-                                launchUrl(url);
-                              },
-                              signText: '',
-                              location: data?.locationOfTent ?? '',
-                            );
-                          }),
-                    ),
+                                    widget.requestId, "reject", context, body);
+                              });
+                            },
+                            onEdit: () {},
+                            onOpenChat: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CdaChatView(
+                                      userId: data?.user?.id ?? -1,
+                                      deviceToken:
+                                          data?.user?.deviceToken ?? "",
+                                    ),
+                                  ));
+                            },
+                            onMapTap: () {
+                              Uri url = Uri.parse(
+                                  "https://www.google.com/maps/search/?api=1&query=${data?.locationOfTent}");
+                              launchUrl(url);
+                            },
+                            signText: '',
+                            location: data?.locationOfTent ?? '',
+                            email: data?.user?.email ?? '',
+                            phoneNumber: data?.user?.phoneNumber ?? "",
+                            nameOfDeceased:
+                                data?.caseDetail?[index].nameOfDeceased ?? "",
+                            dateOfDeath:
+                                data?.caseDetail?[index].dateOfDeath ?? "",
+                            policeClassificationUrl:
+                                data?.caseDetail?[index].policeClearance ?? "",
+                            deathNotificationFileUrl: data?.caseDetail?[index]
+                                    .deathNotificationFile ??
+                                "",
+                            hospitalCertificateUrl:
+                                data?.caseDetail?[index].hospitalCertificate ??
+                                    "",
+                            passportOrEmirateIdFrontUrl: data
+                                    ?.caseDetail?[index]
+                                    .passportOrEmirateIdFront ??
+                                "",
+                            passportOrEmirateIdBackUrl: data?.caseDetail?[index]
+                                    .passportOrEmirateIdBack ??
+                                "",
+                          );
+                        }),
                   ],
                 );
               } else {

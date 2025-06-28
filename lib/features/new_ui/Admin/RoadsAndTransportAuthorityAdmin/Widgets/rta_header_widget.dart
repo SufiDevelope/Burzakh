@@ -10,6 +10,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
   final int notificationCount;
   final VoidCallback? onrtaLogoPressed;
   final VoidCallback? onLogoutPressed;
+  final String? imageurl;
 
   const RTADashboardHeaderWidget({
     super.key,
@@ -18,9 +19,10 @@ class RTADashboardHeaderWidget extends StatelessWidget {
     required this.adminName,
     required this.initials,
     required this.email,
-    this.notificationCount = 0, 
+    this.notificationCount = 0,
     this.onrtaLogoPressed,
     this.onLogoutPressed,
+    this.imageurl,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -51,13 +53,13 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                 ),
               ),
               0.03.ph(context),
-              
+
               // Profile section
               Container(
                 width: context.mw * 0.2,
                 height: context.mw * 0.2,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFa4313d),
+                  color: const Color(0xFFbd4753),
                   borderRadius: BorderRadius.circular(context.mw * 0.1),
                   boxShadow: [
                     BoxShadow(
@@ -79,7 +81,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                 ),
               ),
               0.02.ph(context),
-              
+
               // Admin name
               Text(
                 adminName,
@@ -91,7 +93,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               0.01.ph(context),
-              
+
               // Email
               Text(
                 email,
@@ -102,14 +104,14 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               0.03.ph(context),
-              
+
               // Divider
               Divider(
                 color: Colors.grey[300],
                 thickness: 1,
               ),
               0.02.ph(context),
-              
+
               // Logout button
               SizedBox(
                 width: double.infinity,
@@ -121,7 +123,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFa4313d),
+                    backgroundColor: const Color(0xFFbd4753),
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: context.mh * 0.015),
                     shape: RoundedRectangleBorder(
@@ -159,7 +161,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
-        color: Color(0xFFa4313d),
+        color: Color(0xFFbd4753),
       ),
       child: SafeArea(
         child: Row(
@@ -181,16 +183,24 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Center(
-                  child: Text(
-                    'RTA',
-                    style: TextStyle(
-                      color: const Color(0xFF8B4A5C),
-                      fontSize: context.mh * 0.018,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                child: imageurl == null
+                    ? Center(
+                        child: Text(
+                          'RTA',
+                          style: TextStyle(
+                            color: const Color(0xFFbd4753),
+                            fontSize: context.mh * 0.018,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          imageurl ?? "",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
               ),
             ),
             0.03.pw(context),
@@ -287,7 +297,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                             child: Text(
                               initials,
                               style: TextStyle(
-                                color: const Color(0xFF8B4A5C),
+                                color: const Color(0xFFbd4753),
                                 fontSize: context.mh * 0.018,
                                 fontWeight: FontWeight.bold,
                               ),

@@ -36,6 +36,7 @@ class RequestDetailsData {
   String? createdAt;
   String? updatedAt;
   User? user;
+  List<CaseDetail>? caseDetail;
 
   RequestDetailsData(
       {this.id,
@@ -48,7 +49,8 @@ class RequestDetailsData {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.user});
+      this.user,
+      this.caseDetail});
 
   RequestDetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -62,6 +64,12 @@ class RequestDetailsData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    if (json['case_details'] != null) {
+      caseDetail = <CaseDetail>[];
+      json['case_details'].forEach((v) {
+        caseDetail!.add(CaseDetail.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -78,6 +86,9 @@ class RequestDetailsData {
     data['updated_at'] = this.updatedAt;
     if (this.user != null) {
       data['user'] = this.user!.toJson();
+    }
+    if (this.caseDetail != null) {
+      data['case_details'] = this.caseDetail!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -96,6 +107,7 @@ class User {
   String? adminType;
   String? createdAt;
   String? updatedAt;
+  String? token;
 
   User(
       {this.id,
@@ -124,6 +136,7 @@ class User {
     adminType = json['admin_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    token = json['device_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -140,6 +153,119 @@ class User {
     data['admin_type'] = this.adminType;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['device_token'] = this.token;
+    return data;
+  }
+}
+
+class CaseDetail {
+  int? id;
+  String? userId;
+  String? restingPlace;
+  String? policeClearance;
+  String? deathNotificationFile;
+  String? deathNotificationFileStatus;
+  String? hospitalCertificate;
+  String? hospitalCertificateStatus;
+  String? passportOrEmirateIdFront;
+  String? passportOrEmirateIdFrontStatus;
+  String? passportOrEmirateIdBack;
+  String? passportOrEmirateIdBackStatus;
+  String? caseStatus;
+  String? releaseForm;
+  String? additionalDocument;
+  String? sendNotificationMessage;
+  int? adminId;
+  String? nameOfDeceased;
+  String? dateOfDeath;
+  String? causeOfDeath;
+  String? location;
+  String? additionalDocumentUploadUser;
+  String? createdAt;
+  String? updatedAt;
+
+  CaseDetail({
+    this.id,
+    this.userId,
+    this.restingPlace,
+    this.policeClearance,
+    this.deathNotificationFile,
+    this.deathNotificationFileStatus,
+    this.hospitalCertificate,
+    this.hospitalCertificateStatus,
+    this.passportOrEmirateIdFront,
+    this.passportOrEmirateIdFrontStatus,
+    this.passportOrEmirateIdBack,
+    this.passportOrEmirateIdBackStatus,
+    this.caseStatus,
+    this.releaseForm,
+    this.additionalDocument,
+    this.sendNotificationMessage,
+    this.adminId,
+    this.nameOfDeceased,
+    this.dateOfDeath,
+    this.causeOfDeath,
+    this.location,
+    this.additionalDocumentUploadUser,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  CaseDetail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    restingPlace = json['resting_place'];
+    policeClearance = json['police_clearance'];
+    deathNotificationFile = json['death_notification_file'];
+    deathNotificationFileStatus = json['death_notification_file_status'];
+    hospitalCertificate = json['hospital_certificate'];
+    hospitalCertificateStatus = json['hospital_certificate_status'];
+    passportOrEmirateIdFront = json['passport_or_emirate_id_front'];
+    passportOrEmirateIdFrontStatus =
+        json['passport_or_emirate_id_front_status'];
+    passportOrEmirateIdBack = json['passport_or_emirate_id_back'];
+    passportOrEmirateIdBackStatus = json['passport_or_emirate_id_back_status'];
+    caseStatus = json['case_status'];
+    releaseForm = json['release_form'];
+    additionalDocument = json['additional_document'];
+    sendNotificationMessage = json['send_notification_message'];
+    adminId = json['admin_id'];
+    nameOfDeceased = json['name_of_deceased'];
+    dateOfDeath = json['date_of_death'];
+    causeOfDeath = json['cause_of_death'];
+    location = json['location'];
+    additionalDocumentUploadUser = json['additional_document_upload_user'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['resting_place'] = restingPlace;
+    data['police_clearance'] = policeClearance;
+    data['death_notification_file'] = deathNotificationFile;
+    data['death_notification_file_status'] = deathNotificationFileStatus;
+    data['hospital_certificate'] = hospitalCertificate;
+    data['hospital_certificate_status'] = hospitalCertificateStatus;
+    data['passport_or_emirate_id_front'] = passportOrEmirateIdFront;
+    data['passport_or_emirate_id_front_status'] =
+        passportOrEmirateIdFrontStatus;
+    data['passport_or_emirate_id_back'] = passportOrEmirateIdBack;
+    data['passport_or_emirate_id_back_status'] = passportOrEmirateIdBackStatus;
+    data['case_status'] = caseStatus;
+    data['release_form'] = releaseForm;
+    data['additional_document'] = additionalDocument;
+    data['send_notification_message'] = sendNotificationMessage;
+    data['admin_id'] = adminId;
+    data['name_of_deceased'] = nameOfDeceased;
+    data['date_of_death'] = dateOfDeath;
+    data['cause_of_death'] = causeOfDeath;
+    data['location'] = location;
+    data['additional_document_upload_user'] = additionalDocumentUploadUser;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }

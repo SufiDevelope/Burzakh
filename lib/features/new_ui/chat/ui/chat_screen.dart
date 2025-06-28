@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'dart:developer';
+import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
@@ -83,11 +84,20 @@ class _ChatScreenState extends State<ChatScreen> {
                                 message:
                                     rtacontroller.rtaChatList[index].message ??
                                         '',
+                                time: DateTime.parse(
+                                  rtacontroller.rtaChatList[index].createdAt
+                                      .toString(),
+                                ),
                               )
                             : OtherUserChat(
                                 message:
                                     rtacontroller.rtaChatList[index].message ??
-                                        '');
+                                        '',
+                                time: DateTime.parse(
+                                  rtacontroller.rtaChatList[index].createdAt
+                                      .toString(),
+                                ),
+                              );
                       },
                     ),
                   );
@@ -96,15 +106,15 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
               })
             else if (widget.adminType == "cda")
-              Obx(() {
-                final status = cdacontroller.rxRequestStatusForCdaChat.value;
-                if (status == Status.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (status == Status.error) {
-                  return Center(child: Text("Error"));
-                } else if (status == Status.completed) {
-                  return Expanded(
-                    child: ListView.builder(
+              Expanded(
+                child: Obx(() {
+                  final status = cdacontroller.rxRequestStatusForCdaChat.value;
+                  if (status == Status.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (status == Status.error) {
+                    return Center(child: Text("Error"));
+                  } else if (status == Status.completed) {
+                    return ListView.builder(
                       itemCount: cdacontroller.cdaChatList.length,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemBuilder: (context, index) {
@@ -113,24 +123,37 @@ class _ChatScreenState extends State<ChatScreen> {
                                 message:
                                     cdacontroller.cdaChatList[index].message ??
                                         '',
+                                time: DateTime.parse(
+                                  cdacontroller.cdaChatList[index].createdAt
+                                      .toString(),
+                                ),
                               )
                             : OtherUserChat(
                                 message:
                                     cdacontroller.cdaChatList[index].message ??
-                                        '');
+                                        '',
+                                time: DateTime.parse(
+                                  cdacontroller.cdaChatList[index].createdAt
+                                      .toString(),
+                                ),
+                              );
                       },
-                    ),
-                  );
-                } else {
-                  return SizedBox.shrink();
-                }
-              })
+                    );
+                  } else {
+                    return SizedBox.shrink();
+                  }
+                }),
+              )
             else
-              SizedBox.shrink(),
+              SizedBox(
+                height: context.mh * 0.72,
+              ),
             // Spacer(),
-            RiderSendChatField(id: widget.id, adminType: widget.adminType),
           ],
         ),
+        // RiderSendChatField(id: widget.id, adminType: widget.adminType),
+        bottomNavigationBar:
+            RiderSendChatField(id: widget.id, adminType: widget.adminType),
       ),
     );
   }

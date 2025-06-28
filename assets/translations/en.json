@@ -703,5 +703,9 @@
   "Download Release Form": "Download Release Form",
   "Download Police Clearance": "Download Police Clearance",
   "Upload Document": "Upload Document",
-  "Admin has requested an additional document": "Admin has requested an additional document"
+  "Admin has requested an additional document": "Admin has requested an additional document",
+  "Your request has been sent to the Road Transport Authority.": "Your request has been sent to the Road Transport Authority.",
+  "Case Name": "Case Name",
+  "Rejection Reason: ": "Rejection Reason:",
+  "Update Service": "Update Service"
 }

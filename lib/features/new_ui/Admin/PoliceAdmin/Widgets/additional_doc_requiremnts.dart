@@ -129,9 +129,9 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
               decoration: InputDecoration(
                 hintText:
                     'Please specify the additional documents required for this case...',
-                hintStyle: const TextStyle(
+                hintStyle:  TextStyle(
                   color: Color(0xFF6C757D),
-                  fontSize: 14,
+                  fontSize: context.mh * 0.014,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -150,8 +150,8 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white,
               ),
-              style: const TextStyle(
-                fontSize: 14,
+              style:  TextStyle(
+                fontSize: context.mh * 0.014,
                 color: Color(0xFF2E3A59),
               ),
               textAlignVertical: TextAlignVertical.top,
@@ -174,11 +174,12 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: const Text(
+                    child:  Text(
                       'Cancel',
                       style: TextStyle(
                         color: Color(0xFF6C757D),
                         fontWeight: FontWeight.w600,
+                        fontSize: context.mh * 0.014,
                       ),
                     ),
                   ),
@@ -201,18 +202,19 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4A7C59),
+                      backgroundColor: const Color(0xFF00734B),
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child:  Text(
                       'Send Request',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
+                        fontSize: context.mh * 0.014,
                       ),
                     ),
                   ),

@@ -45,8 +45,9 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
               RTADashboardHeaderWidget(
                 title: "Roads and Transport Authority",
                 subtitle: "Road Sign Services Administration",
-               adminName: widget.name,
-                initials: widget.name.split(" ").map((e) => e[0]).take(2).join(),
+                adminName: widget.name,
+                initials:
+                    widget.name.split(" ").map((e) => e[0]).take(2).join(),
                 notificationCount: 3,
                 onrtaLogoPressed: () async {},
                 onLogoutPressed: () async {
@@ -60,6 +61,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                   );
                 },
                 email: '',
+                imageurl: "assets/images/png/rtalogo.png",
               ),
               Obx(() {
                 return GenericDashboardOverviewWidget(
@@ -68,7 +70,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                   onTimeRangeChanged: (TimeRange range) {
                     controller.updateTimeRange(range);
                   },
-                  selectedColor: Color(0xFFa4313d),
+                  selectedColor: Color(0xFFbd4753),
                 );
               }),
               Padding(
@@ -93,7 +95,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                               lastUpdated: DateFormat("dd MMM yyyy")
                                   .format(DateTime.now()),
                               icon: Icons.description_outlined,
-                              primaryColor: Color(0xFF8B4A5C),
+                              primaryColor: Color(0xFFbd4753),
                               backgroundColor: Colors.grey[50],
                               progressValue: 0.6,
                               onTap: () {},
@@ -117,7 +119,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                               statusText: "This Week",
                               lastUpdated: "Last updated: 30 min ago",
                               icon: Icons.close,
-                              primaryColor: Color(0xFF8B4A5C),
+                              primaryColor: Color(0xFFbd4753),
                               backgroundColor: Colors.grey[50],
                               progressValue: 0.6,
                               onTap: () {},
@@ -198,7 +200,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                           location: data.locationOfHouse ?? "",
                           signCount: data.signsRequired.toString(),
                           rta: 'rta',
-                          primaryColor: Color(0xFF8B4A5C),
+                          primaryColor: Color(0xFFbd4753),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -214,11 +216,10 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => RtaChatView(
-                                    userId: data.user?.id ?? -1,
+                                    userId: data.user?.id ?? -1, deviceToken: data.user?.token ?? "",
                                   ),
                                 ));
                           },
-
                         );
                       });
                 } else if (controller

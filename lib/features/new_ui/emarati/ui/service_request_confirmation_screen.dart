@@ -10,7 +10,8 @@ import '../../../../core/app/di_container.dart';
 import '../../../emirati_svcs/presentation/controller/cubit.dart';
 
 class ServiceRequestConfirmationScreen extends StatelessWidget {
-  const ServiceRequestConfirmationScreen({super.key});
+  final String id;
+  const ServiceRequestConfirmationScreen({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,8 @@ class ServiceRequestConfirmationScreen extends StatelessWidget {
                     children: [
                       RequestConfirmationTopbar(text: "Request Confirmation",),
                       SizedBox(height: 10,),
-                      RequestSubmittedGreenContainer(),
-                      RequestDetailWidget(isApproved: 0,cdaGetModel: _emiratiScvCubit.cdaGetModel!,),
+                      RequestSubmittedGreenContainer(id: id,),
+                      RequestDetailWidget(isApproved: 0,cdaGetModel: _emiratiScvCubit.cdaGetModel!, id: id,),
                       ServiceRequestScreenFooter(),
                     ],
                   ),

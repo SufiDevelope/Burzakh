@@ -275,32 +275,32 @@ bool? isLoading;
                     ),
                   ),
                 ),
-                Container(width: 1, height: 32, color: Colors.grey[200]),
-                if (isApproved==0)
-                  Expanded(
-                    child: TextButton.icon(
-                      onPressed: onCancel,
-                      icon: Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Colors.red[600],
-                      ),
-                      label: Text(
-                       isLoading==true? "Wait..".tr():"Cancel".tr(),
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'ns',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.red[600],
-                        ),
-                      ),
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                      ),
-                    ),
-                  )
-                else
-                  const Expanded(child: SizedBox()),
+                // // Container(width: 1, height: 32, color: Colors.grey[200]),
+                // // if (isApproved==0)
+                // //   Expanded(
+                // //     child: TextButton.icon(
+                // //       onPressed: onCancel,
+                // //       icon: Icon(
+                // //         Icons.close,
+                // //         size: 16,
+                // //         color: Colors.red[600],
+                // //       ),
+                // //       label: Text(
+                // //        isLoading==true? "Wait..".tr():"Cancel".tr(),
+                // //         style: TextStyle(
+                // //           fontSize: 14,
+                // //           fontFamily: 'ns',
+                // //           fontWeight: FontWeight.w500,
+                // //           color: Colors.red[600],
+                // //         ),
+                // //       ),
+                // //       style: TextButton.styleFrom(
+                // //         padding: const EdgeInsets.symmetric(vertical: 8),
+                // //       ),
+                // //     ),
+                // //   )
+                // else
+                //   const Expanded(child: SizedBox()),
               ],
             ),
           ),

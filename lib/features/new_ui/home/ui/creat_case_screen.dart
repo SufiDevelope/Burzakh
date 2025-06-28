@@ -117,7 +117,7 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                               _documentItem(
                                   "Death Notification",
                                   "Pending",
-                                  Symbols.skull,
+                                  Symbols.heart_minus,
                                   const Color(0xFFFFF8E1),
                                   const Color(0xFFE65100),
                                   context: context),
@@ -534,47 +534,6 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
           const SizedBox(height: 16),
 
           // Cause of Death Field
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                text: "Cause of Death",
-                fontSize: context.mh * 0.014,
-                fontWeight: FontWeight.w500,
-                color: AppColor.black(),
-              ),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: causeofdeath,
-                decoration: InputDecoration(
-                  hintText: "",
-                  hintStyle: TextStyle(
-                    color: AppColor.grey(),
-                    fontSize: context.mh * 0.014,
-                  ),
-                  filled: true,
-                  fillColor: AppColor.grey().withOpacity(0.05),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColor.greyLight1()),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColor.greyLight1()),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: AppColor.primary()),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
 
           // Date of Death Field
           Column(

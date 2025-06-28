@@ -8,31 +8,54 @@ import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_adm
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_dashboard_widget.dart';
+import 'package:burzakh/features/new_ui/chat/Controller/AppStateController/app_state_controller.dart';
 import 'package:burzakh/features/onboarding/presentation/page/onboarding_1.dart';
 import 'package:burzakh/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
-import 'package:burzakh/features/translation/presentation/page/translation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../features/authentication/presentation/page/forgot_otp_screen.dart';
 import '../../features/authentication/presentation/page/login_01.dart';
 import '../../features/new_ui/dashboard/app_dashboard.dart';
 import '../../features/onboarding/presentation/page/onboarding_001.dart';
 import '../../features/onboarding/presentation/page/onboarding_01.dart';
 import '../../features/splash/presentation/page/splash_screen.dart';
+import '../../features/translation/presentation/page/translation_screen.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 
-class MyApp extends StatelessWidget {
-  MyApp({
-    super.key,
-  });
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
-  var pro = Get.put(LocalizationGetx());
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  final LocalizationGetx pro = Get.put(LocalizationGetx());
+  final AppStateController appStateController = Get.find<AppStateController>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    bool isForeground = state == AppLifecycleState.resumed;
+    appStateController.updateAppState(isForeground);
+    print("📱 App is in foreground: $isForeground");
+  }
 
   @override
   Widget build(BuildContext context) {

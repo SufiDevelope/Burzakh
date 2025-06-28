@@ -1,6 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Controller/cda_controller.dart';
 
@@ -66,6 +67,27 @@ class CdaRequestDetailsWidget extends StatelessWidget {
   final VoidCallback? onMapTap;
   final Color? primaryColor;
   final Color? backgroundColor;
+  final VoidCallback? onCallUser;
+  final VoidCallback? onEmailUser;
+  final String email;
+  final String phoneNumber;
+  final String? restingPlace;
+  final String? policeClassificationUrl;
+  final String? deathNotificationFileUrl;
+  final String? deathNotificationFileStatus;
+  final String? hospitalCertificateUrl;
+  final String? hospitalCertificateStatus;
+  final String? passportOrEmirateIdFrontUrl;
+  final String? passportOrEmirateIdFrontStatus;
+  final String? passportOrEmirateIdBackUrl;
+  final String? passportOrEmirateIdBackStatus;
+  final String? releaseFormUrl;
+  final String? additionalDocument;
+  final String? additionalDocumentUploadUserUrl;
+  final String? nameOfDeceased;
+  final String? dateOfDeath;
+  final String? causeOfDeath;
+  final String? sendNotificationMessage;
 
   const CdaRequestDetailsWidget({
     super.key,
@@ -84,10 +106,41 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     this.onMapTap,
     this.primaryColor,
     this.backgroundColor,
+    this.onCallUser,
+    this.onEmailUser,
+    required this.email,
+    required this.phoneNumber,
+    this.restingPlace,
+    this.policeClassificationUrl,
+    this.deathNotificationFileUrl,
+    this.deathNotificationFileStatus,
+    this.hospitalCertificateUrl,
+    this.hospitalCertificateStatus,
+    this.passportOrEmirateIdFrontUrl,
+    this.passportOrEmirateIdFrontStatus,
+    this.passportOrEmirateIdBackUrl,
+    this.passportOrEmirateIdBackStatus,
+    this.releaseFormUrl,
+    this.additionalDocument,
+    this.additionalDocumentUploadUserUrl,
+    this.nameOfDeceased,
+    this.dateOfDeath,
+    this.causeOfDeath,
+    this.sendNotificationMessage,
   });
 
   @override
   Widget build(BuildContext context) {
+    bool _hasDocuments() {
+      return policeClassificationUrl != null ||
+          deathNotificationFileUrl != null ||
+          hospitalCertificateUrl != null ||
+          passportOrEmirateIdFrontUrl != null ||
+          passportOrEmirateIdBackUrl != null ||
+          additionalDocumentUploadUserUrl != null ||
+          releaseFormUrl != null;
+    }
+
     final Color mainColor = primaryColor ?? const Color(0xFF1e40af);
     final Color bgColor = backgroundColor ?? Colors.white;
     final Color badgeColor = statusBadgeColor ?? Colors.orange[100]!;
@@ -173,7 +226,217 @@ class CdaRequestDetailsWidget extends StatelessWidget {
           ),
 
           0.03.ph(context),
+          // User Contact Information Section
+          Text(
+            'Contact Information',
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: context.mh * 0.016,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
 
+          0.02.ph(context),
+
+          // Email
+          _buildDetailRow(
+            context,
+            Icons.email_outlined,
+            'Email',
+            email,
+            isClickable: true,
+            onTap: onEmailUser,
+          ),
+
+          0.015.ph(context),
+
+          // Phone Number
+          _buildDetailRow(
+            context,
+            Icons.phone_outlined,
+            'Phone Number',
+            phoneNumber,
+            isClickable: true,
+            onTap: onCallUser,
+          ),
+
+          0.03.ph(context),
+
+          // Case Details Section
+          if (nameOfDeceased != null ||
+              dateOfDeath != null ||
+              causeOfDeath != null ||
+              restingPlace != null) ...[
+            Text(
+              'Case Details',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: context.mh * 0.016,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            0.02.ph(context),
+            if (nameOfDeceased != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.person_outline,
+                'Name of Deceased',
+                nameOfDeceased!,
+              ),
+              0.015.ph(context),
+            ],
+            if (dateOfDeath != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.calendar_today_outlined,
+                'Date of Death',
+                dateOfDeath!,
+              ),
+              0.015.ph(context),
+            ],
+            if (causeOfDeath != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.medical_services_outlined,
+                'Cause of Death',
+                causeOfDeath!,
+                isMultiline: true,
+              ),
+              0.015.ph(context),
+            ],
+            if (restingPlace != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.location_on_outlined,
+                'Resting Place',
+                restingPlace!,
+              ),
+              0.015.ph(context),
+            ],
+            if (additionalDocument != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.description_outlined,
+                'Additional Document',
+                additionalDocument!,
+              ),
+              0.015.ph(context),
+            ],
+            if (sendNotificationMessage != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.message_outlined,
+                'Notification Message',
+                sendNotificationMessage!,
+                isMultiline: true,
+              ),
+              0.015.ph(context),
+            ],
+            0.03.ph(context),
+          ],
+
+          if (_hasDocuments()) ...[
+            Text(
+              'Documents',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: context.mh * 0.016,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+
+            0.02.ph(context),
+
+            // Police Clearance
+            if (policeClassificationUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.security_outlined,
+                'Police Clearance',
+                policeClassificationUrl!,
+                null,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Death Notification File
+            if (deathNotificationFileUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.description_outlined,
+                'Death Notification File',
+                deathNotificationFileUrl!,
+                deathNotificationFileStatus,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Hospital Certificate
+            if (hospitalCertificateUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.local_hospital_outlined,
+                'Hospital Certificate',
+                hospitalCertificateUrl!,
+                hospitalCertificateStatus,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Passport/Emirates ID Front
+            if (passportOrEmirateIdFrontUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.credit_card_outlined,
+                'Emirates ID (Front)',
+                passportOrEmirateIdFrontUrl!,
+                passportOrEmirateIdFrontStatus,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Passport/Emirates ID Back
+            if (passportOrEmirateIdBackUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.credit_card_outlined,
+                'Emirates ID (Back)',
+                passportOrEmirateIdBackUrl!,
+                passportOrEmirateIdBackStatus,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Additional Document Upload
+            if (additionalDocumentUploadUserUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.attach_file_outlined,
+                'Additional Document Upload',
+                additionalDocumentUploadUserUrl!,
+                null,
+              ),
+              0.015.ph(context),
+            ],
+
+            // Release Form
+            if (releaseFormUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.assignment_outlined,
+                'Release Form',
+                releaseFormUrl!,
+                null,
+              ),
+              0.015.ph(context),
+            ],
+
+            0.03.ph(context),
+          ],
+
+          0.01.ph(context),
+
+         
           // Request Details Section
           Text(
             'Request Details',
@@ -194,6 +457,8 @@ class CdaRequestDetailsWidget extends StatelessWidget {
             location,
           ),
 
+          // Documents Section
+
           0.03.ph(context),
           // Location Preview Section
           Text(
@@ -207,7 +472,6 @@ class CdaRequestDetailsWidget extends StatelessWidget {
 
           0.015.ph(context),
 
-          // Map Preview Container
           // Map Preview Container
           GestureDetector(
             onTap: onMapTap,
@@ -435,6 +699,134 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     );
   }
 
+  Widget _buildDocumentRow(
+    BuildContext context,
+    IconData icon,
+    String title,
+    String documentUrl,
+    String? status,
+  ) {
+    Color statusColor = Colors.grey[600]!;
+    Color statusBgColor = Colors.grey[100]!;
+
+    if (status != null) {
+      switch (status.toLowerCase()) {
+        case 'approved':
+          statusColor = Colors.green[700]!;
+          statusBgColor = Colors.green[50]!;
+          break;
+        case 'rejected':
+          statusColor = Colors.red[700]!;
+          statusBgColor = Colors.red[50]!;
+          break;
+        case 'pending':
+          statusColor = Colors.orange[700]!;
+          statusBgColor = Colors.orange[50]!;
+          break;
+      }
+    }
+
+    return GestureDetector(
+      onTap: () {
+        _openDocument(documentUrl);
+      },
+      child: Container(
+        padding: EdgeInsets.all(context.mw * 0.035),
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey[200]!),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(context.mw * 0.025),
+              decoration: BoxDecoration(
+                color: Color(0xFF1e40af).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                icon,
+                color: Color(0xFF1e40af),
+                size: context.mh * 0.022,
+              ),
+            ),
+            0.025.pw(context),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      color: Colors.grey[800],
+                      fontSize: context.mh * 0.015,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  0.005.ph(context),
+                  Text(
+                    'Tap to view document',
+                    style: TextStyle(
+                      color: Color(0xFF1e40af),
+                      fontSize: context.mh * 0.012,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  if (status != null) ...[
+                    0.008.ph(context),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: context.mw * 0.02,
+                        vertical: context.mh * 0.004,
+                      ),
+                      decoration: BoxDecoration(
+                        color: statusBgColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        status.toUpperCase(),
+                        style: TextStyle(
+                          color: statusColor,
+                          fontSize: context.mh * 0.01,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                // Handle document view/download
+                _openDocument(documentUrl);
+              },
+              child: Container(
+                padding: EdgeInsets.all(context.mw * 0.02),
+                decoration: BoxDecoration(
+                  color: Color(0xFF1e40af),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.visibility_outlined,
+                  color: Colors.white,
+                  size: context.mh * 0.018,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _openDocument(String url) {
+    if (url.isNotEmpty) {
+      launchUrl(Uri.parse(url));
+    }
+  }
+
   Widget _buildDetailRow(
     BuildContext context,
     IconData icon,
@@ -442,6 +834,8 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     String content, {
     bool isMultiline = false,
     bool isDocuments = false,
+    bool isClickable = false,
+    VoidCallback? onTap,
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -466,19 +860,41 @@ class CdaRequestDetailsWidget extends StatelessWidget {
               ),
               if (!isDocuments) ...[
                 0.005.ph(context),
-                Text(
-                  content,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: context.mh * 0.014,
-                    fontWeight: FontWeight.w400,
-                    height: isMultiline ? 1.3 : 1.0,
+                GestureDetector(
+                  onTap: isClickable ? onTap : null,
+                  child: Text(
+                    content,
+                    style: TextStyle(
+                      color: isClickable ? Colors.blue[600] : Colors.grey[600],
+                      fontSize: context.mh * 0.014,
+                      fontWeight: FontWeight.w400,
+                      height: isMultiline ? 1.3 : 1.0,
+                      // decoration: isClickable ? TextDecoration.underline : null,
+                    ),
                   ),
                 ),
               ],
             ],
           ),
         ),
+        if (isClickable && onTap != null)
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: EdgeInsets.all(context.mw * 0.015),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Icon(
+                title.toLowerCase().contains('email')
+                    ? Icons.mail_outline
+                    : Icons.phone,
+                color: Colors.blue[600],
+                size: context.mh * 0.018,
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -7,7 +7,7 @@ abstract class CdaAdminRepo {
   Future<CdaRequestModel> getCdaRequest();
   Future<CdaFilterRequestModel> getCdaFilterRequest(filter);
   Future<CdaRequestDetailsModel> getCdaRequestDetails(id);
-  Future<dynamic> updateCdaRequestStatus(id, status);
+  Future<dynamic> updateCdaRequestStatus(id, status, String? rejectionReason);
   Future<RtaChatModel> getCdaChat(id);
   Future<dynamic> sendCdaChatMessage(id, message);
 }

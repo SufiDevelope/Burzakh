@@ -8,16 +8,34 @@ import '../../../../core/theme/AppColor.dart';
 import '../../../../widgets/app_text.dart';
 
 class UserChatWidget extends StatelessWidget {
-   UserChatWidget({super.key,required this.id,required this.adminType,required this.name,required this.time,required this.image,required this.lastMessage,});
-String image;
-String name;
-String lastMessage;
-String time;
-   String id;String adminType;
-   @override
+  UserChatWidget({
+    super.key,
+    required this.id,
+    required this.adminType,
+    required this.name,
+    required this.time,
+    required this.image,
+    required this.lastMessage,
+  });
+  String image;
+  String name;
+  String lastMessage;
+  String time;
+  String id;
+  String adminType;
+  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen(id: id,adminType: adminType,name: name, image: image,),)),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              id: id,
+              adminType: adminType,
+              name: name,
+              image: image,
+            ),
+          )),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -29,14 +47,11 @@ String time;
                 color: Colors.grey[100],
                 shape: BoxShape.circle,
               ),
-              child: Center(
-                child: Text(
-                  image,
-                  style: TextStyle(
-                    fontSize: context.mh * 0.016,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[500],
-                  ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image(
+                  image: AssetImage(image),
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
@@ -48,8 +63,8 @@ String time;
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppText(text:
-                      name,
+                      AppText(
+                        text: name,
                         fontSize: context.mh * 0.016,
                         fontWeight: FontWeight.w500,
                         color: AppColor.black(),
@@ -63,8 +78,8 @@ String time;
                     ],
                   ),
                   const SizedBox(height: 2),
-                  AppText(text:
-                  lastMessage,
+                  AppText(
+                    text: lastMessage,
                     fontSize: context.mh * 0.014,
                     color: Colors.grey[500],
                     overflow: TextOverflow.ellipsis,

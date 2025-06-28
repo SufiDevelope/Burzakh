@@ -34,12 +34,15 @@ class HomeScreen1 extends StatefulWidget {
 }
 
 class _HomeScreen1State extends State<HomeScreen1> {
+   final _homeCubit = DiContainer().sl<HomeCubit>();
   final controller = Get.put(NotificationController());
-  initState() {
+
+  @override
+  void initState() {
     super.initState();
-    // NotificationService().setUpInteractiveMessage();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getNotifs();
+      _homeCubit.getUserCases();
     });
   }
 
@@ -75,154 +78,159 @@ class _HomeScreen1State extends State<HomeScreen1> {
       body: Container(
         height: mdHeight(context) * 1,
         decoration: BoxDecoration(gradient: AppColor.bgGradient),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-            child: BlocBuilder(
-                bloc: _homeCubit,
-                builder: (context, state) {
-                  log("state $state");
-                  log("selected case index ${_homeCubit.selectedCaseIndex}");
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Header
-                      HomeTopbar(),
-                      0.02.ph(context),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            return await _homeCubit.getUserCases();
+          },
+          child: SafeArea(
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+              child: BlocBuilder(
+                  bloc: _homeCubit,
+                  builder: (context, state) {
+                    log("state $state");
+                    log("selected case index ${_homeCubit.selectedCaseIndex}");
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Header
+                        HomeTopbar(),
+                        0.02.ph(context),
 
-                      // Case Info
+                        // Case Info
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _homeCubit.isFetchingCases
-                              ? HomeCaseShimmer()
-                              : _homeCubit.caseList.isEmpty
-                                  ? StartFirstTimeCase()
-                                  : Column(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _homeCubit.isFetchingCases
+                                ? HomeCaseShimmer()
+                                : _homeCubit.caseList.isEmpty
+                                    ? StartFirstTimeCase()
+                                    : Column(
+                                        children: [
+                                          ...List.generate(
+                                            _homeCubit.caseList.length,
+                                            (index) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  log("index ${_homeCubit.caseList[index].police_clearance}");
+                                                  setState(() {
+                                                    _homeCubit
+                                                        .selectCase(index);
+                                                  });
+                                                },
+                                                child: HomeCaseWidget(
+                                                  caseModel: _homeCubit
+                                                      .caseList[index],
+                                                ),
+                                              );
+                                            },
+                                          )
+                                        ],
+                                      ),
+                            0.02.ph(context),
+
+                            // Today's Priority
+                            if (_homeCubit.caseList.isNotEmpty &&
+                                _homeCubit.recentActivityList.isNotEmpty)
+                              Row(
+                                children: [
+                                  AppText(
+                                    text: "Today's Priority",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: context.mh * 0.017,
+                                  ),
+                                  AppText(
+                                    text:
+                                        " (${_homeCubit.caseList[_homeCubit.selectedCaseIndex].name_of_deceased})",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: context.mh * 0.017,
+                                  ),
+                                ],
+                              ),
+                            0.01.ph(context),
+                            (_homeCubit.caseList.isEmpty ||
+                                    _homeCubit.recentActivityList.isEmpty)
+                                ? Container(
+                                    alignment: Alignment.topLeft,
+                                    width: mdWidth(context) * 1,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white,
+                                    ),
+                                    child: Column(
                                       children: [
-                                        ...List.generate(
-                                          _homeCubit.caseList.length,
-                                          (index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                log("index ${_homeCubit.caseList[index].police_clearance}");
-                                                setState(() {
-                                                  _homeCubit.selectCase(index);
-                                                });
-                                              },
-                                              child: HomeCaseWidget(
-                                                caseModel:
-                                                    _homeCubit.caseList[index],
-                                              ),
-                                            );
-                                          },
-                                        )
+                                        AppText(
+                                          text:
+                                              "You have no pending actions today.\nYour priorities will appear here after you register a case.",
+                                          fontSize: context.mh * 0.015,
+                                          color: AppColor.greyLight(),
+                                        ),
                                       ],
                                     ),
-                          0.02.ph(context),
-
-                          // Today's Priority
-                          if (_homeCubit.caseList.isNotEmpty &&
-                              _homeCubit.recentActivityList.isNotEmpty)
-                            Row(
-                              children: [
-                                AppText(
-                                  text: "Today's Priority",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: context.mh * 0.017,
-                                ),
-                                AppText(
-                                  text:
-                                      " (${_homeCubit.caseList[_homeCubit.selectedCaseIndex].name_of_deceased})",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: context.mh * 0.017,
-                                ),
-                              ],
-                            ),
-                          0.01.ph(context),
-                          (_homeCubit.caseList.isEmpty ||
-                                  _homeCubit.recentActivityList.isEmpty)
-                              ? Container(
-                                  alignment: Alignment.topLeft,
-                                  width: mdWidth(context) * 1,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 20),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white,
+                                  )
+                                : TodayPiorityWidget(
+                                    homeCubit: _homeCubit,
+                                    caseModel: _homeCubit
+                                        .caseList[_homeCubit.selectedCaseIndex],
                                   ),
-                                  child: Column(
+
+                            0.02.ph(context),
+
+                            // Recent Activity
+                            RecentActivitySection(),
+                            0.02.ph(context),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 14, horizontal: 20),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  // color: AppColor.bgPrimary(),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border(
+                                      left: BorderSide(
+                                          color: AppColor.darkGreen,
+                                          width: 3))),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AppText(
+                                    text:
+                                        "\"Verify, in the remembrance of Allah do hearts find rest\"",
+                                    fontFamily: 'n',
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w300,
+                                    color: AppColor.greyLight(),
+                                    fontSize: context.mh * 0.015,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       AppText(
-                                        text:
-                                            "You have no pending actions today.\nYour priorities will appear here after you register a case.",
-                                        fontSize: context.mh * 0.015,
-                                        color: AppColor.greyLight(),
+                                        text: "-Surah Ar-Ra'd13:28",
+                                        fontFamily: 'n',
+                                        fontSize: context.mh * 0.012,
+                                        fontWeight: FontWeight.w300,
+                                        color: AppColor.grey(),
+                                        fontStyle: FontStyle.italic,
                                       ),
                                     ],
                                   ),
-                                )
-                              : TodayPiorityWidget(
-                                  homeCubit: _homeCubit,
-                                  caseModel: _homeCubit
-                                      .caseList[_homeCubit.selectedCaseIndex],
-                                ),
-
-                          0.02.ph(context),
-
-                          // Recent Activity
-                          RecentActivitySection(),
-                          0.02.ph(context),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 14, horizontal: 20),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                // color: AppColor.bgPrimary(),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border(
-                                    left: BorderSide(
-                                        color: AppColor.darkGreen, width: 3))),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AppText(
-                                  text:
-                                      "\"Verify, in the remembrance of Allah do hearts find rest\"",
-                                  fontFamily: 'n',
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w300,
-                                  color: AppColor.greyLight(),
-                                  fontSize: context.mh * 0.015,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    AppText(
-                                      text: "-Surah Ar-Ra'd13:28",
-                                      fontFamily: 'n',
-                                      fontSize: context.mh * 0.012,
-                                      fontWeight: FontWeight.w300,
-                                      color: AppColor.grey(),
-                                      fontStyle: FontStyle.italic,
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  );
-                }),
+                          ],
+                        )
+                      ],
+                    );
+                  }),
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-var _homeCubit = DiContainer().sl<HomeCubit>();
-var authCubit = DiContainer().sl<AuthenticationCubit>();

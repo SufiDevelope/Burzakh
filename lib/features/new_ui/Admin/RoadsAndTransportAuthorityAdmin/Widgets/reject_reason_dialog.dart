@@ -2,26 +2,31 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SendNotificationDialog extends StatelessWidget {
+class RejectReasonDialog extends StatelessWidget {
   final VoidCallback onClose;
-  final Function(String title, String body) onSend;
 
-  const SendNotificationDialog({
+  final Function(String body) onSend;
+  final Color color;
+
+  const RejectReasonDialog({
     super.key,
     required this.onClose,
     required this.onSend,
+    required this.color,
   });
 
   static void show(
-    BuildContext context, {
-    required Function(String title, String body) onSend,
+    BuildContext context,
+    Color color, {
+    required Function(String rejectReason) onSend,
   }) {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => SendNotificationDialog(
+      builder: (context) => RejectReasonDialog(
         onClose: () => Navigator.pop(context),
         onSend: onSend,
+        color: color,
       ),
     );
   }
@@ -50,7 +55,7 @@ class SendNotificationDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Send Notification',
+                  'Reject Reason',
                   style: TextStyle(
                     fontSize: context.mh * 0.018,
                     fontWeight: FontWeight.bold,
@@ -70,7 +75,7 @@ class SendNotificationDialog extends StatelessWidget {
 
             // Body Field
             Text(
-              'Message',
+              'Reason',
               style: TextStyle(
                 fontSize: context.mh * 0.016,
                 fontWeight: FontWeight.w600,
@@ -83,7 +88,7 @@ class SendNotificationDialog extends StatelessWidget {
               controller: bodyController,
               maxLines: 4,
               decoration: InputDecoration(
-                hintText: 'Enter notification message...',
+                hintText: 'Enter your reason',
                 hintStyle: TextStyle(
                   color: Color(0xFF6C757D),
                   fontSize: context.mh * 0.014,
@@ -118,10 +123,9 @@ class SendNotificationDialog extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  final title = titleController.text.trim();
                   final body = bodyController.text.trim();
                   if (body.isNotEmpty) {
-                    onSend(title, body);
+                    onSend(body);
                     onClose();
                   } else {
                     Get.snackbar(
@@ -134,7 +138,7 @@ class SendNotificationDialog extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00734B),
+                  backgroundColor: color,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -142,7 +146,7 @@ class SendNotificationDialog extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Send',
+                  'Reject',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

@@ -43,7 +43,8 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                 title: "Community Development Authority",
                 subtitle: "Mourning Tent Administration",
                 adminName: widget.name,
-                initials: widget.name.split(" ").map((e) => e[0]).take(2).join(),
+                initials:
+                    widget.name.split(" ").map((e) => e[0]).take(2).join(),
                 notificationCount: 3,
                 onrtaLogoPressed: () {
                   Navigator.pop(context);
@@ -59,6 +60,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                     (route) => false,
                   );
                 },
+                imageUrl: "assets/images/png/cdalogo.png",
               ),
               Obx(() {
                 return GenericDashboardOverviewWidget(
@@ -211,7 +213,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CdaChatView(
-                                    userId: data.user?.id ?? -1,
+                                    userId: data.user?.id ?? -1, deviceToken: data.user?.deviceToken ?? "",
                                   ),
                                 ));
                           },

@@ -107,6 +107,7 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                     (route) => false,
                   );
                 },
+                imageurl: "assets/images/jpg/dubaipolice.jpeg",
               ),
               StatusTabsWidget(tabs: tabs),
               Column(
@@ -208,177 +209,145 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                             itemBuilder: (context, index) {
                               final data =
                                   controller.filterDataForSearch[index];
-
-                              return RecentCaseWidget(
-                                caseNumber: "Case ID: ${data.id ?? ""}",
-                                submittedTime: DateFormat('dd/MM/yyyy').format(
-                                    (data.createdAt is DateTime
-                                        ? data.createdAt
-                                        : DateTime.now()) as DateTime),
-                                personName:
-                                    "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
-                                location:
-                                    "Deceased in ${data.restingPlace ?? ""}",
-                                issueDate: DateFormat('dd/MM/yyyy').format(
-                                    (data.createdAt is DateTime
-                                        ? data.createdAt
-                                        : DateTime.now()) as DateTime),
-                                status: data.caseStatus ?? "",
-                                statusColor: Colors.grey[200],
-                                onViewDetails: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => CaseDetailsDialog(
-                                      submittedBy:
-                                          "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
-                                      relationship: "Authorized Officer",
-                                      contactNumber:
-                                          data.user?.phoneNumber ?? "",
-                                      email: data.user?.email ?? "",
-                                      deceasedName: data.nameOfDeceased ?? "",
-                                      dateOfDeath: DateFormat('dd/MM/yyyy')
-                                          .format((data.dateOfDeath is DateTime
-                                              ? data.createdAt
-                                              : DateTime.now()) as DateTime),
-                                      causeOfDeath: data.causeOfDeath ?? "",
-                                      location: data.location ?? "",
-                                      submittedDocuments: [
-                                        data.passportOrEmirateIdFront != null
-                                            ? "Emirates ID"
-                                            : "",
-                                        data.deathNotificationFile != null
-                                            ? "Death Notification"
-                                            : "",
-                                        data.hospitalCertificate != null
-                                            ? "Hospital Report"
-                                            : "",
-                                      ],
-                                      onClose: () {
-                                        Navigator.pop(context);
-                                      },
-                                      onApprove: () {
-                                        controller.pickImageApproved(
-                                            data.id, data.user?.id, context);
-                                      },
-                                      status: data.caseStatus ?? "",
-                                      additionalDocument:
-                                          data.additionalDocument,
-                                      additionalDocumentUrl:
-                                          data.additionalDocumentUploadUser,
-                                    ),
-                                  );
+                              return GestureDetector(
+                                onTap: () {
+                                  _showDialog(data);
                                 },
-                                onQuickAction: () {
-                                  QuickActionsDialog.show(
-                                    context,
-                                    onIssueReleaseForm: () async {
-                                      await controller.pickImage(
-                                        widget.adminId,
-                                        data.id ?? -1,
-                                        data.user?.id ?? -1,
-                                        context,
-                                      );
-                                    },
-                                    onScheduleVideoCall: () async {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            ScheduleCallDialog(
-                                          caseName:
-                                              "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
-                                          caseNumber: "#2024-001",
-                                          onScheduleCall: (selectedDate,
-                                              selectedTime, meetingId) async {
-                                            final receiverUserID =
-                                                data.user?.id.toString() ??
-                                                    "user123";
+                                child: RecentCaseWidget(
+                                  caseNumber:
+                                      "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                                  submittedTime:
+                                      DateFormat('yyyy-MM-dd').format(
+                                    DateTime.parse(data.createdAt ?? ""),
+                                  ),
+                                  personName: "${data.nameOfDeceased ?? ""}",
+                                  location:
+                                      "Deceased in ${data.restingPlace ?? ""}",
+                                  issueDate: DateFormat('yyyy-MM-dd').format(
+                                    DateTime.parse(data.createdAt ?? ""),
+                                  ),
+                                  status: data.caseStatus ?? "",
+                                  statusColor: Colors.grey[200],
+                                  onViewDetails: () {
+                                    _showDialog(data);
+                                  },
+                                  onQuickAction: () {
+                                    QuickActionsDialog.show(
+                                      context,
+                                      onIssueReleaseForm: () async {
+                                        await controller.pickImage(
+                                          widget.adminId,
+                                          data.id ?? -1,
+                                          data.user?.id ?? -1,
+                                          context,
+                                        );
+                                      },
+                                      onScheduleVideoCall: () async {
+                                        Navigator.pop(context);
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              ScheduleCallDialog(
+                                            caseName:
+                                                "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
+                                            caseNumber: "#2024-001",
+                                            onScheduleCall: (selectedDate,
+                                                selectedTime, meetingId) async {
+                                              final receiverUserID =
+                                                  data.user?.id.toString() ??
+                                                      "user123";
 
-                                            notificationService
-                                                .sendNotification(
-                                              "Incoming Video Call",
-                                              "You have a video call scheduled",
-                                              data.user?.deviceToken ?? "",
-                                              callID: meetingId,
-                                              userName: widget.name,
-                                              receiverID: receiverUserID,
-                                            )
-                                                .then((value) {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        CallPage(
-                                                      callID: meetingId,
-                                                      userName: widget.name,
-                                                      isCaller: true,
-                                                      receiverID:
-                                                          receiverUserID,
-                                                    ),
-                                                  ));
-                                            });
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    onRequestDocuments: () async {
-                                      Navigator.pop(context);
-                                      AdditionalDocsRequirementsDialog.show(
-                                        context,
-                                        caseNumber: data.id.toString(),
-                                        personName:
-                                            "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
-                                        onSubmit: (requirements) {
-                                          dev.log(requirements.toString());
-                                          controller.policeQuickActionApi(
-                                            widget.adminId,
-                                            data.user?.id,
-                                            data.id,
-                                            null,
-                                            requirements,
-                                            context,
-                                            null,
-                                          );
-                                        },
-                                      );
-                                    },
-                                    onAssignToOfficer: () async {
-                                      Navigator.pop(context);
-                                      SendNotificationDialog.show(
-                                        context,
-                                        onSend: (title, body) async {
-                                          await NotificationService()
-                                              .sendNotification(
-                                            "Burzakh Notification",
-                                            body,
-                                            data.user?.deviceToken ?? "",
-                                          )
-                                              .then((value) {
+                                              notificationService
+                                                  .sendNotification(
+                                                "Incoming Video Call",
+                                                "You have a video call scheduled",
+                                                data.user?.deviceToken ?? "",
+                                                callID: meetingId,
+                                                userName: widget.name,
+                                                receiverID: receiverUserID,
+                                              )
+                                                  .then((value) {
+                                                Navigator.pop(context);
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CallPage(
+                                                        callID: meetingId,
+                                                        userName: widget.name,
+                                                        isCaller: true,
+                                                        receiverID:
+                                                            receiverUserID,
+                                                      ),
+                                                    ));
+                                              });
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      onRequestDocuments: () async {
+                                        Navigator.pop(context);
+                                        AdditionalDocsRequirementsDialog.show(
+                                          context,
+                                          caseNumber: data.id.toString(),
+                                          personName:
+                                              "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
+                                          onSubmit: (requirements) {
+                                            dev.log(requirements.toString());
                                             controller.policeQuickActionApi(
                                               widget.adminId,
                                               data.user?.id,
                                               data.id,
-                                              body,
                                               null,
+                                              requirements,
                                               context,
                                               null,
                                             );
-                                          }).onError((error, stackTrace) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(error.toString()),
-                                                backgroundColor: Colors.red,
-                                                duration: Duration(seconds: 2),
-                                                behavior:
-                                                    SnackBarBehavior.floating,
-                                              ),
-                                            );
-                                          });
-                                        },
-                                      );
-                                    },
-                                  );
-                                },
+                                          },
+                                        );
+                                      },
+                                      onAssignToOfficer: () async {
+                                        Navigator.pop(context);
+                                        SendNotificationDialog.show(
+                                          context,
+                                          onSend: (title, body) async {
+                                            dev.log(body);
+                                            await notificationService
+                                                .sendNotification(
+                                              "Burzakh Notification",
+                                              body,
+                                              data.user?.deviceToken ?? "",
+                                            )
+                                                .then((value) {
+                                              controller.policeQuickActionApi(
+                                                widget.adminId,
+                                                data.user?.id,
+                                                data.id,
+                                                body,
+                                                null,
+                                                context,
+                                                null,
+                                              );
+                                            }).onError((error, stackTrace) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content:
+                                                      Text(error.toString()),
+                                                  backgroundColor: Colors.red,
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                ),
+                                              );
+                                            });
+                                          },
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
                               );
                             });
                       }
@@ -396,6 +365,52 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
   }
 
   var documentCubit = DiContainer().sl<HomeCubit>();
+
+  // Show dialog
+  void _showDialog(data) {
+    showDialog(
+      context: context,
+      builder: (context) => CaseDetailsDialog(
+        submittedBy:
+            "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
+        relationship: "Authorized Officer",
+        contactNumber: data.user?.phoneNumber ?? "",
+        email: data.user?.email ?? "",
+        deceasedName: data.nameOfDeceased ?? "",
+        dateOfDeath: DateFormat('dd/MM/yyyy').format(
+            (data.dateOfDeath is DateTime ? data.createdAt : DateTime.now())
+                as DateTime),
+        causeOfDeath: data.causeOfDeath ?? "",
+        location: data.location ?? "",
+        submittedDocuments: [
+          data.passportOrEmirateIdFront != null &&
+                  data.passportOrEmirateIdBack != null
+              ? "Emirates ID Front"
+              : "",
+          data.passportOrEmirateIdBack != null ? "Emirates ID Back" : "",
+          data.deathNotificationFile != null ? "Death Notification" : "",
+          data.hospitalCertificate != null ? "Hospital Report" : "",
+          data.user.passportCopy != null ? "Passport Copy" : "",
+        ],
+        onClose: () {
+          Navigator.pop(context);
+        },
+        onApprove: () {
+          controller.pickImageApproved(data.id, data.user?.id, context);
+        },
+        status: data.caseStatus ?? "",
+        additionalDocument: data.additionalDocument,
+        additionalDocumentUrl: data.additionalDocumentUploadUser,
+        emiratesIdImageUrl: data.passportOrEmirateIdFront,
+        documentUrls: {
+          "Emirates ID Back": data.passportOrEmirateIdBack,
+          "Death Notification": data.deathNotificationFile,
+          "Hospital Report": data.hospitalCertificate,
+          "Passport Copy": data.user.passportCopy,
+        },
+      ),
+    );
+  }
 }
 
 class CallPage extends StatelessWidget {

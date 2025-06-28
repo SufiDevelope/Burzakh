@@ -713,7 +713,11 @@
   "Download Release Form": "تحميل صورة الإفراج",
   "Download Police Clearance": "تحميل شهادة الإخلاء الشرطي",
   "Upload Document": "تحميل الوثيقة",
-  "Admin has requested an additional document": "طلبت الإدارة وثيقة إضافية"
+  "Admin has requested an additional document": "طلبت الإدارة وثيقة إضافية",
+  "Your request has been sent to the Road Transport Authority.": "تم إرسال طلبك إلى هيئة النقل",
+  "Case Name": "اسم الحالة",
+  "Rejection Reason:": "سبب الرفض:",
+  "Update Service": "تحديث الخدمة"
 
 
 
