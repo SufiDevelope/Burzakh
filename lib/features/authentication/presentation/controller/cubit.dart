@@ -12,6 +12,7 @@ import 'package:burzakh/features/authentication/presentation/page/login.dart';
 import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
 import 'package:burzakh/features/authentication/presentation/page/reset_password.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_dashboard_widget.dart';
@@ -70,7 +71,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         confirmPassword: confirmPassword,
         passportCopy: passportCopy!,
         marsoom: marsoom,
-        uaePass: uaePass, deviceToken: deviceToken);
+        uaePass: uaePass,
+        deviceToken: deviceToken);
 
     var response = await _useCaseName.signup(model: model);
     if (response.isRight()) {
@@ -148,13 +150,26 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         } else if (userModel?.admin_type == "rta") {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RtaDashboardView(name: '${userModel?.firstName}${userModel?.lastName}',)),
+            MaterialPageRoute(
+                builder: (context) => RtaDashboardView(
+                      name: '${userModel?.firstName}${userModel?.lastName}',
+                    )),
           );
         } else if (userModel?.admin_type == "cda") {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CdaAdminDashboardView(name: '${userModel?.firstName}${userModel?.lastName}',)),
+            MaterialPageRoute(
+                builder: (context) => CdaAdminDashboardView(
+                      name: '${userModel?.firstName}${userModel?.lastName}',
+                    )),
           );
+        } else if (userModel?.admin_type == "mancipality") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DubaiAdminDashboardView(
+                        name: "${userModel?.firstName}${userModel?.lastName}",
+                      )));
         } else {
           navigatorKey.currentState?.pushNamedAndRemoveUntil(
             'appDashBoard',
@@ -299,12 +314,26 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       } else if (model.admin_type == "rta") {
         Navigator.push(
           navigatorKey.currentContext!,
-          MaterialPageRoute(builder: (context) => RtaDashboardView(name: "${userModel?.firstName}${userModel?.lastName}",)),
+          MaterialPageRoute(
+              builder: (context) => RtaDashboardView(
+                    name: "${userModel?.firstName}${userModel?.lastName}",
+                  )),
         );
       } else if (model.admin_type == "cda") {
         Navigator.push(
           navigatorKey.currentContext!,
-          MaterialPageRoute(builder: (context) => CdaAdminDashboardView(name: '${userModel?.firstName}${userModel?.lastName}',)),
+          MaterialPageRoute(
+              builder: (context) => CdaAdminDashboardView(
+                    name: '${userModel?.firstName}${userModel?.lastName}',
+                  )),
+        );
+      } else if (model.admin_type == "mancipality") {
+        Navigator.push(
+          navigatorKey.currentContext!,
+          MaterialPageRoute(
+              builder: (context) => DubaiAdminDashboardView(
+                    name: "${userModel?.firstName}${userModel?.lastName}",
+                  )),
         );
       } else {
         navigatorKey.currentState?.pushNamedAndRemoveUntil(

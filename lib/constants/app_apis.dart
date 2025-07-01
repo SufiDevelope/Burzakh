@@ -102,4 +102,6 @@ class AppApis {
 
   static String getUserMessages(adminType, userId) =>
       "${baseUrl}/api/burzakh/get-support-messages/$userId/$adminType";
+
+  static String dubaiGetRequests = "${baseUrl}/api/burzakh-mancipality/get-requests";
 }

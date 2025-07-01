@@ -80,6 +80,7 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                           var data =
                               controller.cdaDetailsModel.value.data?[index];
                           log(data?.caseDetail?[index].policeClearance ?? "");
+                          log(data?.mourningStartDate ?? "");
                           return CdaRequestDetailsWidget(
                             name:
                                 "${data?.user?.firstName} ${data?.user?.lastName}",
@@ -143,6 +144,18 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                             passportOrEmirateIdBackUrl: data?.caseDetail?[index]
                                     .passportOrEmirateIdBack ??
                                 "",
+                            mourningStartDate: DateFormat('yyyy/MM/dd').format(
+                              DateTime.parse(
+                                data?.mourningStartDate ??
+                                    DateTime.now().toIso8601String(),
+                              ),
+                            ),
+                            mourningEndDate: DateFormat('yyyy/MM/dd').format(
+                              DateTime.parse(
+                                data?.mourning_end_date ??
+                                    DateTime.now().toIso8601String(),
+                              ),
+                            ),
                           );
                         }),
                   ],

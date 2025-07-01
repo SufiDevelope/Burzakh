@@ -12,6 +12,10 @@ class GenericStatusCardWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final List<Color>? progressColors;
   final double progressValue;
+  final double? size;
+  final double? containerheight;
+  final double? containerwidth;
+  final double? borderRadius;
 
   const GenericStatusCardWidget({
     super.key,
@@ -25,6 +29,9 @@ class GenericStatusCardWidget extends StatelessWidget {
     this.onTap,
     this.progressColors,
     this.progressValue = 0.6,
+    this.size,
+    this.containerheight,
+    this.containerwidth, this.borderRadius,
   });
 
   @override
@@ -51,13 +58,13 @@ class GenericStatusCardWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(12),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black.withOpacity(0.05),
-          //     blurRadius: 8,
-          //     offset: const Offset(0, 2),
-          //   ),
-          // ],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,16 +73,16 @@ class GenericStatusCardWidget extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: context.mw * 0.08,
-                  height: context.mw * 0.08,
+                  width: containerwidth ?? context.mw * 0.08,
+                  height: containerheight ?? context.mw * 0.08,
                   decoration: BoxDecoration(
                     color: mainColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
                   ),
                   child: Icon(
                     icon,
                     color: mainColor,
-                    size: context.mh * 0.02,
+                    size: size ?? context.mh * 0.02,
                   ),
                 ),
                 0.03.pw(context),
@@ -149,7 +156,7 @@ class GenericStatusCardWidget extends StatelessWidget {
             Divider(
               color: Colors.grey[300],
               thickness: 0.5,
-            ),  
+            ),
 
             // Footer with last updated and view button
             Row(

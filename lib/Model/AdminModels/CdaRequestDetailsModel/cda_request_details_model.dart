@@ -36,8 +36,9 @@ class CdaRequestData {
   String? createdAt;
   String? updatedAt;
   User? user;
-  List<CaseDetail>? caseDetail;
 
+  List<CaseDetail>? caseDetail;
+  String? mourning_end_date;
   CdaRequestData(
       {this.id,
       this.mourningStartDate,
@@ -47,7 +48,9 @@ class CdaRequestData {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.user});
+      this.user,
+      this.caseDetail,
+      this.mourning_end_date});
 
   CdaRequestData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -65,6 +68,7 @@ class CdaRequestData {
         caseDetail!.add(CaseDetail.fromJson(v));
       });
     }
+    mourning_end_date = json['mourning_end_date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -83,6 +87,7 @@ class CdaRequestData {
     if (this.caseDetail != null) {
       data['case_details'] = this.caseDetail!.map((v) => v.toJson()).toList();
     }
+    data['mourning_end_date'] = this.mourning_end_date;
     return data;
   }
 }

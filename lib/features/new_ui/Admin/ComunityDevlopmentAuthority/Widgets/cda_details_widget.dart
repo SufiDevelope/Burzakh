@@ -88,6 +88,8 @@ class CdaRequestDetailsWidget extends StatelessWidget {
   final String? dateOfDeath;
   final String? causeOfDeath;
   final String? sendNotificationMessage;
+  final String? mourningStartDate;
+  final String? mourningEndDate;
 
   const CdaRequestDetailsWidget({
     super.key,
@@ -127,6 +129,8 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     this.dateOfDeath,
     this.causeOfDeath,
     this.sendNotificationMessage,
+    this.mourningStartDate,
+    this.mourningEndDate,
   });
 
   @override
@@ -266,7 +270,9 @@ class CdaRequestDetailsWidget extends StatelessWidget {
           if (nameOfDeceased != null ||
               dateOfDeath != null ||
               causeOfDeath != null ||
-              restingPlace != null) ...[
+              restingPlace != null ||
+              mourningStartDate != null ||
+              mourningEndDate != null) ...[
             Text(
               'Case Details',
               style: TextStyle(
@@ -329,6 +335,24 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                 'Notification Message',
                 sendNotificationMessage!,
                 isMultiline: true,
+              ),
+              0.015.ph(context),
+            ],
+            if (mourningStartDate != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.calendar_today_outlined,
+                'Mourning Start Date',
+                mourningStartDate!,
+              ),
+              0.015.ph(context),
+            ],
+            if (mourningEndDate != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.calendar_today_outlined,
+                'Mourning End Date',
+                mourningEndDate!,
               ),
               0.015.ph(context),
             ],
@@ -436,7 +460,6 @@ class CdaRequestDetailsWidget extends StatelessWidget {
 
           0.01.ph(context),
 
-         
           // Request Details Section
           Text(
             'Request Details',

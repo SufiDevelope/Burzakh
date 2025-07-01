@@ -95,6 +95,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
   final VoidCallback? onEmailUser;
   final Color? primaryColor;
   final Color? backgroundColor;
+  final String? mourningStartDate;
+  final String? mourningEndDate;
 
   const RtaRequestDetailsWidget({
     super.key,
@@ -139,6 +141,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
     this.onEmailUser,
     this.primaryColor,
     this.backgroundColor,
+    this.mourningStartDate,
+    this.mourningEndDate,
   });
 
   @override
@@ -271,7 +275,9 @@ class RtaRequestDetailsWidget extends StatelessWidget {
           if (nameOfDeceased != null ||
               dateOfDeath != null ||
               causeOfDeath != null ||
-              restingPlace != null) ...[
+              restingPlace != null ||
+              mourningStartDate != null ||
+              mourningEndDate != null) ...[
             Text(
               'Case Details',
               style: TextStyle(
@@ -334,6 +340,24 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                 'Notification Message',
                 sendNotificationMessage!,
                 isMultiline: true,
+              ),
+              0.015.ph(context),
+            ],
+            if (mourningStartDate != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.date_range_outlined,
+                'Mourning Start Date',
+                mourningStartDate!,
+              ),
+              0.015.ph(context),
+            ],
+            if (mourningEndDate != null) ...[
+              _buildDetailRow(
+                context,
+                Icons.date_range_outlined,
+                'Mourning End Date',
+                mourningEndDate!,
               ),
               0.015.ph(context),
             ],

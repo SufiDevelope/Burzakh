@@ -37,6 +37,7 @@ class RequestDetailsData {
   String? updatedAt;
   User? user;
   List<CaseDetail>? caseDetail;
+  String? mourningEndDate;
 
   RequestDetailsData(
       {this.id,
@@ -50,7 +51,7 @@ class RequestDetailsData {
       this.createdAt,
       this.updatedAt,
       this.user,
-      this.caseDetail});
+      this.caseDetail, this.mourningEndDate});
 
   RequestDetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -70,6 +71,7 @@ class RequestDetailsData {
         caseDetail!.add(CaseDetail.fromJson(v));
       });
     }
+    mourningEndDate = json['mourning_end_date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,6 +92,7 @@ class RequestDetailsData {
     if (this.caseDetail != null) {
       data['case_details'] = this.caseDetail!.map((v) => v.toJson()).toList();
     }
+    data['mourning_end_date'] = this.mourningEndDate;
     return data;
   }
 }

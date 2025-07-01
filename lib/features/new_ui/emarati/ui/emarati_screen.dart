@@ -87,21 +87,21 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                             : ServiceWidget(
                                 onTap: () {
                                   if (_emiratiScvCubit.cdaGetModel != null) {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //       builder: (context) =>
-                                    //           ServiceRequestConfirmationScreen(),
-                                    //     ));
-                                    showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      constraints: BoxConstraints(
-                                          maxHeight: mdHeight(context) * 1),
-                                      backgroundColor: Colors.transparent,
-                                      barrierColor: AppColor.blurWhiteColor(),
-                                      builder: (context) => TentRequestSheet(),
-                                    );
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ServiceRequestConfirmationScreen(id: 'CDA',),
+                                        ));
+                                    // showModalBottomSheet(
+                                    //   context: context,
+                                    //   isScrollControlled: true,
+                                    //   constraints: BoxConstraints(
+                                    //       maxHeight: mdHeight(context) * 1),
+                                    //   backgroundColor: Colors.transparent,
+                                    //   barrierColor: AppColor.blurWhiteColor(),
+                                    //   builder: (context) => TentRequestSheet(),
+                                    // );
                                   } else {
                                     showModalBottomSheet(
                                       context: context,

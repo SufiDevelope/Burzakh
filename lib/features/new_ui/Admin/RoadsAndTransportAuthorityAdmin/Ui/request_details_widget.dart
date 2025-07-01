@@ -78,12 +78,13 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                       itemCount: dataList.length,
                       itemBuilder: (context, index) {
                         var data = dataList[index];
-                        log("${data.caseDetail?[index].policeClearance}");
+                        log("${data.mourningStartDate ?? ""}");
                         return RtaRequestDetailsWidget(
                           statusBadgeText: data.status ?? "",
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                          caseId:
+                              "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
                           submittedDate: DateFormat('yyyy-MM-dd').format(
                             DateTime.parse(data.createdAt ??
                                 DateTime.now().toIso8601String()),
@@ -136,6 +137,14 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                           passportOrEmirateIdBackUrl:
                               data.caseDetail?[index].passportOrEmirateIdBack ??
                                   "",
+                          mourningStartDate: DateFormat('yyyy/MM/dd').format(
+                            DateTime.parse(data.mourningStartDate ??
+                                DateTime.now().toIso8601String()),
+                          ),
+                          mourningEndDate: DateFormat('yyyy/MM/dd').format(
+                            DateTime.parse(data.mourningEndDate ??
+                                DateTime.now().toIso8601String()),
+                          ),
                         );
                       },
                     );
