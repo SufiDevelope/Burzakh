@@ -8,8 +8,6 @@ import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../core/theme/AppColor.dart';
 import '../../../../widgets/custom_button.dart';
 

@@ -325,7 +325,6 @@ class PoliceAdminController extends GetxController {
     }
   }
 
-  final ImagePicker _pickerUploadUser = ImagePicker();
   RxString imagePathUploadUser = "".obs;
 
   // Pick image from gallery

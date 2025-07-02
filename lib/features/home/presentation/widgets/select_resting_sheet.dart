@@ -15,7 +15,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/AppColor.dart';
 import '../../../../widgets/custom_button.dart';
-import '../../../police_approval/presentation/page/police_approval_screen.dart';
 
 class SelectRestingSheet extends StatelessWidget {
   const SelectRestingSheet({super.key});

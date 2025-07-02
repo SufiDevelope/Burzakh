@@ -1,6 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/data/Response/status.dart';
-import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/rta_chat_widget.dart';
 import 'package:easy_localization/easy_localization.dart';

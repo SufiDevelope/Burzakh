@@ -1,6 +1,5 @@
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/app_widgets_size.dart';
-import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/boarding_button_text.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/container.dart';
 import 'package:flutter/material.dart';

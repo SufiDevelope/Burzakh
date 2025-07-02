@@ -1,16 +1,13 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:burzakh/features/notification/presentation/page/notification_screen.dart';
 import 'package:burzakh/features/onboarding/presentation/page/onboarding_03.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../constants/app_assets.dart';
 import '../../../../constants/app_widgets_size.dart';
-import '../../../../core/app/di_container.dart';
 import '../../../../core/theme/AppColor.dart';
 import '../../../../widgets/app_text.dart';
-import '../../../authentication/presentation/controller/cubit.dart';
 
 class HomeTopBar extends StatelessWidget {
   HomeTopBar({

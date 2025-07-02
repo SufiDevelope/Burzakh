@@ -6,12 +6,10 @@ import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/authentication/presentation/page/login.dart';
 import 'package:burzakh/features/authentication/presentation/page/sign_up.dart';
-import 'package:burzakh/features/onboarding/presentation/page/onboarding_2.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/boarding_button_text.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/container.dart';
 import 'package:burzakh/widgets/custom_listTile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../constants/media_query.dart';

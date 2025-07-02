@@ -1,5 +1,4 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
-import 'package:burzakh/constants/app_widgets_size.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/features/home/presentation/widgets/select_resting_sheet.dart';
 import 'package:burzakh/widgets/app_text.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/AppColor.dart';
 import '../../../../widgets/custom_button.dart';
-import '../../../new_ui/home/ui/creat_case_screen.dart';
 
 class StartFirstTimeCase extends StatelessWidget {
   const StartFirstTimeCase({super.key});

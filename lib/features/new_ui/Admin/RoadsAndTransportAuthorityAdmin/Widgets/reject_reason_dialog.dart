@@ -33,7 +33,6 @@ class RejectReasonDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
     final TextEditingController bodyController = TextEditingController();
 
     return Dialog(

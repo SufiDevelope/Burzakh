@@ -1,22 +1,14 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/core/app/di_container.dart';
-import 'package:burzakh/core/app/myapp.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
-import 'package:burzakh/features/new_ui/dashboard/app_dashboard.dart';
-import 'package:burzakh/features/onboarding/presentation/page/onboarding_01.dart';
-import 'package:burzakh/features/onboarding/presentation/page/onboarding_1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/domain/connectivity/presentaion/connectivity_controller.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

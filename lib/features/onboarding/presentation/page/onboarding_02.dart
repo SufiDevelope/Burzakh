@@ -1,16 +1,10 @@
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/app_widgets_size.dart';
-import 'package:burzakh/core/theme/AppColor.dart';
-import 'package:burzakh/features/onboarding/presentation/page/onboarding_2.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/boarding_button_text.dart';
-import 'package:burzakh/features/onboarding/presentation/widgets/container.dart';
 import 'package:burzakh/features/onboarding/presentation/widgets/support_you_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../constants/media_query.dart';
 import '../../../../widgets/app_text.dart';
-import '../../../../widgets/custom_button.dart';
 import 'onboarding_03.dart';
 
 class Onboarding02 extends StatelessWidget {

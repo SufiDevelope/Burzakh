@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:burzakh/core/app/myapp.dart';
-import 'package:burzakh/features/authentication/presentation/page/login.dart';
 import 'package:burzakh/widgets/custom_button.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import '../../../../core/app/di_container.dart';
 import '../../../../core/localization/localization_getx.dart';
 import '../../../../core/theme/AppColor.dart';
 import '../../../authentication/presentation/controller/cubit.dart';
-import '../../../authentication/presentation/page/login_01.dart';
 
 class Onboarding003 extends StatefulWidget {
    Onboarding003({Key? key,this.isFromSetting=false}) : super(key: key);

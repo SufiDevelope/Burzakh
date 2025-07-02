@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/core/app/di_container.dart';
@@ -8,13 +6,9 @@ import 'package:burzakh/features/authentication/presentation/controller/cubit.da
 import 'package:burzakh/features/onboarding/presentation/page/onboarding_003.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../constants/app_assets.dart';
-import '../../../../constants/app_widgets_size.dart';
 import '../../../../core/app/myapp.dart';
-import '../../../authentication/presentation/page/login.dart';
-import '../../../authentication/presentation/page/login_01.dart';
 
 class Onboarding001 extends StatefulWidget {
   const Onboarding001({Key? key}) : super(key: key);

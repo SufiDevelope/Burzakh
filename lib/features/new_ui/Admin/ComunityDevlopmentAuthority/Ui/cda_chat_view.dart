@@ -2,7 +2,6 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widgets/cda_chat_widget.dart';
-import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/rta_chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -76,9 +75,9 @@ void initState() {
                       itemBuilder: (context, index) {
                         var data = controller.cdafilterChatList[index];
                         return CdaChatWidget(
-                          message: data?.message ?? "No message found",
+                          message: data.message ?? "No message found",
                           timestamp: "2025-05-20 09:18",
-                          isCurrentUser: data?.role == "cda" ? true : false,
+                          isCurrentUser: data.role == "cda" ? true : false,
                           onTap: () {},
                         );
                       },

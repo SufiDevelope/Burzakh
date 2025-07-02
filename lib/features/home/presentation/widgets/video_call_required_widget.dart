@@ -1,7 +1,5 @@
 import 'package:burzakh/constants/app_widgets_size.dart';
-import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
-import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 

@@ -23,7 +23,6 @@ class _ExpandableTextState extends State<ExpandableText> {
 
   @override
   Widget build(BuildContext context) {
-    final maxLines = _isExpanded ? null : 4;
     final displayText =
         _isExpanded ? widget.text : '${widget.text.substring(0, 100)}...';
 

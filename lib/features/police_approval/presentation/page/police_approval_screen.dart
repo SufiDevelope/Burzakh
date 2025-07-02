@@ -3,7 +3,6 @@ import 'package:burzakh/constants/app_widgets_size.dart';
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
-import 'package:burzakh/features/police_approval/presentation/widgets/document_recieved_dialog.dart';
 import 'package:burzakh/widgets/custom_button.dart';
 import 'package:burzakh/widgets/custom_top_bar.dart';
 import 'package:flutter/material.dart';

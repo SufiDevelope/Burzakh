@@ -114,7 +114,6 @@ class GenericDashboardOverviewWidget extends StatelessWidget {
   ) {
     final bool isSelected = selectedTimeRange == timeRange;
     final Color activeColor = selectedColor ?? const Color(0xFFB85C6E);
-    final Color inactiveColor = unselectedColor ?? Colors.grey[300]!;
 
     return GestureDetector(
       onTap: () => onTimeRangeChanged(timeRange),
