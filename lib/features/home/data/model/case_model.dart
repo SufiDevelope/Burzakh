@@ -18,6 +18,9 @@ class CaseModel {
   final String location;
   final String additional_document_upload_user;
   final String police_clearance;
+  final String burial_submission_status;
+  
+
 
 
   CaseModel({
@@ -40,6 +43,7 @@ class CaseModel {
     required this.location,
     required this.additional_document_upload_user,
     required this.police_clearance,
+    required this.burial_submission_status,
   });
 
   factory CaseModel.fromJson(Map<String, dynamic> json) {
@@ -63,6 +67,7 @@ class CaseModel {
       location: json['location'] ?? '',
       additional_document_upload_user: json['additional_document_upload_user'] ?? '',
       police_clearance: json['police_clearance'] ?? '',
+      burial_submission_status: json['burial_submission_status'] ?? '',
     );
   }
 
@@ -87,6 +92,7 @@ class CaseModel {
       'location': location,
       'additional_document_upload_user': additional_document_upload_user,
       'police_clearance': police_clearance,
+      'burial_submission_status': burial_submission_status,
     };
   }
 }

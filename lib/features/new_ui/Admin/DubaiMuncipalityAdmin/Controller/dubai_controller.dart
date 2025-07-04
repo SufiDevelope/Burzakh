@@ -4,18 +4,23 @@ import 'package:burzakh/Model/AdminModels/DubaiChatModel/dubai_chat_model.dart';
 import 'package:burzakh/Model/AdminModels/DubaiMuncipalityRequestModel/dubai_muncipality_request_model.dart';
 import 'package:burzakh/Repository/AdminRepos/DubaiAdminRepo/dubai_admin_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/DubaiAdminRepo/dubai_admin_repo.dart';
+import 'package:burzakh/Repository/AdminRepos/RtaAdminRepo/rta_admin_http_repo.dart';
+import 'package:burzakh/Repository/AdminRepos/RtaAdminRepo/rta_admin_repo.dart';
+import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/emirati_svcs/data/model/GetCaseNameModel.dart';
+import 'package:burzakh/features/home/presentation/controller/cubit.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/home/widgets/burrial_success_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DubaiController extends GetxController {
-  @override
-  void onInit() {
+  var _homeCubit = DiContainer().sl<HomeCubit>();
+  final notification = NotificationService();
+
+  onInit() {
     super.onInit();
-    getRequestApi();
-    getAmbulanceApi();
   }
 
   var selectedIndex = 0.obs;
@@ -109,10 +114,17 @@ class DubaiController extends GetxController {
   void sendDubaiSupportMessage(String message, userid, deviceToken) async {
     try {
       setLoading(true);
-      await repo.sendSupportMessage(userid, message).then((value) {
-        setLoading(false);
-        log(value.toString());
-        getDubaiChatApi(userid);
+      notification
+          .sendNotification("New Message From Dubai Muncipality", message, deviceToken)
+          .then((value) async {
+        await repo.sendSupportMessage(userid, message).then((value) {
+          setLoading(false);
+          log(value.toString());
+          getDubaiChatApi(userid);
+        }).onError((error, stackTrace) {
+          setLoading(false);
+          log(error.toString());
+        });
       }).onError((error, stackTrace) {
         setLoading(false);
         log(error.toString());
@@ -198,7 +210,8 @@ class DubaiController extends GetxController {
     graveBtnLoading.value = value;
   }
 
-  void assignGraveApi(caseId, graveNo, BuildContext context) async {
+  void assignGraveApi(
+      caseId, graveNo, BuildContext context, bool isDetails) async {
     try {
       setGraveBtnLoading(true);
       await repo.assignGraveApi(caseId, "approve", graveNo).then((value) {
@@ -213,7 +226,12 @@ class DubaiController extends GetxController {
                 borderRadius: BorderRadius.circular(25),
               )),
         );
-        Navigator.pop(context);
+        if (isDetails == true) {
+          Navigator.pop(context);
+        } else {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
         getRequestApi();
       }).onError((error, stackTrace) {
         setGraveBtnLoading(false);
@@ -309,26 +327,30 @@ class DubaiController extends GetxController {
       religion,
       special_request,
       BuildContext context,
-      preferred_cemetery) async {
+      preferred_cemetery,
+      caseId) async {
     try {
       setSubmitLoading(true);
       await repo
           .submitCaseToMuncipality(
-              burial_place,
-              user_id,
-              case_name,
-              burial_timing,
-              sect,
-              religion,
-              special_request,
-              preferred_cemetery)
-          .then((value) {
+        burial_place,
+        user_id,
+        case_name,
+        burial_timing,
+        sect,
+        religion,
+        special_request,
+        preferred_cemetery,
+      )
+          .then((value) async {
         setSubmitLoading(false);
         log(value.toString());
+        await _homeCubit.getCaseDetails(caseId);
         showDialog(
           context: context,
           builder: (context) => BurialSuccessDialog(
             onContinue: () {
+              Navigator.pop(context);
               Navigator.pop(context);
             },
           ),
@@ -346,7 +368,8 @@ class DubaiController extends GetxController {
   void dispatchAmbulance(BuildContext context, vehicleId) async {
     try {
       await repo
-          .dispatchAmbulance(null, selectedBurialCase.value, vehicleId)
+          .dispatchAmbulance(
+              null, selectedBurialCase.value, vehicleId, selectedMosque.value)
           .then((value) {
         log(value.toString());
         ScaffoldMessenger.of(context).showSnackBar(
@@ -365,6 +388,31 @@ class DubaiController extends GetxController {
         log(error.toString());
       });
     } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  final RtaAdminRepo rtarepo = RtaAdminHttpRepo();
+
+  // loading
+  var userloading = false.obs;
+
+  void setUserLoading(bool value) {
+    userloading.value = value;
+  }
+
+  void sendUserMessageApi(id, admin_type, message) {
+    try {
+      setUserLoading(true);
+      rtarepo.sendUserChatMessage(id, admin_type, message).then((value) {
+        setUserLoading(false);
+        getDubaiChatApi(id);
+      }).onError((error, stackTrace) {
+        setUserLoading(false);
+        log(error.toString());
+      });
+    } catch (e) {
+      setUserLoading(false);
       log(e.toString());
     }
   }

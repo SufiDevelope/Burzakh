@@ -82,11 +82,12 @@ class DubaiAdminHttpRepo implements DubaiAdminRepo {
   }
 
   @override
-  Future dispatchAmbulance(userId, case_name, vehicle_number) async {
+  Future dispatchAmbulance(userId, case_name, vehicle_number, standby_mosque) async {
     Map<String, dynamic> data = {
       "case_name": case_name,
       "user_id": userId,
       "vehicle_number": vehicle_number,
+      "standby_mosque": standby_mosque,
     };
     final response =
         await _api.getPostApiResponse(AppApis.dispatchAmbulance, data, false);

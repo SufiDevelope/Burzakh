@@ -19,7 +19,7 @@ class DubaiAdminRequestDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<DubaiController>();
+    final controller = Get.put(DubaiController());
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
@@ -36,6 +36,7 @@ class DubaiAdminRequestDetailsView extends StatelessWidget {
           'Request Details',
           style: TextStyle(
             color: Colors.white,
+            fontSize: context.mh * 0.02,
           ),
         ),
       ),
@@ -66,7 +67,7 @@ class DubaiAdminRequestDetailsView extends StatelessWidget {
                   onAssign: (graveNumber) {
                     log(graveNumber);
                     controller.assignGraveApi(
-                        model.id ?? -1, graveNumber, context);
+                        model.id ?? -1, graveNumber, context, false);
                   },
                   onCancel: () {
                     Navigator.pop(context);

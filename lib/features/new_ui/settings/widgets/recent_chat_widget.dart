@@ -110,6 +110,20 @@ class _RecentChatWidgetState extends State<RecentChatWidget> {
                           lastMessage:
                               "👋 Welcome! Let us know how we can assist you. We're here to help!",
                         ),
+                        Divider(
+                          height: 1,
+                          thickness: 1,
+                          color: Colors.grey[100],
+                        ),
+                        UserChatWidget(
+                          adminType: "mancipality_assistence",
+                          id: "send-support-message",
+                          name: "Dubai Muncipality",
+                          time: '10:52 AM',
+                          image: "assets/images/png/dubailogo.png",
+                          lastMessage:
+                              "👋 Welcome! Let us know how we can assist you. We're here to help!",
+                        ),
                       ],
                     )
                   : SizedBox(),

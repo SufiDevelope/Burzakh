@@ -180,7 +180,9 @@ class BurialCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Visibility(
-                      visible: status == "Approve" || status == "Dispatched" ? false : true,
+                      visible: status == "Approve" || status == "Dispatched"
+                          ? false
+                          : true,
                       child: _circleButton(
                         isAmbulance == true ? Icons.trending_up : Icons.add,
                         isAmbulance == true
@@ -194,13 +196,18 @@ class BurialCardWidget extends StatelessWidget {
                       ),
                     ),
                     0.02.pw(context),
-                    _circleButton(
-                      Icons.chevron_right,
-                      Colors.grey.shade200,
-                      Colors.grey,
-                      context,
-                      ongraveAssign,
-                      isGradient: false,
+                    Visibility(
+                      visible: status == "Approve" || status == "Dispatched"
+                          ? false
+                          : true,
+                      child: _circleButton(
+                        Icons.chevron_right,
+                        Colors.grey.shade200,
+                        Colors.grey,
+                        context,
+                        ongraveAssign,
+                        isGradient: false,
+                      ),
                     ),
                   ],
                 )

@@ -1,18 +1,14 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:burzakh/Extenshion/extenshion.dart';
-import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/features/new_ui/home/ui/burrial_process_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/app/di_container.dart';
-import '../../../../widgets/custom_button.dart';
-import '../../../../widgets/under_construction_dialog.dart';
 import '../../../home/presentation/controller/cubit.dart';
 
 class DocumnetProgressCaseDetails extends StatefulWidget {
@@ -289,6 +285,7 @@ class _DocumnetProgressCaseDetailsState
                                                           ?.user_id
                                                           .toString() ??
                                                       "",
+                                                  caseid: widget.caseId,
                                                 ),
                                               ),
                                             );
@@ -342,7 +339,7 @@ class _DocumnetProgressCaseDetailsState
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           AppText(
-                                            text: "Burial Process",
+                                            text: "Case Process",
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -356,7 +353,10 @@ class _DocumnetProgressCaseDetailsState
                                                   BorderRadius.circular(20),
                                             ),
                                             child: AppText(
-                                              text: "Not started",
+                                              text: _homeCubit.caseDetailModel
+                                                      ?.caseStatus
+                                                      .toString() ??
+                                                  "",
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                               color: AppColor.grey(),
@@ -439,7 +439,9 @@ class _DocumnetProgressCaseDetailsState
                                         burialPermitText: '5',
                                         subtitle:
                                             "Issued after police verification is complete",
-                                        statusText: "Not started",
+                                        statusText: _homeCubit.caseDetailModel
+                                                ?.burial_submission_status ??
+                                            '',
                                         statusTextColor: AppColor.grey(),
                                         statusColor:
                                             AppColor.grey().withOpacity(.1),

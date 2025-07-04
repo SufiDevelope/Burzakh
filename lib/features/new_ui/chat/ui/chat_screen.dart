@@ -1,178 +1,15 @@
-// // ignore_for_file: must_be_immutable
-// import 'dart:developer';
-// import 'package:burzakh/Extenshion/extenshion.dart';
-// import 'package:burzakh/core/theme/AppColor.dart';
-// import 'package:burzakh/data/Response/status.dart';
-// import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
-// import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
-// import 'package:burzakh/features/authentication/presentation/model/user_model.dart';
-// import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
-// import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
-// import 'package:burzakh/features/new_ui/chat/widget/chat_top_bar.dart';
-// import 'package:burzakh/features/new_ui/chat/widget/other_user_chat.dart';
-// import 'package:burzakh/features/new_ui/chat/widget/send_message_field.dart';
-// import 'package:burzakh/features/new_ui/chat/widget/user_chat.dart';
-// import 'package:easy_localization/easy_localization.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../../../../core/app/di_container.dart';
-// import '../cubit/chat_cubit.dart';
-
-// class ChatScreen extends StatefulWidget {
-//   ChatScreen(
-//       {super.key,
-//       required this.name,
-//       required this.image,
-//       required this.id,
-//       required this.adminType});
-//   String image;
-//   String name;
-//   String id;
-//   String adminType;
-//   @override
-//   State<ChatScreen> createState() => _ChatScreenState();
-// }
-
-// class _ChatScreenState extends State<ChatScreen> {
-//   final rtacontroller = Get.put(RtaController());
-//   final cdacontroller = Get.put(CdaController());
-
-//   @override
-//   void initState() {
-//     WidgetsBinding.instance.addPostFrameCallback((_) async {
-//       UserShareprefController pref = UserShareprefController();
-//       UserModel? model = await pref.getData();
-//       log(widget.adminType);
-//       log(model?.id.toString() ?? "");
-//       if (widget.adminType == "rta") {
-//         rtacontroller.getRtaChatApi(model?.id);
-//       } else if (widget.adminType == "cda") {
-//         cdacontroller.getCdaChatApi(model?.id);
-//       }
-//     });
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       resizeToAvoidBottomInset: false,
-//       body: Column(
-//         children: [
-//           ChatTopBar(
-//             name: StringTranslateExtension(widget.name).tr(),
-//             image: widget.image,
-//           ),
-//           if (widget.adminType == "rta")
-//             Obx(() {
-//               final status = rtacontroller.rxRequestStatusForRtaChat.value;
-
-//               if (status == Status.loading) {
-//                 return Center(child: CircularProgressIndicator());
-//               } else if (status == Status.error) {
-//                 return Center(child: Text("Error"));
-//               } else if (status == Status.completed) {
-//                 return Expanded(
-//                   child: ListView.builder(
-//                     itemCount: rtacontroller.rtaChatList.length,
-//                     padding: const EdgeInsets.symmetric(horizontal: 16),
-//                     itemBuilder: (context, index) {
-//                       return rtacontroller.rtaChatList[index].role == "rta"
-//                           ? OtherUserChat(
-//                               message:
-//                                   rtacontroller.rtaChatList[index].message ??
-//                                       '',
-//                               time: DateTime.parse(
-//                                 rtacontroller.rtaChatList[index].createdAt
-//                                     .toString(),
-//                               ),
-//                             )
-//                           : UserContainerChat(
-//                               message:
-//                                   rtacontroller.rtaChatList[index].message ??
-//                                       '',
-//                               time: DateTime.parse(
-//                                 rtacontroller.rtaChatList[index].createdAt
-//                                     .toString(),
-//                               ),
-//                             );
-//                     },
-//                   ),
-//                 );
-//               } else {
-//                 return SizedBox.shrink();
-//               }
-//             })
-//           else if (widget.adminType == "cda")
-//             Expanded(
-//               child: Obx(() {
-//                 final status = cdacontroller.rxRequestStatusForCdaChat.value;
-//                 if (status == Status.loading) {
-//                   return Center(child: CircularProgressIndicator());
-//                 } else if (status == Status.error) {
-//                   return Center(child: Text("Error"));
-//                 } else if (status == Status.completed) {
-//                   return ListView.builder(
-//                     itemCount: cdacontroller.cdaChatList.length,
-//                     padding: const EdgeInsets.symmetric(horizontal: 16),
-//                     itemBuilder: (context, index) {
-//                       return cdacontroller.cdaChatList[index].role == "cda"
-//                           ? OtherUserChat(
-//                               message:
-//                                   cdacontroller.cdaChatList[index].message ??
-//                                       '',
-//                               time: DateTime.parse(
-//                                 cdacontroller.cdaChatList[index].createdAt
-//                                     .toString(),
-//                               ),
-//                             )
-//                           : UserContainerChat(
-//                               message:
-//                                   cdacontroller.cdaChatList[index].message ??
-//                                       '',
-//                               time: DateTime.parse(
-//                                 cdacontroller.cdaChatList[index].createdAt
-//                                     .toString(),
-//                               ),
-//                             );
-//                     },
-//                   );
-//                 } else {
-//                   return SizedBox.shrink();
-//                 }
-//               }),
-//             )
-//           else
-//             SizedBox(
-//               height: context.mh * 0.72,
-//             ),
-//           // Spacer(),
-//         ],
-//       ),
-//       bottomNavigationBar:
-//           RiderSendChatField(id: widget.id, adminType: widget.adminType),
-//     );
-//   }
-// }
-
-// var chatCubit = DiContainer().sl<ChatCubit>();
-// var authCubit = DiContainer().sl<AuthenticationCubit>();
-// ignore_for_file: must_be_immutable
-// ignore_for_file: must_be_immutable
 import 'dart:developer';
-import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
-import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
 import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
 import 'package:burzakh/features/authentication/presentation/model/user_model.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
-import 'package:burzakh/features/new_ui/chat/widget/chat_top_bar.dart';
-import 'package:burzakh/features/new_ui/chat/widget/other_user_chat.dart';
+import 'package:burzakh/features/new_ui/chat/widget/ChatRetriveWidgets/cda_chat_content_widget.dart';
+import 'package:burzakh/features/new_ui/chat/widget/ChatRetriveWidgets/dubai_mancipality_chat_content_widget.dart';
+import 'package:burzakh/features/new_ui/chat/widget/ChatRetriveWidgets/rta_chat_content_widget.dart';
 import 'package:burzakh/features/new_ui/chat/widget/send_message_field.dart';
-import 'package:burzakh/features/new_ui/chat/widget/user_chat.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -200,6 +37,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final rtacontroller = Get.put(RtaController());
   final cdacontroller = Get.put(CdaController());
+  final dubaiController = Get.put(DubaiController());
 
   @override
   void initState() {
@@ -214,6 +52,8 @@ class _ChatScreenState extends State<ChatScreen> {
         rtacontroller.getRtaChatApi(model?.id);
       } else if (widget.adminType == "cda") {
         cdacontroller.getCdaChatApi(model?.id);
+      } else if (widget.adminType == "mancipality_assistence") {
+        dubaiController.getDubaiChatApi(model?.id);
       }
     });
   }
@@ -318,153 +158,26 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildChatContent(double screenWidth, double screenHeight) {
     if (widget.adminType == "rta") {
-      return _buildRtaChatContent(screenWidth, screenHeight);
+      return RtaChatContentWidget(
+        screenWidth: MediaQuery.of(context).size.width,
+        screenHeight: MediaQuery.of(context).size.height,
+        rtacontroller: Get.put(RtaController()),
+      );
     } else if (widget.adminType == "cda") {
-      return _buildCdaChatContent(screenWidth, screenHeight);
+      return CdaChatContentWidget(
+        screenWidth: MediaQuery.of(context).size.width,
+        screenHeight: MediaQuery.of(context).size.height,
+        cdacontroller: Get.put(CdaController()),
+      );
+    } else if (widget.adminType == "mancipality_assistence") {
+      return DubaiMancipalityChatContent(
+        screenWidth: MediaQuery.of(context).size.width,
+        screenHeight: MediaQuery.of(context).size.height,
+        dubaiController: Get.put(DubaiController()),
+      );
     } else {
       return _buildEmptyState(screenWidth, screenHeight);
     }
-  }
-
-  Widget _buildRtaChatContent(double screenWidth, double screenHeight) {
-    return Obx(() {
-      final status = rtacontroller.rxRequestStatusForRtaChat.value;
-
-      if (status == Status.loading) {
-        return _buildLoadingState(screenWidth);
-      } else if (status == Status.error) {
-        return _buildErrorState(screenWidth);
-      } else if (status == Status.completed) {
-        if (rtacontroller.rtaChatList.isEmpty) {
-          return _buildEmptyState(screenWidth, screenHeight);
-        }
-
-        return ListView.builder(
-          itemCount: rtacontroller.rtaChatList.length,
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.04,
-            vertical: screenWidth * 0.02,
-          ),
-          itemBuilder: (context, index) {
-            final isRta = rtacontroller.rtaChatList[index].role == "rta";
-            return Container(
-              margin: EdgeInsets.only(bottom: screenWidth * 0.02),
-              child: isRta
-                  ? OtherUserChat(
-                      message: rtacontroller.rtaChatList[index].message ?? '',
-                      time: DateTime.parse(
-                        rtacontroller.rtaChatList[index].createdAt.toString(),
-                      ),
-                    )
-                  : UserContainerChat(
-                      message: rtacontroller.rtaChatList[index].message ?? '',
-                      time: DateTime.parse(
-                        rtacontroller.rtaChatList[index].createdAt.toString(),
-                      ),
-                    ),
-            );
-          },
-        );
-      } else {
-        return const SizedBox.shrink();
-      }
-    });
-  }
-
-  Widget _buildCdaChatContent(double screenWidth, double screenHeight) {
-    return Obx(() {
-      final status = cdacontroller.rxRequestStatusForCdaChat.value;
-
-      if (status == Status.loading) {
-        return _buildLoadingState(screenWidth);
-      } else if (status == Status.error) {
-        return _buildErrorState(screenWidth);
-      } else if (status == Status.completed) {
-        if (cdacontroller.cdaChatList.isEmpty) {
-          return _buildEmptyState(screenWidth, screenHeight);
-        }
-
-        return ListView.builder(
-          itemCount: cdacontroller.cdaChatList.length,
-          padding: EdgeInsets.symmetric(
-            horizontal: screenWidth * 0.04,
-            vertical: screenWidth * 0.02,
-          ),
-          itemBuilder: (context, index) {
-            final isCda = cdacontroller.cdaChatList[index].role == "cda";
-            return Container(
-              margin: EdgeInsets.only(bottom: screenWidth * 0.02),
-              child: isCda
-                  ? OtherUserChat(
-                      message: cdacontroller.cdaChatList[index].message ?? '',
-                      time: DateTime.parse(
-                        cdacontroller.cdaChatList[index].createdAt.toString(),
-                      ),
-                    )
-                  : UserContainerChat(
-                      message: cdacontroller.cdaChatList[index].message ?? '',
-                      time: DateTime.parse(
-                        cdacontroller.cdaChatList[index].createdAt.toString(),
-                      ),
-                    ),
-            );
-          },
-        );
-      } else {
-        return const SizedBox.shrink();
-      }
-    });
-  }
-
-  Widget _buildLoadingState(double screenWidth) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircularProgressIndicator(),
-          SizedBox(height: screenWidth * 0.04),
-          Text(
-            "Loading messages...",
-            style: TextStyle(
-              fontSize: screenWidth * 0.04,
-              color: Colors.grey[600],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildErrorState(double screenWidth) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.error_outline,
-            size: screenWidth * 0.15,
-            color: Colors.grey[400],
-          ),
-          SizedBox(height: screenWidth * 0.04),
-          Text(
-            "Something went wrong",
-            style: TextStyle(
-              fontSize: screenWidth * 0.045,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[700],
-            ),
-          ),
-          SizedBox(height: screenWidth * 0.02),
-          Text(
-            "Please try again later",
-            style: TextStyle(
-              fontSize: screenWidth * 0.035,
-              color: Colors.grey[600],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget _buildEmptyState(double screenWidth, double screenHeight) {

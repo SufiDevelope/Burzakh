@@ -1,98 +1,9 @@
-// import 'package:burzakh/Extenshion/extenshion.dart';
-// import 'package:burzakh/features/home/data/model/case_model.dart';
-// import 'package:burzakh/widgets/under_construction_dialog.dart';
-// import 'package:flutter/material.dart';
-
-// import '../../../../core/theme/AppColor.dart';
-// import '../../../../widgets/app_text.dart';
-// import '../../../../widgets/custom_button.dart';
-// import '../ui/video_call_notification.dart';
-
-// class TodayPiorityWidget extends StatelessWidget {
-//   final homeCubit;
-//   final CaseModel caseModel;
-//   const TodayPiorityWidget({super.key, required this.homeCubit, required this.caseModel});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.all(16),
-//       decoration: BoxDecoration(
-//         color: AppColor.white(),
-//         borderRadius: BorderRadius.circular(12),
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Row(
-//             children: [
-//               CircleAvatar(child: Icon(Icons.video_call_outlined,color: AppColor.darkBlue,),backgroundColor: AppColor.lightBlue,),
-
-//               const SizedBox(width: 8),
-//               Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   AppText(
-//                     text: caseModel.additional_document,
-//                     fontWeight: FontWeight.bold,
-//                     fontSize: 14,
-//                   ),
-//                   const SizedBox(height: 4),
-//                   AppText(
-//                     text: 'Today at 4:30 PM',
-//                     color: AppColor.greyLight(),
-//                     fontSize: 12,
-//                   ),
-//                 ],
-//               ),
-//               const Spacer(),
-//               Container(
-//                 padding: const EdgeInsets.symmetric(
-//                     vertical: 4, horizontal: 8),
-//                 decoration: BoxDecoration(
-//                   color: AppColor.lightOrange,
-//                   borderRadius: BorderRadius.circular(8),
-//                 ),
-//                 child: AppText(
-//                   text: 'Required',
-//                   fontSize: 12,
-//                   fontWeight: FontWeight.bold,
-//                   color: AppColor.orange,
-//                 ),
-//               ),
-//             ],
-//           ),
-
-//           const SizedBox(height: 12),
-//           AppText(
-//             text:
-//             'Video verification with Dubai Police is required to complete your burial permit.',
-//             fontSize: 13,
-//             color: AppColor.greyLight(),
-//           ),
-//           const SizedBox(height: 12),
-//           CustomElevatedButton(
-//             fontSize: context.mh * 0.016,
-//             text: 'Join Video Call',
-//             bgColor: AppColor.buttonColor,
-//             onPressed: () {
-//               showDialog(context: context, builder: (context) => UnderConstructionDialog(),);
-//               // Navigator.push(context, MaterialPageRoute(builder: (context) => VideoCallNotificationScreen(),));
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'dart:developer';
 
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/features/home/data/model/case_model.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Controller/police_admin_provider.dart';
-import 'package:burzakh/widgets/under_construction_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';

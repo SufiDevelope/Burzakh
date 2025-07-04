@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
@@ -33,13 +35,14 @@ class DubaiAdminDashboardView extends StatefulWidget {
 class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
   final controller = Get.put(DubaiController());
 
-  // @override
-  // void initState() {
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     controller.getRequestApi();
-  //   });
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.getRequestApi();
+      controller.getAmbulanceApi();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +168,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               statusText: "",
                               lastUpdated: DateFormat("dd MMM yyyy")
                                   .format(DateTime.now()),
-                              icon: Icons.timer,
+                              icon: Icons.check_circle,
                               primaryColor: dashboardcolor,
                               backgroundColor: Colors.grey[50],
                               progressValue: 0.6,
@@ -183,7 +186,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               statusText: "",
                               lastUpdated: DateFormat("dd MMM yyyy")
                                   .format(DateTime.now()),
-                              icon: Icons.timer,
+                              icon: Icons.cancel,
                               primaryColor: dashboardcolor,
                               backgroundColor: Colors.grey[50],
                               progressValue: 0.6,
@@ -272,6 +275,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                                 status: data.status ?? '',
                                 onConfirm: (assignmentType, instructions,
                                     selectedOption) {
+                                  log(assignmentType);
                                   controller.dispatchAmbulance(
                                       context, data.vehicleNumber ?? "");
                                 },
@@ -347,7 +351,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               cemetery: data.preferredCemetery ?? '',
                               onAssign: (graveNumber) {
                                 controller.assignGraveApi(
-                                    data.id ?? -1, graveNumber, context);
+                                    data.id ?? -1, graveNumber, context, true);
                               },
                               onCancel: () {
                                 Navigator.pop(context);

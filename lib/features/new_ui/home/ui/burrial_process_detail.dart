@@ -1,6 +1,8 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
+import 'package:burzakh/features/new_ui/home/ui/documnet_progress_case_details.dart';
+import 'package:burzakh/features/new_ui/home/widgets/burrial_success_dialog.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +10,12 @@ import 'package:get/get.dart';
 class BurrialProcessDetail extends StatefulWidget {
   final String caseName;
   final String userid;
+  final String caseid;
   const BurrialProcessDetail(
-      {super.key, required this.caseName, required this.userid});
+      {super.key,
+      required this.caseName,
+      required this.userid,
+      required this.caseid});
 
   @override
   State<BurrialProcessDetail> createState() => _BurrialProcessDetailState();
@@ -319,6 +325,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                           : specialRequests,
                       context,
                       preferedCemeteryController.text,
+                      widget.caseid,
                     );
 
                     // Reset the form

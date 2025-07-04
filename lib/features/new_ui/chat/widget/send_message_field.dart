@@ -1,19 +1,17 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:developer';
-
 import 'package:burzakh/constants/app_text_style.dart';
 import 'package:burzakh/core/app/di_container.dart';
-import 'package:burzakh/core/extensions/show_message.dart';
 import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
 import 'package:burzakh/features/authentication/presentation/model/user_model.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
 import 'package:burzakh/features/new_ui/chat/cubit/chat_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/theme/AppColor.dart';
@@ -29,6 +27,7 @@ class RiderSendChatField extends StatefulWidget {
 class _RiderSendChatFieldState extends State<RiderSendChatField> {
   final rtaController = Get.put(RtaController());
   final cdaController = Get.put(CdaController());
+  final dubaiController = Get.put(DubaiController());
 
   bool _isFieldEmpty = true;
   TextEditingController controller = TextEditingController();
@@ -99,6 +98,10 @@ class _RiderSendChatFieldState extends State<RiderSendChatField> {
                           rtaController.sendUserMessageApi(model?.id ?? 0,
                               "police_support", controller.text);
                           cdaController.getCdaChatApi(model?.id ?? 0);
+                          controller.clear();
+                        }else if (widget.adminType == 'mancipality_assistence'){
+                          dubaiController.sendUserMessageApi(model?.id ?? 0,
+                              "mancipality_assistence", controller.text);
                           controller.clear();
                         }
                       },

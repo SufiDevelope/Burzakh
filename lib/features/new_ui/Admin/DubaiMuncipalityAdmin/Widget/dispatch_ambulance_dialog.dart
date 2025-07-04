@@ -9,7 +9,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
   final String currentLocation;
   final String status;
   final VoidCallback? onCancel;
-  final Function(String assignmentType, String additionalInstructions, String selectedOption)? onConfirm;
+  final Function(String assignmentType, String additionalInstructions,
+      String selectedOption)? onConfirm;
 
   const DispatchAmbulanceDialogWidget({
     super.key,
@@ -24,7 +25,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(DubaiController());
-    
+
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
@@ -143,7 +144,6 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
               ),
 
               /// Burial Cases Dropdown
-              
 
               0.02.ph(context),
 
@@ -173,7 +173,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                         0.01.ph(context),
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.04),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
@@ -183,8 +184,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
-                              value: controller.selectedBurialCase.value.isEmpty 
-                                  ? null 
+                              value: controller.selectedBurialCase.value.isEmpty
+                                  ? null
                                   : controller.selectedBurialCase.value,
                               hint: Text(
                                 'Select a burial case...',
@@ -194,9 +195,11 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                 ),
                               ),
                               isExpanded: true,
-                              icon: Icon(Icons.arrow_drop_down, color: Colors.grey.shade600),
+                              icon: Icon(Icons.arrow_drop_down,
+                                  color: Colors.grey.shade600),
                               items: controller.burialCases
-                                  .map((String case_) => DropdownMenuItem<String>(
+                                  .map((String case_) =>
+                                      DropdownMenuItem<String>(
                                         value: case_,
                                         child: Text(
                                           case_,
@@ -222,6 +225,59 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                       children: [
                         0.02.ph(context),
                         Text(
+                          'Select Burial Case:',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.016,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        0.01.ph(context),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.04),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.grey.shade300,
+                              width: 1,
+                            ),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: controller.selectedBurialCase.value.isEmpty
+                                  ? null
+                                  : controller.selectedBurialCase.value,
+                              hint: Text(
+                                'Select a burial case...',
+                                style: TextStyle(
+                                  color: Colors.grey.shade500,
+                                  fontSize: context.mh * 0.016,
+                                ),
+                              ),
+                              isExpanded: true,
+                              icon: Icon(Icons.arrow_drop_down,
+                                  color: Colors.grey.shade600),
+                              items: controller.burialCases
+                                  .map((String case_) =>
+                                      DropdownMenuItem<String>(
+                                        value: case_,
+                                        child: Text(
+                                          case_,
+                                          style: TextStyle(
+                                            fontSize: context.mh * 0.016,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              onChanged: controller.updateBurialCase,
+                            ),
+                          ),
+                        ),
+                        0.02.ph(context),
+                        Text(
                           'Select Mosque:',
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
@@ -232,7 +288,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                         0.01.ph(context),
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.04),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
@@ -242,8 +299,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<String>(
-                              value: controller.selectedMosque.value.isEmpty 
-                                  ? null 
+                              value: controller.selectedMosque.value.isEmpty
+                                  ? null
                                   : controller.selectedMosque.value,
                               hint: Text(
                                 'Select a mosque...',
@@ -253,9 +310,11 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                 ),
                               ),
                               isExpanded: true,
-                              icon: Icon(Icons.arrow_drop_down, color: Colors.grey.shade600),
+                              icon: Icon(Icons.arrow_drop_down,
+                                  color: Colors.grey.shade600),
                               items: controller.mosques
-                                  .map((String mosque) => DropdownMenuItem<String>(
+                                  .map((String mosque) =>
+                                      DropdownMenuItem<String>(
                                         value: mosque,
                                         child: Text(
                                           mosque,
@@ -276,7 +335,6 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
 
               0.03.ph(context),
 
-              /// Additional Instructions
               Text(
                 'Additional Instructions:',
                 style: TextStyle(
@@ -300,7 +358,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                   controller: controller.instructionsController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    hintText: 'Enter any special instructions for the driver...',
+                    hintText:
+                        'Enter any special instructions for the driver...',
                     hintStyle: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: context.mh * 0.016,
@@ -317,7 +376,6 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
 
               0.03.ph(context),
 
-              /// Estimated Arrival Section
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(context.mw * 0.04),
@@ -369,10 +427,10 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                       'Cancel',
                       Colors.white,
                       Colors.grey.shade700,
-                      onCancel ?? () {
-                        Get.delete<DubaiController>();
-                        Navigator.of(context).pop();
-                      },
+                      onCancel ??
+                          () {
+                            Navigator.of(context).pop();
+                          },
                       hasBorder: true,
                     ),
                   ),
@@ -398,20 +456,19 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
 
   void _handleConfirm(DubaiController controller) {
     String selectedOption = '';
-    
+
     if (controller.selectedAssignmentType.value == 'burial') {
       selectedOption = controller.selectedBurialCase.value;
     } else if (controller.selectedAssignmentType.value == 'mosque') {
       selectedOption = controller.selectedMosque.value;
     }
-    
+
     onConfirm?.call(
       controller.selectedAssignmentType.value,
       controller.instructionsController.text.trim(),
       selectedOption,
     );
-    
-    Get.delete<DubaiController>();
+
   }
 
   Widget _buildAssignmentOption(
@@ -537,7 +594,9 @@ void showDispatchAmbulanceDialog(
   required String currentLocation,
   required String status,
   VoidCallback? onCancel,
-  Function(String assignmentType, String additionalInstructions, String selectedOption)? onConfirm,
+  Function(String assignmentType, String additionalInstructions,
+          String selectedOption)?
+      onConfirm,
 }) {
   showDialog(
     context: context,
