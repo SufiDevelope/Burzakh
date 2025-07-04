@@ -217,7 +217,6 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                                   ),
                                 ));
                           },
-
                           primaryColor: Color(0xFF1e40af), rta: 'cda',
                           // rta: "cda",
                         );

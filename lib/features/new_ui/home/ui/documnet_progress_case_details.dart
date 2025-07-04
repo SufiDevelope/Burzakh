@@ -2,6 +2,7 @@
 
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/app_assets.dart';
+import 'package:burzakh/features/new_ui/home/ui/burrial_process_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
@@ -106,38 +107,40 @@ class _DocumnetProgressCaseDetailsState
                                       ),
                                       const SizedBox(height: 20),
                                       _documentItem(
-                                          "Death Notification",
-                                          _homeCubit.caseDetailModel?.caseStatus
-                                                  .toString() ??
-                                              "",
-                                          Icons.description,
-                                          _homeCubit.caseDetailModel
-                                                      ?.deathNotificationFileStatus ==
-                                                  "completed"
-                                              ? AppColor.lightGreen1
-                                              : AppColor.lightOrange1,
-                                          _homeCubit.caseDetailModel
-                                                      ?.deathNotificationFileStatus ==
-                                                  "completed"
-                                              ? AppColor.green()
-                                              : AppColor.orange),
+                                        "Death Notification",
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                .toString() ??
+                                            "",
+                                        Icons.description,
+                                        _homeCubit.caseDetailModel
+                                                    ?.deathNotificationFileStatus ==
+                                                "completed"
+                                            ? AppColor.lightGreen1
+                                            : AppColor.lightOrange1,
+                                        _homeCubit.caseDetailModel
+                                                    ?.deathNotificationFileStatus ==
+                                                "completed"
+                                            ? AppColor.green()
+                                            : AppColor.orange,
+                                      ),
                                       const SizedBox(height: 12),
                                       _documentItem(
-                                          "Hospital Report",
-                                          _homeCubit.caseDetailModel?.caseStatus
-                                                  .toString() ??
-                                              "",
-                                          Icons.local_hospital,
-                                          _homeCubit.caseDetailModel
-                                                      ?.hospitalCertificateStatus ==
-                                                  "completed"
-                                              ? AppColor.lightGreen1
-                                              : AppColor.lightOrange1,
-                                          _homeCubit.caseDetailModel
-                                                      ?.hospitalCertificateStatus ==
-                                                  "completed"
-                                              ? AppColor.green()
-                                              : AppColor.orange),
+                                        "Hospital Report",
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                .toString() ??
+                                            "",
+                                        Icons.local_hospital,
+                                        _homeCubit.caseDetailModel
+                                                    ?.hospitalCertificateStatus ==
+                                                "completed"
+                                            ? AppColor.lightGreen1
+                                            : AppColor.lightOrange1,
+                                        _homeCubit.caseDetailModel
+                                                    ?.hospitalCertificateStatus ==
+                                                "completed"
+                                            ? AppColor.green()
+                                            : AppColor.orange,
+                                      ),
                                       const SizedBox(height: 12),
                                       _documentItem(
                                         "EID & Passport",
@@ -233,12 +236,83 @@ class _DocumnetProgressCaseDetailsState
                                       ),
                                       const SizedBox(height: 20),
                                       _documentItem(
-                                          "Burial Permit",
-                                          "Not Started",
-                                          Icons.lock,
-                                          AppColor.grey().withOpacity(0.1),
-                                          AppColor.grey(),
-                                          subtitle: "Dubai Municipality"),
+                                        "Burial Permit",
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                    .toString() ==
+                                                "approved"
+                                            ? _homeCubit.caseDetailModel
+                                                    ?.burial_submission_status
+                                                    .toString() ??
+                                                ""
+                                            : "Not Started",
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                    .toString() ==
+                                                "approved"
+                                            ? Icons.check_circle
+                                            : Icons.lock,
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                    .toString() ==
+                                                "approved"
+                                            ? AppColor.lightGreen1
+                                            : AppColor.grey().withOpacity(0.1),
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                    .toString() ==
+                                                "approved"
+                                            ? AppColor.green()
+                                            : AppColor.grey(),
+                                        subtitle: "Dubai Municipality",
+                                      ),
+                                      0.01.ph(context),
+                                      Visibility(
+                                        visible: _homeCubit.caseDetailModel
+                                                        ?.burial_submission_status ==
+                                                    "Pending" &&
+                                                _homeCubit.caseDetailModel
+                                                        ?.caseStatus ==
+                                                    "approved"
+                                            ? true
+                                            : false,
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BurrialProcessDetail(
+                                                  caseName: _homeCubit
+                                                          .caseDetailModel
+                                                          ?.name_of_deceased
+                                                          .toString() ??
+                                                      "",
+                                                  userid: _homeCubit
+                                                          .caseDetailModel
+                                                          ?.user_id
+                                                          .toString() ??
+                                                      "",
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            height: context.mh * 0.05,
+                                            width: context.mw,
+                                            decoration: BoxDecoration(
+                                              color: AppColor.buttonColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Center(
+                                              child: AppText(
+                                                text:
+                                                    "+ Start Burial Permit Process",
+                                                color: AppColor.white(),
+                                                fontSize: context.mh * 0.014,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

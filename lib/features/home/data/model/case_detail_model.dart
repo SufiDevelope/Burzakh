@@ -7,6 +7,10 @@ class CaseDetailModel {
    String passportOrEmirateIdBackStatus;
    String caseStatus;
    String policeClearance;
+   int casename;
+   String name_of_deceased;
+   String user_id;
+   String burial_submission_status;
 
   CaseDetailModel({
     required this.id,
@@ -17,6 +21,10 @@ class CaseDetailModel {
     required this.passportOrEmirateIdBackStatus,
     required this.caseStatus,
     required this.policeClearance,
+    required this.casename,
+    required this.name_of_deceased,
+    required this.user_id,
+    required this.burial_submission_status,
   });
 
   factory CaseDetailModel.fromJson(Map<String, dynamic> json) {
@@ -29,8 +37,13 @@ class CaseDetailModel {
       passportOrEmirateIdBackStatus: json['passport_or_emirate_id_back_status'] ?? '',
       caseStatus: json['case_status'] ?? '',
       policeClearance: json['police_clearance'] ?? '',
+      casename: json['case_name'] ?? '',
+      name_of_deceased: json['name_of_deceased'] ?? '',
+      user_id: json['user_id'] ?? '',
+      burial_submission_status: json['burial_submission_status'] ?? '',
     );
   }
+
 
   Map<String, dynamic> toJson() {
     return {
@@ -42,6 +55,10 @@ class CaseDetailModel {
       'passport_or_emirate_id_back_status': passportOrEmirateIdBackStatus,
       'case_status': caseStatus,
       'police_clearance': policeClearance,
+      'case_name': casename,
+      'name_of_deceased': name_of_deceased,
+      'user_id': user_id,
+      'burial_submission_status': burial_submission_status,
     };
   }
 }

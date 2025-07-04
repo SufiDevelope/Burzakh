@@ -183,7 +183,6 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-            // First Row - Logo, Title, and Profile
             Expanded(
               flex: 3,
               child: Row(
@@ -238,7 +237,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                           'Dubai Municipality',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: context.mh * 0.016,
+                            fontSize: context.mh * 0.015,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 0.5,
                           ),
@@ -247,18 +246,9 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                           'Cemetery Services',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: context.mh * 0.016,
+                            fontSize: context.mh * 0.015,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 0.5,
-                          ),
-                        ),
-                        // 0.008.ph(context),
-                        Text(
-                          'Burial Supervisor Dashboard',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
-                            fontSize: context.mh * 0.012,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
@@ -282,7 +272,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: context.mh * 0.01,
+                                fontSize: context.mh * 0.011,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -315,13 +305,10 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                             ],
                           ),
                           child: Center(
-                            child: Text(
-                              initials,
-                              style: TextStyle(
-                                color: const Color(0xFF6B7A8F),
-                                fontSize: context.mh * 0.013,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Icon(
+                              Icons.logout,
+                              color: Colors.grey[600],
+                              size: context.mh * 0.02,
                             ),
                           ),
                         ),
@@ -394,104 +381,104 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                   ),
                   0.015.pw(context),
 
-                  // Reports Button
-                  GestureDetector(
-                    onTap: onReportsPressed,
-                    child: Container(
-                      width: context.mw * 0.08,
-                      height: context.mw * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.description_outlined,
-                        color: Colors.white,
-                        size: context.mh * 0.02,
-                      ),
-                    ),
-                  ),
-                  0.015.pw(context),
+                  // // Reports Button
+                  // GestureDetector(
+                  //   onTap: onReportsPressed,
+                  //   child: Container(
+                  //     width: context.mw * 0.08,
+                  //     height: context.mw * 0.08,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.white.withOpacity(0.2),
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       border: Border.all(
+                  //         color: Colors.white.withOpacity(0.3),
+                  //         width: 1,
+                  //       ),
+                  //     ),
+                  //     child: Icon(
+                  //       Icons.description_outlined,
+                  //       color: Colors.white,
+                  //       size: context.mh * 0.02,
+                  //     ),
+                  //   ),
+                  // ),
+                  // 0.015.pw(context),
 
-                  // Documents Button
-                  GestureDetector(
-                    onTap: onReportsPressed,
-                    child: Container(
-                      width: context.mw * 0.08,
-                      height: context.mw * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.folder_outlined,
-                        color: Colors.white,
-                        size: context.mh * 0.02,
-                      ),
-                    ),
-                  ),
-                  0.015.pw(context),
+                  // // Documents Button
+                  // GestureDetector(
+                  //   onTap: onReportsPressed,
+                  //   child: Container(
+                  //     width: context.mw * 0.08,
+                  //     height: context.mw * 0.08,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.white.withOpacity(0.2),
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       border: Border.all(
+                  //         color: Colors.white.withOpacity(0.3),
+                  //         width: 1,
+                  //       ),
+                  //     ),
+                  //     child: Icon(
+                  //       Icons.folder_outlined,
+                  //       color: Colors.white,
+                  //       size: context.mh * 0.02,
+                  //     ),
+                  //   ),
+                  // ),
+                  // 0.015.pw(context),
 
-                  // Messages Button with Notification Badge
-                  GestureDetector(
-                    onTap: onMessagesPressed,
-                    child: Container(
-                      width: context.mw * 0.08,
-                      height: context.mw * 0.08,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Icon(
-                              Icons.chat_bubble_outline,
-                              color: Colors.white,
-                              size: context.mh * 0.02,
-                            ),
-                          ),
-                          if (notificationCount > 0)
-                            Positioned(
-                              top: context.mh * 0.008,
-                              right: context.mw * 0.008,
-                              child: Container(
-                                width: context.mw * 0.025,
-                                height: context.mw * 0.025,
-                                decoration: const BoxDecoration(
-                                  color: Colors.red,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    notificationCount > 99
-                                        ? '99+'
-                                        : notificationCount.toString(),
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: context.mh * 0.008,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // // Messages Button with Notification Badge
+                  // GestureDetector(
+                  //   onTap: onMessagesPressed,
+                  //   child: Container(
+                  //     width: context.mw * 0.08,
+                  //     height: context.mw * 0.08,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.white.withOpacity(0.2),
+                  //       borderRadius: BorderRadius.circular(8),
+                  //       border: Border.all(
+                  //         color: Colors.white.withOpacity(0.3),
+                  //         width: 1,
+                  //       ),
+                  //     ),
+                  //     child: Stack(
+                  //       children: [
+                  //         Center(
+                  //           child: Icon(
+                  //             Icons.chat_bubble_outline,
+                  //             color: Colors.white,
+                  //             size: context.mh * 0.02,
+                  //           ),
+                  //         ),
+                  //         if (notificationCount > 0)
+                  //           Positioned(
+                  //             top: context.mh * 0.008,
+                  //             right: context.mw * 0.008,
+                  //             child: Container(
+                  //               width: context.mw * 0.025,
+                  //               height: context.mw * 0.025,
+                  //               decoration: const BoxDecoration(
+                  //                 color: Colors.red,
+                  //                 shape: BoxShape.circle,
+                  //               ),
+                  //               child: Center(
+                  //                 child: Text(
+                  //                   notificationCount > 99
+                  //                       ? '99+'
+                  //                       : notificationCount.toString(),
+                  //                   style: TextStyle(
+                  //                     color: Colors.white,
+                  //                     fontSize: context.mh * 0.008,
+                  //                     fontWeight: FontWeight.bold,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

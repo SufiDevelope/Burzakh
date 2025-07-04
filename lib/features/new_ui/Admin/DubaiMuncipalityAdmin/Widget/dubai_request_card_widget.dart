@@ -6,13 +6,16 @@ class BurialCardWidget extends StatelessWidget {
   final String relative;
   final String location;
   final String date;
-  final String time;
+  final String? time;
   final String status;
   final String caseId;
   final int messageCount;
   final VoidCallback? onTap;
   final VoidCallback? onMessageTap;
-  final List<String> documents;
+  final List<String>? documents;
+  final VoidCallback? ongraveAssign;
+  final bool isAmbulance;
+  final VoidCallback? onCallTap;
 
   const BurialCardWidget({
     super.key,
@@ -20,13 +23,16 @@ class BurialCardWidget extends StatelessWidget {
     required this.relative,
     required this.location,
     required this.date,
-    required this.time,
+    this.time,
     required this.status,
     required this.caseId,
     required this.messageCount,
     this.onTap,
     this.onMessageTap,
-    required this.documents,
+    this.documents,
+    this.ongraveAssign,
+    this.isAmbulance = false,
+    this.onCallTap,
   });
 
   @override
@@ -117,18 +123,19 @@ class BurialCardWidget extends StatelessWidget {
               ],
             ),
             0.01.ph(context),
-            Row(
-              children: [
-                Icon(Icons.access_time,
-                    size: context.mh * 0.018, color: Colors.grey),
-                0.01.pw(context),
-                Text(
-                  time,
-                  style: TextStyle(
-                      fontSize: context.mh * 0.015, color: Colors.black54),
-                ),
-              ],
-            ),
+            if (time != null)
+              Row(
+                children: [
+                  Icon(Icons.access_time_outlined,
+                      size: context.mh * 0.018, color: Colors.grey),
+                  0.01.pw(context),
+                  Text(
+                    time!,
+                    style: TextStyle(
+                        fontSize: context.mh * 0.015, color: Colors.black54),
+                  ),
+                ],
+              ),
 
             0.02.ph(context),
 
@@ -137,7 +144,9 @@ class BurialCardWidget extends StatelessWidget {
               spacing: context.mw * 0.02,
               runSpacing: context.mh * 0.01,
               children: [
-                ...documents.map((document) => _DocumentChip(label: document)),
+                ...documents
+                        ?.map((document) => _DocumentChip(label: document)) ??
+                    [],
               ],
             ),
 
@@ -148,7 +157,7 @@ class BurialCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: onMessageTap,
+                  onTap: isAmbulance == false ? onMessageTap : onCallTap,
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: context.mw * 0.04,
@@ -159,7 +168,7 @@ class BurialCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      'Messages ($messageCount)',
+                      isAmbulance == false ? 'Messages' : "Contact",
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
@@ -170,13 +179,29 @@ class BurialCardWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    _circleButton(
-                        Icons.add, Colors.blue.shade100, Colors.blue, context,
-                        isGradient: true),
+                    Visibility(
+                      visible: status == "Approve" || status == "Dispatched" ? false : true,
+                      child: _circleButton(
+                        isAmbulance == true ? Icons.trending_up : Icons.add,
+                        isAmbulance == true
+                            ? Color.fromARGB(255, 181, 249, 196)
+                            : Colors.blue.shade50,
+                        isAmbulance == true ? Colors.green : Colors.blue,
+                        context,
+                        ongraveAssign,
+                        isGradient: true,
+                        isAmbulance: isAmbulance,
+                      ),
+                    ),
                     0.02.pw(context),
-                    _circleButton(Icons.chevron_right, Colors.grey.shade200,
-                        Colors.grey, context,
-                        isGradient: false),
+                    _circleButton(
+                      Icons.chevron_right,
+                      Colors.grey.shade200,
+                      Colors.grey,
+                      context,
+                      ongraveAssign,
+                      isGradient: false,
+                    ),
                   ],
                 )
               ],
@@ -218,29 +243,43 @@ class BurialCardWidget extends StatelessWidget {
     IconData icon,
     Color bgColor,
     Color iconColor,
-    BuildContext context, {
+    BuildContext context,
+    final VoidCallback? onGraveAssign, {
     bool isGradient = false,
+    bool isAmbulance = false,
   }) {
-    return Container(
-      padding: EdgeInsets.all(context.mw * 0.02),
-      decoration: BoxDecoration(
-        color: isGradient == false ? bgColor : null,
-        gradient: isGradient == false
-            ? null
-            : LinearGradient(colors: [
-                Color(0xffe0f2fe),
-                Color(0xffbae6fd),
-              ]),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: Color(0xff0369a1),
-          width: 0.1,
+    return GestureDetector(
+      onTap: onGraveAssign,
+      child: Container(
+        padding: EdgeInsets.all(context.mw * 0.02),
+        decoration: BoxDecoration(
+          color: (!isGradient && !isAmbulance) ? bgColor : null,
+          gradient: isAmbulance
+              ? LinearGradient(
+                  colors: [
+                    Color(0xFFE7F8EB),
+                    Color(0xFFBBF7D0),
+                  ],
+                )
+              : (isGradient
+                  ? LinearGradient(
+                      colors: [
+                        Color(0xffe0f2fe),
+                        Color(0xffbae6fd),
+                      ],
+                    )
+                  : null),
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(
+            color: Color(0xff0369a1),
+            width: 0.1,
+          ),
         ),
-      ),
-      child: Icon(
-        icon,
-        color: iconColor,
-        size: context.mh * 0.018,
+        child: Icon(
+          icon,
+          color: iconColor,
+          size: context.mh * 0.018,
+        ),
       ),
     );
   }

@@ -103,5 +103,28 @@ class AppApis {
   static String getUserMessages(adminType, userId) =>
       "${baseUrl}/api/burzakh/get-support-messages/$userId/$adminType";
 
-  static String dubaiGetRequests = "${baseUrl}/api/burzakh-mancipality/get-requests";
+  static String dubaiGetRequests =
+      "${baseUrl}/api/burzakh-mancipality/get-requests";
+
+  static String dubaiSendMessage =
+      "${baseUrl}/api/burzakh-mancipality/send-support-message";
+
+  static String getDubaiSupportMessage(caseid) =>
+      "${baseUrl}/api/burzakh-mancipality/support/messages/user/$caseid";
+
+  // Get Ambulance
+  static String getAmbulance =
+      "${baseUrl}/api/burzakh-mancipality/get-ambulances";
+
+  // Grave Assign
+  static String dubaiGraveAssign(caseId) =>
+      "${baseUrl}/api/burzakh-mancipality/mancipality-requests/$caseId/update-status";
+
+  // Submit Muncipality
+  static String dubaiSubmitMunicipality =
+      "${baseUrl}/api/burzakh/submit-mancipality-request";
+
+  // Dispatch Ambulance
+  static String dispatchAmbulance =
+      "${baseUrl}/api/burzakh-mancipality/dispatch-ambulance";
 }

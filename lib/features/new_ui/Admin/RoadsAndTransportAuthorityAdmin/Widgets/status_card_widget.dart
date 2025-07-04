@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
 import 'package:flutter/material.dart';
 
 class GenericStatusCardWidget extends StatelessWidget {
@@ -16,6 +17,7 @@ class GenericStatusCardWidget extends StatelessWidget {
   final double? containerheight;
   final double? containerwidth;
   final double? borderRadius;
+  final bool? isDubaiAdmin;
 
   const GenericStatusCardWidget({
     super.key,
@@ -31,7 +33,9 @@ class GenericStatusCardWidget extends StatelessWidget {
     this.progressValue = 0.6,
     this.size,
     this.containerheight,
-    this.containerwidth, this.borderRadius,
+    this.containerwidth,
+    this.borderRadius,
+    this.isDubaiAdmin = false,
   });
 
   @override
@@ -53,7 +57,9 @@ class GenericStatusCardWidget extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: context.mw * 0.7,
-        padding: EdgeInsets.all(context.mw * 0.03),
+        padding: EdgeInsets.symmetric(
+            horizontal: isDubaiAdmin == true ? 0.00 : context.mw * 0.03,
+            vertical: isDubaiAdmin == true ? 0.00 : context.mh * 0.02),
         margin: EdgeInsets.only(left: context.mw * 0.03),
         decoration: BoxDecoration(
           color: bgColor,
@@ -69,109 +75,133 @@ class GenericStatusCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with icon and title
-            Row(
-              children: [
-                Container(
-                  width: containerwidth ?? context.mw * 0.08,
-                  height: containerheight ?? context.mw * 0.08,
-                  decoration: BoxDecoration(
-                    color: mainColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(borderRadius ?? 8),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: mainColor,
-                    size: size ?? context.mh * 0.02,
-                  ),
-                ),
-                0.03.pw(context),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: mainColor,
-                      fontSize: context.mh * 0.016,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            0.02.ph(context),
-
-            // Count and status
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  count,
-                  style: TextStyle(
-                    color: mainColor,
-                    fontSize: context.mh * 0.035,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                0.02.pw(context),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        statusText,
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: context.mh * 0.014,
-                          fontWeight: FontWeight.w500,
+            if (isDubaiAdmin == true)
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: context.mh * 0.008,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: dashboardcolor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12),
                         ),
                       ),
-                      0.01.ph(context),
-                      // // Progress indicators
-                      // Row(
-                      //   children: List.generate(
-                      //     progColors.length,
-                      //     (index) => Container(
-                      //       width: context.mw * 0.025,
-                      //       height: context.mh * 0.008,
-                      //       margin: EdgeInsets.only(
-                      //         right: context.mw * 0.01,
-                      //       ),
-                      //       decoration: BoxDecoration(
-                      //         color: index < (progColors.length * progressValue)
-                      //             ? progColors[index]
-                      //             : Colors.grey[200],
-                      //         borderRadius: BorderRadius.circular(2),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      child: Text(""),
+                    ),
+                  )
+                ],
+              ),
+            Padding(
+              padding: isDubaiAdmin == true
+                  ?  EdgeInsets.all(8.0) : EdgeInsets.zero,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: containerwidth ?? context.mw * 0.08,
+                        height: containerheight ?? context.mw * 0.08,
+                        decoration: BoxDecoration(
+                          color: mainColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(borderRadius ?? 8),
+                        ),
+                        child: Icon(
+                          icon,
+                          color: mainColor,
+                          size: size ?? context.mh * 0.02,
+                        ),
+                      ),
+                      0.03.pw(context),
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            color: mainColor,
+                            fontSize: context.mh * 0.016,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-
-            0.025.ph(context),
-            Divider(
-              color: Colors.grey[300],
-              thickness: 0.5,
-            ),
-
-            // Footer with last updated and view button
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  lastUpdated,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: context.mh * 0.012,
-                    fontWeight: FontWeight.w400,
+                  // Count and status
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        count,
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: context.mh * 0.035,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      0.02.pw(context),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              statusText,
+                              style: TextStyle(
+                                color: mainColor,
+                                fontSize: context.mh * 0.014,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            0.01.ph(context),
+                            // // Progress indicators
+                            // Row(
+                            //   children: List.generate(
+                            //     progColors.length,
+                            //     (index) => Container(
+                            //       width: context.mw * 0.025,
+                            //       height: context.mh * 0.008,
+                            //       margin: EdgeInsets.only(
+                            //         right: context.mw * 0.01,
+                            //       ),
+                            //       decoration: BoxDecoration(
+                            //         color: index < (progColors.length * progressValue)
+                            //             ? progColors[index]
+                            //             : Colors.grey[200],
+                            //         borderRadius: BorderRadius.circular(2),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+              
+                  0.025.ph(context),
+                  Divider(
+                    color: Colors.grey[300],
+                    thickness: 0.5,
+                  ),
+              
+                  // Footer with last updated and view button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        lastUpdated,
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: context.mh * 0.012,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
+            0.02.ph(context),
           ],
         ),
       ),

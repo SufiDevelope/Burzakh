@@ -1,41 +1,45 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/data/Response/status.dart';
-import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
-import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widgets/cda_chat_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_chat_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CdaChatView extends StatefulWidget {
+class DubaiChatView extends StatefulWidget {
   final int userId;
   final String deviceToken;
-  const CdaChatView(
-      {super.key, required this.userId, required this.deviceToken});
+  const DubaiChatView({
+    super.key,
+    required this.userId,
+    required this.deviceToken,
+  });
 
   @override
-  State<CdaChatView> createState() => _CdaChatViewState();
+  State<DubaiChatView> createState() => _DubaiChatViewState();
 }
 
-class _CdaChatViewState extends State<CdaChatView> {
-  final controller = Get.put(CdaController());
+class _DubaiChatViewState extends State<DubaiChatView> {
+  final controller = Get.put(DubaiController());
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.getCdaChatApi(widget.userId);
+      controller.getDubaiChatApi(widget.userId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController messageController = TextEditingController();
-    final Color primaryColor = const Color(0xFF1e40af);
+    final Color primaryColor = dashboardcolor;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
-          "CDA Chat",
+          "Dubai Municipality Chat",
           style: TextStyle(
             color: Colors.white,
             fontSize: context.mh * 0.018,
@@ -59,31 +63,34 @@ class _CdaChatViewState extends State<CdaChatView> {
             child: Container(
                 color: Colors.grey[50],
                 child: Obx(() {
-                  if (controller.rxRequestStatusForCdaChat.value ==
+                  if (controller.rxRequestStatusForAllDubaiRequestChat.value ==
                       Status.loading) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (controller.rxRequestStatusForCdaChat.value ==
+                  } else if (controller
+                          .rxRequestStatusForAllDubaiRequestChat.value ==
                       Status.error) {
                     return Center(
                       child: Text("Error"),
                     );
-                  } else if (controller.rxRequestStatusForCdaChat.value ==
+                  } else if (controller
+                          .rxRequestStatusForAllDubaiRequestChat.value ==
                       Status.completed) {
                     return ListView.builder(
-                      itemCount: controller.cdafilterChatList.length,
+                      itemCount: controller.chatmodel.value.data?.length,
                       itemBuilder: (context, index) {
-                        var data = controller.cdafilterChatList[index];
-                        return CdaChatWidget(
-                          message: data.message ?? "No message found",
+                        var data = controller.chatmodel.value.data?[index];
+                        return DubaiChatWidget(
+                          message: data?.message ?? "No message found",
                           timestamp: DateFormat('yyyy-MM-dd').format(
                             DateTime.parse(
-                              data.createdAt ??
+                              data?.createdAt ??
                                   DateTime.now().toIso8601String(),
                             ),
                           ),
-                          isCurrentUser: data.role == "cda" ? true : false,
+                          isCurrentUser:
+                              data?.role == "mancipality" ? true : false,
                           onTap: () {},
                         );
                       },
@@ -151,10 +158,11 @@ class _CdaChatViewState extends State<CdaChatView> {
                       child: IconButton(
                         onPressed: () {
                           if (messageController.text.trim().isNotEmpty) {
-                            controller.sendChatMessageApi(
-                                widget.userId,
-                                messageController.text.trim(),
-                                widget.deviceToken);
+                            controller.sendDubaiSupportMessage(
+                              messageController.text.trim(),
+                              widget.userId,
+                              widget.deviceToken,
+                            );
                             messageController.clear();
                           }
                         },

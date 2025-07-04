@@ -2,6 +2,10 @@ import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_request_details_view.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_chat_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/assign_grave_dialog_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dispatch_ambulance_dialog.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_dashboard_header_widget.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_filter_widget.dart';
@@ -11,6 +15,7 @@ import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Wi
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../data/Response/status.dart';
 
@@ -27,193 +32,341 @@ class DubaiAdminDashboardView extends StatefulWidget {
 
 class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
   final controller = Get.put(DubaiController());
+
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     controller.getRequestApi();
+  //   });
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            DMCemeteryHeaderWidget(
-              adminName: widget.name,
-              initials: widget.name.substring(0, 2),
-              email: "ahmed.alkaabi@dm.gov.ae",
-              role: "Adminstrator",
-              notificationCount: 3,
-              isArabicSelected: false,
-              onDMLogoPressed: () {},
-              onLogoutPressed: () async {
-                await documentCubit.logOut();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BurzakhEnhancedLogin(),
-                  ),
-                  (route) => false,
-                );
-              },
-              onLanguagePressed: () {},
-              onMessagesPressed: () {},
-              onReportsPressed: () {},
-              onNotificationPressed: () {},
-            ),
-            StatusBarWidgetDubai(
-              tabs: <TabItem>[
-                TabItem(
-                  title: 'All',
-                  count: 3,
-                ),
-                TabItem(
-                  title: 'Pending',
-                  count: 3,
-                ),
-                TabItem(
-                  title: 'Approved',
-                  count: 10,
-                ),
-                TabItem(
-                  title: 'Rejected',
-                  count: 2,
-                ),
-                TabItem(
-                  title: 'Completed',
-                  count: 2,
-                ),
-                TabItem(
-                  title: 'Ambulance',
-                  count: 2,
-                ),
-              ],
-            ),
-            0.02.ph(context),
-            SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.01, vertical: context.mh * 0.01),
-                child: Obx(() {
-                  return Row(
-                    children: [
-                      GenericStatusCardWidget(
-                        title: "Today's Burials",
-                        count: controller.model.value.todayBurials.toString(),
-                        statusText: "",
-                        lastUpdated:
-                            DateFormat("dd MMM yyyy").format(DateTime.now()),
-                        icon: Icons.calendar_month,
-                        primaryColor: dashboardcolor,
-                        backgroundColor: Colors.grey[50],
-                        progressValue: 0.6,
-                        onTap: () {},
-                        size: context.mh * 0.033,
-                        containerheight: context.mw * 0.2,
-                        containerwidth: context.mw * 0.2,
-                        borderRadius: 18,
-                      ),
-                      GenericStatusCardWidget(
-                        title: "Pending",
-                        count: controller.model.value.pendingCount.toString(),
-                        statusText: "",
-                        lastUpdated:
-                            DateFormat("dd MMM yyyy").format(DateTime.now()),
-                        icon: Icons.pending_actions,
-                        primaryColor: dashboardcolor,
-                        backgroundColor: Colors.grey[50],
-                        progressValue: 0.6,
-                        onTap: () {},
-                        size: context.mh * 0.033,
-                        containerheight: context.mw * 0.2,
-                        containerwidth: context.mw * 0.2,
-                        borderRadius: 18,
-                      ),
-                      GenericStatusCardWidget(
-                        title: "Approved",
-                        count: controller.model.value.approvedCount.toString(),
-                        statusText: "",
-                        lastUpdated:
-                            DateFormat("dd MMM yyyy").format(DateTime.now()),
-                        icon: Icons.timer,
-                        primaryColor: dashboardcolor,
-                        backgroundColor: Colors.grey[50],
-                        progressValue: 0.6,
-                        onTap: () {},
-                        size: context.mh * 0.033,
-                        containerheight: context.mw * 0.2,
-                        containerwidth: context.mw * 0.2,
-                        borderRadius: 18,
-                      ),
-                      GenericStatusCardWidget(
-                        title: "Rejected",
-                        count: controller.model.value.rejectedCount.toString(),
-                        statusText: "",
-                        lastUpdated:
-                            DateFormat("dd MMM yyyy").format(DateTime.now()),
-                        icon: Icons.timer,
-                        primaryColor: dashboardcolor,
-                        backgroundColor: Colors.grey[50],
-                        progressValue: 0.6,
-                        onTap: () {},
-                        size: context.mh * 0.033,
-                        containerheight: context.mw * 0.2,
-                        containerwidth: context.mw * 0.2,
-                        borderRadius: 18,
-                      ),
-                    ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.getRequestApi();
+          controller.getAmbulanceApi();
+          controller.resetToFirst();
+        },
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              DMCemeteryHeaderWidget(
+                imageurl: "assets/images/png/dubailogo.png",
+                adminName: widget.name,
+                initials: widget.name.substring(0, 2),
+                email: "ahmed.alkaabi@dm.gov.ae",
+                role: "Adminstrator",
+                notificationCount: 3,
+                isArabicSelected: false,
+                onDMLogoPressed: () {},
+                onLogoutPressed: () async {
+                  await documentCubit.logOut();
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BurzakhEnhancedLogin(),
+                    ),
+                    (route) => false,
                   );
-                })),
-            0.01.ph(context),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.mw * 0.02),
-              child: DubaiFilterWidget(
-                searchHint: "Search by name Cemetery or Id",
-                onSearchChanged: (value) {},
+                },
+                onLanguagePressed: () {},
+                onMessagesPressed: () {},
+                onReportsPressed: () {},
+                onNotificationPressed: () {},
               ),
-            ),
-            0.01.ph(context),
-            Obx(() {
-              switch (controller.rxRequestStatusForAllDubaiRequest.value) {
-                case Status.loading:
-                  return Center(child: CircularProgressIndicator());
-                case Status.completed:
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    itemCount: controller.model.value.allRequests?.length ?? 0,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      var data = controller.model.value.allRequests?[index];
-                      var caseDetail = (data?.caseDetails != null &&
-                              data!.caseDetails!.isNotEmpty)
-                          ? data.caseDetails![0]
-                          : null;
+              StatusBarWidgetDubai(
+                tabs: <TabItem>[
+                  TabItem(
+                    title: 'All',
+                    count: 3,
+                  ),
+                  TabItem(
+                    title: 'Pending',
+                    count: 3,
+                  ),
+                  TabItem(
+                    title: 'Approved',
+                    count: 10,
+                  ),
+                  TabItem(
+                    title: 'Rejected',
+                    count: 2,
+                  ),
+                  TabItem(
+                    title: 'Completed',
+                    count: 2,
+                  ),
+                  TabItem(
+                    title: 'Ambulance',
+                    count: 2,
+                  ),
+                ],
+              ),
+              0.02.ph(context),
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.mw * 0.01,
+                    vertical: context.mh * 0.01,
+                  ),
+                  child: Obx(() {
+                    switch (
+                        controller.rxRequestStatusForAllDubaiRequest.value) {
+                      case Status.loading:
+                        return Center(child: CircularProgressIndicator());
+                      case Status.completed:
+                        return Row(
+                          children: [
+                            GenericStatusCardWidget(
+                              title: "Today's Burials",
+                              count: controller.model.value.todayBurials
+                                  .toString(),
+                              statusText: "",
+                              lastUpdated: DateFormat("dd MMM yyyy")
+                                  .format(DateTime.now()),
+                              icon: Icons.calendar_month,
+                              primaryColor: dashboardcolor,
+                              backgroundColor: Colors.grey[50],
+                              progressValue: 0.6,
+                              onTap: () {},
+                              size: context.mh * 0.033,
+                              containerheight: context.mw * 0.2,
+                              containerwidth: context.mw * 0.2,
+                              borderRadius: 18,
+                              isDubaiAdmin: true,
+                            ),
+                            GenericStatusCardWidget(
+                              title: "Pending",
+                              count: controller.model.value.pendingCount
+                                  .toString(),
+                              statusText: "",
+                              lastUpdated: DateFormat("dd MMM yyyy")
+                                  .format(DateTime.now()),
+                              icon: Icons.pending_actions,
+                              primaryColor: dashboardcolor,
+                              backgroundColor: Colors.grey[50],
+                              progressValue: 0.6,
+                              onTap: () {},
+                              size: context.mh * 0.033,
+                              containerheight: context.mw * 0.2,
+                              containerwidth: context.mw * 0.2,
+                              borderRadius: 18,
+                              isDubaiAdmin: true,
+                            ),
+                            GenericStatusCardWidget(
+                              title: "Approved",
+                              count: controller.model.value.approvedCount
+                                  .toString(),
+                              statusText: "",
+                              lastUpdated: DateFormat("dd MMM yyyy")
+                                  .format(DateTime.now()),
+                              icon: Icons.timer,
+                              primaryColor: dashboardcolor,
+                              backgroundColor: Colors.grey[50],
+                              progressValue: 0.6,
+                              onTap: () {},
+                              size: context.mh * 0.033,
+                              containerheight: context.mw * 0.2,
+                              containerwidth: context.mw * 0.2,
+                              borderRadius: 18,
+                              isDubaiAdmin: true,
+                            ),
+                            GenericStatusCardWidget(
+                              title: "Rejected",
+                              count: controller.model.value.rejectedCount
+                                  .toString(),
+                              statusText: "",
+                              lastUpdated: DateFormat("dd MMM yyyy")
+                                  .format(DateTime.now()),
+                              icon: Icons.timer,
+                              primaryColor: dashboardcolor,
+                              backgroundColor: Colors.grey[50],
+                              progressValue: 0.6,
+                              onTap: () {},
+                              size: context.mh * 0.033,
+                              containerheight: context.mw * 0.2,
+                              containerwidth: context.mw * 0.2,
+                              borderRadius: 18,
+                              isDubaiAdmin: true,
+                            ),
+                          ],
+                        );
 
-                      return BurialCardWidget(
-                        name:
-                            "${data?.user?.firstName ?? ''} ${data?.user?.lastName ?? ''}",
-                        caseId: "BUR-${DateTime.now().year}-${data?.id}",
-                        location: caseDetail?.location ?? "",
-                        date: DateFormat('yyyy-MM-dd').format(
-                          DateTime.parse(data?.createdAt ??
-                              DateTime.now().toIso8601String()),
-                        ),
-                        time: data?.burialTiming ?? "",
-                        status: data?.status ?? "",
-                        messageCount: 2,
-                        onTap: () {},
-                        onMessageTap: () {},
-                        relative: 'Ahmed Al Kaabi',
-                        documents: [
-                          "Death Certificate",
-                        ],
+                      case Status.error:
+                        return Text("Error Loading Data");
+                      default:
+                        return SizedBox();
+                    }
+                  })),
+              0.01.ph(context),
+              Obx(() {
+                switch (controller.rxRequestStatusForAllDubaiRequest.value) {
+                  case Status.loading:
+                    return SizedBox(height: 0);
+                  case Status.completed:
+                    return Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: context.mw * 0.02),
+                      child: DubaiFilterWidget(
+                        searchHint: controller.selectedIndex.value == 5
+                            ? "Search by name or Id Vehicle Number or Status"
+                            : "Search by name Cemetery or Id",
+                        onSearchChanged: (value) {
+                          if (controller.selectedIndex.value == 5) {
+                            controller.filterAmbulanceUsingSearchQurey(value);
+                          } else {
+                            controller.filterRequestUsingSearchQurey(value);
+                          }
+                        },
+                      ),
+                    );
+                  case Status.error:
+                    return Center(child: Text("Error Loading Data"));
+                  default:
+                    return SizedBox();
+                }
+              }),
+              0.01.ph(context),
+              Obx(() {
+                switch (controller.rxRequestStatusForAllDubaiRequest.value) {
+                  case Status.loading:
+                    return SizedBox(height: 0);
+                  case Status.completed:
+                    if (controller.selectedIndex.value == 5) {
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        itemCount: controller.filterAmbulanceList.value.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          var data =
+                              controller.filterAmbulanceList.value[index];
+                          return BurialCardWidget(
+                            name: "${data.driverName ?? ''}",
+                            caseId: "${data.vehicleNumber ?? ''}",
+                            location: data.currentLocation ?? "",
+                            date: DateFormat('yyyy-MM-dd').format(
+                              DateTime.parse(data.createdAt ??
+                                  DateTime.now().toIso8601String()),
+                            ),
+                            status: data.status ?? "",
+                            messageCount: 2,
+                            onTap: () {},
+                            relative: 'Ahmed Al Kaabi',
+                            isAmbulance: true,
+                            onCallTap: () {
+                              launchUrl(
+                                  Uri.parse('tel:${data.contactNumber ?? ''}'));
+                            },
+                            ongraveAssign: () {
+                              showDispatchAmbulanceDialog(
+                                context,
+                                ambulanceId: data.vehicleNumber ?? '',
+                                driverName: data.driverName ?? '',
+                                currentLocation: data.currentLocation ?? '',
+                                status: data.status ?? '',
+                                onConfirm: (assignmentType, instructions,
+                                    selectedOption) {
+                                  controller.dispatchAmbulance(
+                                      context, data.vehicleNumber ?? "");
+                                },
+                              );
+                            },
+                          );
+                        },
                       );
-                    },
-                  );
-                case Status.error:
-                  return Center(child: Text("Error Loading Data"));
-                default:
-                  return SizedBox();
-              }
-            })
-          ],
+                    }
+
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: controller.filterRequestList.value.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var data = controller.filterRequestList.value[index];
+                        var caseDetail = (data.caseDetails != null &&
+                                data.caseDetails!.isNotEmpty)
+                            ? data.caseDetails![0]
+                            : null;
+
+                        return BurialCardWidget(
+                          name:
+                              "${data.user?.firstName ?? ''} ${data.user?.lastName ?? ''}",
+                          caseId: "BUR-${DateTime.now().year}-${data.id}",
+                          location: caseDetail?.location ?? "",
+                          date: DateFormat('yyyy-MM-dd').format(
+                            DateTime.parse(data.createdAt ??
+                                DateTime.now().toIso8601String()),
+                          ),
+                          time: data.burialTiming ?? "",
+                          status: data.status ?? "",
+                          messageCount: 2,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DubaiAdminRequestDetailsView(
+                                  model: data,
+                                ),
+                              ),
+                            );
+                          },
+                          onMessageTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DubaiChatView(
+                                  userId: data.user?.id ?? -1,
+                                  deviceToken: data.user?.deviceToken ?? '',
+                                ),
+                              ),
+                            );
+                          },
+                          relative: '',
+                          documents: [
+                            if (caseDetail?.deathNotificationFile != null)
+                              "Death Notification",
+                            if (caseDetail?.hospitalCertificate != null)
+                              "Hospital Certificate",
+                            if (caseDetail?.policeClearance != null)
+                              "Police Clearance",
+                            if (caseDetail?.passportOrEmirateIdFront != null)
+                              "Emirates ID Front",
+                            if (caseDetail?.passportOrEmirateIdBack != null)
+                              "Emirates ID Back",
+                          ],
+                          ongraveAssign: () {
+                            showAssignGraveDialog(
+                              context,
+                              cemetery: data.preferredCemetery ?? '',
+                              onAssign: (graveNumber) {
+                                controller.assignGraveApi(
+                                    data.id ?? -1, graveNumber, context);
+                              },
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
+
+                  case Status.error:
+                    return Center(child: Text("Error Loading Data"));
+
+                  default:
+                    return SizedBox();
+                }
+              })
+            ],
+          ),
         ),
       ),
     );
