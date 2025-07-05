@@ -102,9 +102,8 @@ class GenericStatsContainerWidget extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: context.mh * 0.013,
+                    fontSize: context.mh * 0.012,
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
                   ),
                   textAlign: TextAlign.center,
                 ),

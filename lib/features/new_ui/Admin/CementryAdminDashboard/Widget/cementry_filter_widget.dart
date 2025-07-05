@@ -46,8 +46,8 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        horizontal: context.mw * 0.04,
-        vertical: context.mh * 0.02,
+        horizontal: context.mw * 0.02,
+        // vertical: context.mh * 0.02,
       ),
       padding: EdgeInsets.symmetric(
         horizontal: context.mw * 0.04,

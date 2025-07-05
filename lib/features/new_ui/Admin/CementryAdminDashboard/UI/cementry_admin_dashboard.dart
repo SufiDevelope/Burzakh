@@ -65,10 +65,6 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                         topBorderColor: const Color(0xFFEF4444),
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
                     Expanded(
                       child: GenericStatsContainerWidget(
                         title: "PENDING CASES",
@@ -78,6 +74,10 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                         topBorderColor: const Color(0xFFF59E0B),
                       ),
                     ),
+                  ],
+                ),
+                Row(
+                  children: [
                     Expanded(
                       child: GenericStatsContainerWidget(
                         title: "COMPLETED CASES",
@@ -87,10 +87,6 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                         topBorderColor: const Color(0xFF10B981),
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
                     Expanded(
                       child: GenericStatsContainerWidget(
                         title: "ACTIVE MORTICIANS",
@@ -103,7 +99,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                     Expanded(
                       child: GenericStatsContainerWidget(
                         title: "CEMETERY DISTRIBUTION",
-                        value: "3/2",
+                        value: "1/1",
                         icon: Icons.location_on,
                         iconBackgroundColor: const Color(0xFF6366F1),
                         topBorderColor: const Color(0xFF6366F1),
@@ -111,6 +107,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                     ),
                   ],
                 ),
+                0.01.ph(context),
                 CementryFilterWidget(
                   searchHint: "Search by name or case ID...",
                   dropdownValue: _selectedFilter,
