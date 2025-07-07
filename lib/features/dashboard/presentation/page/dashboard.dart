@@ -50,10 +50,10 @@ class _DashboardState extends State<Dashboard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(child: BottomWidget(text: 'Home', icon: AppAssets.homeIcon, isSelected:dashboardCubit.screenIndex==0,index: 0,)),
-                  Expanded(child: BottomWidget(text: 'Emirati Svcs', icon: AppAssets.emiratiSvcIcon, isSelected: dashboardCubit.screenIndex==1,index: 1)),
-                  Expanded(child: BottomWidget(text: 'Islamic Edu.', icon: AppAssets.islamicEduIcon, isSelected: dashboardCubit.screenIndex==2,index: 2)),
-                  Expanded(child: BottomWidget(text: 'Documents', icon: AppAssets.documentIcon, isSelected: dashboardCubit.screenIndex==3,index: 3)),
+                  // Expanded(child: BottomWidget(text: 'Home', icon: AppAssets.homeIcon, isSelected:dashboardCubit.screenIndex==0,index: 0,)),
+                  // Expanded(child: BottomWidget(text: 'Emirati Svcs', icon: AppAssets.emiratiSvcIcon, isSelected: dashboardCubit.screenIndex==1,index: 1)),
+                  // Expanded(child: BottomWidget(text: 'Islamic Edu.', icon: AppAssets.islamicEduIcon, isSelected: dashboardCubit.screenIndex==2,index: 2)),
+                  // Expanded(child: BottomWidget(text: 'Documents', icon: AppAssets.documentIcon, isSelected: dashboardCubit.screenIndex==3,index: 3)),
                 ],
               ),
             ),

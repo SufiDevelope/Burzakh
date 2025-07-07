@@ -1,3 +1,4 @@
+import 'package:burzakh/Model/NotificationModel/muncipality_notification_model.dart';
 import 'package:burzakh/Model/NotificationModel/notificationModel.dart';
 import 'package:burzakh/Repository/NotificationRepo/notification_repo.dart';
 import 'package:burzakh/constants/app_apis.dart';
@@ -11,5 +12,12 @@ class NotificationHttpRepo implements NotificationRepo {
     final response =
         await _api.getGetApiResponse(AppApis.notificationsApi(userId));
     return NotificationModel.fromJson(response);
+  }
+
+  @override
+  Future<MuncipalityNotifs> getMuncipalityNotification() async {
+    final response =
+        await _api.getGetApiResponse(AppApis.getMancipalityNotifications);
+    return MuncipalityNotifs.fromJson(response);
   }
 }

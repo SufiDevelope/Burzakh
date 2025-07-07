@@ -256,7 +256,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // 0.01.ph(context),
+                 0.005.ph(context),
                 Row(
                   children: [
                     GestureDetector(
@@ -304,15 +304,15 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        _showLogoutBottomSheet(context);
-                      },
-                      icon: Icon(Icons.logout, color: Colors.red.shade300),
-                    )
+                    0.02.pw(context),
+                    GestureDetector(
+                        onTap: () {
+                          _showLogoutBottomSheet(context);
+                        },
+                        child: Icon(Icons.logout, color: Colors.red.shade300)),
                   ],
                 ),
-                // 0.01.ph(context),
+                0.005.ph(context),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Container(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/app_widgets_size.dart';
@@ -31,6 +33,7 @@ class AppDashboard extends StatefulWidget {
 class _AppDashboardState extends State<AppDashboard> {
   NotificationService notificationServices = NotificationService();
   bool _dontShowAgain = false;
+  String? selectedCaseId; // Add this for case selection
 
   updateDataInOneMinutes() async {
     String response = await _homeCubit.recentActivity();
@@ -94,11 +97,6 @@ class _AppDashboardState extends State<AppDashboard> {
   Future<void> _showEmaratiPopup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool shouldShow = prefs.getBool('show_emirati_popup') ?? true;
-
-    // if (!shouldShow) {
-    //   dashboardCubit.changeScreenIndex(0);
-    //   return;
-    // }
 
     showDialog(
       context: context,
@@ -215,7 +213,7 @@ class _AppDashboardState extends State<AppDashboard> {
                             child: TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
-                                dashboardCubit.changeScreenIndex(0);
+                                // Don't change screen index on cancel
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor:
@@ -281,6 +279,261 @@ class _AppDashboardState extends State<AppDashboard> {
     );
   }
 
+  bool isWaitingForCaseSelection = false;
+
+// Document screen logic
+  Widget _getDocumentScreen() {
+    if (isWaitingForCaseSelection) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_homeCubit.caseList.isNotEmpty) {
+      if (selectedCaseId != null) {
+        return DocumnetProgressCaseDetails(
+          caseId: selectedCaseId!,
+        );
+      } else {
+        return const Center(child: Text('Please select a case'));
+      }
+    } else {
+      log("No cases available or no case selected, going to create case screen");
+      return CreatCaseScreen();
+    }
+  }
+
+// Handle Docs tab tap
+  void _handleDocumentTap() {
+    log("Document tab tapped");
+    log("Available cases: ${_homeCubit.caseList.length}");
+
+    if (_homeCubit.caseList.isNotEmpty) {
+      log("Cases available, will show selection dialog");
+      setState(() {
+        isWaitingForCaseSelection = true;
+        dashboardCubit.changeScreenIndex(1);
+      });
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showCaseSelectionDialog();
+      });
+    } else {
+      log("No cases available, going directly to create case screen");
+      setState(() {
+        selectedCaseId = null;
+        isWaitingForCaseSelection = false;
+        dashboardCubit.changeScreenIndex(1);
+      });
+    }
+  }
+
+// Dialog
+  void _showCaseSelectionDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppColor.white(),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icon
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: AppColor.primary().withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.folder_open,
+                      color: AppColor.primary(), size: 30),
+                ),
+                0.02.ph(context),
+
+                // Title
+                Text(
+                  'Select Case'.tr(),
+                  style: TextStyle(
+                    fontSize: context.mh * 0.020,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.primary(),
+                    fontFamily: 'ns',
+                  ),
+                ),
+                0.016.ph(context),
+
+                // Message
+                Text(
+                  'Choose an existing case or create a new one'.tr(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: context.mh * 0.014,
+                    color: AppColor.grey(),
+                    fontFamily: 'nr',
+                  ),
+                ),
+                0.02.ph(context),
+
+                // Case List
+                Container(
+                  width: double.maxFinite,
+                  constraints: BoxConstraints(maxHeight: context.mh * 0.3),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: _homeCubit.caseList.map((caseItem) {
+                        return Container(
+                          margin: EdgeInsets.only(bottom: 8),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(12),
+                              onTap: () {
+                                log("Case selected: ${caseItem.id}");
+                                Navigator.of(context).pop();
+                                setState(() {
+                                  selectedCaseId = caseItem.id.toString();
+                                  isWaitingForCaseSelection = false;
+                                });
+                                dashboardCubit.changeScreenIndex(1);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: AppColor.bgPrimary(),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            caseItem.name_of_deceased,
+                                            style: TextStyle(
+                                              fontSize: context.mh * 0.016,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: 'ns',
+                                            ),
+                                          ),
+                                          0.005.ph(context),
+                                          Text(
+                                            caseItem.caseStatus,
+                                            style: TextStyle(
+                                              fontSize: context.mh * 0.014,
+                                              color: AppColor.grey(),
+                                              fontFamily: 'nr',
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Icon(Icons.arrow_forward_ios,
+                                        size: 16, color: AppColor.grey()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                0.02.ph(context),
+
+                // Buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: context.mh * 0.05,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            setState(() {
+                              isWaitingForCaseSelection = false;
+                            });
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                                AppColor.greyLight1().withOpacity(0.3),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                          ),
+                          child: Text(
+                            'Cancel'.tr(),
+                            style: TextStyle(
+                              color: AppColor.grey(),
+                              fontSize: context.mh * 0.016,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'ns',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    0.02.pw(context),
+                    Expanded(
+                      child: SizedBox(
+                        height: context.mh * 0.05,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            setState(() {
+                              selectedCaseId = null;
+                              isWaitingForCaseSelection = false;
+                            });
+                            dashboardCubit.changeScreenIndex(1);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.primary(),
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                          ),
+                          child: Text(
+                            'Create New Case'.tr(),
+                            style: TextStyle(
+                              color: AppColor.white(),
+                              fontSize: context.mh * 0.016,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'ns',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -294,67 +547,86 @@ class _AppDashboardState extends State<AppDashboard> {
         return false;
       },
       child: BlocBuilder(
-          bloc: dashboardCubit,
-          builder: (context, state) {
-            return Scaffold(
-              backgroundColor: AppColor.bgPrimary(),
-              body: dashboardCubit.screenIndex == 0
-                  ? EmaratiScreen()
-                  : dashboardCubit.screenIndex == 1
-                      ? _homeCubit.caseList.isNotEmpty
-                          ? DocumnetProgressCaseDetails(
-                              caseId: _homeCubit.caseList.first.id.toString(),
-                            )
-                          : CreatCaseScreen()
-                      : dashboardCubit.screenIndex == 2
-                          ? HomeScreen1()
-                          : dashboardCubit.screenIndex == 3
-                              ? RehmaScreen()
-                              : SettingScreen(),
-              bottomNavigationBar: Container(
-                decoration: BoxDecoration(
-                    color: AppColor.white(),
-                    border: Border(
-                        top: BorderSide(
-                            width: .5, color: AppColor.greyLight1()))),
-                padding: EdgeInsets.symmetric(vertical: appBottomMargin - 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(child: _buildEmaratiBottomWidget()),
-                    Expanded(
-                        child: BottomWidget(
-                            text: 'Docs',
-                            icon: AppAssets.documentIcon,
-                            isSelected: dashboardCubit.screenIndex == 1,
-                            index: 1)),
-                    Expanded(
-                        child: BottomWidget(
+        bloc: dashboardCubit,
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: AppColor.bgPrimary(),
+            body: dashboardCubit.screenIndex == 0
+                ? EmaratiScreen()
+                : dashboardCubit.screenIndex == 1
+                    ? _getDocumentScreen()
+                    : dashboardCubit.screenIndex == 2
+                        ? HomeScreen1()
+                        : dashboardCubit.screenIndex == 3
+                            ? RehmaScreen()
+                            : SettingScreen(),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: AppColor.white(),
+                border: Border(
+                    top: BorderSide(width: .5, color: AppColor.greyLight1())),
+              ),
+              padding: EdgeInsets.symmetric(vertical: appBottomMargin - 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(child: _buildEmaratiBottomWidget()),
+
+                  Expanded(
+                    child: BottomWidget(
+                      text: 'Docs',
+                      icon: AppAssets.documentIcon,
+                      isSelected: dashboardCubit.screenIndex == 1,
+                      index: 1,
+                      onTap: () {
+                        _handleDocumentTap();
+                      },
+                    ),
+                  ),
+
+                  Expanded(
+                    child: BottomWidget(
                       text: 'Home',
                       icon: AppAssets.homeIcon,
                       isSelected: dashboardCubit.screenIndex == 2,
                       index: 2,
-                    )),
-                    Expanded(
-                        child: BottomWidget(
-                            text: 'Rehma',
-                            icon: AppAssets.islamicEduIcon,
-                            isSelected: dashboardCubit.screenIndex == 3,
-                            index: 3)),
-                    Expanded(
-                        child: BottomWidget(
-                            text: 'Settings',
-                            icon: AppAssets.personsInCircleIcon,
-                            isSelected: dashboardCubit.screenIndex == 4,
-                            index: 4)),
-                  ],
-                ),
+                      onTap: () {
+                        dashboardCubit.getIndex(2);
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: BottomWidget(
+                      text: 'Rehma',
+                      icon: AppAssets.islamicEduIcon,
+                      isSelected: dashboardCubit.screenIndex == 3,
+                      index: 3,
+                      onTap: () {
+                        dashboardCubit.getIndex(3);
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: BottomWidget(
+                      text: 'Settings',
+                      icon: AppAssets.personsInCircleIcon,
+                      isSelected: dashboardCubit.screenIndex == 4,
+                      index: 4,
+                      onTap: () {
+                        dashboardCubit.getIndex(4);
+                      },
+                    ),
+                  ),
+                ],
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 
-  var dashboardCubit = DiContainer().sl<DashboardCubit>();
-  var _homeCubit = DiContainer().sl<HomeCubit>();
+// Dependency injectors
+  final dashboardCubit = DiContainer().sl<DashboardCubit>();
+  final _homeCubit = DiContainer().sl<HomeCubit>();
 }

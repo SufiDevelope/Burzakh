@@ -48,7 +48,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                     _buildCemeteryLocationDropdown(controller, context),
                     _buildMosqueNameField(controller, context),
                     _buildDescriptionEnglishField(controller, context),
-                    // _buildDescriptionArabicField(controller, context),
+                    _buildDescriptionArabicField(controller, context),
                     _buildStatusDropdown(controller, context),
                     _buildImportantAlertCheckbox(controller, context),
                     _buildActionButtons(controller, context),

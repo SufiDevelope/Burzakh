@@ -125,7 +125,9 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                     'BUR-${DateTime.now().year}-${data.id ?? ""}',
                                 age: 'Age 75',
                                 dateOfDeath: caseDetail?.dateOfDeath ?? "N/A",
-                                burrialTime: caseDetail?.caseStatus?.toUpperCase() ?? "N/A",
+                                burrialTime:
+                                    caseDetail?.caseStatus?.toUpperCase() ??
+                                        "N/A",
                                 familyContact: data.user?.phoneNumber ?? "",
                                 preferredTime: '',
                                 index: index,
@@ -144,6 +146,19 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                 caseIdRaw: data.id ?? 0,
                                 phoneNo: data.user?.phoneNumber ?? "",
                                 policeCleared: caseDetail?.policeClearance,
+                                graveNo: data.graveNumber ?? '',
+                                burrialTiming:
+                                    data.muncipalityRecord?.burialTiming ?? '',
+                                preferedCemetery:
+                                    data.muncipalityRecord?.preferredCemetery ??
+                                        'N/A',
+                                sect:
+                                    "${data.muncipalityRecord?.sect ?? ''} , ${data.muncipalityRecord?.religion ?? ''}",
+                                specialRequest:
+                                    data.muncipalityRecord?.specialRequest ??
+                                        '',
+                                nameofdeceased:
+                                    caseDetail?.nameOfDeceased ?? '',
                                 // muncipalityCleared: caseDetail.,
                               );
                             },
@@ -153,7 +168,6 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                 .rxRequestStatusForAllMorticians.value) {
                               case Status.loading:
                                 return Text("");
-
                               case Status.completed:
                                 return Padding(
                                   padding: EdgeInsets.symmetric(

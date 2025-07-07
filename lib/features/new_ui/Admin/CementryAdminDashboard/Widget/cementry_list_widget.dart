@@ -31,6 +31,12 @@ class CementryListWidget extends StatelessWidget {
   final String phoneNo;
   final String? policeCleared;
   final String? muncipalityCleared;
+  final String graveNo;
+  final String burrialTiming;
+  final String preferedCemetery;
+  final String sect;
+  final String specialRequest;
+  final String nameofdeceased;
 
   CementryListWidget({
     super.key,
@@ -50,6 +56,12 @@ class CementryListWidget extends StatelessWidget {
     required this.phoneNo,
     this.policeCleared,
     this.muncipalityCleared,
+    required this.graveNo,
+    required this.burrialTiming,
+    required this.preferedCemetery,
+    required this.sect,
+    required this.specialRequest,
+    required this.nameofdeceased,
   });
 
   @override
@@ -57,7 +69,7 @@ class CementryListWidget extends StatelessWidget {
     final controller = Get.find<CementryController>();
     log(controller.isMorticainEdited.value.toString());
     return Container(
-      height: context.mh * 0.85,
+      height: context.mh * 1.1,
       width: context.mw,
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.02, vertical: context.mh * 0.01),
@@ -249,6 +261,11 @@ class CementryListWidget extends StatelessWidget {
                     burialTime: burrialTime,
                     familyContact: familyContact,
                     preferredTime: preferredTime,
+                    graveNo: graveNo,
+                    burrialTiming: burrialTiming,
+                    preferedCemetery: preferedCemetery,
+                    sect: sect,
+                    specialRequest: specialRequest, nameofdeceased: nameofdeceased,
                   ),
                   0.02.ph(context),
                   // Assign Mortician Section

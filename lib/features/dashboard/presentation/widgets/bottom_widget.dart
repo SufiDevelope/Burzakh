@@ -11,24 +11,25 @@ import '../../../../core/app/di_container.dart';
 import '../../../../widgets/app_text.dart';
 
 class BottomWidget extends StatelessWidget {
-  BottomWidget(
-      {super.key,
-      required this.index,
-      required this.text,
-      required this.icon,
-      required this.isSelected});
+  BottomWidget({
+    super.key,
+    required this.index,
+    required this.text,
+    required this.icon,
+    required this.isSelected,
+    required this.onTap,
+  });
   String icon;
   String text;
   bool isSelected;
   int index;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
       hoverColor: Colors.transparent,
-      onTap: () {
-        dashboardCubit.getIndex(index);
-      },
+      onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -40,7 +41,9 @@ class BottomWidget extends StatelessWidget {
                     ? Colors.transparent
                     : AppColor.primary().withOpacity(.1)),
             child: SvgPicture.asset(icon,
-                color: !isSelected ? AppColor.grey() : AppColor.primary(), height: context.mh * 0.017, width: context.mw * 0.017),
+                color: !isSelected ? AppColor.grey() : AppColor.primary(),
+                height: context.mh * 0.017,
+                width: context.mw * 0.017),
           ),
           AppText(
             text: text,

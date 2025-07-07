@@ -136,7 +136,7 @@ class VisitorPortalDialog extends StatelessWidget {
 
                   // Description
                   Text(
-                    'The Visitor Portal is currently under development. This feature will be available soon with enhanced visitor management capabilities.',
+                    'The Visitor Portal is currently under development. This feature will be available soon ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: screenHeight * 0.016,
@@ -177,35 +177,6 @@ class VisitorPortalDialog extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureItem(BuildContext context, String text) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    return Padding(
-      padding: EdgeInsets.only(bottom: screenHeight * 0.005),
-      child: Row(
-        children: [
-          Container(
-            width: screenWidth * 0.015,
-            height: screenWidth * 0.015,
-            decoration: const BoxDecoration(
-              color: Color(0xFF7C3AED),
-              shape: BoxShape.circle,
-            ),
-          ),
-          SizedBox(width: screenWidth * 0.03),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: screenHeight * 0.014,
-              color: const Color(0xFF6B7280),
-            ),
-          ),
-        ],
       ),
     );
   }

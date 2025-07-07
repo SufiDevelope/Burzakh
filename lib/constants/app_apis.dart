@@ -147,4 +147,8 @@ class AppApis {
 
   static String getAllMorticians =
       "${baseUrl}/api/burzakh-cemetery/get-morticians";
+  
+  // Mancipality Notifications
+  static String getMancipalityNotifications =
+      "${baseUrl}/api/burzakh-mancipality/get-notifications";
 }

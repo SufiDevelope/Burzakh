@@ -130,18 +130,17 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       border: InputBorder.none,
                     ),
                     items: const [
-                      DropdownMenuItem(value: "fajr", child: Text("Fajr")),
-                      DropdownMenuItem(value: "dhuhr", child: Text("Dhuhr")),
-                      DropdownMenuItem(value: "asr", child: Text("Asr")),
+                      DropdownMenuItem(value: "fajr", child: Text("Fajr (Dawn Prayer)")),
+                      DropdownMenuItem(value: "dhuhr", child: Text("Dhuhr (Noon Prayer)")),
+                      DropdownMenuItem(value: "asr", child: Text("Asr (Afternoon Prayer)")),
                       DropdownMenuItem(
-                          value: "maghrib", child: Text("Maghrib")),
-                      DropdownMenuItem(value: "isha", child: Text("Isha")),
+                          value: "maghrib", child: Text("Maghrib (Sunset Prayer)")),
+                      DropdownMenuItem(value: "isha", child: Text("Isha (Night Prayer)")),
                       DropdownMenuItem(value: "custom", child: Text("Custom Time")),
                     ],
                     onChanged: (value) {
                       setState(() {
                         selectedPrayerTime = value;
-                        // Reset custom time when switching away from custom
                         if (value != "custom") {
                           customTime = null;
                         }

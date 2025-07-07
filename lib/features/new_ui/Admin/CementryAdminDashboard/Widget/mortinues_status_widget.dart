@@ -113,7 +113,7 @@ class MorticiansStatusWidget extends StatelessWidget {
                 ),
                 SizedBox(height: context.mh * 0.005),
                 Text(
-                  'Specialization: Male • ${mortician.caseName ?? "No Case"}',
+                  'Specialization: Male • ${mortician.caseName == null || mortician.caseName == '' ? 'No Case' : mortician.caseName}',
                   style: TextStyle(
                     color: Colors.grey[500],
                     fontSize: context.mh * 0.014,

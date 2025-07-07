@@ -58,6 +58,7 @@ class CementryCassesData {
   User? user;
   List<CaseDetails>? caseDetails;
   Mortician? mortician;
+  MuncipalityRecord? muncipalityRecord;
 
   CementryCassesData(
       {this.id,
@@ -90,6 +91,9 @@ class CementryCassesData {
     mortician = json['mortician'] != null
         ? new Mortician.fromJson(json['mortician'])
         : null;
+    muncipalityRecord = json['mancipality_record'] != null
+        ? MuncipalityRecord.fromJson(json['mancipality_record'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +114,9 @@ class CementryCassesData {
     }
     if (this.mortician != null) {
       data['mortician'] = this.mortician!.toJson();
+    }
+    if (this.muncipalityRecord != null) {
+      data['mancipality_record'] = this.muncipalityRecord!.toJson();
     }
     return data;
   }
@@ -338,6 +345,72 @@ class Mortician {
     data['status'] = status;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class MuncipalityRecord {
+  int? id;
+  String? burialPlace;
+  String? burialTiming;
+  String? preferredCemetery;
+  String? userId;
+  String? caseName;
+  String? graveNumber;
+  String? sect;
+  String? religion;
+  String? specialRequest;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  MuncipalityRecord({
+    this.id,
+    this.burialPlace,
+    this.burialTiming,
+    this.preferredCemetery,
+    this.userId,
+    this.caseName,
+    this.graveNumber,
+    this.sect,
+    this.religion,
+    this.specialRequest,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  MuncipalityRecord.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    burialPlace = json['burial_place'];
+    burialTiming = json['burial_timing'];
+    preferredCemetery = json['preferred_cemetery'];
+    userId = json['user_id'];
+    caseName = json['case_name'];
+    graveNumber = json['grave_number'];
+    sect = json['sect'];
+    religion = json['religion'];
+    specialRequest = json['special_request'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = this.id;
+    data['burial_place'] = this.burialPlace;
+    data['burial_timing'] = this.burialTiming;
+    data['preferred_cemetery'] = this.preferredCemetery;
+    data['user_id'] = this.userId;
+    data['case_name'] = this.caseName;
+    data['grave_number'] = this.graveNumber;
+    data['sect'] = this.sect;
+    data['religion'] = this.religion;
+    data['special_request'] = this.specialRequest;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

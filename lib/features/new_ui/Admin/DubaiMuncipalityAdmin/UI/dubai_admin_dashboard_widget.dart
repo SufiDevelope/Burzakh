@@ -6,6 +6,7 @@ import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_request_details_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_chat_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/notification_screen_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/ambulance_diaply_count_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/assign_grave_dialog_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dispatch_ambulance_dialog.dart';
@@ -81,7 +82,14 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                 onLanguagePressed: () {},
                 onMessagesPressed: () {},
                 onReportsPressed: () {},
-                onNotificationPressed: () {},
+                onNotificationPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MuncipalityNotificationScreen(),
+                    ),
+                  );
+                },
                 onAmbulancePressed: () {
                   controller.selectedIndex.value = 5;
                 },

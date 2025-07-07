@@ -6,15 +6,17 @@ class DubaiMuncipalityRequestModel {
   int? todayBurials;
   int? cancelled;
   List<DubaiMuncipalityReqestData>? allRequests;
+ 
 
-  DubaiMuncipalityRequestModel(
-      {this.message,
-      this.pendingCount,
-      this.approvedCount,
-      this.rejectedCount,
-      this.todayBurials,
-      this.cancelled,
-      this.allRequests});
+  DubaiMuncipalityRequestModel({
+    this.message,
+    this.pendingCount,
+    this.approvedCount,
+    this.rejectedCount,
+    this.todayBurials,
+    this.cancelled,
+    this.allRequests,
+  });
 
   DubaiMuncipalityRequestModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];

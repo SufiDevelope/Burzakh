@@ -363,54 +363,57 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       0.02.pw(context),
 
                       // Notification Icon Container (with red dot)
-                      Container(
-                        width: context.mw * 0.12,
-                        height: context.mw * 0.12,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
-                            width: 2,
-                          ),
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xff596e84),
-                              Color(0xff617890),
-                              // Color(0xff2d4159),
+                      GestureDetector(
+                        onTap: onNotificationPressed,
+                        child: Container(
+                          width: context.mw * 0.12,
+                          height: context.mw * 0.12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.2),
+                              width: 2,
+                            ),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xff596e84),
+                                Color(0xff617890),
+                                // Color(0xff2d4159),
+                              ],
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              ),
                             ],
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          children: [
-                            Center(
-                              child: Icon(
-                                Icons.notifications,
-                                color: Colors.white,
-                                size: context.mw * 0.05,
-                              ),
-                            ),
-                            Positioned(
-                              top: 6,
-                              right: 6,
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: const BoxDecoration(
-                                  color: Colors.red,
-                                  shape: BoxShape.circle,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Icon(
+                                  Icons.notifications,
+                                  color: Colors.white,
+                                  size: context.mw * 0.05,
                                 ),
                               ),
-                            ),
-                          ],
+                              Positioned(
+                                top: 6,
+                                right: 6,
+                                child: Container(
+                                  width: 8,
+                                  height: 8,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
