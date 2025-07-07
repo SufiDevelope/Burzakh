@@ -1,14 +1,17 @@
 class AmbulancesModel {
   String? message;
+  Counts? counts;
   List<Ambulances>? ambulances;
 
-  AmbulancesModel({this.message, this.ambulances});
+  AmbulancesModel({this.message, this.counts, this.ambulances});
 
   AmbulancesModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    if (json['Ambulances'] != null) {
+    counts =
+        json['counts'] != null ? new Counts.fromJson(json['counts']) : null;
+    if (json['ambulances'] != null) {
       ambulances = <Ambulances>[];
-      json['Ambulances'].forEach((v) {
+      json['ambulances'].forEach((v) {
         ambulances!.add(new Ambulances.fromJson(v));
       });
     }
@@ -17,9 +20,34 @@ class AmbulancesModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
-    if (this.ambulances != null) {
-      data['Ambulances'] = this.ambulances!.map((v) => v.toJson()).toList();
+    if (this.counts != null) {
+      data['counts'] = this.counts!.toJson();
     }
+    if (this.ambulances != null) {
+      data['ambulances'] = this.ambulances!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Counts {
+  int? activeCount;
+  int? dispatchedCount;
+  int? maintenanceCount;
+
+  Counts({this.activeCount, this.dispatchedCount, this.maintenanceCount});
+
+  Counts.fromJson(Map<String, dynamic> json) {
+    activeCount = json['Active_count'];
+    dispatchedCount = json['Dispatched_count'];
+    maintenanceCount = json['Maintenance_count'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['Active_count'] = this.activeCount;
+    data['Dispatched_count'] = this.dispatchedCount;
+    data['Maintenance_count'] = this.maintenanceCount;
     return data;
   }
 }

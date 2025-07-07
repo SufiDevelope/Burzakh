@@ -45,7 +45,7 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
           ),
           0.03.ph(context),
           _buildInfoSection(
-            title: 'BURIAL TIME',
+            title: 'Case Status',
             content: burialTime,
             context: context,
           ),
@@ -55,12 +55,12 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
             content: familyContact,
             context: context,
           ),
-          0.03.ph(context),
-          _buildInfoSection(
-            title: 'PREFERRED TIME',
-            content: preferredTime,
-            context: context,
-          ),
+          // 0.03.ph(context),
+          // _buildInfoSection(
+          //   title: '',
+          //   content: preferredTime,
+          //   context: context,
+          // ),
         ],
       ),
     );

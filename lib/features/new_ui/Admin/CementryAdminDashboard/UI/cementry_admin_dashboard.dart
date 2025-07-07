@@ -1,5 +1,8 @@
 import 'dart:developer';
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/app/di_container.dart';
+import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
+import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/cementry_dashboard_header_view.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/cementry_filter_widget.dart';
@@ -12,7 +15,8 @@ import 'package:get/get.dart';
 import '../../../../../data/Response/status.dart';
 
 class CementryAdminDashboard extends StatefulWidget {
-  const CementryAdminDashboard({super.key});
+  final String name;
+  const CementryAdminDashboard({super.key, required this.name});
 
   @override
   State<CementryAdminDashboard> createState() => _CementryAdminDashboardState();
@@ -29,7 +33,20 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
         preferredSize: Size.fromHeight(context.mh * 0.18),
         child: Padding(
           padding: EdgeInsets.only(top: context.mh * 0.03),
-          child: const CementryDashboardHeaderWidget(),
+          child: CementryDashboardHeaderWidget(
+            initails: widget.name[0],
+            adminname: widget.name,
+            onLogoutPressed: () async {
+              await documentCubit.logOut();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BurzakhEnhancedLogin(),
+                ),
+                (route) => false,
+              );
+            },
+          ),
         ),
       ),
       body: Container(
@@ -108,7 +125,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                     'BUR-${DateTime.now().year}-${data.id ?? ""}',
                                 age: 'Age 75',
                                 dateOfDeath: caseDetail?.dateOfDeath ?? "N/A",
-                                burrialTime: "",
+                                burrialTime: caseDetail?.caseStatus?.toUpperCase() ?? "N/A",
                                 familyContact: data.user?.phoneNumber ?? "",
                                 preferredTime: '',
                                 index: index,
@@ -124,7 +141,10 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                 status: data.status ?? "",
                                 assignedName: data.mortician?.name ?? "",
                                 morticianId: data.mortician?.id ?? 0,
-                                caseIdRaw: data.id ?? 0, phoneNo: data.user?.phoneNumber ?? "",
+                                caseIdRaw: data.id ?? 0,
+                                phoneNo: data.user?.phoneNumber ?? "",
+                                policeCleared: caseDetail?.policeClearance,
+                                // muncipalityCleared: caseDetail.,
                               );
                             },
                           ),
@@ -165,3 +185,5 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
     );
   }
 }
+
+var documentCubit = DiContainer().sl<HomeCubit>();

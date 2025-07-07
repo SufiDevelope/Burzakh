@@ -8,21 +8,19 @@ import 'package:burzakh/core/extensions/show_message.dart';
 import 'package:burzakh/features/authentication/presentation/controller/state.dart';
 import 'package:burzakh/features/authentication/presentation/model/signup_model.dart';
 import 'package:burzakh/features/authentication/presentation/model/user_model.dart';
-import 'package:burzakh/features/authentication/presentation/page/login.dart';
 import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
 import 'package:burzakh/features/authentication/presentation/page/reset_password.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_dashboard_widget.dart';
-import 'package:burzakh/features/notification/presentation/page/notification_screen.dart';
 import 'package:flutter/material.dart';
 import '../../domain/usecase/usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../page/forgot_otp_screen.dart';
-import '../page/login_01.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthenticationUseCase _useCaseName;
@@ -168,6 +166,13 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               context,
               MaterialPageRoute(
                   builder: (context) => DubaiAdminDashboardView(
+                        name: "${userModel?.firstName}${userModel?.lastName}",
+                      )));
+        } else if (userModel?.admin_type == "cemetery") {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CementryAdminDashboard(
                         name: "${userModel?.firstName}${userModel?.lastName}",
                       )));
         } else {
@@ -334,6 +339,15 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               builder: (context) => DubaiAdminDashboardView(
                     name: "${userModel?.firstName}${userModel?.lastName}",
                   )),
+        );
+      } else if (model.admin_type == "cemetery") {
+        Navigator.push(
+          navigatorKey.currentContext!,
+          MaterialPageRoute(
+            builder: (context) => CementryAdminDashboard(
+              name: "${userModel?.firstName}${userModel?.lastName}",
+            ),
+          ),
         );
       } else {
         navigatorKey.currentState?.pushNamedAndRemoveUntil(

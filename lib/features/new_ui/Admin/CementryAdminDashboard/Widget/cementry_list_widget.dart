@@ -7,6 +7,7 @@ import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/crea
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/currently_assigned_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/custom_gradient_color.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/profile_display_info_container.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/visitor_alert_portal_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,6 +29,8 @@ class CementryListWidget extends StatelessWidget {
   final morticianId;
   final caseIdRaw;
   final String phoneNo;
+  final String? policeCleared;
+  final String? muncipalityCleared;
 
   CementryListWidget({
     super.key,
@@ -45,6 +48,8 @@ class CementryListWidget extends StatelessWidget {
     required this.morticianId,
     required this.caseIdRaw,
     required this.phoneNo,
+    this.policeCleared,
+    this.muncipalityCleared,
   });
 
   @override
@@ -144,71 +149,73 @@ class CementryListWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.mw * 0.02),
-                            height: context.mh * 0.03,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.green.withOpacity(0.43),
-                                Colors.green.withOpacity(0.67),
-                              ]),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: context.mh * 0.02,
-                                ),
-                                0.01.pw(context),
-                                Center(
-                                  child: Text(
-                                    "Police Cleared".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: context.mh * 0.013,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                          if (policeCleared != null)
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.mw * 0.02),
+                              height: context.mh * 0.03,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Colors.green.withOpacity(0.43),
+                                  Colors.green.withOpacity(0.67),
+                                ]),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: context.mh * 0.02,
+                                  ),
+                                  0.01.pw(context),
+                                  Center(
+                                    child: Text(
+                                      "Police Cleared".toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: context.mh * 0.013,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
                           0.01.ph(context),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: context.mw * 0.02),
-                            height: context.mh * 0.03,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.blueAccent.withOpacity(0.43),
-                                Colors.blueAccent.withOpacity(0.67),
-                              ]),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.check,
-                                  color: Colors.white,
-                                  size: context.mh * 0.02,
-                                ),
-                                0.01.pw(context),
-                                Center(
-                                  child: Text(
-                                    "Muncipality Cleared".toUpperCase(),
-                                    style: TextStyle(
-                                      fontSize: context.mh * 0.013,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
+                          if (muncipalityCleared != null)
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.mw * 0.02),
+                              height: context.mh * 0.03,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Colors.blueAccent.withOpacity(0.43),
+                                  Colors.blueAccent.withOpacity(0.67),
+                                ]),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                    size: context.mh * 0.02,
+                                  ),
+                                  0.01.pw(context),
+                                  Center(
+                                    child: Text(
+                                      "Muncipality Cleared".toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: context.mh * 0.013,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
                           0.01.ph(context),
                           Container(
                             padding: EdgeInsets.symmetric(
@@ -410,7 +417,6 @@ class CementryListWidget extends StatelessWidget {
                         primaryColor: Colors.blue,
                         icon: Icons.call,
                         onTap: () {
-                          // launch Url
                           launchUrl(Uri.parse("tel:$phoneNo"));
                         },
                       ),
@@ -419,7 +425,9 @@ class CementryListWidget extends StatelessWidget {
                         text: "Send to Portal",
                         primaryColor: Colors.black87,
                         icon: Icons.system_update_tv_outlined,
-                        onTap: () {},
+                        onTap: () {
+                          showVisitorPortalDialog(context);
+                        },
                       ),
                     ],
                   ),

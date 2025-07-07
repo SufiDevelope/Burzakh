@@ -23,7 +23,13 @@ class StatusBarWidgetDubai extends StatelessWidget {
           vertical: context.mh * 0.015,
         ),
         decoration: const BoxDecoration(
-          color: dashboardcolor,
+          gradient: LinearGradient(
+            colors: [
+              Color(0xff596e84),
+              Color(0xff617890),
+              Color(0xff2d4159),
+            ],
+          ),
         ),
         child: Row(
           children: List.generate(tabs.length, (index) {

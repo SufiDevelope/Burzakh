@@ -6,14 +6,15 @@ import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_request_details_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_chat_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/ambulance_diaply_count_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/assign_grave_dialog_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dispatch_ambulance_dialog.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_dashboard_header_widget.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_filter_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/dubai_request_card_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/status_card_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Widget/status_tab_widget_dubai.dart';
-import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/status_card_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,6 +82,9 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                 onMessagesPressed: () {},
                 onReportsPressed: () {},
                 onNotificationPressed: () {},
+                onAmbulancePressed: () {
+                  controller.selectedIndex.value = 5;
+                },
               ),
               StatusBarWidgetDubai(
                 tabs: <TabItem>[
@@ -112,100 +116,23 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
               ),
               0.02.ph(context),
               SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.01,
-                    vertical: context.mh * 0.01,
-                  ),
-                  child: Obx(() {
-                    switch (
-                        controller.rxRequestStatusForAllDubaiRequest.value) {
-                      case Status.loading:
-                        return Center(child: CircularProgressIndicator());
-                      case Status.completed:
-                        return Row(
-                          children: [
-                            GenericStatusCardWidget(
-                              title: "Today's Burials",
-                              count: controller.model.value.todayBurials
-                                  .toString(),
-                              statusText: "",
-                              lastUpdated: DateFormat("dd MMM yyyy")
-                                  .format(DateTime.now()),
-                              icon: Icons.calendar_month,
-                              primaryColor: dashboardcolor,
-                              backgroundColor: Colors.grey[50],
-                              progressValue: 0.6,
-                              onTap: () {},
-                              size: context.mh * 0.033,
-                              containerheight: context.mw * 0.2,
-                              containerwidth: context.mw * 0.2,
-                              borderRadius: 18,
-                              isDubaiAdmin: true,
-                            ),
-                            GenericStatusCardWidget(
-                              title: "Pending",
-                              count: controller.model.value.pendingCount
-                                  .toString(),
-                              statusText: "",
-                              lastUpdated: DateFormat("dd MMM yyyy")
-                                  .format(DateTime.now()),
-                              icon: Icons.pending_actions,
-                              primaryColor: dashboardcolor,
-                              backgroundColor: Colors.grey[50],
-                              progressValue: 0.6,
-                              onTap: () {},
-                              size: context.mh * 0.033,
-                              containerheight: context.mw * 0.2,
-                              containerwidth: context.mw * 0.2,
-                              borderRadius: 18,
-                              isDubaiAdmin: true,
-                            ),
-                            GenericStatusCardWidget(
-                              title: "Approved",
-                              count: controller.model.value.approvedCount
-                                  .toString(),
-                              statusText: "",
-                              lastUpdated: DateFormat("dd MMM yyyy")
-                                  .format(DateTime.now()),
-                              icon: Icons.check_circle,
-                              primaryColor: dashboardcolor,
-                              backgroundColor: Colors.grey[50],
-                              progressValue: 0.6,
-                              onTap: () {},
-                              size: context.mh * 0.033,
-                              containerheight: context.mw * 0.2,
-                              containerwidth: context.mw * 0.2,
-                              borderRadius: 18,
-                              isDubaiAdmin: true,
-                            ),
-                            GenericStatusCardWidget(
-                              title: "Rejected",
-                              count: controller.model.value.rejectedCount
-                                  .toString(),
-                              statusText: "",
-                              lastUpdated: DateFormat("dd MMM yyyy")
-                                  .format(DateTime.now()),
-                              icon: Icons.cancel,
-                              primaryColor: dashboardcolor,
-                              backgroundColor: Colors.grey[50],
-                              progressValue: 0.6,
-                              onTap: () {},
-                              size: context.mh * 0.033,
-                              containerheight: context.mw * 0.2,
-                              containerwidth: context.mw * 0.2,
-                              borderRadius: 18,
-                              isDubaiAdmin: true,
-                            ),
-                          ],
-                        );
-
-                      case Status.error:
-                        return Text("Error Loading Data");
-                      default:
-                        return SizedBox();
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.mw * 0.01,
+                  vertical: context.mh * 0.01,
+                ),
+                child: Obx(
+                  () {
+                    if (controller.selectedIndex.value == 5) {
+                      return AmbulanceStatusCardWidget(
+                        controller: controller,
+                      );
+                    } else {
+                      return DubaiStatusCardWidget(controller: controller);
                     }
-                  })),
+                  },
+                ),
+              ),
               0.01.ph(context),
               Obx(() {
                 switch (controller.rxRequestStatusForAllDubaiRequest.value) {

@@ -7,6 +7,7 @@ import 'package:burzakh/features/dashboard/presentation/controller/cubit.dart';
 import 'package:burzakh/features/dashboard/presentation/widgets/bottom_widget.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
+import 'package:burzakh/features/new_ui/home/ui/documnet_progress_case_details.dart';
 import 'package:burzakh/features/new_ui/rehma/ui/rehma_screen.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -300,7 +301,11 @@ class _AppDashboardState extends State<AppDashboard> {
               body: dashboardCubit.screenIndex == 0
                   ? EmaratiScreen()
                   : dashboardCubit.screenIndex == 1
-                      ? CreatCaseScreen()
+                      ? _homeCubit.caseList.isNotEmpty
+                          ? DocumnetProgressCaseDetails(
+                              caseId: _homeCubit.caseList.first.id.toString(),
+                            )
+                          : CreatCaseScreen()
                       : dashboardCubit.screenIndex == 2
                           ? HomeScreen1()
                           : dashboardCubit.screenIndex == 3

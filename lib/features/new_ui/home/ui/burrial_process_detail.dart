@@ -1,8 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
-import 'package:burzakh/features/new_ui/home/ui/documnet_progress_case_details.dart';
-import 'package:burzakh/features/new_ui/home/widgets/burrial_success_dialog.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,16 +24,42 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
 
   // Data variables
   String? selectedPrayerTime;
-  String? selectedNationality = "uae"; // Default value
-  String? selectedReligion = "islam"; // Default value
-  String? selectedSect = "sunni"; // Default value
+  String? selectedNationality = "uae"; 
+  String? selectedReligion = "islam";
+  String? selectedSect = "sunni";
   String specialRequests = "";
   String preferedCemeteryRequests = "";
+  TimeOfDay? customTime;
 
   final TextEditingController specialRequestsController =
       TextEditingController();
   final TextEditingController preferedCemeteryController =
       TextEditingController();
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: customTime ?? TimeOfDay.now(),
+    );
+    if (picked != null && picked != customTime) {
+      setState(() {
+        customTime = picked;
+      });
+    }
+  }
+
+  String _formatTime(TimeOfDay time) {
+    final hour = time.hour.toString().padLeft(2, '0');
+    final minute = time.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
+  }
+
+  String _getFinalPrayerTime() {
+    if (selectedPrayerTime == "custom" && customTime != null) {
+      return _formatTime(customTime!);
+    }
+    return selectedPrayerTime ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,14 +136,69 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       DropdownMenuItem(
                           value: "maghrib", child: Text("Maghrib")),
                       DropdownMenuItem(value: "isha", child: Text("Isha")),
+                      DropdownMenuItem(value: "custom", child: Text("Custom Time")),
                     ],
                     onChanged: (value) {
                       setState(() {
                         selectedPrayerTime = value;
+                        // Reset custom time when switching away from custom
+                        if (value != "custom") {
+                          customTime = null;
+                        }
                       });
                     },
                   ),
                 ),
+                
+                // Custom Time Field - Only show when "Custom Time" is selected
+                if (selectedPrayerTime == "custom") ...[
+                  const SizedBox(height: 16),
+                  AppText(
+                    text: "Select Custom Time *",
+                    fontSize: 14,
+                    color: AppColor.black(),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  const SizedBox(height: 8),
+                  GestureDetector(
+                    onTap: () => _selectTime(context),
+                    child: Container(
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: AppColor.greyLight1().withOpacity(0.23),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 16),
+                          Icon(
+                            Icons.access_time,
+                            color: AppColor.grey(),
+                            size: 20,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: AppText(
+                              text: customTime != null 
+                                  ? _formatTime(customTime!)
+                                  : "Select time",
+                              fontSize: 14,
+                              color: customTime != null 
+                                  ? AppColor.black()
+                                  : AppColor.grey(),
+                            ),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColor.grey(),
+                          ),
+                          const SizedBox(width: 16),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+                
                 const SizedBox(height: 16),
 
                 // Nationality
@@ -313,11 +392,20 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       return;
                     }
 
+                    // Validate custom time if selected
+                    if (selectedPrayerTime == "custom" && customTime == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text("Please select a custom time")),
+                      );
+                      return;
+                    }
+
                     controller.submitRequestToMunicipality(
                       "UAE",
                       widget.userid,
                       widget.caseName,
-                      selectedPrayerTime ?? "",
+                      _getFinalPrayerTime(),
                       selectedSect ?? "",
                       selectedReligion ?? "",
                       specialRequests.isEmpty
@@ -333,6 +421,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     selectedSect = null;
                     selectedReligion = null;
                     specialRequests = "";
+                    customTime = null;
                     specialRequestsController.clear();
                   },
                   child: Obx(
@@ -372,6 +461,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
   @override
   void dispose() {
     specialRequestsController.dispose();
+    preferedCemeteryController.dispose();
     super.dispose();
   }
 }
