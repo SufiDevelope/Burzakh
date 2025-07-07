@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/create_visitor_alert_dialog.dart';
 import 'package:flutter/material.dart';
 
 class CementryDashboardHeaderWidget extends StatelessWidget {
@@ -60,43 +61,51 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.015,
-                    vertical: context.mh * 0.008,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF10B981),
-                    borderRadius: BorderRadius.circular(context.mw * 0.02),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF10B981).withOpacity(0.3),
-                        blurRadius: context.mw * 0.01,
-                        offset: Offset(0, context.mh * 0.003),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.chat_bubble_outline,
-                        size: context.mh * 0.016,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: context.mw * 0.008),
-                      Flexible(
-                        child: Text(
-                          'Create Visitor Alert',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: context.mh * 0.012,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          overflow: TextOverflow.ellipsis,
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const CreateVisitorAlertDialog(),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.mw * 0.015,
+                      vertical: context.mh * 0.008,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF10B981),
+                      borderRadius: BorderRadius.circular(context.mw * 0.02),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF10B981).withOpacity(0.3),
+                          blurRadius: context.mw * 0.01,
+                          offset: Offset(0, context.mh * 0.003),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.chat_bubble_outline,
+                          size: context.mh * 0.016,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: context.mw * 0.008),
+                        Flexible(
+                          child: Text(
+                            'Create Visitor Alert',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: context.mh * 0.012,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 0.01.ph(context),

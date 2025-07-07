@@ -127,4 +127,24 @@ class AppApis {
   // Dispatch Ambulance
   static String dispatchAmbulance =
       "${baseUrl}/api/burzakh-mancipality/dispatch-ambulance";
+
+  // Cementry Casses Api
+  static String cemnetryCassesApi =
+      "${baseUrl}/api/burzakh-cemetery/get-requests";
+  // get Active Mortcians
+  static String getActiveMorticians =
+      "${baseUrl}/api/burzakh-cemetery/get-active-morticians";
+  // Assign Mortician
+  static String assignMortician(caseId) =>
+      "${baseUrl}/api/burzakh-cemetery/assign-mortician/$caseId";
+  // Create Visitor Alert
+  static String createVisitorAlert =
+      "${baseUrl}/api/burzakh-cemetery/create-visitor-alert";
+
+  // Remove Mortician
+  static String removeMortician(morticianId) =>
+      "${baseUrl}/api/burzakh-cemetery/remove-mortician/$morticianId";
+
+  static String getAllMorticians =
+      "${baseUrl}/api/burzakh-cemetery/get-morticians";
 }

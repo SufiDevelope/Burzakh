@@ -1,10 +1,15 @@
 import 'dart:developer';
-
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/cementry_dashboard_header_view.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/cementry_filter_widget.dart';
-import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/status_card_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/cementry_list_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/mortinues_status_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/status_count_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../../data/Response/status.dart';
 
 class CementryAdminDashboard extends StatefulWidget {
   const CementryAdminDashboard({super.key});
@@ -15,7 +20,7 @@ class CementryAdminDashboard extends StatefulWidget {
 
 class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
   final TextEditingController _searchController = TextEditingController();
-  String _selectedFilter = "All Cases";
+  final controller = Get.put(CementryController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,96 +46,119 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
             ],
           ),
         ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "TOTAL CASES",
-                        value: "7",
-                        icon: Icons.assessment,
-                        iconBackgroundColor: const Color(0xFF3B82F6),
-                        topBorderColor: const Color(0xFF3B82F6),
-                      ),
-                    ),
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "TODAY'S BURIALS",
-                        value: "5",
-                        icon: Icons.today,
-                        iconBackgroundColor: const Color(0xFFEF4444),
-                        topBorderColor: const Color(0xFFEF4444),
-                      ),
-                    ),
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "PENDING CASES",
-                        value: "2",
-                        icon: Icons.pending,
-                        iconBackgroundColor: const Color(0xFFF59E0B),
-                        topBorderColor: const Color(0xFFF59E0B),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "COMPLETED CASES",
-                        value: "2",
-                        icon: Icons.check_circle,
-                        iconBackgroundColor: const Color(0xFF10B981),
-                        topBorderColor: const Color(0xFF10B981),
-                      ),
-                    ),
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "ACTIVE MORTICIANS",
-                        value: "3",
-                        icon: Icons.person,
-                        iconBackgroundColor: const Color(0xFF8B5CF6),
-                        topBorderColor: const Color(0xFF8B5CF6),
-                      ),
-                    ),
-                    Expanded(
-                      child: GenericStatsContainerWidget(
-                        title: "CEMETERY DISTRIBUTION",
-                        value: "1/1",
-                        icon: Icons.location_on,
-                        iconBackgroundColor: const Color(0xFF6366F1),
-                        topBorderColor: const Color(0xFF6366F1),
-                      ),
-                    ),
-                  ],
-                ),
-                0.01.ph(context),
-                CementryFilterWidget(
-                  searchHint: "Search by name or case ID...",
-                  dropdownValue: _selectedFilter,
-                  dropdownItems: [
-                    "All Cases",
-                    "Active Cases",
-                    "Closed Cases",
-                    "Pending Cases",
-                    "Urgent Cases",
-                  ],
-                  searchController: _searchController,
-                  onSearchChanged: (value) {
-                    log("Search changed: $value");
-                  },
-                  onDropdownChanged: (value) {
-                    setState(() {
-                      _selectedFilter = value;
-                    });
-                    log("Dropdown changed: $value");
-                  },
-                ),
-              ],
-            ),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            controller.getAllCementryRequest();
+            controller.getActiveMorticians();
+            controller.resetActiveMorticians();
+            controller.getAllMorticians();
+          },
+          child: SafeArea(
+            child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: Obx(() {
+                  switch (
+                      controller.rxRequestStatusForAllCementryRequest.value) {
+                    case Status.loading:
+                      return const Center(child: CircularProgressIndicator());
+                    case Status.completed:
+                      return Column(
+                        children: [
+                          StatusCountWidget(controller: controller),
+                          0.01.ph(context),
+                          Obx(
+                            () {
+                              return CementryFilterWidget(
+                                searchHint: "Search by name or case ID...",
+                                dropdownValue:
+                                    controller.selectedFilterText.value,
+                                dropdownItems: [
+                                  "All",
+                                  "Pending",
+                                  "Assigned",
+                                ],
+                                searchController: _searchController,
+                                onSearchChanged: (value) {
+                                  controller
+                                      .filterRequestUsingSearchQurey(value);
+                                },
+                                onDropdownChanged: (value) {
+                                  controller.setSelectedFilterText(value);
+                                  log("Dropdown changed: $value");
+                                },
+                              );
+                            },
+                          ),
+                          0.02.ph(context),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.filterCementryCasses.length,
+                            itemBuilder: (context, index) {
+                              var data = controller.filterCementryCasses[index];
+                              var caseDetail = (data.caseDetails != null &&
+                                      data.caseDetails?.isNotEmpty == true)
+                                  ? data.caseDetails![0]
+                                  : null;
+                              log("Selected mortician: ${controller.selectedMorticians[index]?.caseName}");
+                              return CementryListWidget(
+                                name:
+                                    "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
+                                caseid:
+                                    'BUR-${DateTime.now().year}-${data.id ?? ""}',
+                                age: 'Age 75',
+                                dateOfDeath: caseDetail?.dateOfDeath ?? "N/A",
+                                burrialTime: "",
+                                familyContact: data.user?.phoneNumber ?? "",
+                                preferredTime: '',
+                                index: index,
+                                onMorticianSelected: (mortician) {
+                                  controller.setSelectedMorticianForIndex(
+                                    index,
+                                    mortician,
+                                    data.id ?? 0,
+                                    data.caseName ?? "",
+                                    context,
+                                  );
+                                },
+                                status: data.status ?? "",
+                                assignedName: data.mortician?.name ?? "",
+                                morticianId: data.mortician?.id ?? 0,
+                                caseIdRaw: data.id ?? 0, phoneNo: data.user?.phoneNumber ?? "",
+                              );
+                            },
+                          ),
+                          Obx(() {
+                            switch (controller
+                                .rxRequestStatusForAllMorticians.value) {
+                              case Status.loading:
+                                return Text("");
+
+                              case Status.completed:
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: context.mw * 0.02,
+                                  ),
+                                  child: MorticiansStatusWidget(
+                                    morticians:
+                                        controller.morticiansModel.value,
+                                  ),
+                                );
+                              case Status.error:
+                                return Text("Error");
+                              default:
+                                return SizedBox();
+                            }
+                          }),
+                          0.01.ph(context),
+                        ],
+                      );
+                    case Status.error:
+                      return Center(child: Text("Error"));
+                    default:
+                      return SizedBox.shrink();
+                  }
+                })),
           ),
         ),
       ),

@@ -284,9 +284,10 @@ class DubaiController extends GetxController {
     super.onClose();
   }
 
+
+
   void updateAssignmentType(String type) {
     selectedAssignmentType.value = type;
-    // Clear selections when switching types
     selectedBurialCase.value = '';
     selectedMosque.value = '';
   }
