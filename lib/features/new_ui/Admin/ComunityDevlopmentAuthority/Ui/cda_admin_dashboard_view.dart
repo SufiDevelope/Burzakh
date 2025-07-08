@@ -194,7 +194,8 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                         return FilterListCardWidget(
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                          caseId:
+                              "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
                           location: data.locationOfTent ?? "",
                           signCount: "",
                           messageCount: 2,
@@ -210,12 +211,14 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                           },
                           onMessageTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CdaChatView(
-                                    userId: data.user?.id ?? -1, deviceToken: data.user?.deviceToken ?? "",
-                                  ),
-                                ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CdaChatView(
+                                  userId: data.user?.id ?? -1,
+                                  deviceToken: data.user?.deviceToken ?? "",
+                                ),
+                              ),
+                            );
                           },
                           primaryColor: Color(0xFF1e40af), rta: 'cda',
                           // rta: "cda",

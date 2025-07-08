@@ -274,7 +274,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                           onPressed: controller.whatsappPublishLoading.value
                               ? null
                               : () {
-                                  controller.sendWhatsappAnnouncement();
+                                  controller.sendWhatsappAnnouncement(context);
                                 },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green.shade600,

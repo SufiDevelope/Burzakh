@@ -3,6 +3,7 @@ import 'package:burzakh/core/theme/theme.dart';
 import 'package:burzakh/features/admin_dashboard/presentation/page/admin_dashboard.dart';
 import 'package:burzakh/features/authentication/presentation/page/sign_up.dart';
 import 'package:burzakh/features/dashboard/presentation/page/dashboard.dart';
+import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/UI/ambulance_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
@@ -71,24 +72,25 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         themeMode: pro.themeMode.value,
         theme: ThemeChange.lightTheme(),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        routes: {
-          'appDashBoard': (context) => AppDashboard(),
-          '/': (context) => SplashScreen(),
-          'onboarding1': (context) => Onboarding1(),
-          'onboarding01': (context) => Onboarding01(),
-          'onboarding001': (context) => Onboarding001(),
-          'SignUpScreen': (context) => SignUpScreen(),
-          'dashboard': (context) => Dashboard(),
-          'adminDashboard': (context) => AdminDashboard(),
-          'translation': (context) => TranslationScreen(),
-          'BurzakhEnhancedLogin': (context) => BurzakhEnhancedLogin(),
-          'VerifyOtpForResetpassword': (context) => VerifyOtpForResetpassword(),
-        },
+        // initialRoute: '/',
+        // routes: {
+        //   'appDashBoard': (context) => AppDashboard(),
+        //   '/': (context) => SplashScreen(),
+        //   'onboarding1': (context) => Onboarding1(),
+        //   'onboarding01': (context) => Onboarding01(),
+        //   'onboarding001': (context) => Onboarding001(),
+        //   'SignUpScreen': (context) => SignUpScreen(),
+        //   'dashboard': (context) => Dashboard(),
+        //   'adminDashboard': (context) => AdminDashboard(),
+        //   'translation': (context) => TranslationScreen(),
+        //   'BurzakhEnhancedLogin': (context) => BurzakhEnhancedLogin(),
+        //   'VerifyOtpForResetpassword': (context) => VerifyOtpForResetpassword(),
+        // },
         // home: RtaDashboardView(),
         // home: CdaAdminDashboardView(),
         // home: DubaiAdminDashboardView(),
         // home: CementryAdminDashboard(),
+        home: AmbulanceDashboard(),
       );
     });
   }

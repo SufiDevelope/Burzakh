@@ -220,17 +220,24 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: Center(
-                        child: Text(
-                          'DM',
-                          style: TextStyle(
-                            color: const Color(0xFF6B7A8F),
-                            fontSize: context.mh * 0.022,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.0,
-                          ),
-                        ),
-                      ),
+                      child: imageurl == null
+                          ? Center(
+                              child: Text(
+                                'DM',
+                                style: TextStyle(
+                                  color: const Color(0xFF6B7A8F),
+                                  fontSize: context.mh * 0.022,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.0,
+                                ),
+                              ),
+                            )
+                          : Center(
+                              child: Image.asset(
+                                imageurl!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                     ),
                   ),
 

@@ -293,7 +293,7 @@ class _AppDashboardState extends State<AppDashboard> {
           caseId: selectedCaseId!,
         );
       } else {
-        return const Center(child: Text('Please select a case'));
+        return CreatCaseScreen();
       }
     } else {
       log("No cases available or no case selected, going to create case screen");
@@ -485,7 +485,7 @@ class _AppDashboardState extends State<AppDashboard> {
                             'Cancel'.tr(),
                             style: TextStyle(
                               color: AppColor.grey(),
-                              fontSize: context.mh * 0.016,
+                              fontSize: context.mh * 0.012,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'ns',
                             ),
@@ -493,7 +493,7 @@ class _AppDashboardState extends State<AppDashboard> {
                         ),
                       ),
                     ),
-                    0.02.pw(context),
+                    0.01.pw(context),
                     Expanded(
                       child: SizedBox(
                         height: context.mh * 0.05,
@@ -505,6 +505,10 @@ class _AppDashboardState extends State<AppDashboard> {
                               isWaitingForCaseSelection = false;
                             });
                             dashboardCubit.changeScreenIndex(1);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreatCaseScreen()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.primary(),
@@ -516,7 +520,7 @@ class _AppDashboardState extends State<AppDashboard> {
                             'Create New Case'.tr(),
                             style: TextStyle(
                               color: AppColor.white(),
-                              fontSize: context.mh * 0.016,
+                              fontSize: context.mh * 0.012,
                               fontWeight: FontWeight.w600,
                               fontFamily: 'ns',
                             ),
@@ -571,7 +575,6 @@ class _AppDashboardState extends State<AppDashboard> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(child: _buildEmaratiBottomWidget()),
-
                   Expanded(
                     child: BottomWidget(
                       text: 'Docs',
@@ -583,7 +586,6 @@ class _AppDashboardState extends State<AppDashboard> {
                       },
                     ),
                   ),
-
                   Expanded(
                     child: BottomWidget(
                       text: 'Home',

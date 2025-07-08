@@ -2,7 +2,6 @@
 
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/home/data/model/case_model.dart';
-import 'package:burzakh/features/new_ui/documents/ui/documents_progress_screen.dart';
 import 'package:burzakh/features/new_ui/home/ui/documnet_progress_case_details.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +89,6 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
           ),
           const SizedBox(height: 4),
           LinearProgressIndicator(
-            // value: step / 5,
             value: 1 / 5,
             borderRadius: BorderRadius.circular(10),
             backgroundColor: Colors.grey[300],

@@ -149,7 +149,6 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                   ),
                 ),
                 
-                // Custom Time Field - Only show when "Custom Time" is selected
                 if (selectedPrayerTime == "custom") ...[
                   const SizedBox(height: 16),
                   AppText(

@@ -268,7 +268,7 @@ class CementryController extends GetxController {
     isWhatsappPreviewToggled.value = false;
   }
 
-  void sendWhatsappAnnouncement() async {
+  void sendWhatsappAnnouncement(BuildContext context) async {
     setWhatsappPublishLoading(true);
 
     try {
@@ -283,6 +283,7 @@ class CementryController extends GetxController {
         setWhatsappPublishLoading(false);
         return;
       }
+      Navigator.pop(context);
 
       final message = '''
         *Funeral Announcement*
