@@ -1,22 +1,12 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/Model/AdminModels/AmbulanceSchduleModel/ambulance_schdule_model.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambulance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ScheduleItem {
-  final String time;
-  final String location;
-  final String status; // "Current", "Upcoming", "Completed"
-  
-  ScheduleItem({
-    required this.time,
-    required this.location,
-    required this.status,
-  });
-}
 
 class TodaysScheduleWidget extends StatelessWidget {
-  final List<ScheduleItem> scheduleItems;
+  final List<DispatchedCasesList> scheduleItems;
   
   const TodaysScheduleWidget({
     super.key,
@@ -62,7 +52,7 @@ class TodaysScheduleWidget extends StatelessWidget {
           // Schedule Items
           ...scheduleItems.asMap().entries.map((entry) {
             int index = entry.key;
-            ScheduleItem item = entry.value;
+            DispatchedCasesList item = entry.value;
             bool isLast = index == scheduleItems.length - 1;
             
             return Column(
@@ -77,7 +67,7 @@ class TodaysScheduleWidget extends StatelessWidget {
                           width: context.mw * 0.03,
                           height: context.mw * 0.03,
                           decoration: BoxDecoration(
-                            color: _getStatusColor(item.status),
+                            color: _getStatusColor(item.status ?? ""),
                             shape: BoxShape.circle,
                           ),
                         ),
@@ -104,7 +94,7 @@ class TodaysScheduleWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item.time,
+                                    "Time",
                                     style: TextStyle(
                                       fontSize: context.mh * 0.02,
                                       fontWeight: FontWeight.w600,
@@ -113,7 +103,7 @@ class TodaysScheduleWidget extends StatelessWidget {
                                   ),
                                   0.005.ph(context),
                                   Text(
-                                    item.location,
+                                    "Location",
                                     style: TextStyle(
                                       fontSize: context.mh * 0.016,
                                       color: Colors.grey[600],
@@ -129,13 +119,13 @@ class TodaysScheduleWidget extends StatelessWidget {
                                   vertical: context.mh * 0.006,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: _getStatusBackgroundColor(item.status),
+                                  color: _getStatusBackgroundColor(item.status ?? ""),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  item.status,
+                                  item.status ?? "",
                                   style: TextStyle(
-                                    color: _getStatusTextColor(item.status),
+                                    color: _getStatusTextColor(item.status ?? ""),
                                     fontSize: context.mh * 0.013,
                                     fontWeight: FontWeight.w500,
                                   ),

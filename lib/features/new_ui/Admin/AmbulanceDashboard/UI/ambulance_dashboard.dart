@@ -1,4 +1,7 @@
+// ignore_for_file: constant_pattern_never_matches_value_type
+
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambulance_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/widget/ambulance_card_list_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/widget/tab_selection_widget.dart';
@@ -105,45 +108,80 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            0.02.ph(context),
-            TabSelectionWidget(),
-            0.01.ph(context),
-            AmbulanceListCardWidget(
-              driverName: "Ahmad Hassan",
-              ambulanceId: "AMB001",
-              caseId: "F2025001",
-              pickupLocation: "Al-Manara Hospital",
-              pickupAddress: "Sheikh Zayed Road, Dubai",
-              deliverLocation: "Qusais Cemetery",
-              scheduledTime: "09:00",
-              dispatchPhone: "+971-4-555-0123",
-              priority: "High",
-              status: "Assigned",
-            ),
-            0.01.ph(context),
-            TodaysScheduleWidget(
-              scheduleItems: [
-                ScheduleItem(
-                  time: "09:00",
-                  location: "Al-Manara Hospital",
-                  status: "Current",
-                ),
-                ScheduleItem(
-                  time: "11:30",
-                  location: "Dubai Hospital",
-                  status: "Upcoming",
-                ),
-                ScheduleItem(
-                  time: "14:00",
-                  location: "American Hospital",
-                  status: "Upcoming",
-                ),
-              ],
-            )
-          ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          ambulanceController.getAmbulanceCasses();
+          ambulanceController.getAmbulanceSchedule();
+        },
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              0.02.ph(context),
+              TabSelectionWidget(),
+              0.01.ph(context),
+              Obx(
+                () {
+                  switch (ambulanceController
+                      .rxRequestStatusForAllAmbulanceRequest.value) {
+                    case Status.loading:
+                      return Center(child: CircularProgressIndicator());
+                    case Status.completed:
+                      var data = ambulanceController.model.value.ambulance;
+                      return Container(
+                        height: context.mh * 0.7,
+                        child: ListView.builder(
+                            itemCount: ambulanceController
+                                    .model.value.dispatchedCases?.length ??
+                                0,
+                            itemBuilder: (context, index) {
+                              return AmbulanceListCardWidget(
+                                driverName: data?.driverName ?? "",
+                                ambulanceId: data?.vehicleNumber ?? "",
+                                caseId:
+                                    "BUR-${DateTime.now().year}-${ambulanceController.model.value.caseDetails?[index].id?.toString() ?? ""}",
+                                pickupLocation: "Al-Manara Hospital",
+                                pickupAddress: "Sheikh Zayed Road, Dubai",
+                                deliverLocation: "Qusais Cemetery",
+                                scheduledTime: "09:00",
+                                dispatchPhone: data?.contactNumber ?? "",
+                                priority: "High",
+                                status: data?.status ?? "",
+                                driverId: ambulanceController
+                                    .model.value.dispatchedCases?[index].id,
+                              );
+                            }),
+                      );
+
+                    case Status.error:
+                      return Text("Error");
+                    default:
+                      return SizedBox();
+                  }
+                },
+              ),
+              0.01.ph(context),
+              Obx(
+                () {
+                  switch (ambulanceController
+                      .rxRequestStatusForScheduleAmbulanceRequest.value) {
+                    case Status.loading:
+                      return Center(child: CircularProgressIndicator());
+                    case Status.completed:
+                      return TodaysScheduleWidget(
+                        scheduleItems: ambulanceController
+                                .modelSchedule.value.dispatchedCases ??
+                            [],
+                      );
+                    case Status.error:
+                      return Text("Error");
+                    default:
+                      return SizedBox();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

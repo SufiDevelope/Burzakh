@@ -12,6 +12,7 @@ analyzer:
     must_be_immutable: ignore
     deprecated_member_use: ignore
     invalid_use_of_protected_member: ignore
+    constant_pattern_never_matches_value_type: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

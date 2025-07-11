@@ -147,8 +147,23 @@ class AppApis {
 
   static String getAllMorticians =
       "${baseUrl}/api/burzakh-cemetery/get-morticians";
-  
+
   // Mancipality Notifications
   static String getMancipalityNotifications =
       "${baseUrl}/api/burzakh-mancipality/get-notifications";
+
+  static String ambulanceCassesList(driverid) =>
+      "${baseUrl}/api/burzakh-ambulance-driver/get-cases/$driverid";
+
+  // Todays Schedule
+  static String getTodaysSchedule(driverId) =>
+      "${baseUrl}/api/burzakh-ambulance-driver/get-today-schedule/$driverId";
+
+  // Change Status
+  static String changeStatus =
+      "${baseUrl}/api/burzakh-ambulance-driver/change-status";
+  
+  // Update Case Status
+  static String updateCaseStatus(caseId) =>
+      "${baseUrl}/api/burzakh-ambulance-driver/update-case/$caseId";
 }

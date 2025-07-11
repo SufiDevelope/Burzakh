@@ -50,7 +50,8 @@ class TabSelectionWidget extends StatelessWidget {
               children: [
                 // Available - Green when selected
                 GestureDetector(
-                  onTap: () => ambulanceController.setStatus("Available"),
+                  onTap: () =>
+                      ambulanceController.setStatus("Available", context),
                   child: Container(
                     width: context.mw * 0.19,
                     height: context.mw * 0.12,
@@ -77,7 +78,8 @@ class TabSelectionWidget extends StatelessWidget {
 
                 // On Route - Blue when selected
                 GestureDetector(
-                  onTap: () => ambulanceController.setStatus("On Route"),
+                  onTap: () =>
+                      ambulanceController.setStatus("On Route", context),
                   child: Container(
                     width: context.mw * 0.19,
                     height: context.mw * 0.12,
@@ -104,7 +106,7 @@ class TabSelectionWidget extends StatelessWidget {
 
                 // Busy - Yellow when selected
                 GestureDetector(
-                  onTap: () => ambulanceController.setStatus("Busy"),
+                  onTap: () => ambulanceController.setStatus("Busy", context),
                   child: Container(
                     width: context.mw * 0.19,
                     height: context.mw * 0.12,

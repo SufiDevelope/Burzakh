@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambulance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceListCardWidget extends StatelessWidget {
   final String driverName;
@@ -14,6 +15,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
   final String dispatchPhone;
   final String priority;
   final String status;
+  final dynamic driverId;
 
   const AmbulanceListCardWidget({
     super.key,
@@ -26,13 +28,13 @@ class AmbulanceListCardWidget extends StatelessWidget {
     required this.scheduledTime,
     required this.dispatchPhone,
     required this.priority,
-    required this.status,
+    required this.status, this.driverId,
   });
 
   @override
   Widget build(BuildContext context) {
     final ambulanceController = Get.find<AmbulanceController>();
-    
+
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: context.mw * 0.02,
@@ -69,7 +71,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ],
           ),
           0.02.ph(context),
-          
+
           // Driver Info Section
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,31 +117,12 @@ class AmbulanceListCardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  0.02.pw(context),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.mw * 0.03,
-                      vertical: context.mh * 0.008,
-                    ),
-                    decoration: BoxDecoration(
-                      color: priority == "High" ? Colors.red : Colors.orange,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      priority,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: context.mh * 0.014,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ],
           ),
           0.03.ph(context),
-          
+
           // Pickup Location
           Container(
             padding: EdgeInsets.all(context.mw * 0.04),
@@ -191,7 +174,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ),
           ),
           0.02.ph(context),
-          
+
           // Deliver Location
           Container(
             padding: EdgeInsets.all(context.mw * 0.04),
@@ -235,7 +218,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ),
           ),
           0.02.ph(context),
-          
+
           // Scheduled Time
           Container(
             padding: EdgeInsets.all(context.mw * 0.04),
@@ -279,7 +262,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ),
           ),
           0.02.ph(context),
-          
+
           // Dispatch Phone
           Container(
             padding: EdgeInsets.all(context.mw * 0.04),
@@ -323,14 +306,15 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ),
           ),
           0.03.ph(context),
-          
+
           // Action Buttons
           Row(
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // Navigate action
+                    launchUrl(Uri.parse(
+                        'https://www.google.com/maps/dir/?api=1&destination=$pickupLocation'));
                   },
                   child: Container(
                     height: context.mh * 0.06,
@@ -364,7 +348,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // Arrived action
+                    ambulanceController.updateCaseStatus("arrived", driverId, context);
                   },
                   child: Container(
                     height: context.mh * 0.06,
@@ -397,14 +381,14 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ],
           ),
           0.02.ph(context),
-          
+
           // Secondary Action Buttons
           Row(
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // Picked Up action
+                    ambulanceController.updateCaseStatus("picked-up", driverId, context);
                   },
                   child: Container(
                     height: context.mh * 0.06,
@@ -438,7 +422,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    // Delivered action
+                    ambulanceController.updateCaseStatus("delivered", driverId, context);
                   },
                   child: Container(
                     height: context.mh * 0.06,
@@ -471,11 +455,11 @@ class AmbulanceListCardWidget extends StatelessWidget {
             ],
           ),
           0.02.ph(context),
-          
+
           // Call Dispatch Button
           GestureDetector(
             onTap: () {
-              // Call dispatch action
+              launchUrl(Uri.parse("tel:$dispatchPhone"));
             },
             child: Container(
               width: double.infinity,
