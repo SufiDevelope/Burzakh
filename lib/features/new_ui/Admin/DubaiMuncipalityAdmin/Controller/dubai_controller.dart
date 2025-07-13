@@ -53,8 +53,12 @@ class DubaiController extends GetxController {
     model.value = data;
     dubaiRequestList.value = data.allRequests ?? [];
     filterRequestList.value = dubaiRequestList;
-    burialCases.value =
-        (data.allRequests ?? []).map((e) => e.caseName.toString()).toList();
+    burialCases.value = (data.allRequests ?? [])
+        .where((e) => !(e.caseDetails?.any((detail) =>
+                detail.ambulance_dispatched?.toLowerCase() == "true") ??
+            false))
+        .map((e) => e.caseName.toString())
+        .toList();
   }
 
   void getRequestApi() async {
@@ -115,7 +119,8 @@ class DubaiController extends GetxController {
     try {
       setLoading(true);
       notification
-          .sendNotification("New Message From Dubai Muncipality", message, deviceToken)
+          .sendNotification(
+              "New Message From Dubai Muncipality", message, deviceToken)
           .then((value) async {
         await repo.sendSupportMessage(userid, message).then((value) {
           setLoading(false);
@@ -283,8 +288,6 @@ class DubaiController extends GetxController {
     instructionsController.dispose();
     super.onClose();
   }
-
-
 
   void updateAssignmentType(String type) {
     selectedAssignmentType.value = type;

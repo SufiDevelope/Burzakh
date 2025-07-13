@@ -184,6 +184,8 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                         itemBuilder: (context, index) {
                           var data =
                               controller.filterAmbulanceList.value[index];
+                          log(data.dispatchedInfo?.length.toString() ?? "");
+                          
                           return BurialCardWidget(
                             name: "${data.driverName ?? ''}",
                             caseId: "${data.vehicleNumber ?? ''}",
@@ -216,6 +218,8 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                                 },
                               );
                             },
+                            statusAmbulance:
+                                "${data.dispatchedInfo?[index].status} for",
                           );
                         },
                       );

@@ -42,9 +42,9 @@ class AmbulanceScheduleModel {
 class DispatchedCasesList {
   int? id;
   String? caseName;
-  Null? standbyMosque;
-  Null? additionalNotes;
-  Null? userId;
+  String? standbyMosque;
+  String? additionalNotes;
+  dynamic userId;
   String? vehicleNumber;
   String? status;
   String? createdAt;

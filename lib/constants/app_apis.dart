@@ -162,8 +162,12 @@ class AppApis {
   // Change Status
   static String changeStatus =
       "${baseUrl}/api/burzakh-ambulance-driver/change-status";
-  
+
   // Update Case Status
   static String updateCaseStatus(caseId) =>
       "${baseUrl}/api/burzakh-ambulance-driver/update-case/$caseId";
+
+  // Mortician Get Casses
+  static String morticianGetCasses(morticianId) =>
+      "${baseUrl}/api/burzakh-mortician/get-requests/$morticianId";
 }

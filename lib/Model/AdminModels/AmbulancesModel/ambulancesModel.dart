@@ -62,6 +62,7 @@ class Ambulances {
   String? status;
   String? createdAt;
   String? updatedAt;
+  List<DispatchedInfo>? dispatchedInfo;
 
   Ambulances(
       {this.id,
@@ -72,7 +73,8 @@ class Ambulances {
       this.cemetryName,
       this.status,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.dispatchedInfo});
 
   Ambulances.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -84,6 +86,12 @@ class Ambulances {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['dispatch_info'] != null) {
+      dispatchedInfo = <DispatchedInfo>[];
+      json['dispatch_info'].forEach((v) {
+        dispatchedInfo!.add(DispatchedInfo.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +105,61 @@ class Ambulances {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    if (dispatchedInfo != null) {
+      data['dispatch_info'] = dispatchedInfo!.map((v) => v.toJson()).toList();
+    }
     return data;
+  }
+}
+
+class DispatchedInfo {
+  final int id;
+  final String caseName;
+  final String? standbyMosque;
+  final String? additionalNotes;
+  final int? userId;
+  final String vehicleNumber;
+  final String status;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  DispatchedInfo({
+    required this.id,
+    required this.caseName,
+    this.standbyMosque,
+    this.additionalNotes,
+    this.userId,
+    required this.vehicleNumber,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory DispatchedInfo.fromJson(Map<String, dynamic> json) {
+    return DispatchedInfo(
+      id: json['id'],
+      caseName: json['case_name'],
+      standbyMosque: json['standby_mosque'],
+      additionalNotes: json['additional_notes'],
+      userId: json['user_id'],
+      vehicleNumber: json['vehicle_number'],
+      status: json['status'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'case_name': caseName,
+      'standby_mosque': standbyMosque,
+      'additional_notes': additionalNotes,
+      'user_id': userId,
+      'vehicle_number': vehicleNumber,
+      'status': status,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
+    };
   }
 }

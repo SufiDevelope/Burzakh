@@ -16,6 +16,8 @@ class AmbulanceListCardWidget extends StatelessWidget {
   final String priority;
   final String status;
   final dynamic driverId;
+  final dynamic rawId;
+  final dynamic statusDispatch;
 
   const AmbulanceListCardWidget({
     super.key,
@@ -28,8 +30,25 @@ class AmbulanceListCardWidget extends StatelessWidget {
     required this.scheduledTime,
     required this.dispatchPhone,
     required this.priority,
-    required this.status, this.driverId,
+    required this.status,
+    this.driverId,
+    this.rawId,
+    this.statusDispatch,
   });
+
+  bool _isArrivedButtonActive() {
+    return statusDispatch.toLowerCase() != "arrived" &&
+        statusDispatch.toLowerCase() != "picked-up" &&
+        statusDispatch.toLowerCase() != "delivered";
+  }
+
+  bool _isPickupButtonActive() {
+    return statusDispatch.toLowerCase() == "arrived";
+  }
+
+  bool _isDeliveredButtonActive() {
+    return statusDispatch.toLowerCase() == "picked-up";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,16 +101,16 @@ class AmbulanceListCardWidget extends StatelessWidget {
                   Text(
                     driverName,
                     style: TextStyle(
-                      fontSize: context.mh * 0.024,
+                      fontSize: context.mh * 0.02,
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
                   ),
                   0.005.ph(context),
                   Text(
-                    "ID: $ambulanceId • Case: $caseId",
+                    "Vehicle No: $ambulanceId • Case: $caseId",
                     style: TextStyle(
-                      fontSize: context.mh * 0.016,
+                      fontSize: context.mh * 0.011,
                       color: Colors.grey[600],
                     ),
                   ),
@@ -101,17 +120,51 @@ class AmbulanceListCardWidget extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: context.mw * 0.03,
+                      horizontal: context.mw * 0.02,
                       vertical: context.mh * 0.008,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.grey[700],
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
                       status,
                       style: TextStyle(
                         color: Colors.white,
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  0.02.pw(context),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.mw * 0.02,
+                      vertical: context.mh * 0.008,
+                    ),
+                    decoration: BoxDecoration(
+                      color: priority == "High"
+                          ? Colors.red.withOpacity(0.23)
+                          : priority == "Medium"
+                              ? Colors.orange.withOpacity(0.23)
+                              : Colors.green.withOpacity(0.23),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: priority == "High"
+                            ? Colors.red
+                            : priority == "Medium"
+                                ? Colors.orange
+                                : Colors.green,
+                      ),
+                    ),
+                    child: Text(
+                      priority,
+                      style: TextStyle(
+                        color: priority == "High"
+                            ? Colors.red
+                            : priority == "Medium"
+                                ? Colors.orange
+                                : Colors.green,
                         fontSize: context.mh * 0.014,
                         fontWeight: FontWeight.w500,
                       ),
@@ -347,13 +400,18 @@ class AmbulanceListCardWidget extends StatelessWidget {
               0.02.pw(context),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    ambulanceController.updateCaseStatus("arrived", driverId, context);
-                  },
+                  onTap: _isArrivedButtonActive()
+                      ? () {
+                          ambulanceController.updateCaseStatus(
+                              "arrived", rawId.toString(), context, driverId);
+                        }
+                      : null,
                   child: Container(
                     height: context.mh * 0.06,
                     decoration: BoxDecoration(
-                      color: Colors.green,
+                      color: _isArrivedButtonActive()
+                          ? Colors.green
+                          : Colors.grey[400],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -387,13 +445,18 @@ class AmbulanceListCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    ambulanceController.updateCaseStatus("picked-up", driverId, context);
-                  },
+                  onTap: _isPickupButtonActive()
+                      ? () {
+                          ambulanceController.updateCaseStatus(
+                              "picked-up", rawId.toString(), context, driverId);
+                        }
+                      : null,
                   child: Container(
                     height: context.mh * 0.06,
                     decoration: BoxDecoration(
-                      color: Colors.grey[400],
+                      color: _isPickupButtonActive()
+                          ? Colors.orange
+                          : Colors.grey[400],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -421,20 +484,25 @@ class AmbulanceListCardWidget extends StatelessWidget {
               0.02.pw(context),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    ambulanceController.updateCaseStatus("delivered", driverId, context);
-                  },
+                  onTap: _isDeliveredButtonActive()
+                      ? () {
+                          ambulanceController.updateCaseStatus(
+                              "delivered", rawId.toString(), context, driverId);
+                        }
+                      : null,
                   child: Container(
                     height: context.mh * 0.06,
                     decoration: BoxDecoration(
-                      color: Colors.grey[400],
+                      color: _isDeliveredButtonActive()
+                          ? Colors.blue
+                          : Colors.grey[400],
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.check_box_outline_blank,
+                          Icons.check_box,
                           color: Colors.white,
                           size: context.mh * 0.022,
                         ),

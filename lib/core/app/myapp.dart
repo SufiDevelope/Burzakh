@@ -7,6 +7,7 @@ import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/UI/ambulance_da
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/UI/mortician_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_dashboard_widget.dart';
@@ -90,7 +91,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         // home: CdaAdminDashboardView(),
         // home: DubaiAdminDashboardView(),
         // home: CementryAdminDashboard(),
-        home: AmbulanceDashboard(),
+        // home: AmbulanceDashboard(),
+        home: MorticianAdminDashboard(),
       );
     });
   }

@@ -10,6 +10,7 @@ import 'package:burzakh/features/authentication/presentation/model/signup_model.
 import 'package:burzakh/features/authentication/presentation/model/user_model.dart';
 import 'package:burzakh/features/authentication/presentation/controller/user_sharepref_controller.dart';
 import 'package:burzakh/features/authentication/presentation/page/reset_password.dart';
+import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/UI/ambulance_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
@@ -175,6 +176,16 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
                   builder: (context) => CementryAdminDashboard(
                         name: "${userModel?.firstName}${userModel?.lastName}",
                       )));
+        } else if (userModel?.admin_type == "ambulance") {
+          Navigator.push(
+            navigatorKey.currentContext!,
+            MaterialPageRoute(
+              builder: (context) => AmbulanceDashboard(
+                name: "${userModel?.firstName}${userModel?.lastName}",
+                id: userModel?.id.toString() ?? "",
+              ),
+            ),
+          );
         } else {
           navigatorKey.currentState?.pushNamedAndRemoveUntil(
             'appDashBoard',
@@ -346,6 +357,16 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           MaterialPageRoute(
             builder: (context) => CementryAdminDashboard(
               name: "${userModel?.firstName}${userModel?.lastName}",
+            ),
+          ),
+        );
+      } else if (model.admin_type == "ambulance") {
+        Navigator.push(
+          navigatorKey.currentContext!,
+          MaterialPageRoute(
+            builder: (context) => AmbulanceDashboard(
+              name: "${userModel?.firstName}${userModel?.lastName}",
+              id: userModel?.id.toString() ?? "",
             ),
           ),
         );

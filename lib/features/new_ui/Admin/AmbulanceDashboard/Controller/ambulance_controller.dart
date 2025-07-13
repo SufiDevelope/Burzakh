@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:burzakh/Model/AdminModels/AmbulanceCassesModel/ambulance_casses_model.dart';
-import 'package:burzakh/Model/AdminModels/AmbulanceSchduleModel/ambulance_schdule_model.dart';
 import 'package:burzakh/Repository/AdminRepos/AmbulanceRepo/ambulance_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/AmbulanceRepo/ambulance_repo.dart';
 import 'package:flutter/material.dart';
@@ -10,27 +9,19 @@ import 'package:get/get.dart';
 import '../../../../../data/Response/status.dart';
 
 class AmbulanceController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    getAmbulanceCasses();
-    getAmbulanceSchedule();
-  }
-
   RxString selectedStatus = ''.obs;
-
-  void setStatus(String status, BuildContext context) {
+  void setStatus(String status, BuildContext context, driverId) {
     selectedStatus.value = status;
     if (status == 'Available') {
-      chnageStatusAmbulance("pending", "48", context);
+      chnageStatusAmbulance("pending", driverId, context, true);
     } else if (status == 'On Route') {
-      chnageStatusAmbulance("busy", "48", context);
+      chnageStatusAmbulance("on-route", driverId, context, true);
     } else if (status == 'Busy') {
-      chnageStatusAmbulance("not-available", "48", context);
+      chnageStatusAmbulance("busy", driverId, context, true);
     }
   }
 
-  var model = AmbulanceCassesModel().obs;
+  var model = AmbulanceCaseModel().obs;
   final rxRequestStatusForAllAmbulanceRequest = Status.loading.obs;
   final AmbulanceRepo repo = AmbulanceHttpRepo();
 
@@ -38,47 +29,40 @@ class AmbulanceController extends GetxController {
     rxRequestStatusForAllAmbulanceRequest.value = value;
   }
 
-  void setGetRequestApiResponse(AmbulanceCassesModel data) {
+  void setGetRequestApiResponse(AmbulanceCaseModel data) {
     model.value = data;
   }
 
-  void getAmbulanceCasses() {
+  void getAmbulanceCasses(driverId, BuildContext context) {
     setRequestStatusForAllAmbulanceRequest(Status.loading);
-    repo.getAmbulanceCasses(48).then((value) {
-      setRequestStatusForAllAmbulanceRequest(Status.completed);
+    repo.getAmbulanceCasses(driverId).then((value) {
       setGetRequestApiResponse(value);
+
+      final currentStatus = value.ambulance?.status ?? "";
+      log("Fetched ambulance status: $currentStatus");
+
+      if (currentStatus == "pending") {
+        selectedStatus.value = "Available";
+      } else if (currentStatus == "on-route") {
+        selectedStatus.value = "On Route";
+      } else if (currentStatus == "busy") {
+        selectedStatus.value = "Busy";
+      } else {
+        selectedStatus.value = "";
+      }
+
+      setRequestStatusForAllAmbulanceRequest(Status.completed);
     }).onError((error, stackTrace) {
-      log(error.toString());
+      log("Get cases error: $error");
       setRequestStatusForAllAmbulanceRequest(Status.error);
     });
   }
 
-  var modelSchedule = AmbulanceScheduleModel().obs;
-  final rxRequestStatusForScheduleAmbulanceRequest = Status.loading.obs;
-
-  void setRequestStatusForScheduleAmbulanceRequest(Status value) {
-    rxRequestStatusForScheduleAmbulanceRequest.value = value;
-  }
-
-  void setGetRequestApiResponseForSchedule(AmbulanceScheduleModel data) {
-    modelSchedule.value = data;
-  }
-
-  void getAmbulanceSchedule() {
-    setRequestStatusForScheduleAmbulanceRequest(Status.loading);
-    repo.getAmbulanceTodaySchedule(48).then((value) {
-      setRequestStatusForScheduleAmbulanceRequest(Status.completed);
-      setGetRequestApiResponseForSchedule(value);
-    }).onError((error, stackTrace) {
-      log(error.toString());
-      setRequestStatusForScheduleAmbulanceRequest(Status.error);
-    });
-  }
-
-  void chnageStatusAmbulance(status, id, BuildContext context) {
+  void chnageStatusAmbulance(status, id, BuildContext context, bool flag) {
     repo.chnageStatusAmbulance(id, status).then((value) {
-      getAmbulanceCasses();
-      getAmbulanceSchedule();
+      if (flag == true) {
+        getAmbulanceCasses(id, context);
+      }
     }).onError((error, stackTrace) {
       log(error.toString());
       // Snackbar
@@ -96,9 +80,10 @@ class AmbulanceController extends GetxController {
     });
   }
 
-  void updateCaseStatus(status, id, BuildContext context) {
+  void updateCaseStatus(status, id, BuildContext context, driverid) {
+    log(id);
     repo.updateCaseStatusAmbulance(status, id).then((value) {
-      getAmbulanceCasses();
+      getAmbulanceCasses(driverid, context);
     }).onError((error, stackTrace) {
       log(error.toString());
       // Snackbar

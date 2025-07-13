@@ -2,7 +2,7 @@ import 'package:burzakh/Model/AdminModels/AmbulanceCassesModel/ambulance_casses_
 import 'package:burzakh/Model/AdminModels/AmbulanceSchduleModel/ambulance_schdule_model.dart';
 
 abstract class AmbulanceRepo {
-  Future<AmbulanceCassesModel> getAmbulanceCasses(driverid);
+  Future<AmbulanceCaseModel> getAmbulanceCasses(driverid);
   Future<AmbulanceScheduleModel> getAmbulanceTodaySchedule(driverid);
   Future<dynamic> chnageStatusAmbulance(driverid, status);
   Future<dynamic> updateCaseStatusAmbulance(status, caseid);

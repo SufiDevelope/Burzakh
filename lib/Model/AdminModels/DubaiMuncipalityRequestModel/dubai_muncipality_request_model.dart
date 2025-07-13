@@ -6,7 +6,6 @@ class DubaiMuncipalityRequestModel {
   int? todayBurials;
   int? cancelled;
   List<DubaiMuncipalityReqestData>? allRequests;
- 
 
   DubaiMuncipalityRequestModel({
     this.message,
@@ -220,6 +219,7 @@ class DubaiCaseDetails {
   String? additionalDocumentUploadUser;
   String? createdAt;
   String? updatedAt;
+  String? ambulance_dispatched;
 
   DubaiCaseDetails(
       {this.id,
@@ -245,7 +245,8 @@ class DubaiCaseDetails {
       this.location,
       this.additionalDocumentUploadUser,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.ambulance_dispatched});
 
   DubaiCaseDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -273,6 +274,7 @@ class DubaiCaseDetails {
     additionalDocumentUploadUser = json['additional_document_upload_user'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    ambulance_dispatched = json['ambulance_dispatched'];
   }
 
   Map<String, dynamic> toJson() {
@@ -303,6 +305,7 @@ class DubaiCaseDetails {
     data['additional_document_upload_user'] = this.additionalDocumentUploadUser;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['ambulance_dispatched'] = this.ambulance_dispatched;
     return data;
   }
 }

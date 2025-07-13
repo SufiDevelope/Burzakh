@@ -1,70 +1,91 @@
-class AmbulanceCaseModel {
-  bool? success;
-  String? message;
-  Ambulance? ambulance;
+class MorticianCassesModel {
+  CaseCounts? caseCounts;
+  MorticianCassesData? mortician;
 
-  AmbulanceCaseModel({this.success, this.message, this.ambulance});
+  MorticianCassesModel({this.caseCounts, this.mortician});
 
-  AmbulanceCaseModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    message = json['message'];
-    ambulance = json['ambulance'] != null
-        ? new Ambulance.fromJson(json['ambulance'])
+  MorticianCassesModel.fromJson(Map<String, dynamic> json) {
+    caseCounts = json['case_counts'] != null
+        ? new CaseCounts.fromJson(json['case_counts'])
+        : null;
+    mortician = json['mortician'] != null
+        ? new MorticianCassesData.fromJson(json['mortician'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.ambulance != null) {
-      data['ambulance'] = this.ambulance!.toJson();
+    if (this.caseCounts != null) {
+      data['case_counts'] = this.caseCounts!.toJson();
+    }
+    if (this.mortician != null) {
+      data['mortician'] = this.mortician!.toJson();
     }
     return data;
   }
 }
 
-class Ambulance {
+class CaseCounts {
+  int? pending;
+  int? assigned;
+  int? ghuslInProgress;
+  int? completed;
+
+  CaseCounts(
+      {this.pending, this.assigned, this.ghuslInProgress, this.completed});
+
+  CaseCounts.fromJson(Map<String, dynamic> json) {
+    pending = json['Pending'];
+    assigned = json['Assigned'];
+    ghuslInProgress = json['Ghusl-in-Progress'];
+    completed = json['Completed'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['Pending'] = this.pending;
+    data['Assigned'] = this.assigned;
+    data['Ghusl-in-Progress'] = this.ghuslInProgress;
+    data['Completed'] = this.completed;
+    return data;
+  }
+}
+
+class MorticianCassesData {
   int? id;
-  int? userId;
-  String? driverName;
-  String? vehicleNumber;
-  String? currentLocation;
-  String? contactNumber;
-  String? cemetryName;
+  String? name;
+  String? caseName;
+  String? userId;
+  String? phoneNumber;
   String? status;
   String? createdAt;
   String? updatedAt;
-  List<DispatchInfo>? dispatchInfo;
+  List<CemeteryCases>? cemeteryCases;
 
-  Ambulance(
+  MorticianCassesData(
       {this.id,
+      this.name,
+      this.caseName,
       this.userId,
-      this.driverName,
-      this.vehicleNumber,
-      this.currentLocation,
-      this.contactNumber,
-      this.cemetryName,
+      this.phoneNumber,
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.dispatchInfo});
+      this.cemeteryCases});
 
-  Ambulance.fromJson(Map<String, dynamic> json) {
+  MorticianCassesData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    name = json['name'];
+    caseName = json['case_name'];
     userId = json['user_id'];
-    driverName = json['driver_name'];
-    vehicleNumber = json['vehicle_number'];
-    currentLocation = json['current_location'];
-    contactNumber = json['contact_number'];
-    cemetryName = json['cemetry_name'];
+    phoneNumber = json['phone_number'];
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    if (json['dispatch_info'] != null) {
-      dispatchInfo = <DispatchInfo>[];
-      json['dispatch_info'].forEach((v) {
-        dispatchInfo!.add(new DispatchInfo.fromJson(v));
+    if (json['cemetery_cases'] != null) {
+      cemeteryCases = <CemeteryCases>[];
+      json['cemetery_cases'].forEach((v) {
+        cemeteryCases!.add(new CemeteryCases.fromJson(v));
       });
     }
   }
@@ -72,92 +93,80 @@ class Ambulance {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['name'] = this.name;
+    data['case_name'] = this.caseName;
     data['user_id'] = this.userId;
-    data['driver_name'] = this.driverName;
-    data['vehicle_number'] = this.vehicleNumber;
-    data['current_location'] = this.currentLocation;
-    data['contact_number'] = this.contactNumber;
-    data['cemetry_name'] = this.cemetryName;
+    data['phone_number'] = this.phoneNumber;
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    if (this.dispatchInfo != null) {
-      data['dispatch_info'] =
-          this.dispatchInfo!.map((v) => v.toJson()).toList();
+    if (this.cemeteryCases != null) {
+      data['cemetery_cases'] =
+          this.cemeteryCases!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class DispatchInfo {
+class CemeteryCases {
   int? id;
   String? caseName;
-  String? standbyMosque;
-  String? additionalNotes;
   String? userId;
-  String? vehicleNumber;
+  String? graveNumber;
+  String? morticianId;
   String? status;
   String? createdAt;
   String? updatedAt;
-  String? priority;
   List<CaseDetails>? caseDetails;
-  MunicipalityAmbulanceSub? municipalityAmbulanceSub;
+  MancipalityRecord? mancipalityRecord;
 
-  DispatchInfo(
+  CemeteryCases(
       {this.id,
       this.caseName,
-      this.standbyMosque,
-      this.additionalNotes,
       this.userId,
-      this.vehicleNumber,
+      this.graveNumber,
+      this.morticianId,
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.priority,
       this.caseDetails,
-      this.municipalityAmbulanceSub});
+      this.mancipalityRecord});
 
-  DispatchInfo.fromJson(Map<String, dynamic> json) {
+  CemeteryCases.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     caseName = json['case_name'];
-    standbyMosque = json['standby_mosque'];
-    additionalNotes = json['additional_notes'];
     userId = json['user_id'];
-    vehicleNumber = json['vehicle_number'];
+    graveNumber = json['grave_number'];
+    morticianId = json['mortician_id'];
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    priority = json['priority'];
     if (json['case_details'] != null) {
       caseDetails = <CaseDetails>[];
       json['case_details'].forEach((v) {
         caseDetails!.add(new CaseDetails.fromJson(v));
       });
     }
-    if (json['municipality_submission'] != null) {
-      municipalityAmbulanceSub =
-          MunicipalityAmbulanceSub.fromJson(json['municipality_submission']);
-    }
+    mancipalityRecord = json['mancipality_record'] != null
+        ? new MancipalityRecord.fromJson(json['mancipality_record'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['case_name'] = this.caseName;
-    data['standby_mosque'] = this.standbyMosque;
-    data['additional_notes'] = this.additionalNotes;
     data['user_id'] = this.userId;
-    data['vehicle_number'] = this.vehicleNumber;
+    data['grave_number'] = this.graveNumber;
+    data['mortician_id'] = this.morticianId;
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['priority'] = this.priority;
     if (this.caseDetails != null) {
       data['case_details'] = this.caseDetails!.map((v) => v.toJson()).toList();
     }
-
-    if (this.municipalityAmbulanceSub != null) {
-      data['municipality_submission'] = this.municipalityAmbulanceSub!.toJson();
+    if (this.mancipalityRecord != null) {
+      data['mancipality_record'] = this.mancipalityRecord!.toJson();
     }
     return data;
   }
@@ -287,70 +296,67 @@ class CaseDetails {
   }
 }
 
-class MunicipalityAmbulanceSub {
-  final int? id;
-  final String? burialPlace;
-  final String? burialTiming;
-  final String? preferredCemetery;
-  final String? userId;
-  final String? caseName;
-  final String? graveNumber;
-  final String? sect;
-  final String? religion;
-  final String? specialRequest;
-  final String? status;
-  final String? createdAt;
-  final String? updatedAt;
+class MancipalityRecord {
+  int? id;
+  String? burialPlace;
+  String? burialTiming;
+  String? preferredCemetery;
+  String? userId;
+  String? caseName;
+  String? graveNumber;
+  String? sect;
+  String? religion;
+  String? specialRequest;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
 
-  MunicipalityAmbulanceSub({
-    this.id,
-    this.burialPlace,
-    this.burialTiming,
-    this.preferredCemetery,
-    this.userId,
-    this.caseName,
-    this.graveNumber,
-    this.sect,
-    this.religion,
-    this.specialRequest,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-  });
+  MancipalityRecord(
+      {this.id,
+      this.burialPlace,
+      this.burialTiming,
+      this.preferredCemetery,
+      this.userId,
+      this.caseName,
+      this.graveNumber,
+      this.sect,
+      this.religion,
+      this.specialRequest,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
 
-  factory MunicipalityAmbulanceSub.fromJson(Map<String, dynamic> json) {
-    return MunicipalityAmbulanceSub(
-      id: json['id'],
-      burialPlace: json['burial_place'],
-      burialTiming: json['burial_timing'],
-      preferredCemetery: json['preferred_cemetery'],
-      userId: json['user_id'],
-      caseName: json['case_name'],
-      graveNumber: json['grave_number'],
-      sect: json['sect'],
-      religion: json['religion'],
-      specialRequest: json['special_request'],
-      status: json['status'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
-    );
+  MancipalityRecord.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    burialPlace = json['burial_place'];
+    burialTiming = json['burial_timing'];
+    preferredCemetery = json['preferred_cemetery'];
+    userId = json['user_id'];
+    caseName = json['case_name'];
+    graveNumber = json['grave_number'];
+    sect = json['sect'];
+    religion = json['religion'];
+    specialRequest = json['special_request'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'burial_place': burialPlace,
-      'burial_timing': burialTiming,
-      'preferred_cemetery': preferredCemetery,
-      'user_id': userId,
-      'case_name': caseName,
-      'grave_number': graveNumber,
-      'sect': sect,
-      'religion': religion,
-      'special_request': specialRequest,
-      'status': status,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['burial_place'] = this.burialPlace;
+    data['burial_timing'] = this.burialTiming;
+    data['preferred_cemetery'] = this.preferredCemetery;
+    data['user_id'] = this.userId;
+    data['case_name'] = this.caseName;
+    data['grave_number'] = this.graveNumber;
+    data['sect'] = this.sect;
+    data['religion'] = this.religion;
+    data['special_request'] = this.specialRequest;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    return data;
   }
 }

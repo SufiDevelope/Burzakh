@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Model/AdminModels/AmbulanceCassesModel/ambulance_casses_model.dart';
 import 'package:burzakh/Model/AdminModels/AmbulanceSchduleModel/ambulance_schdule_model.dart';
 import 'package:burzakh/Repository/AdminRepos/AmbulanceRepo/ambulance_repo.dart';
@@ -7,10 +9,10 @@ import 'package:burzakh/data/Network/network_api_service.dart';
 class AmbulanceHttpRepo implements AmbulanceRepo {
   final _api = NetworkApiService();
   @override
-  Future<AmbulanceCassesModel> getAmbulanceCasses(driverid) async {
+  Future<AmbulanceCaseModel> getAmbulanceCasses(driverid) async {
     final response =
         await _api.getGetApiResponse(AppApis.ambulanceCassesList(driverid));
-    return AmbulanceCassesModel.fromJson(response);
+    return AmbulanceCaseModel.fromJson(response);
   }
 
   @override
@@ -30,6 +32,7 @@ class AmbulanceHttpRepo implements AmbulanceRepo {
 
   @override
   Future updateCaseStatusAmbulance(status, caseid) async {
+    log(caseid);
     Map<String, dynamic> data = {"status": status};
     final response = await _api.getPostApiResponse(
         AppApis.updateCaseStatus(caseid), data, false);

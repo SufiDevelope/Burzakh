@@ -16,6 +16,7 @@ class BurialCardWidget extends StatelessWidget {
   final VoidCallback? ongraveAssign;
   final bool isAmbulance;
   final VoidCallback? onCallTap;
+  final String? statusAmbulance;
 
   const BurialCardWidget({
     super.key,
@@ -33,6 +34,7 @@ class BurialCardWidget extends StatelessWidget {
     this.ongraveAssign,
     this.isAmbulance = false,
     this.onCallTap,
+    this.statusAmbulance,
   });
 
   @override
@@ -54,7 +56,6 @@ class BurialCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Name + Badges
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -92,6 +93,20 @@ class BurialCardWidget extends StatelessWidget {
             ),
 
             0.02.ph(context),
+            if (statusAmbulance != null)
+              Row(
+                children: [
+                  Icon(Icons.local_shipping_outlined,
+                      size: context.mh * 0.018, color: Colors.grey),
+                  0.01.pw(context),
+                  Text(
+                    statusAmbulance!,
+                    style: TextStyle(
+                        fontSize: context.mh * 0.015, color: Colors.black54),
+                  ),
+                ],
+              ),
+            0.01.ph(context),
 
             /// Location
             Row(
