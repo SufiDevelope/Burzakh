@@ -14,33 +14,34 @@ import '../../../../widgets/custom_button.dart';
 import '../../../authentication/presentation/controller/cubit.dart';
 
 class HomeCaseWidget extends StatefulWidget {
-   HomeCaseWidget({super.key,required this.caseModel});
-   CaseModel caseModel;
+  HomeCaseWidget({super.key, required this.caseModel});
+  CaseModel caseModel;
 
   @override
   State<HomeCaseWidget> createState() => _HomeCaseWidgetState();
 }
 
 class _HomeCaseWidgetState extends State<HomeCaseWidget> {
-  int step=0;
+  int step = 0;
   @override
   void initState() {
-    if(widget.caseModel.passportOrEmirateIdFrontStatus=="completed" && widget.caseModel.passportOrEmirateIdBackStatus=="completed"){
-      step=step+1;
+    if (widget.caseModel.passportOrEmirateIdFrontStatus == "completed" &&
+        widget.caseModel.passportOrEmirateIdBackStatus == "completed") {
+      step = step + 1;
     }
-    if(widget.caseModel.hospitalCertificateStatus=="completed"){
-      step=step+1;
+    if (widget.caseModel.hospitalCertificateStatus == "completed") {
+      step = step + 1;
     }
-    if(widget.caseModel.deathNotificationFileStatus=="completed"){
-      step=step+1;
+    if (widget.caseModel.deathNotificationFileStatus == "completed") {
+      step = step + 1;
     }
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
-    return  Container(
+    return Container(
       margin: EdgeInsets.only(bottom: 5),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -52,13 +53,20 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
         children: [
           Row(
             children: [
-              Icon(Icons.file_present, size: 25,color: AppColor.grey(),),
-              SizedBox(width: 10,),
+              Icon(
+                Icons.file_present,
+                size: 25,
+                color: AppColor.grey(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AppText(
-                    text: '${'Case:'.tr()} ${widget.caseModel.name_of_deceased}',
+                    text:
+                        '${'Case:'.tr()} ${widget.caseModel.name_of_deceased}',
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -80,8 +88,8 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
               ),
               const Spacer(),
               AppText(
-                // text: '$step of 4',
-                text: '1 ${'of'.tr()} 5',
+                text:
+                    '${(double.tryParse(widget.caseModel.ratio)!.clamp(0, 1) * 5).round()} ${'of'.tr()} 5',
                 fontSize: 12,
                 color: AppColor.blue,
               ),
@@ -89,16 +97,23 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
           ),
           const SizedBox(height: 4),
           LinearProgressIndicator(
-            value: 1 / 5,
+            value: double.parse(widget.caseModel.ratio),
             borderRadius: BorderRadius.circular(10),
             backgroundColor: Colors.grey[300],
-            color:  AppColor.blue,
+            color: AppColor.blue,
           ),
           const SizedBox(height: 12),
           CustomElevatedButton(
             fontSize: context.mh * 0.016,
             text: 'Follow up Service',
-            onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DocumnetProgressCaseDetails(caseId: widget.caseModel.id.toString()),));},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DocumnetProgressCaseDetails(
+                        caseId: widget.caseModel.id.toString()),
+                  ));
+            },
             iconColor: Colors.white,
             icon: AppAssets.clockIcon,
             fontWeight: FontWeight.bold,
@@ -108,4 +123,5 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
     );
   }
 }
-var authCubit=DiContainer().sl<AuthenticationCubit>();
+
+var authCubit = DiContainer().sl<AuthenticationCubit>();

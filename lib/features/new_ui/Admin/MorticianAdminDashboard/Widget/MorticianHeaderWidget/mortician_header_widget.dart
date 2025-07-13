@@ -213,14 +213,14 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xFF059669),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(Icons.phone_outlined, color: Colors.white, size: 16),
-            ),
+            // Container(
+            //   padding: EdgeInsets.all(8),
+            //   decoration: BoxDecoration(
+            //     color: Color(0xFF059669),
+            //     borderRadius: BorderRadius.circular(8),
+            //   ),
+            //   child: Icon(Icons.phone_outlined, color: Colors.white, size: 16),
+            // ),
             0.01.pw(context),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),

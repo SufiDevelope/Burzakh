@@ -1,11 +1,32 @@
+import 'dart:developer';
+
+import 'package:burzakh/Model/AdminModels/MorticianCassesModel/mortician_model.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/CaseCardWidget/case_card_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/controller/mortician_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AssignedCaseCardList extends StatelessWidget {
-  const AssignedCaseCardList({super.key});
+  final List<CemeteryCases> assignedCases;
+  const AssignedCaseCardList({super.key, required this.assignedCases});
+
+  // Method to calculate progress based on status
+  double _calculateProgress(String? status) {
+    if (status == null) return 0.0;
+
+    switch (status.toLowerCase()) {
+      case 'ghusal-started':
+        return 0.5;
+      case 'ghusal-completed':
+        return 1.0;
+      default:
+        return 0.0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<MorticianController>();
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -53,18 +74,47 @@ class AssignedCaseCardList extends StatelessWidget {
             ),
           ),
           ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            separatorBuilder: (context, index) =>
-                Divider(height: 1, color: Color(0xFFF3F4F6)),
-            itemBuilder: (context, index) => CaseCardWidget(
-              caseNo: 'Case #${index + 1}',
-              status: 'Pending',
-              age: '25',
-              gender: 'Male',
-            ),
-          ),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: assignedCases.length,
+              separatorBuilder: (context, index) =>
+                  Divider(height: 1, color: Color(0xFFF3F4F6)),
+              itemBuilder: (context, index) {
+                log(assignedCases.length.toString());
+                final currentCase = assignedCases[index];
+                final caseDetail =
+                    assignedCases[index].caseDetails?.isNotEmpty == true
+                        ? assignedCases[index].caseDetails!.first
+                        : null;
+
+                return CaseCardWidget(
+                  caseNo:
+                      "BUR-${DateTime.now().year}-${currentCase.id.toString()}",
+                  caseName: currentCase.caseName ?? "Unknown", // Add case name
+                  status: currentCase.status,
+                  age: currentCase.mancipalityRecord?.graveNumber,
+                  gender: currentCase.mancipalityRecord?.preferredCemetery,
+                  progress: _calculateProgress(currentCase.status),
+                  onStartGhusl: () {
+                    controller.updateCaseStatus(
+                      caseDetail?.id,
+                      "ghusal-started",
+                      context,
+                    );
+                  },
+                  onCompleteGhusl: () {
+                    controller.updateCaseStatus(
+                      caseDetail?.id,
+                      "ghusal-completed",
+                      context,
+                    );
+                  },
+                  burrialSchedule:
+                      "${currentCase.mancipalityRecord?.sect}, ${currentCase.mancipalityRecord?.religion}",
+                  burrialTiming:
+                      currentCase.mancipalityRecord?.burialTiming ?? "",
+                );
+              }),
         ],
       ),
     );

@@ -157,6 +157,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.mw,
+      height: context.mh * 0.13,
       margin: EdgeInsets.all(context.mw * 0.025),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.95),
@@ -178,7 +179,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
         child: Row(
           children: [
             Flexible(
-              flex: 2,
+              flex: 1,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -209,6 +210,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                0.003.ph(context),
                 GestureDetector(
                   onTap: () {
                     showDialog(
@@ -256,7 +258,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                0.005.ph(context),
+                0.009.ph(context),
                 Row(
                   children: [
                     GestureDetector(
@@ -304,7 +306,48 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    0.02.pw(context),
+                    0.03.pw(context),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.mw * 0.015,
+                          vertical: context.mh * 0.008,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF64748B),
+                          borderRadius:
+                              BorderRadius.circular(context.mw * 0.02),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF64748B).withOpacity(0.3),
+                              blurRadius: context.mw * 0.01,
+                              offset: Offset(0, context.mh * 0.003),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.language,
+                              size: context.mh * 0.016,
+                              color: Colors.white,
+                            ),
+                            SizedBox(width: context.mw * 0.008),
+                            Text(
+                              'العربية',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: context.mh * 0.012,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    0.03.pw(context),
                     GestureDetector(
                       onTap: () {
                         _showLogoutBottomSheet(context);
@@ -317,45 +360,6 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                   ],
                 ),
                 0.005.ph(context),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.mw * 0.015,
-                      vertical: context.mh * 0.008,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF64748B),
-                      borderRadius: BorderRadius.circular(context.mw * 0.02),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF64748B).withOpacity(0.3),
-                          blurRadius: context.mw * 0.01,
-                          offset: Offset(0, context.mh * 0.003),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.language,
-                          size: context.mh * 0.016,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: context.mw * 0.008),
-                        Text(
-                          'العربية',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: context.mh * 0.012,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             )
           ],

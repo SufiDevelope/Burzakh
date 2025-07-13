@@ -69,7 +69,7 @@ class CementryListWidget extends StatelessWidget {
     final controller = Get.find<CementryController>();
     log(controller.isMorticainEdited.value.toString());
     return Container(
-      height: context.mh * 1.1,
+      height:  status == 'Assigned' ? context.mh * 0.8 :  context.mh * 0.75,
       width: context.mw,
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.02, vertical: context.mh * 0.01),

@@ -170,4 +170,12 @@ class AppApis {
   // Mortician Get Casses
   static String morticianGetCasses(morticianId) =>
       "${baseUrl}/api/burzakh-mortician/get-requests/$morticianId";
+
+  // Mortician Change Case Status
+  static String morticianChangeCaseStatus(caseId) =>
+      "${baseUrl}/api/burzakh-mortician/change-case-status/$caseId";
+
+  // Chnage Duty Status Mortician
+  static String changeDutyStatusMortician(morticianId) =>
+      "${baseUrl}/api/burzakh-mortician/change-status/$morticianId";
 }

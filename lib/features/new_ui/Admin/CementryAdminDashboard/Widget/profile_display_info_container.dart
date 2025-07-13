@@ -13,7 +13,6 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
   final String specialRequest;
   final String nameofdeceased;
 
-
   const ProfileDisplayInfoContainer({
     Key? key,
     required this.dateOfDeath,
@@ -21,7 +20,11 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
     required this.familyContact,
     required this.preferredTime,
     required this.graveNo,
-    required this.burrialTiming, required this.preferedCemetery, required this.sect, required this.specialRequest, required this.nameofdeceased,
+    required this.burrialTiming,
+    required this.preferedCemetery,
+    required this.sect,
+    required this.specialRequest,
+    required this.nameofdeceased,
   }) : super(key: key);
 
   @override
@@ -47,52 +50,85 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInfoSection(
-            title: 'NAME OF DECEASED',
-            content: nameofdeceased,
-            context: context,
+          Row(
+            children: [
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'NAME OF DECEASED',
+                  content: nameofdeceased,
+                  context: context,
+                ),
+              ),
+              0.04.pw(context),
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'DATE OF DEATH',
+                  content: dateOfDeath,
+                  context: context,
+                ),
+              ),
+            ],
           ),
           0.01.ph(context),
-          _buildInfoSection(
-            title: 'DATE OF DEATH',
-            content: dateOfDeath,
-            context: context,
+          Row(
+            children: [
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'GRAVE NO',
+                  content: graveNo,
+                  context: context,
+                ),
+              ),
+              0.04.pw(context),
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'Case Status',
+                  content: burialTime,
+                  context: context,
+                ),
+              ),
+            ],
           ),
           0.01.ph(context),
-          _buildInfoSection(
-            title: 'GRAVE NO',
-            content: graveNo,
-            context: context,
+          Row(
+            children: [
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'FAMILY CONTACT',
+                  content: familyContact,
+                  context: context,
+                ),
+              ),
+              0.04.pw(context),
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'BURRIAL TIMING',
+                  content: burrialTiming,
+                  context: context,
+                ),
+              ),
+            ],
           ),
           0.01.ph(context),
-          _buildInfoSection(
-            title: 'Case Status',
-            content: burialTime,
-            context: context,
-          ),
-          0.01.ph(context),
-          _buildInfoSection(
-            title: 'FAMILY CONTACT',
-            content: familyContact,
-            context: context,
-          ),
-          0.01.ph(context),
-          _buildInfoSection(
-            title: 'BURRIAL TIMING',
-            content: burrialTiming,
-            context: context,
-          ),
-          0.01.ph(context),
-          _buildInfoSection(
-            title: 'PREFERED CEMETERY',
-            content: preferedCemetery,
-            context: context,
-          ),
-          0.01.ph(context),
-          _buildInfoSection(
-            title: 'SECT & RELIGION',
-            content: sect,
-            context: context,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'PREFERED CEMETERY',
+                  content: preferedCemetery,
+                  context: context,
+                ),
+              ),
+              0.04.pw(context),
+              Expanded(
+                child: _buildInfoSection(
+                  title: 'SECT & RELIGION',
+                  content: sect,
+                  context: context,
+                ),
+              ),
+            ],
           ),
           0.01.ph(context),
           _buildInfoSection(

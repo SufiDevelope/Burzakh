@@ -236,48 +236,6 @@ class CDADashboardHeaderWidget extends StatelessWidget {
               ),
             ),
 
-            // Notification Icon
-            // if (notificationCount > 0) ...[
-            //   Stack(
-            //     children: [
-            //       Container(
-            //         width: context.mw * 0.1,
-            //         height: context.mw * 0.1,
-            //         decoration: BoxDecoration(
-            //           color: Colors.white.withOpacity(0.2),
-            //           borderRadius: BorderRadius.circular(8),
-            //         ),
-            //         child: Icon(
-            //           Icons.notifications_outlined,
-            //           color: Colors.white,
-            //           size: context.mh * 0.025,
-            //         ),
-            //       ),
-            //       if (notificationCount > 0)
-            //         Positioned(
-            //           right: 0,
-            //           top: 0,
-            //           child: Container(
-            //             padding: const EdgeInsets.all(4),
-            //             decoration: const BoxDecoration(
-            //               color: Colors.red,
-            //               shape: BoxShape.circle,
-            //             ),
-            //             child: Text(
-            //               notificationCount > 9 ? '9+' : '$notificationCount',
-            //               style: TextStyle(
-            //                 color: Colors.white,
-            //                 fontSize: context.mh * 0.01,
-            //                 fontWeight: FontWeight.bold,
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //     ],
-            //   ),
-            //   0.03.pw(context),
-            // ],
-
             // Admin Info
             GestureDetector(
               onTap: () => _showLogoutBottomSheet(context),
