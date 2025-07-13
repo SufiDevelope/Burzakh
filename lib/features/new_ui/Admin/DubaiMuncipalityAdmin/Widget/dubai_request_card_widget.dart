@@ -97,12 +97,15 @@ class BurialCardWidget extends StatelessWidget {
               Row(
                 children: [
                   Icon(Icons.local_shipping_outlined,
-                      size: context.mh * 0.018, color: Colors.grey),
+                      size: context.mh * 0.015, color: Colors.grey),
                   0.01.pw(context),
                   Text(
                     statusAmbulance!,
+                    maxLines: 3,
                     style: TextStyle(
-                        fontSize: context.mh * 0.015, color: Colors.black54),
+                      fontSize: context.mh * 0.013,
+                      color: Colors.black54,
+                    ),
                   ),
                 ],
               ),

@@ -16,6 +16,7 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
   final String? imageurl;
   final bool isArabic;
 
+
   const MorticianDashboardHeaderWidget({
     super.key,
     required this.title,
@@ -239,14 +240,17 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
               ),
             ),
             0.01.pw(context),
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xFF475569),
-                borderRadius: BorderRadius.circular(8),
+            GestureDetector(
+              onTap: onNotificationPressed,
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Color(0xFF475569),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(Icons.notifications_none_outlined,
+                    color: Colors.white, size: 16),
               ),
-              child: Icon(Icons.notifications_none_outlined,
-                  color: Colors.white, size: 16),
             ),
             0.01.pw(context),
             GestureDetector(

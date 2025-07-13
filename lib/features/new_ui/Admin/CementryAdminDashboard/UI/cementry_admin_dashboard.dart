@@ -27,6 +27,16 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
   final controller = Get.put(CementryController());
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.getAllCementryRequest();
+      controller.getActiveMorticians();
+      controller.getAllMorticians();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -123,7 +133,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                     "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
                                 caseid:
                                     'BUR-${DateTime.now().year}-${data.id ?? ""}',
-                                age: 'Age 75',
+                                age: '',
                                 dateOfDeath: caseDetail?.dateOfDeath ?? "N/A",
                                 burrialTime:
                                     caseDetail?.caseStatus?.toUpperCase() ??
@@ -159,6 +169,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                         '',
                                 nameofdeceased:
                                     caseDetail?.nameOfDeceased ?? '',
+                                mortiId: data.morticianId,
                                 // muncipalityCleared: caseDetail.,
                               );
                             },

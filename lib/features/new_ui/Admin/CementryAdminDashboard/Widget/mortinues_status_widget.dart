@@ -16,7 +16,6 @@ class MorticiansStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.mw,
-      height: context.mh * 0.5,
       padding: EdgeInsets.all(context.mh * 0.02),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -31,6 +30,7 @@ class MorticiansStatusWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min, // This makes the column take minimum space
         children: [
           // Header
           Row(
@@ -55,17 +55,16 @@ class MorticiansStatusWidget extends StatelessWidget {
           SizedBox(height: context.mh * 0.02),
 
           // Morticians List
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: morticians.morticians?.length ?? 0,
-              itemBuilder: (context, index) {
-                return _buildMorticianItem(
-                    context,
-                    morticians.morticians?[index] ?? MorticiansListData(),
-                    index);
-              },
-            ),
+          ListView.builder(
+            shrinkWrap: true, // This makes ListView take only the space it needs
+            physics: const NeverScrollableScrollPhysics(), // Disable scrolling since parent will handle it
+            itemCount: morticians.morticians?.length ?? 0,
+            itemBuilder: (context, index) {
+              return _buildMorticianItem(
+                  context,
+                  morticians.morticians?[index] ?? MorticiansListData(),
+                  index);
+            },
           )
         ],
       ),

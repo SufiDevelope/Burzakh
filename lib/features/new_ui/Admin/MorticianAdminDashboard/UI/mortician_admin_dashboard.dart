@@ -3,6 +3,7 @@ import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
+import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/UI/mortician_notifs_screen.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/AssignedCaseCardList/assigned_case_card_list_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/DutyStatusCountWidget/duty_status_count_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/GridViewStatsWidget/grid_view_stats_widget.dart';
@@ -74,6 +75,12 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
                       ),
                       (route) => false,
                     );
+                  },
+                  onNotificationPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return MorticianNotifs();
+                    }));
                   },
                 ),
                 Obx(() {

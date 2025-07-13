@@ -184,15 +184,26 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                         itemBuilder: (context, index) {
                           var data =
                               controller.filterAmbulanceList.value[index];
-                          log(data.dispatchedInfo?.length.toString() ?? "");
-                          
+
+                          // Build a combined string of "Status for CaseName"
+                          String statusAmbulance = "Not Assigned";
+                          if (data.dispatchedInfo != null &&
+                              data.dispatchedInfo!.isNotEmpty) {
+                            statusAmbulance =
+                                data.dispatchedInfo!.map((dispatch) {
+                              final status = dispatch.status ?? "Unknown";
+                              final caseName = dispatch.caseName ?? "Unnamed";
+                              return "$status for $caseName";
+                            }).join(", ");
+                          }
+
                           return BurialCardWidget(
                             name: "${data.driverName ?? ''}",
                             caseId: "${data.vehicleNumber ?? ''}",
                             location: data.currentLocation ?? "",
                             date: DateFormat('yyyy-MM-dd').format(
-                              DateTime.parse(data.createdAt ??
-                                  DateTime.now().toIso8601String()),
+                              DateTime.tryParse(data.createdAt ?? "") ??
+                                  DateTime.now(),
                             ),
                             status: data.status ?? "",
                             messageCount: 2,
@@ -218,8 +229,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                                 },
                               );
                             },
-                            statusAmbulance:
-                                "${data.dispatchedInfo?[index].status} for",
+                            statusAmbulance: statusAmbulance,
                           );
                         },
                       );

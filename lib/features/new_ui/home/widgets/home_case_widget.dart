@@ -95,7 +95,7 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
               ),
             ],
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 4), 
           LinearProgressIndicator(
             value: double.parse(widget.caseModel.ratio),
             borderRadius: BorderRadius.circular(10),

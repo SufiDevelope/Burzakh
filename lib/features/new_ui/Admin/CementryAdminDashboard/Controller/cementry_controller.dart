@@ -19,13 +19,6 @@ class CementryController extends GetxController {
     filterRequestUsingStatus(text);
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    getAllCementryRequest();
-    getActiveMorticians();
-    getAllMorticians();
-  }
 
   var model = CementryCassesModel().obs;
   final rxRequestStatusForAllCementryRequest = Status.loading.obs;

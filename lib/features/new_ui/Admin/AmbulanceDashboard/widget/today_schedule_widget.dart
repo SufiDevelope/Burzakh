@@ -114,14 +114,10 @@ class TodaysScheduleWidget extends StatelessWidget {
                                     ),
                                     0.005.ph(context),
                                     Text(
-                                      scheduleItems[index]
-                                                  .caseDetails?[index] ==
-                                              null
-                                          ? ""
-                                          : scheduleItems[index]
-                                                  .caseDetails?[index]
-                                                  .location ??
-                                              "",
+                                      // Fixed: Check if caseDetails exists and has items before accessing
+                                      (item.caseDetails != null && item.caseDetails!.isNotEmpty)
+                                          ? item.caseDetails!.first.location ?? ""
+                                          : "",
                                       style: TextStyle(
                                         fontSize: context.mh * 0.016,
                                         color: Colors.grey[600],

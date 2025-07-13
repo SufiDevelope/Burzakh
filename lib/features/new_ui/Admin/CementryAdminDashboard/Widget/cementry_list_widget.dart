@@ -37,6 +37,7 @@ class CementryListWidget extends StatelessWidget {
   final String sect;
   final String specialRequest;
   final String nameofdeceased;
+  final dynamic mortiId;
 
   CementryListWidget({
     super.key,
@@ -62,6 +63,7 @@ class CementryListWidget extends StatelessWidget {
     required this.sect,
     required this.specialRequest,
     required this.nameofdeceased,
+    required this.mortiId,
   });
 
   @override
@@ -69,7 +71,7 @@ class CementryListWidget extends StatelessWidget {
     final controller = Get.find<CementryController>();
     log(controller.isMorticainEdited.value.toString());
     return Container(
-      height:  status == 'Assigned' ? context.mh * 0.8 :  context.mh * 0.75,
+      height: mortiId != null ? context.mh * 0.8 : context.mh * 0.75,
       width: context.mw,
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.02, vertical: context.mh * 0.01),
@@ -124,33 +126,6 @@ class CementryListWidget extends StatelessWidget {
                                   fontSize: context.mh * 0.015,
                                   color: Color(0xFF9CA3AF),
                                   fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              0.01.pw(context),
-                              Container(
-                                width: context.mw * 0.01,
-                                height: context.mh * 0.005,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF9CA3AF),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              0.01.pw(context),
-                              Text(
-                                age,
-                                style: TextStyle(
-                                  fontSize: context.mw * 0.035,
-                                  color: Color(0xFF9CA3AF),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              0.01.pw(context),
-                              Container(
-                                width: context.mw * 0.01,
-                                height: context.mh * 0.005,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF9CA3AF),
-                                  borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
                             ],
@@ -265,7 +240,8 @@ class CementryListWidget extends StatelessWidget {
                     burrialTiming: burrialTiming,
                     preferedCemetery: preferedCemetery,
                     sect: sect,
-                    specialRequest: specialRequest, nameofdeceased: nameofdeceased,
+                    specialRequest: specialRequest,
+                    nameofdeceased: nameofdeceased,
                   ),
                   0.02.ph(context),
                   // Assign Mortician Section
@@ -305,7 +281,7 @@ class CementryListWidget extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: status == "Assigned" &&
+                                child: mortiId != null &&
                                         controller.isMorticainEdited.value ==
                                             false
                                     ? CurrentlyAssignedWidget(

@@ -164,13 +164,27 @@ class DubaiController extends GetxController {
   final rxRequestStatusForAllDubaiAmb = Status.loading.obs;
   RxList<Ambulances> ambulancesList = <Ambulances>[].obs;
   RxList<Ambulances> filterAmbulanceList = <Ambulances>[].obs;
+  RxList<DispatchedInfo> filterAmbulanceDispatchedList = <DispatchedInfo>[].obs;
 
   void setRxRequestStatusForAllAmbulance(Status value) =>
       rxRequestStatusForAllDubaiAmb.value = value;
+
   void setGetRequesForDubaiAmbulance(AmbulancesModel data) {
     ambulanceModel.value = data;
     ambulancesList.value = data.ambulances ?? [];
     filterAmbulanceList.value = ambulancesList;
+
+    // Properly flatten all dispatched info from all ambulances
+    List<DispatchedInfo> allDispatchedInfo = [];
+
+    for (var ambulance in data.ambulances ?? []) {
+      if (ambulance.dispatchedInfo != null &&
+          ambulance.dispatchedInfo!.isNotEmpty) {
+        allDispatchedInfo.addAll(ambulance.dispatchedInfo!);
+      }
+    }
+
+    filterAmbulanceDispatchedList.value = allDispatchedInfo;
   }
 
   void getAmbulanceApi() async {
