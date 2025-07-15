@@ -390,6 +390,7 @@ class DubaiController extends GetxController {
               null, selectedBurialCase.value, vehicleId, selectedMosque.value)
           .then((value) {
         log(value.toString());
+        getAmbulanceApi();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(value.toString()),

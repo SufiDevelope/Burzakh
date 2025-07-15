@@ -178,4 +178,8 @@ class AppApis {
   // Chnage Duty Status Mortician
   static String changeDutyStatusMortician(morticianId) =>
       "${baseUrl}/api/burzakh-mortician/change-status/$morticianId";
+
+  // Visitor Alert Case Api
+  static String visitorAlertCaseApi(prayerTime, day) =>
+      "${baseUrl}/api/burzakh-visitors/alerts?prayer_time=${prayerTime}&day=${day}";
 }
