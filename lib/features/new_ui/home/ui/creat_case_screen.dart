@@ -9,12 +9,12 @@ import 'package:material_symbols_icons/symbols.dart';
 
 import '../../../../core/app/di_container.dart';
 import '../../../../widgets/custom_button.dart';
-import '../../../../widgets/under_construction_dialog.dart';
 import '../../../home/presentation/controller/cubit.dart';
 import '../../../police_approval/presentation/widgets/document_recieved_dialog.dart';
 
 class CreatCaseScreen extends StatefulWidget {
-  const CreatCaseScreen({super.key});
+  final int? restingPlaceIndex;
+  const CreatCaseScreen({super.key,  this.restingPlaceIndex});
 
   @override
   State<CreatCaseScreen> createState() => _CreatCaseScreenState();
@@ -63,10 +63,12 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                       onPressed: () async {
                         if (documentCubit.isUploadingdocs == false) {
                           String response = await documentCubit.uploadDocument(
-                              nameofdeceased,
-                              causeofdeath,
-                              dateofdeath,
-                              locationofdeath);
+                            nameofdeceased,
+                            causeofdeath,
+                            dateofdeath,
+                            locationofdeath,
+                            widget.restingPlaceIndex,
+                          );
                           if (response == "200") {
                             showDialog(
                               context: context,
@@ -300,7 +302,7 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                                 AppColor.grey(),
                                 subtitle: "Dubai Municipality",
                                 context: context,
-                              ),   
+                              ),
                             ],
                           ),
                         ),

@@ -39,9 +39,9 @@ class BottomWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 color: !isSelected
                     ? Colors.transparent
-                    : AppColor.primary().withOpacity(.1)),
+                    : Color(0xffaf8646).withOpacity(.1)),
             child: SvgPicture.asset(icon,
-                color: !isSelected ? AppColor.grey() : AppColor.primary(),
+                color: !isSelected ? AppColor.grey() : Color(0xffaf8646),
                 height: context.mh * 0.017,
                 width: context.mw * 0.017),
           ),
@@ -49,7 +49,7 @@ class BottomWidget extends StatelessWidget {
             text: text,
             fontSize: context.mh * 0.013,
             overflow: TextOverflow.ellipsis,
-            color: !isSelected ? AppColor.grey() : AppColor.primary(),
+            color: !isSelected ? AppColor.grey() : Color(0xffaf8646),
             fontFamily: !isSelected ? 'nr' : 'ns',
             fontWeight: !isSelected ? FontWeight.w400 : FontWeight.w600,
           )

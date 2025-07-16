@@ -3,6 +3,7 @@ import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
+import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/visitor_alert_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/settings/ui/choose_support_type_screen.dart';
 import 'package:burzakh/features/new_ui/settings/ui/setting_screen.dart';
 import 'package:burzakh/features/notification/presentation/controller/notification_controller.dart';
@@ -44,18 +45,31 @@ class HomeTopbar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        AppText(
-          text: "Welcome,",
-          fontSize: context.mh * 0.015,
-          color: AppColor.greyLight(),
-          fontWeight: FontWeight.w500,
-        ),
-        const SizedBox(height: 2),
-        AppText(
-          text: userName,
-          fontSize: context.mh * 0.02,
-          fontWeight: FontWeight.bold,
-        ),
+        Row(
+          children: [
+            _buildProfileMenuButton(context),
+            0.03.pw(context),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  text: "Welcome,",
+                  fontSize: context.mh * 0.015,
+                  color: Color(0xff6a655d),
+                  fontWeight: FontWeight.w500,
+                ),
+                const SizedBox(height: 2),
+                AppText(
+                  text: userName,
+                  fontSize: context.mh * 0.02,
+                  color: Color(0xff1a1913),
+                  fontWeight: FontWeight.bold,
+                ),
+              ],
+            )
+          ],
+        )
       ],
     );
   }
@@ -66,11 +80,23 @@ class HomeTopbar extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         // Notification Button
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VisitorAlertAdminDashboard(),
+              ),
+            );
+          },
+          child: CircleAvatar(
+            backgroundColor: Color(0xffe6e7eb),
+            child: Icon(Icons.person_4_outlined, color: Color(0xff706c64)),
+          ),
+        ),
+        0.02.pw(context),
         _buildNotificationButton(context, controller),
-        const SizedBox(width: 12),
-
-        // Profile Menu Button
-        _buildProfileMenuButton(context),
+        0.02.pw(context),
       ],
     );
   }
@@ -97,7 +123,9 @@ class HomeTopbar extends StatelessWidget {
                 radius: 8,
                 backgroundColor: Colors.red,
                 child: AppText(
-                  text: controller.model.value.notifications?.length.toString() ?? '0',
+                  text:
+                      controller.model.value.notifications?.length.toString() ??
+                          '0',
                   fontSize: 10,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -114,8 +142,8 @@ class HomeTopbar extends StatelessWidget {
     return InkWell(
       onTap: () => _showProfileMenu(context),
       child: CircleAvatar(
-        backgroundColor: AppColor.white(),
-        child: Icon(Icons.person, color: AppColor.buttonColor),
+        backgroundColor: Color(0xffe6e7eb),
+        child: Icon(Icons.person_2_outlined, color: Color(0xff706c64)),
       ),
     );
   }
@@ -277,17 +305,6 @@ class HomeTopbar extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  String _getGreeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Good Morning';
-    } else if (hour < 17) {
-      return 'Good Afternoon';
-    } else {
-      return 'Good Evening';
-    }
   }
 
   String _getUserInitials() {

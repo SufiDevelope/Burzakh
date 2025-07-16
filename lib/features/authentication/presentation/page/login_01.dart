@@ -3,6 +3,7 @@ import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/authentication/presentation/page/forgot_possword.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_with_uae.dart';
 import 'package:burzakh/features/authentication/presentation/page/sign_up.dart';
+import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/visitor_alert_admin_dashboard.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -130,14 +131,14 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
     setState(() {
       _password = value;
       _passwordStrength = checkPasswordStrength(value);
-      if (_passwordError.isNotEmpty && value.length >= 6) _passwordError = '';
+      if (_passwordError.isNotEmpty && value.length >= 2) _passwordError = '';
     });
   }
 
   void handleSubmit(BuildContext context) async {
     final emailErr = validateEmail(_email);
     final passErr =
-        _password.length < 8 ? 'Password must be at least 8 characters' : '';
+        _password.length < 2 ? 'Password must be at least 2 characters' : '';
 
     setState(() {
       _emailError = emailErr;
@@ -149,7 +150,8 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
         _isLoading = true;
       });
 
-      await authCubit.login(email: _email, password: _password, context: context);
+      await authCubit.login(
+          email: _email, password: _password, context: context);
     }
   }
 
@@ -535,7 +537,7 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                               focusNode: _passwordFocusNode,
                                               onChanged: handlePasswordChange,
                                               obscureText: !_showPassword,
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                 fontSize: context.mh * 0.015,
                                                 fontWeight: FontWeight.w300,
                                                 color: mainText,
@@ -543,7 +545,7 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                               decoration: InputDecoration(
                                                 hintText:
                                                     'Enter your password'.tr(),
-                                                hintStyle:  TextStyle(
+                                                hintStyle: TextStyle(
                                                   fontSize: context.mh * 0.015,
                                                   fontWeight: FontWeight.w300,
                                                   color: placeholderText,
@@ -807,10 +809,11 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                               bloc: authCubit,
                                               builder: (_, state) {
                                                 return ElevatedButton(
-                                                  onPressed:
-                                                      authCubit.isLoginLoading
-                                                          ? null
-                                                          : () => handleSubmit(context),
+                                                  onPressed: authCubit
+                                                          .isLoginLoading
+                                                      ? null
+                                                      : () =>
+                                                          handleSubmit(context),
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
@@ -1009,6 +1012,7 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                               color: subtleText,
                                             ),
                                           ),
+                                          0.01.pw(context),
                                           MouseRegion(
                                             onEnter: (_) => setState(() =>
                                                 _hoveredButton = 'signup'),
@@ -1022,8 +1026,8 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                                         : 1.0),
                                               duration: const Duration(
                                                   milliseconds: 300),
-                                              child: TextButton(
-                                                onPressed: () {
+                                              child: GestureDetector(
+                                                onTap: () {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
@@ -1034,8 +1038,8 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                                 child: Text(
                                                   'Sign up here'.tr(),
                                                   style: TextStyle(
-                                                    fontSize: context.mh *
-                                                            0.012,
+                                                    fontSize:
+                                                        context.mh * 0.012,
                                                     fontWeight: FontWeight.w500,
                                                     color: richGold,
                                                   ),
@@ -1045,6 +1049,45 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                           ),
                                         ],
                                       ),
+                                      0.01.ph(context),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Contine as'.tr(),
+                                            style: TextStyle(
+                                              fontSize: context.mh * 0.014,
+                                              color: subtleText,
+                                            ),
+                                          ),
+                                          0.01.pw(context),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        VisitorAlertAdminDashboard(),
+                                                  ));
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.zero,
+                                              child: Text(
+                                                'Visitor'.tr(),
+                                                style: TextStyle(
+                                                  fontSize: context.mh * 0.012,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: richGold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      0.01.ph(context),
 
                                       // Security Notice
                                       Padding(

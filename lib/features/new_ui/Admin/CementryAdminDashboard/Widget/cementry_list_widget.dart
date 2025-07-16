@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/Model/AdminModels/GetActiveMorticianModel/get_active_mortician_model.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
@@ -7,7 +6,7 @@ import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/crea
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/currently_assigned_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/custom_gradient_color.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/profile_display_info_container.dart';
-import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/visitor_alert_portal_dialog.dart';
+import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/send_visitor_portal_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -419,7 +418,19 @@ class CementryListWidget extends StatelessWidget {
                         primaryColor: Colors.black87,
                         icon: Icons.system_update_tv_outlined,
                         onTap: () {
-                          showVisitorPortalDialog(context);
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) => SendtoVisitorAlertDialog(
+                              nameEnglish: name,
+                              nameArabic: "جون دو",
+                              alertTime: burrialTiming,
+                              mosqueName: "",
+                              descriptionEnglish: "",
+                              descriptionArabic: "",
+                              cemeteryLoaction: preferedCemetery,
+                            ),
+                          );
                         },
                       ),
                     ],

@@ -83,9 +83,9 @@ class TodayPiorityWidget extends StatelessWidget {
                   hasReleaseForm || hasPoliceClearance
                       ? Icons.download_outlined
                       : Icons.upload_file_outlined,
-                  color: AppColor.white(),
+                  color: Color(0xffad8443),
                 ),
-                backgroundColor: AppColor.buttonColor,
+                backgroundColor: Color(0xfff7f1e8),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -110,7 +110,7 @@ class TodayPiorityWidget extends StatelessWidget {
                       text: hasReleaseForm || hasPoliceClearance
                           ? 'Ready for download'
                           : 'Upload required document',
-                      color: AppColor.greyLight(),
+                      color: Color(0xff6a655d),
                       fontSize: 12,
                     ),
                   ],
@@ -127,14 +127,14 @@ class TodayPiorityWidget extends StatelessWidget {
               text:
                   'Your release form is ready for download. Please download and keep it safe.',
               fontSize: context.mh * 0.013,
-              color: AppColor.greyLight(),
+              color: Color(0xff6a655d),
             ),
           if (hasPoliceClearance)
             AppText(
               text:
                   'Your Police Clearance Certificate is ready for download. Please save a copy for future reference.',
               fontSize: context.mh * 0.013,
-              color: AppColor.greyLight(),
+              color: Color(0xff6a655d),
             ),
           if (!hasReleaseForm &&
               !hasPoliceClearance &&
@@ -145,14 +145,14 @@ class TodayPiorityWidget extends StatelessWidget {
                   text:
                       'Admin has requested an additional document',
                   fontSize: context.mh * 0.014,
-                  color: AppColor.greyLight(),
+                 color: Color(0xff6a655d),
                 ),
                 AppText(
                   text:
                       ': ${caseModel.additional_document}',
                   fontSize: context.mh * 0.013,
                   maxLines: 3,
-                  color: AppColor.greyLight(),
+                 color: Color(0xff6a655d),
                 ),
               ],
             ),
@@ -164,7 +164,7 @@ class TodayPiorityWidget extends StatelessWidget {
             CustomElevatedButton(
               fontSize: context.mh * 0.016,
               text: 'Download Release Form',
-              bgColor: AppColor.buttonColor,
+             bgColor: Color(0xffc29118),
               onPressed: () {
                 _downloadFile(caseModel.releaseForm);
               },
@@ -173,7 +173,7 @@ class TodayPiorityWidget extends StatelessWidget {
             CustomElevatedButton(
               fontSize: context.mh * 0.016,
               text: 'Download Police Clearance',
-              bgColor: AppColor.buttonColor,
+              bgColor: Color(0xffc29118),
               onPressed: () {
                 _downloadFile(caseModel.police_clearance!);
               },
@@ -184,7 +184,7 @@ class TodayPiorityWidget extends StatelessWidget {
             CustomElevatedButton(
               fontSize: context.mh * 0.016,
               text: 'Upload Document',
-              bgColor: AppColor.buttonColor,
+             bgColor: Color(0xffc29118),
               onPressed: () {
                 controller.pickImageUploadUser(
                     caseModel.id, caseModel.userId, context);

@@ -62,20 +62,21 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                       children: [
                         AppText(
                           text: "Support for Emirati Families",
-                          color: Colors.black,
+                          color: Color(0xff1a1913),
                           fontSize: context.mh * 0.017,
                           fontWeight: FontWeight.w600,
                         ),
                         0.008.ph(context),
                         AppText(
-                            text:
-                                "As part of the UAE's commitment to its citizens, Emirati families are offered additional support during times of loss.",
-                            color: AppColor.grey(),
-                            fontSize: context.mh * 0.014),
+                          text:
+                              "As part of the UAE's commitment to its citizens, Emirati families are offered additional support during times of loss.",
+                          color: Color(0xff4d5765),
+                          fontSize: context.mh * 0.014,
+                        ),
                         0.01.ph(context),
                         AppText(
                           text: "Available Services",
-                          color: AppColor.black(),
+                          color: Color(0xff1a1913),
                           fontSize: context.mh * 0.017,
                           fontFamily: 'ns',
                         ),
@@ -91,7 +92,9 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ServiceRequestConfirmationScreen(id: 'CDA',),
+                                              ServiceRequestConfirmationScreen(
+                                            id: 'CDA',
+                                          ),
                                         ));
                                     // showModalBottomSheet(
                                     //   context: context,
@@ -131,7 +134,9 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            RtaServiceRequestScreen(id: 'RTA',),
+                                            RtaServiceRequestScreen(
+                                          id: 'RTA',
+                                        ),
                                       ),
                                     );
                                     // showModalBottomSheet(

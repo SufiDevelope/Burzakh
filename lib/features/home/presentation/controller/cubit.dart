@@ -51,6 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   int selectedCaseIndex = 0;
 
+
   void selectCase(int index) {
     selectedCaseIndex = index;
     emit(HomeLoaded());
@@ -307,7 +308,7 @@ class HomeCubit extends Cubit<HomeState> {
       TextEditingController nameOfDeceased,
       TextEditingController causeOfDeath,
       TextEditingController deathDate,
-      TextEditingController deathLocation) async {
+      TextEditingController deathLocation, restingPlace) async {
     if (deathNoti == null ||
         hospitalCerti == null ||
         passportBack == null ||
@@ -318,7 +319,7 @@ class HomeCubit extends Cubit<HomeState> {
       isLoading(true);
       DocumentUploadModel model = DocumentUploadModel(
         userId: "${_authenticationCubit.userModel!.id}",
-        restingPlace: restingPlaceIndex == 0 ? "Hospital" : "Home",
+        restingPlace: restingPlace == 1 ? "Hospital" : "Home",
         deathNotificationFile: deathNoti!,
         hospitalCertification: hospitalCerti!,
         passportOrEmirateIdFront: passportFront!,

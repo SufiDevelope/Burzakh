@@ -19,7 +19,6 @@ class CementryController extends GetxController {
     filterRequestUsingStatus(text);
   }
 
-
   var model = CementryCassesModel().obs;
   final rxRequestStatusForAllCementryRequest = Status.loading.obs;
   final CementryAdminRepo repo = CementryAdminHttpRepo();
@@ -146,6 +145,17 @@ class CementryController extends GetxController {
   ];
   final statusOptions = ['Confirmed', 'Pending', 'Cancelled'];
 
+  var selectedAlertTime = ''.obs; // default can be 'Fajar'
+  List<String> alertTimeOptions = [
+    'Fajr',
+    'Dhuhr',
+    'Asr',
+    'Maghrib',
+    'Isha',
+    'Custom Time'
+  ];
+  var customAlertTime = ''.obs;
+
   void toggleImportantAlert() {
     isImportantAlert.value = !isImportantAlert.value;
   }
@@ -156,8 +166,9 @@ class CementryController extends GetxController {
     publishLoading.value = value;
   }
 
-  void createVisitorAlertApi(BuildContext context) async {
+  void sendVisitorAlertApi(BuildContext context) async {
     setPublishLoading(true);
+    log(alertTimeController.text);
     repo
         .createVisitorAlertApi(
       nameEnglishController.text,
@@ -195,6 +206,8 @@ class CementryController extends GetxController {
       selectedStatus.value = 'Confirmed';
       isImportantAlert.value = false;
       isImportantAlert.refresh();
+      selectedAlertTime.value = '';
+      customAlertTime.value = '';
       Navigator.pop(context);
     }).onError((error, stackTrace) {
       log(error.toString());
@@ -376,5 +389,65 @@ class CementryController extends GetxController {
       log(e.toString());
       setRxRequestStatusForAllMorticians(Status.error);
     }
+  }
+
+  RxBool publishLoadingSend = false.obs;
+
+  void setPublishLoadingSend(bool value) {
+    publishLoadingSend.value = value;
+  }
+
+  void sendTOVisitorAlertApi(
+    BuildContext context,
+    name,
+    alertTime,
+    cemetery,
+    mosque,
+    descriptionEnglish,
+    descriptionArabic,
+  ) async {
+    setPublishLoadingSend(true);
+    repo
+        .createVisitorAlertApi(
+      name,
+      selectedGender.value,
+      alertTime,
+      cemetery,
+      mosque,
+      descriptionEnglish,
+      descriptionArabic,
+      selectedStatus.value,
+      isImportantAlert.value,
+    )
+        .then((value) {
+      log(value.toString());
+      setPublishLoadingSend(false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(value.toString()),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            )),
+      );
+
+      nameEnglishController.clear();
+      nameArabicController.clear();
+      descriptionEnglishController.clear();
+      descriptionArabicController.clear();
+      mosqueNameController.clear();
+      alertTimeController.clear();
+      selectedGender.value = 'Male';
+      selectedCemeteryLocation.value = 'Al Qusais Cemetery';
+      selectedStatus.value = 'Confirmed';
+      isImportantAlert.value = false;
+      isImportantAlert.refresh();
+      Navigator.pop(context);
+    }).onError((error, stackTrace) {
+      log(error.toString());
+      setPublishLoadingSend(false);
+    });
   }
 }

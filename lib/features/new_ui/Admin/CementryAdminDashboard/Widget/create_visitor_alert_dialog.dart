@@ -44,7 +44,8 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                   children: [
                     _buildNameEnglishField(controller, context),
                     _buildGenderDropdown(controller, context),
-                    _buildAlertTimeField(controller, context),
+                    // _buildAlertTimeField(controller, context),
+                    _buildAlertTimeDropdown(controller, context),
                     _buildCemeteryLocationDropdown(controller, context),
                     _buildMosqueNameField(controller, context),
                     _buildDescriptionEnglishField(controller, context),
@@ -114,25 +115,25 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildNameArabicField(
-      CementryController controller, BuildContext context) {
-    return _buildTextField(
-      label: 'Name (Arabic)',
-      controller: controller.nameArabicController,
-      textDirection: TextDirection.rtl,
-      context: context,
-    );
-  }
+  // Widget _buildNameArabicField(
+  //     CementryController controller, BuildContext context) {
+  //   return _buildTextField(
+  //     label: 'Name (Arabic)',
+  //     controller: controller.nameArabicController,
+  //     textDirection: TextDirection.rtl,
+  //     context: context,
+  //   );
+  // }
 
-  Widget _buildAlertTimeField(
-      CementryController controller, BuildContext context) {
-    return _buildTextField(
-      label: 'Alert Time',
-      controller: controller.alertTimeController,
-      textDirection: TextDirection.ltr,
-      context: context,
-    );
-  }
+  // Widget _buildAlertTimeField(
+  //     CementryController controller, BuildContext context) {
+  //   return _buildTextField(
+  //     label: 'Alert Time',
+  //     controller: controller.alertTimeController,
+  //     textDirection: TextDirection.ltr,
+  //     context: context,
+  //   );
+  // }
 
   Widget _buildMosqueNameField(
       CementryController controller, BuildContext context) {
@@ -371,7 +372,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
           0.02.pw(context),
           ElevatedButton(
             onPressed: () {
-              controller.createVisitorAlertApi(context);
+              controller.sendVisitorAlertApi(context);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.green.shade600,
@@ -399,5 +400,95 @@ class CreateVisitorAlertDialog extends StatelessWidget {
         ],
       );
     });
+  }
+
+  Widget _buildAlertTimeDropdown(
+      CementryController controller, BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Alert Time',
+          style: TextStyle(
+            fontSize: context.mh * 0.015,
+            fontWeight: FontWeight.w500,
+            color: Colors.black87,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Obx(() => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                DropdownButtonFormField<String>(
+                  value: controller.alertTimeOptions
+                          .contains(controller.selectedAlertTime.value)
+                      ? controller.selectedAlertTime.value
+                      : 'Custom Time',
+                  onChanged: (value) async {
+                    if (value == 'Custom Time') {
+                      TimeOfDay? picked = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                      if (picked != null) {
+                        final formatted = picked.format(context);
+                        controller.customAlertTime.value = formatted;
+                        controller.alertTimeController.text = formatted;
+                      }
+                    } else {
+                      controller.alertTimeController.text = value!;
+                    }
+                    controller.selectedAlertTime.value = value!;
+                  },
+                  items: controller.alertTimeOptions.map((String item) {
+                    return DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: TextStyle(
+                          fontSize: context.mh * 0.015,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide:
+                          BorderSide(color: Colors.blue.shade400, width: 2),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                    filled: true,
+                    fillColor: Colors.grey.shade50,
+                  ),
+                  icon: Icon(Icons.keyboard_arrow_down,
+                      color: Colors.grey.shade600),
+                ),
+                if (controller.selectedAlertTime.value == 'Custom Time' &&
+                    controller.customAlertTime.value.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      'Selected Time: ${controller.customAlertTime.value}',
+                      style: TextStyle(
+                        fontSize: context.mh * 0.015,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+              ],
+            )),
+      ],
+    );
   }
 }

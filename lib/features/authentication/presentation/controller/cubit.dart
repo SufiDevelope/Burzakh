@@ -205,7 +205,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           );
         }
       } else {
-        showMessage("${jsonDecode(data.body)['errors']}", isError: true);
+        showMessage("${jsonDecode(data.body)['message']}", isError: true);
       }
     } else {
       showMessage(response.asLeft(), isError: true);

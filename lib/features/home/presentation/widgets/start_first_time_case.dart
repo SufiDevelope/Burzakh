@@ -1,6 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/features/home/presentation/widgets/select_resting_sheet.dart';
+import 'package:burzakh/features/new_ui/home/widgets/resting_dialog_widget.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -50,13 +51,15 @@ class StartFirstTimeCase extends StatelessWidget {
             height: context.mh * 0.05,
             onPressed: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) => CreatCaseScreen(),));
-              showModalBottomSheet(
-                  context: context, builder: (context) => SelectRestingSheet());
+              // showModalBottomSheet(
+              //     context: context, builder: (context) => SelectRestingSheet());
+              showRestingDialog(context);
             },
             text: "START A CASE",
             textColor: AppColor.white(),
             fontWeight: FontWeight.w600,
             fontSize: context.mh * 0.016,
+            // bgColor: Color(0xff063b31),
           ),
         ],
       ),

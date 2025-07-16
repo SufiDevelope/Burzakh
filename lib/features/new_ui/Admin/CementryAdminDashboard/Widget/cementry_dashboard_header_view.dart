@@ -1,6 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/create_visitor_alert_dialog.dart';
-import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/visitor_alert_portal_dialog.dart';
+import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/visitor_alert_admin_dashboard.dart';
 import 'package:flutter/material.dart';
 
 class CementryDashboardHeaderWidget extends StatelessWidget {
@@ -195,7 +195,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                     child: Text(
                       "Cemetery\nAdmin\nDashboard",
                       style: TextStyle(
-                        fontSize: context.mh * 0.022,
+                        fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                         height: 1.1,
@@ -263,7 +263,13 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showVisitorPortalDialog(context);
+                        // showVisitorPortalDialog(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VisitorAlertAdminDashboard(),
+                          ),
+                        );
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(

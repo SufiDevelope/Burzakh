@@ -190,11 +190,8 @@ class VisitorAlertController extends GetxController {
 
   void getAllCasses() async {
     await repo
-        .visitorAlertCaseApi(
-            currentPrayer.value.toLowerCase() == "dhuhr"
-                ? "zohar"
-                : currentPrayer.value.toLowerCase(),
-            selectedDay.value.toLowerCase())
+        .visitorAlertCaseApi(currentPrayer.value.toLowerCase(),
+            selectedDay.value.toLowerCase(), selectedCemetery.value)
         .then(
       (value) {
         setRxRequestStatusForGetCassesCount(Status.completed);
@@ -206,6 +203,20 @@ class VisitorAlertController extends GetxController {
     });
   }
 
+  RxString selectedCemetery = 'Al Qusais Cemetery'.obs;
+
+  final List<String> cemeteries = [
+    'Al Qusais Cemetery',
+    'Al Warqa Cemetery',
+    'Jumeirah Cemetery',
+    'Dubai Silicon Oasis Cemetery',
+    'Other Cemetery'
+  ];
+
+  void setSelectedCemetery(String cemetery) {
+    selectedCemetery.value = cemetery;
+    getAllCasses();
+  }
 
   void resetData() {
     selectedDay.value = "Today";

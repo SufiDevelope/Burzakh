@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class JanazaScheduleCardWidget extends StatelessWidget {
   final String name;
@@ -19,7 +22,10 @@ class JanazaScheduleCardWidget extends StatelessWidget {
     required this.mercyText,
     required this.timeLabel,
     required this.description,
-    this.isToday = false, required this.cemetery, required this.time, required this.mosque,
+    this.isToday = false,
+    required this.cemetery,
+    required this.time,
+    required this.mosque,
   });
 
   @override
@@ -346,67 +352,96 @@ class JanazaScheduleCardWidget extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: context.mh * 0.06,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFe2e8f0),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Color(0xFFcbd5e1),
-                        width: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Launch Google Maps
+                      launchUrl(Uri.parse(
+                          'https://www.google.com/maps/search/?api=1&query=$cemetery'));
+                    },
+                    child: Container(
+                      height: context.mh * 0.06,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFe2e8f0),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Color(0xFFcbd5e1),
+                          width: 1,
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.directions,
-                          color: Color(0xFF475569),
-                          size: context.mh * 0.022,
-                        ),
-                        0.02.pw(context),
-                        Text(
-                          'Directions',
-                          style: TextStyle(
-                            fontSize: context.mh * 0.018,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.directions,
                             color: Color(0xFF475569),
-                            fontWeight: FontWeight.w600,
+                            size: context.mh * 0.022,
                           ),
-                        ),
-                      ],
+                          0.02.pw(context),
+                          Text(
+                            'Directions',
+                            style: TextStyle(
+                              fontSize: context.mh * 0.018,
+                              color: Color(0xFF475569),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 0.03.pw(context),
                 Expanded(
-                  child: Container(
-                    height: context.mh * 0.06,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFe2e8f0),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Color(0xFFcbd5e1),
-                        width: 1,
+                  child: GestureDetector(
+                    onTap: () async {
+                      final message = '''
+                          *Funeral Announcement*
+                          Deceased: $name
+                          Nationality: UAE
+                          Prayer Time: $time
+                          Burial Location: $cemetery
+                          ${description.isNotEmpty ? "Note: $description" : ""}
+                          ''';
+
+                      final url = Uri.parse(
+                          "https://wa.me/?text=${Uri.encodeComponent(message)}");
+
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(url,
+                            mode: LaunchMode.externalApplication);
+                      } else {
+                        log("WhatsApp not available");
+                      }
+                    },
+                    child: Container(
+                      height: context.mh * 0.06,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFe2e8f0),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Color(0xFFcbd5e1),
+                          width: 1,
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.share,
-                          color: Color(0xFF475569),
-                          size: context.mh * 0.022,
-                        ),
-                        0.02.pw(context),
-                        Text(
-                          'Share',
-                          style: TextStyle(
-                            fontSize: context.mh * 0.018,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.share,
                             color: Color(0xFF475569),
-                            fontWeight: FontWeight.w600,
+                            size: context.mh * 0.022,
                           ),
-                        ),
-                      ],
+                          0.02.pw(context),
+                          Text(
+                            'Share',
+                            style: TextStyle(
+                              fontSize: context.mh * 0.018,
+                              color: Color(0xFF475569),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

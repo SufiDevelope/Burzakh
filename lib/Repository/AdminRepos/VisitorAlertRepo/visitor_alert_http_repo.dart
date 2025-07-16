@@ -6,9 +6,9 @@ import 'package:burzakh/data/Network/network_api_service.dart';
 class VisitorAlertHttpRepo implements VisitorAlertRepo {
   final _api = NetworkApiService();
   @override
-  Future<VisitorAlertCaseModel> visitorAlertCaseApi(prayerTime, day) async {
+  Future<VisitorAlertCaseModel> visitorAlertCaseApi(prayerTime, day, cemetery) async {
     final response = await _api
-        .getGetApiResponse(AppApis.visitorAlertCaseApi(prayerTime, day));
+        .getGetApiResponse(AppApis.visitorAlertCaseApi(prayerTime, day, cemetery));
     return VisitorAlertCaseModel.fromJson(response);
   }
 }

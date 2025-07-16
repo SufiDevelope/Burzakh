@@ -110,7 +110,10 @@ class _AppDashboardState extends State<AppDashboard> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               child: Container(
-                padding: EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width * 0.9,
+                constraints: BoxConstraints(
+                  maxWidth: 450,
+                ),
                 decoration: BoxDecoration(
                   color: AppColor.white(),
                   borderRadius: BorderRadius.circular(20),
@@ -122,160 +125,315 @@ class _AppDashboardState extends State<AppDashboard> {
                     ),
                   ],
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Icon
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: AppColor.primary().withOpacity(0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.flag,
-                        color: AppColor.primary(),
-                        size: 30,
-                      ),
-                    ),
-                    0.03.ph(context),
-
-                    // Title
-                    Text(
-                      'UAE Citizens Only'.tr(),
-                      style: TextStyle(
-                        fontSize: context.mh * 0.020,
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.primary(),
-                        fontFamily: 'ns',
-                      ),
-                    ),
-                    0.016.ph(context),
-
-                    // Message
-                    Text(
-                      'This section is strictly for UAE Citizens only. Kindly confirm you are an Emirati to proceed.'
-                          .tr(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: context.mh * 0.016,
-                        color: AppColor.grey(),
-                        fontFamily: 'nr',
-                        height: 1.4,
-                      ),
-                    ),
-                    0.02.ph(context),
-
-                    // Checkbox
-                    Container(
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: AppColor.bgPrimary(),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: _dontShowAgain,
-                            onChanged: (value) {
-                              setState(() {
-                                _dontShowAgain = value ?? false;
-                              });
-                            },
-                            activeColor: AppColor.primary(),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Golden Header Section
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(24),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFFaf863e),
+                              Color(0xFFb98b2c),
+                              Color(0xFFc69310),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          Expanded(
-                            child: Text(
-                              "Don't show this again".tr(),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            // Icon
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.layers,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            0.02.ph(context),
+
+                            // Title
+                            Text(
+                              'Emirati Citizen Services'.tr(),
+                              style: TextStyle(
+                                fontSize: context.mh * 0.024,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontFamily: 'ns',
+                              ),
+                            ),
+                            0.01.ph(context),
+
+                            // Subtitle
+                            Text(
+                              'Special support services for UAE nationals during\ntheir time of need'
+                                  .tr(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: context.mh * 0.013,
+                                color: Colors.white.withOpacity(0.9),
+                                fontFamily: 'nr',
+                                height: 1.4,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // White Content Section
+                      Container(
+                        padding: EdgeInsets.all(24),
+                        child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Main Title
+                            Text(
+                              'Eligibility Confirmation Required'.tr(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: context.mh * 0.016,
+                                fontWeight: FontWeight.bold,
+                                color: AppColor.primary(),
+                                fontFamily: 'ns',
+                              ),
+                            ),
+                            0.02.ph(context),
+
+                            // Description
+                            Text(
+                              'As part of the UAE\'s commitment to its citizens, additional compassionate services are available exclusively for Emirati families. These services are provided to honor our national heritage and support our community during times of loss.'
+                                  .tr(),
+                                  textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: context.mh * 0.014,
                                 color: AppColor.grey(),
                                 fontFamily: 'nr',
+                                height: 1.5,
                               ),
                             ),
-                          ),
-                        ],
+                            0.025.ph(context),
+
+                            // Services Section
+                            Row(
+                              children: [
+                                Text(
+                                  'Available Services Include:'.tr(),
+                                  style: TextStyle(
+                                    fontSize: context.mh * 0.018,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFFB8956A),
+                                    fontFamily: 'ns',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            0.015.ph(context),
+
+                            // Services List
+                            Container(
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFF8F6F3),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildServiceItem(
+                                      'Mourning tent setup and facilities'),
+                                  0.01.ph(context),
+                                  _buildServiceItem(
+                                      'Directional road signage assistance'),
+                                  0.01.ph(context),
+                                  _buildServiceItem(
+                                      'Specialized administrative support'),
+                                ],
+                              ),
+                            ),
+                            0.025.ph(context),
+
+                            // Checkbox
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: AppColor.bgPrimary(),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: _dontShowAgain,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _dontShowAgain = value ?? false;
+                                      });
+                                    },
+                                    activeColor: Color(0xFFB8956A),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      'I understand the eligibility requirements. Do not show this confirmation again.'
+                                          .tr(),
+                                      style: TextStyle(
+                                        fontSize: context.mh * 0.014,
+                                        color: AppColor.grey(),
+                                        fontFamily: 'nr',
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            0.025.ph(context),
+
+                            // Buttons
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: context.mh * 0.055,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      style: TextButton.styleFrom(
+                                        backgroundColor:
+                                            Color(0xFFdac9a8),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'Cancel'.tr(),
+                                        style: TextStyle(
+                                          fontSize: context.mh * 0.016,
+                                          color: Color(0xff656056),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'ns',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                0.015.pw(context),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      if (_dontShowAgain) {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        prefs.setBool(
+                                            'show_emirati_popup', false);
+                                      }
+                                      Navigator.of(context).pop();
+                                      dashboardCubit.changeScreenIndex(0);
+                                    },
+                                    child: Container(
+                                      height: context.mh * 0.055,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Color(0xFFb0863d),
+                                            Color(0xFFc59211),
+                                          ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'I Confirm Eligibility'.tr(),
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: context.mh * 0.014,
+                                            fontWeight: FontWeight.w600,
+                                            fontFamily: 'ns',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            0.02.ph(context),
+
+                            // Quranic Verse
+                            Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.all(16),
+                              child: Text(
+                                '"And those who believed and whose families follow them in faith - We will join with them their families" — At-Tur 52:21'
+                                    .tr(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: context.mh * 0.014,
+                                  color: AppColor.grey().withOpacity(0.8),
+                                  fontFamily: 'nr',
+                                  fontStyle: FontStyle.italic,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-
-                    0.02.ph(context),
-
-                    // Buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: context.mh * 0.05,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                // Don't change screen index on cancel
-                              },
-                              style: TextButton.styleFrom(
-                                backgroundColor:
-                                    AppColor.greyLight1().withOpacity(0.3),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: Text(
-                                'Cancel'.tr(),
-                                style: TextStyle(
-                                  color: AppColor.grey(),
-                                  fontSize: context.mh * 0.016,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'ns',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        0.02.pw(context),
-                        Expanded(
-                          child: Container(
-                            height: context.mh * 0.05,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                if (_dontShowAgain) {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  prefs.setBool('show_emirati_popup', false);
-                                }
-                                Navigator.of(context).pop();
-                                dashboardCubit.changeScreenIndex(0);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColor.primary(),
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              child: Text(
-                                'Confirm'.tr(),
-                                style: TextStyle(
-                                  color: AppColor.white(),
-                                  fontSize: context.mh * 0.016,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'ns',
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
           },
         );
       },
+    );
+  }
+
+  Widget _buildServiceItem(String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 6,
+          height: 6,
+          margin: EdgeInsets.only(top: 6, right: 12),
+          decoration: BoxDecoration(
+            color: Color(0xFFB8956A),
+            shape: BoxShape.circle,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            text.tr(),
+            style: TextStyle(
+              fontSize: context.mh * 0.015,
+              color: AppColor.grey(),
+              fontFamily: 'nr',
+              height: 1.4,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

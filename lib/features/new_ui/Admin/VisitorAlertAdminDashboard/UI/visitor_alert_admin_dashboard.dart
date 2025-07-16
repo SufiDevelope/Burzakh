@@ -1,4 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
+import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/notifs_screen.dart';
+import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Widgets/cemetery_notifs_dialog.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Widgets/dua_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Widgets/janaza_schedule_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Widgets/namaz_schedule_widget.dart';
@@ -46,9 +49,27 @@ class _VisitorAlertAdminDashboardState
               VisitorAlertHeadingWidget(
                 title: 'Janazah Alerts',
                 subtitle: 'Community prayer schedules and\nspiritual reminders',
-                onNotificationPressed: () {},
-                onToolsPressed: () {},
-                onSettingsPressed: () {},
+                onNotificationPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NotifsScreen()));
+                },
+                onToolsPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BurzakhEnhancedLogin(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                onSettingsPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return CemeteryDropdownDialog();
+                    },
+                  );
+                },
                 notificationCount: 3,
               ),
               Obx(() {

@@ -12,6 +12,7 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor:Colors.transparent,
+      backgroundColor: Color(0xfffcf7f3),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16,),
         child: SafeArea(

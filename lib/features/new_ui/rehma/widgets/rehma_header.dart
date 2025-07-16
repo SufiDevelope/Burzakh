@@ -17,8 +17,8 @@ class RehmaHeader extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColor.darkGreen,
             AppColor.primary(),
+            AppColor.buttonColor,
           ],
         ),
         borderRadius: BorderRadius.only(

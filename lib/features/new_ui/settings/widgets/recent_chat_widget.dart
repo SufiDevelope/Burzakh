@@ -186,6 +186,7 @@ class _RecentChatWidgetState extends State<RecentChatWidget> {
                 text: "View All Messages",
                 fontSize: context.mh * 0.016,
                 height: context.mh * 0.06,
+                bgColor: Color(0xff3b82f6),
               )
             : SizedBox(),
 

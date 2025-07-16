@@ -180,6 +180,14 @@ class AppApis {
       "${baseUrl}/api/burzakh-mortician/change-status/$morticianId";
 
   // Visitor Alert Case Api
-  static String visitorAlertCaseApi(prayerTime, day) =>
-      "${baseUrl}/api/burzakh-visitors/alerts?prayer_time=${prayerTime}&day=${day}";
+  static String visitorAlertCaseApi(prayerTime, day, String? cemetery) {
+  String url = "$baseUrl/api/burzakh-visitors/alerts?prayer_time=$prayerTime&day=$day";
+
+  if (cemetery != null && cemetery.isNotEmpty) {
+    url += "&cemetery_location=$cemetery";
+  }
+
+  return url;
+}
+
 }

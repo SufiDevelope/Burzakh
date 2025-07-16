@@ -72,7 +72,7 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
                   ),
                   AppText(
                     text: 'Case in process',
-                    color: AppColor.greyLight(),
+                    color: Color(0xff6a655d),
                   ),
                 ],
               ),
@@ -84,23 +84,23 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
               AppText(
                 text: 'Case Progress',
                 fontSize: 12,
-                color: AppColor.greyLight(),
+                color: Color(0xff6a655d),
               ),
               const Spacer(),
               AppText(
                 text:
                     '${(double.tryParse(widget.caseModel.ratio)!.clamp(0, 1) * 5).round()} ${'of'.tr()} 5',
                 fontSize: 12,
-                color: AppColor.blue,
+                color: Color(0xffaf8646),
               ),
             ],
           ),
-          const SizedBox(height: 4), 
+          const SizedBox(height: 4),
           LinearProgressIndicator(
             value: double.parse(widget.caseModel.ratio),
             borderRadius: BorderRadius.circular(10),
             backgroundColor: Colors.grey[300],
-            color: AppColor.blue,
+            color: Color(0xffaf8646),
           ),
           const SizedBox(height: 12),
           CustomElevatedButton(

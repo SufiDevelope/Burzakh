@@ -100,7 +100,7 @@ class ServiceWidget extends StatelessWidget {
                 ElevatedButton(
                   onPressed: onTap ?? () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.buttonColor,
+                    backgroundColor: Color(0xff3c8a5c),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     shape: RoundedRectangleBorder(

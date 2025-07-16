@@ -33,7 +33,7 @@ class AppColor{
   static const Color placeholderText = Color(0xFFA9A49E);
   static const Color backgroundStart = Color(0xFFFBF7F2);
   static const Color backgroundEnd = Color(0xFFF2EDE6);
-  static  Color buttonColor = Color(0xFF00695c);
+  static  Color buttonColor = Color(0xff063b31);
   static  Color darkGreen = Color(0xFF1a6d53);
   static Color _borderBlackColor = Colors.black;
   static Color _borderWhiteColor = Colors.white;

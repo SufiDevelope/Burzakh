@@ -4,6 +4,7 @@ import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/features/new_ui/home/widgets/home_case_widget.dart';
 import 'package:burzakh/features/new_ui/home/widgets/home_topbar.dart';
 import 'package:burzakh/features/new_ui/home/widgets/recent_activity_section.dart';
+import 'package:burzakh/features/new_ui/home/widgets/resting_dialog_widget.dart';
 import 'package:burzakh/features/new_ui/home/widgets/today_piority_widget.dart';
 import 'package:burzakh/features/notification/presentation/controller/notification_controller.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +48,13 @@ class _HomeScreen1State extends State<HomeScreen1> {
           //     MaterialPageRoute(
           //       builder: (context) => CreatCaseScreen(),
           //     ));
-          showModalBottomSheet(
-            context: context,
-            backgroundColor: Colors.transparent,
-            barrierColor: AppColor.blurWhiteColor(),
-            builder: (context) => SelectRestingSheet(),
-          );
+          // showModalBottomSheet(
+          //   context: context,
+          //   backgroundColor: Colors.transparent,
+          //   barrierColor: AppColor.blurWhiteColor(),
+          //   builder: (context) => SelectRestingSheet(),
+          // );
+          showRestingDialog(context);
         },
         splashColor: Colors.transparent,
         hoverColor: Colors.transparent,
@@ -158,7 +160,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                           text:
                                               "You have no pending actions today.\nYour priorities will appear here after you register a case.",
                                           fontSize: context.mh * 0.015,
-                                          color: AppColor.greyLight(),
+                                          color: Color(0xff6a655d),
                                         ),
                                       ],
                                     ),
@@ -223,8 +225,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                                             "Your Case is now ready for burial. Please Check the Notification for Grave Number.",
                                                         fontSize:
                                                             context.mh * 0.015,
-                                                        color: AppColor
-                                                            .greyLight(),
+                                                        color:
+                                                            Color(0xff6a655d),
                                                       ),
                                                     ],
                                                   ),
@@ -249,13 +251,16 @@ class _HomeScreen1State extends State<HomeScreen1> {
                               padding: EdgeInsets.symmetric(
                                   vertical: 14, horizontal: 20),
                               decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  // color: AppColor.bgPrimary(),
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border(
-                                      left: BorderSide(
-                                          color: AppColor.darkGreen,
-                                          width: 3))),
+                                color: Colors.white,
+                                // color: AppColor.bgPrimary(),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border(
+                                  left: BorderSide(
+                                    color: AppColor.darkGreen,
+                                    width: 3,
+                                  ),
+                                ),
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -265,7 +270,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                     fontFamily: 'n',
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.w300,
-                                    color: AppColor.greyLight(),
+                                    color: Color(0xff6a655d),
                                     fontSize: context.mh * 0.015,
                                   ),
                                   Row(
@@ -276,7 +281,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                         fontFamily: 'n',
                                         fontSize: context.mh * 0.012,
                                         fontWeight: FontWeight.w300,
-                                        color: AppColor.grey(),
+                                        color: Color(0xff6a655d),
                                         fontStyle: FontStyle.italic,
                                       ),
                                     ],

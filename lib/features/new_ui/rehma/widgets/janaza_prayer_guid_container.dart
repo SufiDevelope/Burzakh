@@ -19,7 +19,7 @@ class JanazaPrayerGuidContainer extends StatelessWidget {
           colors: [
             // EnhancedColors.secondary,
             Color(0xFF8A6E47),
-            Color(0xFF8A6E47),
+            Color(0xFFa98246),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
