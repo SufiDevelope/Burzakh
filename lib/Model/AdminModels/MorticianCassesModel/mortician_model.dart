@@ -200,35 +200,40 @@ class CaseDetails {
   String? ambulanceDispatched;
   String? createdAt;
   String? updatedAt;
+  String? gender;
+  String? age;
 
-  CaseDetails(
-      {this.id,
-      this.userId,
-      this.restingPlace,
-      this.policeClearance,
-      this.deathNotificationFile,
-      this.deathNotificationFileStatus,
-      this.hospitalCertificate,
-      this.hospitalCertificateStatus,
-      this.passportOrEmirateIdFront,
-      this.passportOrEmirateIdFrontStatus,
-      this.passportOrEmirateIdBack,
-      this.passportOrEmirateIdBackStatus,
-      this.caseStatus,
-      this.releaseForm,
-      this.additionalDocument,
-      this.sendNotificationMessage,
-      this.adminId,
-      this.nameOfDeceased,
-      this.dateOfDeath,
-      this.causeOfDeath,
-      this.location,
-      this.additionalDocumentUploadUser,
-      this.burialSubmissionStatus,
-      this.ratio,
-      this.ambulanceDispatched,
-      this.createdAt,
-      this.updatedAt});
+  CaseDetails({
+    this.id,
+    this.userId,
+    this.restingPlace,
+    this.policeClearance,
+    this.deathNotificationFile,
+    this.deathNotificationFileStatus,
+    this.hospitalCertificate,
+    this.hospitalCertificateStatus,
+    this.passportOrEmirateIdFront,
+    this.passportOrEmirateIdFrontStatus,
+    this.passportOrEmirateIdBack,
+    this.passportOrEmirateIdBackStatus,
+    this.caseStatus,
+    this.releaseForm,
+    this.additionalDocument,
+    this.sendNotificationMessage,
+    this.adminId,
+    this.nameOfDeceased,
+    this.dateOfDeath,
+    this.causeOfDeath,
+    this.location,
+    this.additionalDocumentUploadUser,
+    this.burialSubmissionStatus,
+    this.ratio,
+    this.ambulanceDispatched,
+    this.createdAt,
+    this.updatedAt,
+    this.gender,
+    this.age,
+  });
 
   CaseDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -259,6 +264,8 @@ class CaseDetails {
     ambulanceDispatched = json['ambulance_dispatched'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    gender = json['gender'];
+    age = json['age'];
   }
 
   Map<String, dynamic> toJson() {
@@ -292,6 +299,8 @@ class CaseDetails {
     data['ambulance_dispatched'] = this.ambulanceDispatched;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['gender'] = this.gender;
+    data['age'] = this.age;
     return data;
   }
 }

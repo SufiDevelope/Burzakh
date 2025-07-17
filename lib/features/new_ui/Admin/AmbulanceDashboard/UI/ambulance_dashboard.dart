@@ -176,111 +176,110 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
     return Scaffold(
       backgroundColor: Color(0xfff9fafb),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
+        preferredSize:
+            Size.fromHeight(50.0 + MediaQuery.of(context).padding.top),
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFffffff),
             borderRadius: BorderRadius.circular(12),
           ),
-          padding: EdgeInsets.symmetric(
-              horizontal: context.mw * 0.03, vertical: context.mw * 0.02),
-          child: Column(
+          padding: EdgeInsets.only(
+            left: context.mw * 0.03,
+            right: context.mw * 0.03,
+            top: MediaQuery.of(context).padding.top + (context.mw * 0.02),
+            bottom: context.mw * 0.02,
+          ),
+          child: Row(
             children: [
-              0.04.ph(context),
-              Row(
-                children: [
-                  Container(
-                    width: context.mw * 0.1,
-                    height: context.mw * 0.1,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF4b5563),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(
-                      Icons.directions_car,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                  0.05.pw(context),
-                  // Middle - Text content
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Driver Dashboard',
-                          style: GoogleFonts.inter(
-                            fontSize: context.mh * 0.02,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFF4b5563),
-                          ),
-                        ),
-                        0.001.ph(context),
-                        Text(
-                          '${widget.name} • ID: ${widget.id}',
-                          style: TextStyle(
-                            fontSize: context.mh * 0.011,
-                            color: Color(0xFF6B6B6B),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: context.mw * 0.2,
-                    height: context.mw * 0.09,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: context.mw * 0.02,
-                        vertical: context.mw * 0.01),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF4b5563),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.language,
-                          color: Colors.white,
-                          size: 14,
-                        ),
-                        SizedBox(width: 6),
-                        Text(
-                          'عربي',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  0.01.pw(context),
-                  // Logout Container
-                  InkWell(
-                    onTap: () {
-                      _showLogoutBottomSheet(context);
-                    },
-                    child: Container(
-                      width: context.mw * 0.1,
-                      height: context.mw * 0.1,
-                      decoration: BoxDecoration(
+              Container(
+                width: context.mw * 0.1,
+                height: context.mw * 0.1,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF4b5563),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.directions_car,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+              0.05.pw(context),
+              // Middle - Text content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Driver Dashboard',
+                      style: GoogleFonts.inter(
+                        fontSize: context.mh * 0.02,
+                        fontWeight: FontWeight.w600,
                         color: const Color(0xFF4b5563),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                        size: 20,
                       ),
                     ),
+                    0.001.ph(context),
+                    Text(
+                      '${widget.name} • ID: ${widget.id}',
+                      style: TextStyle(
+                        fontSize: context.mh * 0.011,
+                        color: Color(0xFF6B6B6B),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: context.mw * 0.2,
+                height: context.mw * 0.09,
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.mw * 0.02, vertical: context.mw * 0.01),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF4b5563),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.language,
+                      color: Colors.white,
+                      size: 14,
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      'عربي',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              0.01.pw(context),
+              // Logout Container
+              InkWell(
+                onTap: () {
+                  _showLogoutBottomSheet(context);
+                },
+                child: Container(
+                  width: context.mw * 0.1,
+                  height: context.mw * 0.1,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF4b5563),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                ],
+                  child: const Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
               ),
             ],
           ),
@@ -299,7 +298,7 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  0.02.ph(context),
+                  0.03.ph(context),
                   TabSelectionWidget(
                     driverId: widget.id.toString(),
                   ),

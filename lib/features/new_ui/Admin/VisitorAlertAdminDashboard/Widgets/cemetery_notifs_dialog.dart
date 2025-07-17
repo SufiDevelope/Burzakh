@@ -4,21 +4,25 @@ import 'package:get/get.dart';
 
 class CemeteryDropdownDialog extends StatefulWidget {
   @override
-  _CemeteryDropdownDialogState createState() => _CemeteryDropdownDialogState();
+  _CemeteryDropdownDialogState createState() =>
+      _CemeteryDropdownDialogState();
 }
 
 class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<VisitorAlertController>();
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+
     return Dialog(
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(height * 0.02),
       ),
       child: Container(
-        padding: EdgeInsets.all(24),
-        width: MediaQuery.of(context).size.width * 0.9,
+        padding: EdgeInsets.all(height * 0.03),
+        width: width * 0.9,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -29,21 +33,21 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
                 Text(
                   'Notification Settings',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: height * 0.018,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
                 ),
                 IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.close, size: 24),
-                  padding: EdgeInsets.zero,
-                  constraints: BoxConstraints(),
+                  icon: Icon(Icons.close, size: height * 0.02),
+                  onPressed: () {
+                   Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
 
-            SizedBox(height: 32),
+            SizedBox(height: height * 0.04),
 
             // Cemetery Dropdown Section
             Column(
@@ -52,34 +56,40 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
                 Text(
                   'Preferred Cemetery',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: height * 0.018,
                     fontWeight: FontWeight.w500,
                     color: Colors.black87,
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: height * 0.015),
                 Obx(() {
                   return Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.04,
+                      vertical: height * 0.008,
+                    ),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(height * 0.012),
                       color: Colors.grey.shade50,
                     ),
                     child: DropdownButton<String>(
                       value: controller.selectedCemetery.value,
                       isExpanded: true,
                       underline: SizedBox(),
-                      icon: Icon(Icons.keyboard_arrow_down,
-                          color: Colors.grey.shade600),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.grey.shade600,
+                        size: height * 0.028,
+                      ),
                       items: controller.cemeteries.map((String cemetery) {
                         return DropdownMenuItem<String>(
                           value: cemetery,
                           child: Text(
                             cemetery,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: height * 0.018,
                               color: Colors.black87,
                             ),
                           ),
@@ -90,7 +100,7 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
                       },
                     ),
                   );
-                })
+                }),
               ],
             ),
           ],

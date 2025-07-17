@@ -26,7 +26,6 @@ class DubaiRequestDetailWidget extends StatelessWidget {
   final String? passportOrEmirateIdBackUrl;
   final String? passportOrEmirateIdBackStatus;
   final String? releaseFormUrl;
-
   const DubaiRequestDetailWidget({
     super.key,
     required this.name,
@@ -244,15 +243,29 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           Row(
             children: [
               Visibility(
-                visible: status == 'Approve' ? false : true,
+                visible: status == 'grave-number-assigned' || status == 'Approve' ? false : true,
                 child: Expanded(
                   child: _buildActionButton(
                     context,
                     'Assign Grave',
-                    Colors.green,
+                    Colors.deepOrange,
                     Colors.white,
                     Icons.add,
                     onAssignGrave,
+                  ),
+                ),
+              ),
+              0.02.pw(context),
+              Visibility(
+                visible: status == 'Pending' || status == 'grave-number-assigned' ? true : false,
+                child: Expanded(
+                  child: _buildActionButton(
+                    context,
+                    'Approve',
+                    Colors.green,
+                    Colors.white,
+                    Icons.add,
+                    onApprove,
                   ),
                 ),
               ),

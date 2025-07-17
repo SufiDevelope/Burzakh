@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 import '../../../../core/app/di_container.dart';
 import '../../../home/presentation/controller/cubit.dart';
 import '../../../home/presentation/widgets/home_case_shimmer.dart';
-import '../../../home/presentation/widgets/select_resting_sheet.dart';
 import '../../../home/presentation/widgets/start_first_time_case.dart';
 
 class HomeScreen1 extends StatefulWidget {
@@ -59,10 +58,10 @@ class _HomeScreen1State extends State<HomeScreen1> {
         splashColor: Colors.transparent,
         hoverColor: Colors.transparent,
         child: Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
               shape: BoxShape.circle, color: AppColor.buttonColor),
-          child: Icon(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           ),
@@ -77,45 +76,53 @@ class _HomeScreen1State extends State<HomeScreen1> {
           },
           child: SafeArea(
             child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
               child: BlocBuilder(
                   bloc: _homeCubit,
                   builder: (context, state) {
                     log("state $state");
                     log("selected case index ${_homeCubit.selectedCaseIndex}");
+                    
+                    final caseList = _homeCubit.caseList ?? [];
+                    final recentActivityList = _homeCubit.recentActivityList ?? [];
+                    final selectedCaseIndex = _homeCubit.selectedCaseIndex ?? 0;
+                    final isFetchingCases = _homeCubit.isFetchingCases ?? false;
+                    
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Header
-                        HomeTopbar(),
+                        const HomeTopbar(),
                         0.02.ph(context),
 
                         // Case Info
-
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _homeCubit.isFetchingCases
-                                ? HomeCaseShimmer()
-                                : _homeCubit.caseList.isEmpty
-                                    ? StartFirstTimeCase()
+                            isFetchingCases
+                                ? const HomeCaseShimmer()
+                                : caseList.isEmpty
+                                    ? const StartFirstTimeCase()
                                     : Column(
                                         children: [
                                           ...List.generate(
-                                            _homeCubit.caseList.length,
+                                            caseList.length,
                                             (index) {
+                                              final caseModel = caseList[index];
+                                              if (caseModel == null) {
+                                                return const SizedBox.shrink();
+                                              }
+                                              
                                               return GestureDetector(
                                                 onTap: () {
-                                                  log("index ${_homeCubit.caseList[index].police_clearance}");
+                                                  log("index ${caseModel.police_clearance}");
                                                   setState(() {
-                                                    _homeCubit
-                                                        .selectCase(index);
+                                                    _homeCubit.selectCase(index);
                                                   });
                                                 },
                                                 child: HomeCaseWidget(
-                                                  caseModel: _homeCubit
-                                                      .caseList[index],
+                                                  caseModel: caseModel,
                                                 ),
                                               );
                                             },
@@ -125,8 +132,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                             0.02.ph(context),
 
                             // Today's Priority
-                            if (_homeCubit.caseList.isNotEmpty &&
-                                _homeCubit.recentActivityList.isNotEmpty)
+                            if (caseList.isNotEmpty && recentActivityList.isNotEmpty)
                               Row(
                                 children: [
                                   AppText(
@@ -135,20 +141,18 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                     fontSize: context.mh * 0.017,
                                   ),
                                   AppText(
-                                    text:
-                                        " (${_homeCubit.caseList[_homeCubit.selectedCaseIndex].name_of_deceased})",
+                                    text: " (${_getSelectedCaseName(caseList, selectedCaseIndex)})",
                                     fontWeight: FontWeight.bold,
                                     fontSize: context.mh * 0.017,
                                   ),
                                 ],
                               ),
                             0.01.ph(context),
-                            (_homeCubit.caseList.isEmpty ||
-                                    _homeCubit.recentActivityList.isEmpty)
+                            (caseList.isEmpty || recentActivityList.isEmpty)
                                 ? Container(
                                     alignment: Alignment.topLeft,
                                     width: mdWidth(context) * 1,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 20, horizontal: 20),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -160,62 +164,45 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                           text:
                                               "You have no pending actions today.\nYour priorities will appear here after you register a case.",
                                           fontSize: context.mh * 0.015,
-                                          color: Color(0xff6a655d),
+                                          color: const Color(0xff6a655d),
                                         ),
                                       ],
                                     ),
                                   )
-                                : _homeCubit
-                                                .caseList[_homeCubit
-                                                    .selectedCaseIndex]
-                                                .caseStatus ==
-                                            "approved" &&
-                                        _homeCubit
-                                                .caseList[_homeCubit
-                                                    .selectedCaseIndex]
-                                                .burial_submission_status ==
-                                            "Approved"
+                                : _shouldShowCaseCompletedMessage(caseList, selectedCaseIndex)
                                     ? Container(
                                         alignment: Alignment.topLeft,
                                         width: mdWidth(context) * 1,
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 20, horizontal: 20),
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(10),
                                           color: Colors.white,
                                         ),
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
                                                 CircleAvatar(
+                                                  backgroundColor: AppColor.buttonColor,
                                                   child: Icon(
                                                     Icons.check,
                                                     color: AppColor.white(),
                                                   ),
-                                                  backgroundColor:
-                                                      AppColor.buttonColor,
                                                 ),
                                                 const SizedBox(width: 8),
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                        CrossAxisAlignment.start,
                                                     children: [
                                                       Row(
                                                         children: [
                                                           AppText(
-                                                            text:
-                                                                "Case Updated",
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize:
-                                                                context.mh *
-                                                                    0.016,
+                                                            text: "Case Updated",
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: context.mh * 0.016,
                                                           ),
                                                         ],
                                                       ),
@@ -223,10 +210,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                                       AppText(
                                                         text:
                                                             "Your Case is now ready for burial. Please Check the Notification for Grave Number.",
-                                                        fontSize:
-                                                            context.mh * 0.015,
-                                                        color:
-                                                            Color(0xff6a655d),
+                                                        fontSize: context.mh * 0.015,
+                                                        color: const Color(0xff6a655d),
                                                       ),
                                                     ],
                                                   ),
@@ -236,19 +221,20 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                           ],
                                         ),
                                       )
-                                    : TodayPiorityWidget(
-                                        homeCubit: _homeCubit,
-                                        caseModel: _homeCubit.caseList[
-                                            _homeCubit.selectedCaseIndex],
-                                      ),
+                                    : _getSelectedCase(caseList, selectedCaseIndex) != null
+                                        ? TodayPiorityWidget(
+                                            homeCubit: _homeCubit,
+                                            caseModel: _getSelectedCase(caseList, selectedCaseIndex)!,
+                                          )
+                                        : const SizedBox.shrink(),
 
                             0.02.ph(context),
 
                             // Recent Activity
-                            RecentActivitySection(),
+                            const RecentActivitySection(),
                             0.02.ph(context),
                             Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 14, horizontal: 20),
                               decoration: BoxDecoration(
                                 color: Colors.white,
@@ -270,7 +256,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                     fontFamily: 'n',
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.w300,
-                                    color: Color(0xff6a655d),
+                                    color: const Color(0xff6a655d),
                                     fontSize: context.mh * 0.015,
                                   ),
                                   Row(
@@ -281,7 +267,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                         fontFamily: 'n',
                                         fontSize: context.mh * 0.012,
                                         fontWeight: FontWeight.w300,
-                                        color: Color(0xff6a655d),
+                                        color: const Color(0xff6a655d),
                                         fontStyle: FontStyle.italic,
                                       ),
                                     ],
@@ -299,5 +285,31 @@ class _HomeScreen1State extends State<HomeScreen1> {
         ),
       ),
     );
+  }
+
+  // Helper method to safely get selected case name
+  String _getSelectedCaseName(List<dynamic> caseList, int selectedIndex) {
+    if (caseList.isEmpty || selectedIndex >= caseList.length || selectedIndex < 0) {
+      return 'Unknown Case';
+    }
+    final selectedCase = caseList[selectedIndex];
+    return selectedCase?.name_of_deceased ?? 'Unknown Case';
+  }
+
+  // Helper method to safely get selected case
+  dynamic _getSelectedCase(List<dynamic> caseList, int selectedIndex) {
+    if (caseList.isEmpty || selectedIndex >= caseList.length || selectedIndex < 0) {
+      return null;
+    }
+    return caseList[selectedIndex];
+  }
+
+  // Helper method to check if case completed message should be shown
+  bool _shouldShowCaseCompletedMessage(List<dynamic> caseList, int selectedIndex) {
+    final selectedCase = _getSelectedCase(caseList, selectedIndex);
+    if (selectedCase == null) return false;
+    
+    return selectedCase.caseStatus == "approved" && 
+           selectedCase.burial_submission_status == "Approved";
   }
 }

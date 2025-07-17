@@ -10,6 +10,8 @@ class DocumentUploadModel {
   final String nameofdeceased;
   final String dateofdeath;
   final String locationofdeath;
+  final String age;
+  final String gender;
 
   DocumentUploadModel({
     required this.userId,
@@ -21,5 +23,7 @@ class DocumentUploadModel {
     required this.nameofdeceased,
     required this.dateofdeath,
     required this.locationofdeath,
+    required this.age,
+    required this.gender,
   });
 }

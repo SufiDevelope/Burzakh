@@ -14,7 +14,7 @@ import '../../../police_approval/presentation/widgets/document_recieved_dialog.d
 
 class CreatCaseScreen extends StatefulWidget {
   final int? restingPlaceIndex;
-  const CreatCaseScreen({super.key,  this.restingPlaceIndex});
+  const CreatCaseScreen({super.key, this.restingPlaceIndex});
 
   @override
   State<CreatCaseScreen> createState() => _CreatCaseScreenState();
@@ -25,12 +25,16 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
   final TextEditingController causeofdeath = TextEditingController();
   final TextEditingController dateofdeath = TextEditingController();
   final TextEditingController locationofdeath = TextEditingController();
+  final TextEditingController age = TextEditingController();
+  final TextEditingController gender = TextEditingController();
 
   dispose() {
     nameofdeceased.dispose();
     causeofdeath.dispose();
     dateofdeath.dispose();
     locationofdeath.dispose();
+    age.dispose();
+    gender.dispose();
     super.dispose();
   }
 
@@ -68,6 +72,8 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                             dateofdeath,
                             locationofdeath,
                             widget.restingPlaceIndex,
+                            age,
+                            gender,
                           );
                           if (response == "200") {
                             showDialog(
@@ -638,6 +644,90 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                     vertical: 12,
                   ),
                 ),
+              ),
+              const SizedBox(height: 8),
+              // Age
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    text: "Age",
+                    fontSize: context.mh * 0.014,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.black(),
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: age,
+                    decoration: InputDecoration(
+                      hintText: "",
+                      hintStyle: TextStyle(
+                        color: AppColor.grey(),
+                        fontSize: context.mh * 0.014,
+                      ),
+                      filled: true,
+                      fillColor: AppColor.grey().withOpacity(0.05),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.greyLight1()),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.greyLight1()),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.primary()),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              // Gender
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    text: "Gender",
+                    fontSize: context.mh * 0.014,
+                    fontWeight: FontWeight.w500,
+                    color: AppColor.black(),
+                  ),
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    controller: gender,
+                    decoration: InputDecoration(
+                      hintText: "",
+                      hintStyle: TextStyle(
+                        color: AppColor.grey(),
+                        fontSize: context.mh * 0.014,
+                      ),
+                      filled: true,
+                      fillColor: AppColor.grey().withOpacity(0.05),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.greyLight1()),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.greyLight1()),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: AppColor.primary()),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

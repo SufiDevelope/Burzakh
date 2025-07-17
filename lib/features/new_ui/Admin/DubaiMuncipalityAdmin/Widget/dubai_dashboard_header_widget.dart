@@ -177,14 +177,16 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
       height: context.mh * 0.37,
       width: double.infinity,
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
             Color(0xff596e84),
             Color(0xff617890),
             Color(0xff2d4159),
-          ])),
+          ],
+        ),
+      ),
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(context.mw * 0.04),
@@ -267,19 +269,19 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                                 letterSpacing: 0.5,
                               ),
                             ),
+                            Center(
+                              child: Text(
+                                'Burial Supervisor Dashboard',
+                                style: GoogleFonts.inter(
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontSize: context.mh * 0.016,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         0.008.ph(context),
-                        Center(
-                          child: Text(
-                            'Burial Supervisor Dashboard',
-                            style: GoogleFonts.inter(
-                              color: Colors.white.withOpacity(0.8),
-                              fontSize: context.mh * 0.016,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),

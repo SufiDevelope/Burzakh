@@ -13,7 +13,6 @@ class AssignedCaseCardList extends StatelessWidget {
   // Method to calculate progress based on status
   double _calculateProgress(String? status) {
     if (status == null) return 0.0;
-
     switch (status.toLowerCase()) {
       case 'ghusal-started':
         return 0.5;
@@ -87,24 +86,28 @@ class AssignedCaseCardList extends StatelessWidget {
                         ? assignedCases[index].caseDetails!.first
                         : null;
 
+                log("Assigned Case Id ${assignedCases[index].id.toString()}");
+
                 return CaseCardWidget(
                   caseNo:
                       "BUR-${DateTime.now().year}-${currentCase.id.toString()}",
-                  caseName: currentCase.caseName ?? "Unknown", // Add case name
+                  caseName: currentCase.caseName ?? "Unknown",
                   status: currentCase.status,
-                  age: currentCase.mancipalityRecord?.graveNumber,
-                  gender: currentCase.mancipalityRecord?.preferredCemetery,
+                  age: caseDetail?.age ?? "N/A",
+                  gender: caseDetail?.gender ?? "N/A",
                   progress: _calculateProgress(currentCase.status),
                   onStartGhusl: () {
+                    log("ghusal-started");
                     controller.updateCaseStatus(
-                      caseDetail?.id,
+                      assignedCases[index].id,
                       "ghusal-started",
                       context,
                     );
                   },
                   onCompleteGhusl: () {
+                    log("ghusal-Updated");
                     controller.updateCaseStatus(
-                      caseDetail?.id,
+                      assignedCases[index].id,
                       "ghusal-completed",
                       context,
                     );
@@ -113,6 +116,8 @@ class AssignedCaseCardList extends StatelessWidget {
                       "${currentCase.mancipalityRecord?.sect}, ${currentCase.mancipalityRecord?.religion}",
                   burrialTiming:
                       currentCase.mancipalityRecord?.burialTiming ?? "",
+                  specialRequest:
+                      currentCase.mancipalityRecord?.specialRequest ?? "",
                 );
               }),
         ],

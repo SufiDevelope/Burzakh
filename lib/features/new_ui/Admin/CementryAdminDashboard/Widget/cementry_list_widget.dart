@@ -84,11 +84,15 @@ class CementryListWidget extends StatelessWidget {
             height: context.mh * 0.006,
             width: context.mw,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Colors.blue.withOpacity(0.43),
-                Colors.purple.withOpacity(0.43),
-                Colors.green.withOpacity(0.43),
-              ]),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xff596e84),
+                  Color(0xff617890),
+                  Color(0xff2d4159),
+                ],
+              ),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(16),
                 topRight: Radius.circular(16),
@@ -138,48 +142,43 @@ class CementryListWidget extends StatelessWidget {
                           if (policeCleared != null)
                             Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: context.mw * 0.02),
-                              height: context.mh * 0.03,
+                                  horizontal: context.mw * 0.025,
+                                  vertical: context.mh * 0.005),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.green.withOpacity(0.43),
-                                  Colors.green.withOpacity(0.67),
-                                ]),
-                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xffd9e2ec),
+                                    Color(0xffbcccdc),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.blue.shade100,
                               ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                    size: context.mh * 0.02,
-                                  ),
-                                  0.01.pw(context),
-                                  Center(
-                                    child: Text(
-                                      "Police Cleared".toUpperCase(),
-                                      style: TextStyle(
-                                        fontSize: context.mh * 0.013,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                "Police Cleared",
+                                style: TextStyle(
+                                  fontSize: context.mh * 0.013,
+                                  color: Color(0xff243b53),
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           0.01.ph(context),
                           if (muncipalityCleared != null)
                             Container(
+                              // height: context.mh * 0.03,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: context.mw * 0.02),
-                              height: context.mh * 0.03,
+                                  horizontal: context.mw * 0.025,
+                                  vertical: context.mh * 0.005),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(colors: [
-                                  Colors.blueAccent.withOpacity(0.43),
-                                  Colors.blueAccent.withOpacity(0.67),
-                                ]),
-                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xffd9e2ec),
+                                    Color(0xffbcccdc),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.blue.shade100,
                               ),
                               child: Row(
                                 children: [
@@ -194,7 +193,7 @@ class CementryListWidget extends StatelessWidget {
                                       "Muncipality Cleared".toUpperCase(),
                                       style: TextStyle(
                                         fontSize: context.mh * 0.013,
-                                        color: Colors.white,
+                                         color: Color(0xff243b53),
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -205,21 +204,24 @@ class CementryListWidget extends StatelessWidget {
                           0.01.ph(context),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: context.mw * 0.02),
-                            height: context.mh * 0.03,
+                                horizontal: context.mw * 0.025,
+                                vertical: context.mh * 0.005),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Colors.redAccent.withOpacity(0.67),
-                                Colors.redAccent.withOpacity(0.67),
-                              ]),
-                              borderRadius: BorderRadius.circular(10),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xffd9e2ec),
+                                  Color(0xffbcccdc),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.blue.shade100,
                             ),
                             child: Center(
                               child: Text(
                                 status.toUpperCase(),
                                 style: TextStyle(
                                   fontSize: context.mh * 0.013,
-                                  color: Colors.white,
+                                  color: Color(0xff243b53),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

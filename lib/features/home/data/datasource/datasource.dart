@@ -59,6 +59,8 @@ class DocumentProcess extends DocumentDataSource {
       request.fields['name_of_deceased'] = model.nameofdeceased;
       request.fields['date_of_death'] = model.dateofdeath;
       request.fields['location'] = model.locationofdeath;
+      request.fields['age'] = model.age;
+      request.fields['gender'] = model.gender;
 
       // Add files
       request.files.add(await http.MultipartFile.fromPath(

@@ -83,13 +83,13 @@ class MorticiansStatusWidget extends StatelessWidget {
             height: context.mh * 0.08,
             decoration: BoxDecoration(
               gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [
-                  Colors.blue.withOpacity(0.43),
-                  Colors.purple.withOpacity(0.43),
-                  Colors.green.withOpacity(0.43),
+                  Color(0xff596e84),
+                  Color(0xff617890),
+                  Color(0xff2d4159),
                 ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
               ),
               borderRadius: BorderRadius.circular(2),
             ),

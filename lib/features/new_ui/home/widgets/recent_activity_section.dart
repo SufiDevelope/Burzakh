@@ -19,10 +19,14 @@ class RecentActivitySection extends StatefulWidget {
 class _RecentActivitySectionState extends State<RecentActivitySection> {
   @override
   Widget build(BuildContext context) {
-    final currentLocale = EasyLocalization.of(context)!.locale;
+    final currentLocale = EasyLocalization.of(context)?.locale;
+    final homeCubit = DiContainer().sl<HomeCubit>();
+    
     return BlocBuilder(
-        bloc: _homeCubit,
+        bloc: homeCubit,
         builder: (context, state) {
+          final recentActivityList = homeCubit.recentActivityList ?? [];
+          
           return Column(
             children: [
               Row(
@@ -33,34 +37,36 @@ class _RecentActivitySectionState extends State<RecentActivitySection> {
                     fontWeight: FontWeight.bold,
                     fontSize: context.mh * 0.017,
                   ),
-                  SizedBox(),
+                  const SizedBox(),
                 ],
               ),
               0.01.ph(context),
-              _homeCubit.recentActivityList.isEmpty
+              recentActivityList.isEmpty
                   ? Container(
                       alignment: Alignment.topLeft,
                       width: mdWidth(context) * 1,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                       ),
                       child: AppText(
-                        text: "You haven’t performed any actions yet.",
+                        text: "You haven't performed any actions yet.",
                         fontSize: context.mh * 0.013,
                         color: AppColor.greyLight(),
                       ))
                   : Column(
                       children: [
                         ...List.generate(
-                          _homeCubit.recentActivityList.length,
+                          recentActivityList.length,
                           (index) {
-                            var model = _homeCubit.recentActivityList[index];
-                            bool isLast = false;
-                            isLast = _homeCubit.recentActivityList.length ==
-                                index + 1;
+                            final model = recentActivityList[index];
+                            if (model == null) {
+                              return const SizedBox.shrink();
+                            }
+                            
+                            bool isLast = recentActivityList.length == index + 1;
+                            
                             return Container(
                               decoration: BoxDecoration(
                                   border: Border(
@@ -70,8 +76,7 @@ class _RecentActivitySectionState extends State<RecentActivitySection> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(
-                                        _homeCubit.recentActivityList.length ==
-                                                1
+                                        recentActivityList.length == 1
                                             ? 8
                                             : isLast
                                                 ? 0
@@ -79,8 +84,7 @@ class _RecentActivitySectionState extends State<RecentActivitySection> {
                                                     ? 8
                                                     : 0),
                                     topRight: Radius.circular(
-                                        _homeCubit.recentActivityList.length ==
-                                                1
+                                        recentActivityList.length == 1
                                             ? 8
                                             : isLast
                                                 ? 0
@@ -106,17 +110,17 @@ class _RecentActivitySectionState extends State<RecentActivitySection> {
                                 ),
                                 title: AppText(
                                   text: model.getTranslatedName(
-                                      currentLocale.languageCode),
+                                      currentLocale?.languageCode ?? 'en'),
                                   fontFamily: 'ns',
                                   fontSize: 14,
                                 ),
                                 subtitle: AppText(
                                   text: model.getTranslatedStatus(
-                                      currentLocale.languageCode),
+                                      currentLocale?.languageCode ?? 'en'),
                                   fontSize: 10,
                                 ),
                                 trailing: AppText(
-                                  text: model.timeAgo,
+                                  text: model.timeAgo ?? '',
                                   color: Colors.grey,
                                   fontSize: 12,
                                 ),
@@ -131,5 +135,3 @@ class _RecentActivitySectionState extends State<RecentActivitySection> {
         });
   }
 }
-
-var _homeCubit = DiContainer().sl<HomeCubit>();

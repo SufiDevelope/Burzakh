@@ -13,6 +13,7 @@ class CaseCardWidget extends StatelessWidget {
   final VoidCallback? onCompleteGhusl;
   final String burrialSchedule;
   final String burrialTiming;
+  final String specialRequest;
 
   const CaseCardWidget({
     super.key,
@@ -25,7 +26,7 @@ class CaseCardWidget extends StatelessWidget {
     this.onStartGhusl,
     this.onCompleteGhusl,
     required this.burrialSchedule,
-    required this.burrialTiming,
+    required this.burrialTiming, required this.specialRequest,
   });
 
   @override
@@ -69,7 +70,7 @@ class CaseCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      caseNo ?? "",
+                      caseName ?? "",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class CaseCardWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Grave No:${age}, Cemetry:${gender}',
+                      'Age:${age}, Gender:${gender}',
                       style: TextStyle(
                         fontSize: context.mh * 0.013,
                         color: Color(0xFF6B7280),
@@ -157,7 +158,7 @@ class CaseCardWidget extends StatelessWidget {
           ),
           SizedBox(height: 4),
           Text(
-            "Requires gentle handling - elderly case",
+            specialRequest,
             style: TextStyle(
               fontSize: 14,
               color: Color(0xFF6B7280),

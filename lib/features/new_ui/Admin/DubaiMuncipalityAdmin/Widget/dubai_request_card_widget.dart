@@ -198,7 +198,9 @@ class BurialCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Visibility(
-                      visible: status == "Approve" || status == "Dispatched"
+                      visible: status == "grave-number-assigned" ||
+                              status == "Approve" ||
+                              status == "Dispatched"
                           ? false
                           : true,
                       child: _circleButton(
@@ -215,7 +217,9 @@ class BurialCardWidget extends StatelessWidget {
                     ),
                     0.02.pw(context),
                     Visibility(
-                      visible: status == "Approve" || status == "Dispatched"
+                      visible: status == "grave-number-assigned" ||
+                              status == "Approve" ||
+                              status == "Dispatched"
                           ? false
                           : true,
                       child: _circleButton(

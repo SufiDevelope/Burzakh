@@ -39,6 +39,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(context.mh * 0.18),
         child: Padding(
@@ -63,15 +64,15 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
         height: context.mh,
         width: context.mw,
         decoration: const BoxDecoration(
-          gradient: RadialGradient(
-            center: Alignment.topCenter,
-            radius: 2.0,
-            colors: [
-              Color(0xFFF8FAFC),
-              Color(0xFFE2E8F0),
-              Color(0xFFCBD5E1),
-            ],
-          ),
+          // gradient: RadialGradient(
+          //   center: Alignment.topCenter,
+          //   radius: 2.0,
+          //   colors: [
+          //     Color(0xFFF8FAFC),
+          //     Color(0xFFE2E8F0),
+          //     Color(0xFFCBD5E1),
+          //   ],
+          // ),
         ),
         child: RefreshIndicator(
           onRefresh: () async {

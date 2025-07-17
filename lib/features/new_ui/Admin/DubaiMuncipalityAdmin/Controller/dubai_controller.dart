@@ -233,17 +233,20 @@ class DubaiController extends GetxController {
       caseId, graveNo, BuildContext context, bool isDetails) async {
     try {
       setGraveBtnLoading(true);
-      await repo.assignGraveApi(caseId, "approve", graveNo).then((value) {
+      await repo
+          .assignGraveApi(caseId, "assign_grave_number", graveNo)
+          .then((value) {
         setGraveBtnLoading(false);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(value.toString()),
-              backgroundColor: Colors.green,
-              duration: Duration(seconds: 2),
-              behavior: SnackBarBehavior.floating,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25),
-              )),
+            content: Text(value.toString()),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
         );
         if (isDetails == true) {
           Navigator.pop(context);
@@ -267,6 +270,64 @@ class DubaiController extends GetxController {
       });
     } catch (e) {
       setGraveBtnLoading(false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+        ),
+      );
+    }
+  }
+
+  var approveBtnLoading = false.obs;
+
+  setApproveBtnLoading(bool value) {
+    approveBtnLoading.value = value;
+  }
+
+  void approveGraveApi(caseId, BuildContext context, bool isDetails) async {
+    try {
+      setApproveBtnLoading(true);
+      await repo.assignGraveApi(caseId, "approve", null).then((value) {
+        setApproveBtnLoading(false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(value.toString()),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
+        );
+        if (isDetails == true) {
+          Navigator.pop(context);
+        } else {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
+        getRequestApi();
+      }).onError((error, stackTrace) {
+        setApproveBtnLoading(false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(error.toString()),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 2),
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              )),
+        );
+      });
+    } catch (e) {
+      setApproveBtnLoading(false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),

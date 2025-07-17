@@ -49,9 +49,9 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFF4F46E5),
-                      const Color(0xFF7C3AED),
-                      const Color(0xFF059669)
+                      Color(0xff596e84),
+                      Color(0xff617890),
+                      Color(0xff2d4159),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(context.mw * 0.1),
@@ -117,7 +117,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4F46E5),
+                    backgroundColor: Color(0xff2d4159),
                     foregroundColor: Colors.white,
                     padding: EdgeInsets.symmetric(vertical: context.mh * 0.015),
                     shape: RoundedRectangleBorder(
@@ -159,17 +159,29 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
       width: context.mw,
       height: context.mh * 0.13,
       margin: EdgeInsets.all(context.mw * 0.025),
+      // decoration: BoxDecoration(
+      //   color: Colors.white.withOpacity(0.95),
+      //   borderRadius: BorderRadius.circular(context.mw * 0.04),
+      //   border: Border.all(color: Colors.white.withOpacity(0.2)),
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.black.withOpacity(0.1),
+      //       blurRadius: context.mw * 0.03,
+      //       offset: Offset(0, context.mh * 0.005),
+      //     ),
+      //   ],
+      // ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.95),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xff596e84),
+            Color(0xff617890),
+            Color(0xff2d4159),
+          ],
+        ),
         borderRadius: BorderRadius.circular(context.mw * 0.04),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: context.mw * 0.03,
-            offset: Offset(0, context.mh * 0.005),
-          ),
-        ],
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -184,22 +196,13 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [
-                        Color(0xFF4F46E5),
-                        Color(0xFF7C3AED),
-                        Color(0xFF059669)
-                      ],
-                    ).createShader(bounds),
-                    child: Text(
-                      "Cemetery\nAdmin\nDashboard",
-                      style: TextStyle(
-                        fontSize: context.mh * 0.02,
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white,
-                        height: 1.1,
-                      ),
+                  Text(
+                    "Cemetery\nAdmin\nDashboard",
+                    style: TextStyle(
+                      fontSize: context.mh * 0.02,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                      height: 1.1,
                     ),
                   ),
                 ],
@@ -224,11 +227,11 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                       vertical: context.mh * 0.008,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF10B981),
+                      color: const Color(0xFF64748B),
                       borderRadius: BorderRadius.circular(context.mw * 0.02),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF10B981).withOpacity(0.3),
+                          color: const Color(0xFF64748B).withOpacity(0.3),
                           blurRadius: context.mw * 0.01,
                           offset: Offset(0, context.mh * 0.003),
                         ),
@@ -277,12 +280,12 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                           vertical: context.mh * 0.008,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF7C3AED),
+                          color: const Color(0xFF64748B),
                           borderRadius:
                               BorderRadius.circular(context.mw * 0.02),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF7C3AED).withOpacity(0.3),
+                              color: const Color(0xFF64748B).withOpacity(0.3),
                               blurRadius: context.mw * 0.01,
                               offset: Offset(0, context.mh * 0.003),
                             ),
@@ -358,9 +361,28 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                       onTap: () {
                         _showLogoutBottomSheet(context);
                       },
-                      child: Icon(
-                        Icons.logout,
-                        color: Colors.red.shade300,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.mw * 0.015,
+                          vertical: context.mh * 0.008,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF64748B),
+                          borderRadius:
+                              BorderRadius.circular(context.mw * 0.02),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF64748B).withOpacity(0.3),
+                              blurRadius: context.mw * 0.01,
+                              offset: Offset(0, context.mh * 0.003),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.logout,
+                          size: context.mh * 0.016,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

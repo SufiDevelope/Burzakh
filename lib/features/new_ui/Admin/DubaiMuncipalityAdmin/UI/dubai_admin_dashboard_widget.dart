@@ -191,8 +191,8 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               data.dispatchedInfo!.isNotEmpty) {
                             statusAmbulance =
                                 data.dispatchedInfo!.map((dispatch) {
-                              final status = dispatch.status ?? "Unknown";
-                              final caseName = dispatch.caseName ?? "Unnamed";
+                              final status = dispatch.status;
+                              final caseName = dispatch.caseName;
                               return "$status for $caseName";
                             }).join(", ");
                           }
@@ -307,6 +307,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               },
                             );
                           },
+                          
                         );
                       },
                     );
