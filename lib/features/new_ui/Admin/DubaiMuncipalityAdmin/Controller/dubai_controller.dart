@@ -67,7 +67,7 @@ class DubaiController extends GetxController {
       setGetRequestApiResponse(value);
       setRxRequestStatusForAllDubaiRequest(Status.completed);
     }).onError((error, stackTrace) {
-      log(error.toString());
+      log(error.toString(), stackTrace: stackTrace);
       setRxRequestStatusForAllDubaiRequest(Status.error);
     });
   }

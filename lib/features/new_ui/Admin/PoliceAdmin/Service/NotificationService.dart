@@ -198,6 +198,7 @@ class NotificationService {
   /// Show local notification (when app is in foreground)
   Future<void> showNotification(RemoteMessage message) async {
     try {
+      log("Call ID When the user is in foreground: ${message.data['callID']}");
       // Check if message has a notification block
       String? title = message.notification?.title;
       String? body = message.notification?.body;
@@ -289,10 +290,10 @@ class NotificationService {
         await http.post(url, headers: headers, body: jsonEncode(payload));
 
     if (response.statusCode == 200) {
-      print("Notification sent successfully");
+      log("Notification sent successfully");
     } else {
-      print("Failed to send notification. Status code: ${response.statusCode}");
-      print("Response body: ${response.body}");
+      log("Failed to send notification. Status code: ${response.statusCode}");
+      log("Response body: ${response.body}");
     }
   }
 
@@ -316,6 +317,7 @@ class NotificationService {
   }
 
   void handleMessage(BuildContext context, RemoteMessage message) {
+    log("Call Id When the user Clicked on notification: ${message.data['callID']}");
     if (message.data['callID'] != null) {
       Navigator.push(
         context,

@@ -370,7 +370,6 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                         ),
                       ),
                       0.02.pw(context),
-
                       // Notification Icon Container (with red dot)
                       GestureDetector(
                         onTap: onNotificationPressed,
@@ -427,7 +426,6 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   Container(
                     height: context.mw * 0.12,
                     width: context.mw * 0.35,
@@ -499,7 +497,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: context.mw * 0.35,
+                        width: context.mw * 0.32,
                         child: Text(
                           adminName,
                           overflow: TextOverflow.ellipsis,
@@ -521,7 +519,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  0.01.pw(context),
+                  // 0.01.pw(context),
                   Container(
                     width: context.mw * 0.12,
                     height: context.mw * 0.12,

@@ -40,6 +40,7 @@ class CementryController extends GetxController {
         setGetRequestApiResponse(value);
         setRxRequestStatusForAllCementryRequest(Status.completed);
       }).onError((error, stackTrace) {
+        log(error.toString(), stackTrace: stackTrace);
         setRxRequestStatusForAllCementryRequest(Status.error);
       });
     } catch (e) {

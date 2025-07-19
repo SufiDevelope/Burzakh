@@ -211,7 +211,7 @@ class DubaiCaseDetails {
   String? releaseForm;
   String? additionalDocument;
   String? sendNotificationMessage;
-  String? adminId;
+  int? adminId;
   String? nameOfDeceased;
   String? dateOfDeath;
   String? causeOfDeath;

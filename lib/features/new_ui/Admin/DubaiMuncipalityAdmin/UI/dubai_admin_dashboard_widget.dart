@@ -281,7 +281,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               ),
                             );
                           },
-                          relative: '',
+                          relative: "Dead Person : ${caseDetail?.nameOfDeceased ?? ''}",
                           documents: [
                             if (caseDetail?.deathNotificationFile != null)
                               "Death Notification",

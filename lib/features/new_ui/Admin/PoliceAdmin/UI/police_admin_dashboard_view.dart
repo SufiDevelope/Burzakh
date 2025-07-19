@@ -256,7 +256,7 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                                               final receiverUserID =
                                                   data.user?.id.toString() ??
                                                       "user123";
-
+                                              dev.log("Call Id when the admin invites the user ${meetingId}");
                                               notificationService
                                                   .sendNotification(
                                                 "Incoming Video Call",
@@ -432,9 +432,6 @@ class CallPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final String adminID = "admin_1";
     final String currentUserID = isCaller ? adminID : receiverID;
-
-    dev.log("call ID $callID");
-
     return ZegoUIKitPrebuiltCall(
       appID: 729062384,
       appSign:
