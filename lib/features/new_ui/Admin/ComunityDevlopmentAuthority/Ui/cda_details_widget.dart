@@ -154,6 +154,10 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                                     DateTime.now().toIso8601String(),
                               ),
                             ),
+                            passportDocumentUrl: data?.caseDetail?[index]
+                                    .passportOrEmirateIdFront ??
+                                "",
+                            
                           );
                         }),
                   ],

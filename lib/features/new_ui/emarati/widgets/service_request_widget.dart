@@ -3,10 +3,7 @@
 import 'dart:developer';
 
 import 'package:burzakh/Extenshion/extenshion.dart';
-import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
-import 'package:burzakh/features/emirati_svcs/presentation/widgets/sign_age_sheet.dart';
-import 'package:burzakh/features/new_ui/emarati/ui/rta_service_request_Screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../widgets/app_text.dart';
@@ -68,7 +65,8 @@ class ServiceRequestWidget extends StatelessWidget {
                     children: [
                       AppText(
                         text: text1,
-                        fontSize: context.mh * 0.014,
+                        overflow: TextOverflow.ellipsis,
+                        fontSize: context.mh * 0.013,
                         fontFamily: 'ns',
                         fontWeight: FontWeight.w500,
                         color: AppColor.black(),
@@ -84,7 +82,7 @@ class ServiceRequestWidget extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding:  EdgeInsets.symmetric(horizontal: context.mw * 0.015, vertical: context.mh * 0.005),
                 decoration: BoxDecoration(
                   color: approved == 1
                       ? const Color(0x1434C759)

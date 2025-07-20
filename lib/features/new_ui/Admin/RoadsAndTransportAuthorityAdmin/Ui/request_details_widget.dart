@@ -145,6 +145,9 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                             DateTime.parse(data.mourningEndDate ??
                                 DateTime.now().toIso8601String()),
                           ),
+                          passportDocumentUrl: data.caseDetail?[index]
+                                  .passportOrEmirateIdFront ??
+                              "",
                         );
                       },
                     );

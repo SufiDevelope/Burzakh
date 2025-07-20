@@ -18,6 +18,9 @@ class BurialCardWidget extends StatelessWidget {
   final VoidCallback? onCallTap;
   final String? statusAmbulance;
   final String? graveStatus;
+  final String? age;
+  final String? sect;
+  final String? religion;
 
   const BurialCardWidget({
     super.key,
@@ -35,7 +38,8 @@ class BurialCardWidget extends StatelessWidget {
     this.ongraveAssign,
     this.isAmbulance = false,
     this.onCallTap,
-    this.statusAmbulance, this.graveStatus,
+    this.statusAmbulance,
+    this.graveStatus, this.age, this.sect, this.religion,
   });
 
   @override
@@ -85,12 +89,25 @@ class BurialCardWidget extends StatelessWidget {
             ),
 
             0.005.ph(context),
-            Text(
-              relative,
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: context.mh * 0.016,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  relative,
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: context.mh * 0.016,
+                  ),
+                ),
+                Text(
+                  "Age: ${age} . Sect: ${sect} . Religion: ${religion}",
+                  style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: context.mh * 0.012,
+                  ),
+                ),
+              ],
             ),
 
             0.02.ph(context),
@@ -199,10 +216,10 @@ class BurialCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Visibility(
-                      visible: graveStatus == "Pending" ||
-                              status == "Dispatched"
-                          ? false
-                          : true,
+                      visible:
+                          graveStatus == "Pending"
+                              ? true
+                              : false,
                       child: _circleButton(
                         isAmbulance == true ? Icons.trending_up : Icons.add,
                         isAmbulance == true
@@ -216,11 +233,26 @@ class BurialCardWidget extends StatelessWidget {
                       ),
                     ),
                     0.02.pw(context),
+                    // New circle button for ambulance when status is not "Dispatched"
                     Visibility(
-                      visible: graveStatus == "Pending" ||
-                              status == "Dispatched"
-                          ? false
-                          : true,
+                      visible: isAmbulance == true && status != "Dispatched",
+                      child: _circleButton(
+                        Icons.local_hospital_outlined,
+                        Colors.orange.shade50,
+                        Colors.green,
+                        context,
+                        ongraveAssign,
+                        isGradient: true,
+                        isAmbulance: false,
+                      ),
+                    ),
+                    0.02.pw(context),
+                    Visibility(
+                      visible:
+                          graveStatus == "Pending"||
+                                  status == "Dispatched"
+                              ? true
+                              : false,
                       child: _circleButton(
                         Icons.chevron_right,
                         Colors.grey.shade200,
@@ -230,6 +262,7 @@ class BurialCardWidget extends StatelessWidget {
                         isGradient: false,
                       ),
                     ),
+                    
                   ],
                 )
               ],

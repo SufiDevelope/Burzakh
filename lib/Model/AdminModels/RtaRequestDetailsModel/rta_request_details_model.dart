@@ -186,6 +186,7 @@ class CaseDetail {
   String? additionalDocumentUploadUser;
   String? createdAt;
   String? updatedAt;
+  String? passport_document;
 
   CaseDetail({
     this.id,
@@ -240,6 +241,7 @@ class CaseDetail {
     additionalDocumentUploadUser = json['additional_document_upload_user'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    passport_document = json['passport_document'];
   }
 
   Map<String, dynamic> toJson() {
@@ -269,6 +271,7 @@ class CaseDetail {
     data['additional_document_upload_user'] = additionalDocumentUploadUser;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['passport_document'] = passport_document;
     return data;
   }
 }

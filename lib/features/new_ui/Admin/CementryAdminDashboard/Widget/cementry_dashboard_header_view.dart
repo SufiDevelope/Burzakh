@@ -258,7 +258,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    VisitorAlertAdminDashboard(),
+                                    VisitorAlertAdminDashboard(isDashboard: true,),
                               ),
                             );
                           },

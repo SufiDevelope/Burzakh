@@ -203,9 +203,10 @@ class VisitorAlertController extends GetxController {
     });
   }
 
-  RxString selectedCemetery = 'Al Qusais Cemetery'.obs;
+  RxString selectedCemetery = ''.obs;
 
   final List<String> cemeteries = [
+    '',
     'Al Qusais Cemetery',
     'Al Warqa Cemetery',
     'Jumeirah Cemetery',

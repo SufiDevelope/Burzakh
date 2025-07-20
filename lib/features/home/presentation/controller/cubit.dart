@@ -32,6 +32,7 @@ class HomeCubit extends Cubit<HomeState> {
   File? hospitalCerti;
   File? passportFront;
   File? passportBack;
+  File? pickPassportFile;
   bool isUploadingdocs = false;
   bool isFetchingCases = false;
   bool isFetchingCaseDetail = false;
@@ -291,6 +292,12 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoaded());
   }
 
+  pickPassport() async {
+    emit(HomeInit());
+    pickPassportFile = await ImagePickerClass.pickImage();
+    emit(HomeLoaded());
+  }
+
   pickPassportBack() async {
     emit(HomeInit());
     passportBack = await ImagePickerClass.pickImage();
@@ -328,7 +335,10 @@ class HomeCubit extends Cubit<HomeState> {
         passportOrEmirateIdBack: passportBack!,
         nameofdeceased: nameOfDeceased.text,
         dateofdeath: deathDate.text,
-        locationofdeath: deathLocation.text, age: age.text, gender: gender.text
+        locationofdeath: deathLocation.text,
+        age: age.text,
+        gender: gender.text,
+        pickPassportFile: pickPassportFile!,
       );
       var response = await _useCase.uploadDocument(model: model);
       if (response is Left) {

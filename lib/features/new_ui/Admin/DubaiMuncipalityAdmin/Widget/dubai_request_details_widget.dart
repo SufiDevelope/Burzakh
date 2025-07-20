@@ -251,12 +251,11 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                     'Assign Grave',
                     Colors.deepOrange,
                     Colors.white,
-                    Icons.add,
                     onAssignGrave,
                   ),
                 ),
               ),
-              0.02.pw(context),
+              // 0.02.pw(context),
               Visibility(
                 visible: status == 'Pending' || status == 'grave-number-assigned' ? true : false,
                 child: Expanded(
@@ -265,19 +264,17 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                     'Approve',
                     Colors.green,
                     Colors.white,
-                    Icons.add,
                     onApprove,
                   ),
                 ),
               ),
-              0.02.pw(context),
+              // 0.02.pw(context),
               Expanded(
                 child: _buildActionButton(
                   context,
                   'Open Chat',
                   Colors.white,
                   Colors.black87,
-                  Icons.chat_bubble_outline,
                   onOpenChat,
                   hasBorder: true,
                 ),
@@ -371,17 +368,19 @@ class DubaiRequestDetailWidget extends StatelessWidget {
     String text,
     Color backgroundColor,
     Color textColor,
-    IconData icon,
     VoidCallback? onTap, {
     bool hasBorder = false,
   }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: context.mw * 0.3,
         padding: EdgeInsets.symmetric(
           vertical: context.mh * 0.018,
           horizontal: context.mw * 0.03,
+        ),
+        margin: EdgeInsets.symmetric(
+          horizontal: context.mw * 0.02,
+          vertical: context.mh * 0.01,
         ),
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -390,28 +389,17 @@ class DubaiRequestDetailWidget extends StatelessWidget {
               ? Border.all(color: Colors.grey.shade300, width: 1)
               : null,
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: context.mh * 0.016,
+        child: Center(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: context.mh * 0.016,
               color: textColor,
+              fontWeight: FontWeight.w600,
             ),
-            0.015.pw(context),
-            Expanded(
-              child: Text(
-                text,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: context.mh * 0.016,
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

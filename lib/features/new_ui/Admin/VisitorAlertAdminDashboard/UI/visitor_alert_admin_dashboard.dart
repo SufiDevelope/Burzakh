@@ -14,7 +14,8 @@ import '../../../../../data/Response/status.dart';
 import '../Controller/visitor_alert_controller.dart';
 
 class VisitorAlertAdminDashboard extends StatefulWidget {
-  const VisitorAlertAdminDashboard({super.key});
+  final bool isDashboard;
+  const VisitorAlertAdminDashboard({super.key, required this.isDashboard});
 
   @override
   State<VisitorAlertAdminDashboard> createState() =>
@@ -54,13 +55,17 @@ class _VisitorAlertAdminDashboardState
                       MaterialPageRoute(builder: (context) => NotifsScreen()));
                 },
                 onToolsPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BurzakhEnhancedLogin(),
-                    ),
-                    (route) => false,
-                  );
+                  if (widget.isDashboard == true) {
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BurzakhEnhancedLogin(),
+                      ),
+                      (route) => false,
+                    );
+                  }
                 },
                 onSettingsPressed: () {
                   showDialog(

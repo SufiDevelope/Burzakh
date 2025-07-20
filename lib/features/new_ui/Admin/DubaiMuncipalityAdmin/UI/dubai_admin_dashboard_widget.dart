@@ -61,7 +61,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
           child: Column(
             children: [
               DMCemeteryHeaderWidget(
-                imageurl: "assets/images/png/dubailogo.png",
+                imageurl: "assets/images/jpg/dmlogo.jpeg",
                 adminName: widget.name,
                 initials: widget.name.substring(0, 2),
                 email: "ahmed.alkaabi@dm.gov.ae",
@@ -91,7 +91,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                   );
                 },
                 onAmbulancePressed: () {
-                  controller.selectedIndex.value = 5;
+                  controller.selectedIndex.value = 3;
                 },
               ),
               StatusBarWidgetDubai(
@@ -273,7 +273,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               ),
                             );
                           },
-                          relative: "Dead Person : ${caseDetail?.nameOfDeceased ?? ''}",
+                          relative: "Name of Deceased : ${caseDetail?.nameOfDeceased ?? ''}",
                           documents: [
                             if (caseDetail?.deathNotificationFile != null)
                               "Death Notification",
@@ -300,6 +300,9 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                             );
                           },
                           graveStatus: data.grave_status ?? '',
+                          sect: data.sect ?? '',
+                          religion: data.religion ?? '',
+                          age: caseDetail?.age ?? '',
                         );
                       },
                     );

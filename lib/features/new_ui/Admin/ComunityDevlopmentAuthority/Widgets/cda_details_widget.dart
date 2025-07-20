@@ -90,6 +90,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
   final String? sendNotificationMessage;
   final String? mourningStartDate;
   final String? mourningEndDate;
+  final String? passportDocumentUrl;
 
   const CdaRequestDetailsWidget({
     super.key,
@@ -130,7 +131,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     this.causeOfDeath,
     this.sendNotificationMessage,
     this.mourningStartDate,
-    this.mourningEndDate,
+    this.mourningEndDate, this.passportDocumentUrl,
   });
 
   @override
@@ -142,7 +143,8 @@ class CdaRequestDetailsWidget extends StatelessWidget {
           passportOrEmirateIdFrontUrl != null ||
           passportOrEmirateIdBackUrl != null ||
           additionalDocumentUploadUserUrl != null ||
-          releaseFormUrl != null;
+          releaseFormUrl != null ||
+          passportDocumentUrl != null;
     }
 
     final Color mainColor = primaryColor ?? const Color(0xFF1e40af);
@@ -450,6 +452,16 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                 Icons.assignment_outlined,
                 'Release Form',
                 releaseFormUrl!,
+                null,
+              ),
+              0.015.ph(context),
+            ],
+            if (passportDocumentUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.file_copy,
+                'Passport Document',
+                passportDocumentUrl!,
                 null,
               ),
               0.015.ph(context),

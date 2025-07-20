@@ -85,7 +85,9 @@ class HomeTopbar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VisitorAlertAdminDashboard(),
+                builder: (context) => VisitorAlertAdminDashboard(
+                  isDashboard: true,
+                ),
               ),
             );
           },

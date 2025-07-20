@@ -1070,7 +1070,9 @@ class _BurzakhEnhancedLoginState extends State<BurzakhEnhancedLogin>
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        VisitorAlertAdminDashboard(),
+                                                        VisitorAlertAdminDashboard(
+                                                      isDashboard: false,
+                                                    ),
                                                   ));
                                             },
                                             child: Padding(

@@ -125,7 +125,7 @@ class VisitorAlertHeadingWidget extends StatelessWidget {
                 ),
               ),
               child: Icon(
-                Icons.person_2_outlined,
+                Icons.person_off,
                color: const Color(0xFF4b6fa5),
                 size: context.mh * 0.02,
               ),

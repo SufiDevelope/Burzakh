@@ -83,12 +83,13 @@ class _HomeScreen1State extends State<HomeScreen1> {
                   builder: (context, state) {
                     log("state $state");
                     log("selected case index ${_homeCubit.selectedCaseIndex}");
-                    
+
                     final caseList = _homeCubit.caseList ?? [];
-                    final recentActivityList = _homeCubit.recentActivityList ?? [];
+                    final recentActivityList =
+                        _homeCubit.recentActivityList ?? [];
                     final selectedCaseIndex = _homeCubit.selectedCaseIndex ?? 0;
                     final isFetchingCases = _homeCubit.isFetchingCases ?? false;
-                    
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -113,12 +114,13 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                               if (caseModel == null) {
                                                 return const SizedBox.shrink();
                                               }
-                                              
+
                                               return GestureDetector(
                                                 onTap: () {
                                                   log("index ${caseModel.police_clearance}");
                                                   setState(() {
-                                                    _homeCubit.selectCase(index);
+                                                    _homeCubit
+                                                        .selectCase(index);
                                                   });
                                                 },
                                                 child: HomeCaseWidget(
@@ -132,7 +134,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
                             0.02.ph(context),
 
                             // Today's Priority
-                            if (caseList.isNotEmpty && recentActivityList.isNotEmpty)
+                            if (caseList.isNotEmpty &&
+                                recentActivityList.isNotEmpty)
                               Row(
                                 children: [
                                   AppText(
@@ -141,7 +144,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                     fontSize: context.mh * 0.017,
                                   ),
                                   AppText(
-                                    text: " (${_getSelectedCaseName(caseList, selectedCaseIndex)})",
+                                    text:
+                                        " (${_getSelectedCaseName(caseList, selectedCaseIndex)})",
                                     fontWeight: FontWeight.bold,
                                     fontSize: context.mh * 0.017,
                                   ),
@@ -169,40 +173,53 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                       ],
                                     ),
                                   )
-                                : _shouldShowCaseCompletedMessage(caseList, selectedCaseIndex)
+                                : _shouldShowCaseCompletedMessage(
+                                        caseList, selectedCaseIndex)
                                     ? Container(
                                         alignment: Alignment.topLeft,
                                         width: mdWidth(context) * 1,
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 20, horizontal: 20),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                         ),
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
-                                                CircleAvatar(
-                                                  backgroundColor: AppColor.buttonColor,
-                                                  child: Icon(
-                                                    Icons.check,
-                                                    color: AppColor.white(),
-                                                  ),
+                                                Column(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      backgroundColor:
+                                                          AppColor.buttonColor,
+                                                      child: Icon(
+                                                        Icons.check,
+                                                        color: AppColor.white(),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                                 const SizedBox(width: 8),
                                                 Expanded(
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Row(
                                                         children: [
                                                           AppText(
-                                                            text: "Case Updated",
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: context.mh * 0.016,
+                                                            text:
+                                                                "Case Updated",
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize:
+                                                                context.mh *
+                                                                    0.016,
                                                           ),
                                                         ],
                                                       ),
@@ -210,8 +227,26 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                                       AppText(
                                                         text:
                                                             "Your Case is now ready for burial. Please Check the Notification for Grave Number.",
-                                                        fontSize: context.mh * 0.015,
-                                                        color: const Color(0xff6a655d),
+                                                        fontSize:
+                                                            context.mh * 0.015,
+                                                        color: const Color(
+                                                            0xff6a655d),
+                                                      ),
+                                                      0.01.ph(context),
+                                                      
+                                                      AppText(
+                                                        text:
+                                                            caseList[selectedCaseIndex].restingPlace == "Hospital"
+                                                                ? "Please Proceed to your Perfered Cemetery. We wil arrange an ambulance to pick up the deceased from the hospital."
+                                                                :  "",
+                                                        fontSize:
+                                                            context.mh * 0.015,
+                                                        fontStyle:
+                                                            FontStyle.italic,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color:
+                                                            Color(0xffc29118),
                                                       ),
                                                     ],
                                                   ),
@@ -221,10 +256,13 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                           ],
                                         ),
                                       )
-                                    : _getSelectedCase(caseList, selectedCaseIndex) != null
+                                    : _getSelectedCase(
+                                                caseList, selectedCaseIndex) !=
+                                            null
                                         ? TodayPiorityWidget(
                                             homeCubit: _homeCubit,
-                                            caseModel: _getSelectedCase(caseList, selectedCaseIndex)!,
+                                            caseModel: _getSelectedCase(
+                                                caseList, selectedCaseIndex)!,
                                           )
                                         : const SizedBox.shrink(),
 
@@ -289,7 +327,9 @@ class _HomeScreen1State extends State<HomeScreen1> {
 
   // Helper method to safely get selected case name
   String _getSelectedCaseName(List<dynamic> caseList, int selectedIndex) {
-    if (caseList.isEmpty || selectedIndex >= caseList.length || selectedIndex < 0) {
+    if (caseList.isEmpty ||
+        selectedIndex >= caseList.length ||
+        selectedIndex < 0) {
       return 'Unknown Case';
     }
     final selectedCase = caseList[selectedIndex];
@@ -298,18 +338,21 @@ class _HomeScreen1State extends State<HomeScreen1> {
 
   // Helper method to safely get selected case
   dynamic _getSelectedCase(List<dynamic> caseList, int selectedIndex) {
-    if (caseList.isEmpty || selectedIndex >= caseList.length || selectedIndex < 0) {
+    if (caseList.isEmpty ||
+        selectedIndex >= caseList.length ||
+        selectedIndex < 0) {
       return null;
     }
     return caseList[selectedIndex];
   }
 
   // Helper method to check if case completed message should be shown
-  bool _shouldShowCaseCompletedMessage(List<dynamic> caseList, int selectedIndex) {
+  bool _shouldShowCaseCompletedMessage(
+      List<dynamic> caseList, int selectedIndex) {
     final selectedCase = _getSelectedCase(caseList, selectedIndex);
     if (selectedCase == null) return false;
-    
-    return selectedCase.caseStatus == "approved" && 
-           selectedCase.burial_submission_status == "Approved";
+
+    return selectedCase.caseStatus == "approved" &&
+        selectedCase.burial_submission_status == "Approved";
   }
 }

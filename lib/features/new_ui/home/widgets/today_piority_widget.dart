@@ -179,13 +179,32 @@ class TodayPiorityWidget extends StatelessWidget {
           0.01.ph(context),
           caseModel.burial_submission_status == "Pending"
               ? AppText(
-                  text: 'Please Continue With The Burial Process.',
+                  text: 'Please Continue With The Burial Process, by Following up your Case.',
                   fontSize: context.mh * 0.015,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
                   color: Color(0xffad8443),
                 )
-              : Text(""),
+              : caseModel.burial_submission_status == "Submitted"
+                  ? AppText(
+                      text:
+                          'Your Burrial Submission Has Been Successfully Submitted. Please Wait For Muncipal Approval.',
+                      fontSize: context.mh * 0.015,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffad8443),
+                    )
+                  : caseModel.burial_submission_status == "Approved"
+                      ? AppText(
+                          text: caseModel.restingPlace == "Home"
+                              ? 'Your Burrial Submission Has Been Approved. Please Proceed To Your Home to Cemetery'
+                              : 'Your Burrial Submission Has Been Approved. Please Proceed To Your Hospital to Cemetery.',
+                          fontSize: context.mh * 0.015,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xffad8443),
+                        )
+                      : Text(""),
           if (!hasReleaseForm &&
               !hasPoliceClearance &&
               hasAdditionalDocRequired)

@@ -174,7 +174,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.mh * 0.37,
+      height: context.mh * 0.22,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -189,14 +189,19 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(context.mw * 0.04),
+          padding: EdgeInsets.symmetric(
+            horizontal: context.mw * 0.04,
+            vertical: context.mh * 0.015,
+          ),
           child: Column(
             children: [
+              // Top Row - Logo, Title, and Language Switcher
               Row(
                 children: [
+                  // Logo Section
                   Container(
-                    width: context.mw * 0.15,
-                    height: context.mw * 0.15,
+                    width: context.mw * 0.12, // Slightly smaller
+                    height: context.mw * 0.12,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: const LinearGradient(
@@ -211,13 +216,13 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.15),
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
                     child: Container(
-                      margin: const EdgeInsets.all(4),
+                      margin: const EdgeInsets.all(3),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.white,
@@ -228,214 +233,65 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                                 'DM',
                                 style: TextStyle(
                                   color: const Color(0xFF6B7A8F),
-                                  fontSize: context.mh * 0.022,
+                                  fontSize: context.mh * 0.018,
                                   fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.0,
+                                  letterSpacing: 0.5,
                                 ),
                               ),
                             )
-                          : Center(
+                          : ClipOval(
                               child: Image.asset(
                                 imageurl!,
                                 fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
                               ),
                             ),
                     ),
                   ),
 
-                  // Text
-                  0.02.pw(context),
+                  SizedBox(width: context.mw * 0.03),
+
+                  // Title Section - More Compact
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Column(
-                          children: [
-                            Text(
-                              'Dubai Municipality Cemetery',
-                              style: GoogleFonts.inter(
-                                color: Colors.white,
-                                fontSize: context.mh * 0.02,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            Text(
-                              ' Services',
-                              style: GoogleFonts.inter(
-                                color: Colors.white,
-                                fontSize: context.mh * 0.02,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.5,
-                              ),
-                            ),
-                            Center(
-                              child: Text(
-                                'Burial Supervisor Dashboard',
-                                style: GoogleFonts.inter(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: context.mh * 0.016,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
+                        Text(
+                          'Dubai Municipality Cemetery Services',
+                          style: GoogleFonts.inter(
+                            color: Colors.white,
+                            fontSize: context.mh * 0.018,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.3,
+                            height: 1.1,
+                          ),
                         ),
-                        0.008.ph(context),
+                        SizedBox(height: context.mh * 0.002),
+                        Text(
+                          'Burial Supervisor Dashboard',
+                          style: GoogleFonts.inter(
+                            color: Colors.white.withOpacity(0.85),
+                            fontSize: context.mh * 0.013,
+                            fontWeight: FontWeight.w500,
+                            height: 1.0,
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                ],
-              ),
-              0.02.ph(context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Logout Icon Container
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          _showLogoutBottomSheet(context);
-                        },
-                        child: Container(
-                          width: context.mw * 0.12,
-                          height: context.mw * 0.12,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.2),
-                              width: 2,
-                            ),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xff596e84),
-                                Color(0xff617890),
-                                // Color(0xff2d4159),
-                              ],
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                            size: context.mw * 0.05,
-                          ),
-                        ),
-                      ),
-                      0.02.pw(context),
 
-                      // Ambulance Icon Container
-                      GestureDetector(
-                        onTap: onAmbulancePressed,
-                        child: Container(
-                          width: context.mw * 0.12,
-                          height: context.mw * 0.12,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.2),
-                              width: 2,
-                            ),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xff596e84),
-                                Color(0xff617890),
-                                // Color(0xff2d4159),
-                              ],
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.local_hospital,
-                            color: Colors.white,
-                            size: context.mw * 0.05,
-                          ),
-                        ),
-                      ),
-                      0.02.pw(context),
-                      // Notification Icon Container (with red dot)
-                      GestureDetector(
-                        onTap: onNotificationPressed,
-                        child: Container(
-                          width: context.mw * 0.12,
-                          height: context.mw * 0.12,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.2),
-                              width: 2,
-                            ),
-                            gradient: const LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xff596e84),
-                                Color(0xff617890),
-                                // Color(0xff2d4159),
-                              ],
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: Icon(
-                                  Icons.notifications,
-                                  color: Colors.white,
-                                  size: context.mw * 0.05,
-                                ),
-                              ),
-                              Positioned(
-                                top: 6,
-                                right: 6,
-                                child: Container(
-                                  width: 8,
-                                  height: 8,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Language Switcher - Compact
                   Container(
-                    height: context.mw * 0.12,
-                    width: context.mw * 0.35,
+                    height: context.mw * 0.09,
                     padding:
-                        EdgeInsets.symmetric(horizontal: context.mw * 0.03),
+                        EdgeInsets.symmetric(horizontal: context.mw * 0.025),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: Colors.white.withOpacity(0.2),
-                        width: 2,
+                        width: 1.5,
                       ),
                       gradient: const LinearGradient(
                         begin: Alignment.topLeft,
@@ -443,45 +299,36 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                         colors: [
                           Color(0xff596e84),
                           Color(0xff617890),
-                          // Color(0xff2d4159),
                         ],
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: context.mw * 0.03,
-                              vertical: context.mh * 0.005),
+                            horizontal: context.mw * 0.02,
+                            vertical: context.mh * 0.003,
+                          ),
                           decoration: BoxDecoration(
                             color: Color(0xff828f9e),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
                             'EN',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: context.mw * 0.032,
+                              fontSize: context.mw * 0.028,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                        0.02.pw(context),
+                        SizedBox(width: context.mw * 0.015),
                         Text(
                           'العربية',
                           style: TextStyle(
                             color: Colors.white.withOpacity(0.8),
-                            fontSize: context.mw * 0.028,
+                            fontSize: context.mw * 0.025,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -490,77 +337,174 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              0.015.ph(context),
+
+              SizedBox(height: context.mh * 0.015),
+
+              // Bottom Row - User Info and Action Buttons
               Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  // User Info Section
+                  Row(
                     children: [
+                      0.02.pw(context),
                       Container(
-                        width: context.mw * 0.32,
-                        child: Text(
-                          adminName,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: context.mh * 0.017,
-                            fontWeight: FontWeight.w600,
+                          width: context.mw * 0.1,
+                          height: context.mw * 0.1,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.2),
+                              width: 1.5,
+                            ),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xff596e84),
+                                Color(0xff617890),
+                              ],
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.08),
+                                blurRadius: 3,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                      0.001.ph(context),
-                      Text(
-                        'Cementry Admin',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: context.mh * 0.012,
-                        ),
+                          child: Center(
+                            child: Text(
+                              initials.toUpperCase(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: context.mh * 0.016,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          )),
+                      SizedBox(width: context.mw * 0.025),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: context.mw * 0.32,
+                            child: Text(
+                              adminName,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: context.mh * 0.015,
+                                fontWeight: FontWeight.w600,
+                                height: 1.2,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'Cemetery Admin',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontSize: context.mh * 0.011,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  // 0.01.pw(context),
-                  Container(
-                    width: context.mw * 0.12,
-                    height: context.mw * 0.12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.2),
-                        width: 2,
+
+                  const Spacer(),
+
+                  // Action Buttons Row - More Compact
+                  Row(
+                    children: [
+                      _buildActionButton(
+                        context: context,
+                        icon: Icons.logout,
+                        onTap: () => _showLogoutBottomSheet(context),
                       ),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xff596e84),
-                          Color(0xff617890),
-                          // Color(0xff2d4159),
-                        ],
+                      SizedBox(width: context.mw * 0.02),
+                      _buildActionButton(
+                        context: context,
+                        icon: Icons.local_hospital,
+                        onTap: onAmbulancePressed ?? () {},
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 4,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        initials.toUpperCase(),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: context.mh * 0.02,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      SizedBox(width: context.mw * 0.02),
+                      _buildActionButton(
+                        context: context,
+                        icon: Icons.notifications,
+                        onTap: onNotificationPressed ?? () {},
+                        hasNotification: true,
                       ),
-                    ),
+                    ],
                   ),
                 ],
-              )
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+// Helper method for action buttons
+  Widget _buildActionButton({
+    required BuildContext context,
+    required IconData icon,
+    required VoidCallback onTap,
+    bool hasNotification = false,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: context.mw * 0.1,
+        height: context.mw * 0.1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1.5,
+          ),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff596e84),
+              Color(0xff617890),
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 3,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Center(
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: context.mw * 0.045,
+              ),
+            ),
+            if (hasNotification)
+              Positioned(
+                top: 6,
+                right: 6,
+                child: Container(
+                  width: 7,
+                  height: 7,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

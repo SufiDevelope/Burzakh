@@ -192,7 +192,7 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                               ),
                               const SizedBox(height: 12),
                               _documentItem(
-                                  "EID & Passport",
+                                  "Emirates ID",
                                   "Pending",
                                   Icons.badge,
                                   const Color(0xFFFFF8E1),
@@ -249,6 +249,42 @@ class _CreatCaseScreenState extends State<CreatCaseScreen> {
                                         ),
                                         AppText(
                                           text: "Back",
+                                          color: AppColor.blue,
+                                          fontSize: context.mh * 0.014,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              _documentItem(
+                                  "Passport",
+                                  "Pending",
+                                  Icons.badge,
+                                  const Color(0xFFFFF8E1),
+                                  const Color(0xFFE65100),
+                                  context: context),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      documentCubit.pickPassport();
+                                    },
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset(
+                                          documentCubit.pickPassportFile != null
+                                              ? AppAssets.tickIcon
+                                              : AppAssets.uploadIcon,
+                                          color: AppColor.blue,
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        AppText(
+                                          text: "Upload Passport",
                                           color: AppColor.blue,
                                           fontSize: context.mh * 0.014,
                                           fontWeight: FontWeight.bold,

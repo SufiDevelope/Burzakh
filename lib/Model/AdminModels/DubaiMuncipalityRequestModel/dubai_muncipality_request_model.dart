@@ -223,6 +223,7 @@ class DubaiCaseDetails {
   String? createdAt;
   String? updatedAt;
   String? ambulance_dispatched;
+  String? age;
 
   DubaiCaseDetails(
       {this.id,
@@ -249,7 +250,7 @@ class DubaiCaseDetails {
       this.additionalDocumentUploadUser,
       this.createdAt,
       this.updatedAt,
-      this.ambulance_dispatched});
+      this.ambulance_dispatched, this.age});
 
   DubaiCaseDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -278,6 +279,7 @@ class DubaiCaseDetails {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     ambulance_dispatched = json['ambulance_dispatched'];
+    age = json['age'];
   }
 
   Map<String, dynamic> toJson() {
@@ -309,6 +311,7 @@ class DubaiCaseDetails {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['ambulance_dispatched'] = this.ambulance_dispatched;
+    data['age'] = this.age;
     return data;
   }
 }

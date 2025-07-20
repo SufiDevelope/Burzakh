@@ -294,15 +294,36 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                                               "${data.user?.firstName ?? ""} ${data.user?.lastName ?? ""}",
                                           onSubmit: (requirements) {
                                             dev.log(requirements.toString());
-                                            controller.policeQuickActionApi(
-                                              widget.adminId,
-                                              data.user?.id,
-                                              data.id,
-                                              null,
-                                              requirements,
-                                              context,
-                                              null,
-                                            );
+                                            notificationService
+                                                .sendNotification(
+                                              "Burzakh Notification",
+                                              "Additional Documents Required",
+                                              data.user?.deviceToken ?? "",
+                                            )
+                                                .then((value) {
+                                              controller.policeQuickActionApi(
+                                                widget.adminId,
+                                                data.user?.id,
+                                                data.id,
+                                                "Additional Documents Required",
+                                                requirements,
+                                                context,
+                                                null,
+                                              );
+                                            }).onError((error, stackTrace) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content:
+                                                      Text(error.toString()),
+                                                  backgroundColor: Colors.red,
+                                                  duration:
+                                                      Duration(seconds: 2),
+                                                  behavior:
+                                                      SnackBarBehavior.floating,
+                                                ),
+                                              );
+                                            });
                                           },
                                         );
                                       },

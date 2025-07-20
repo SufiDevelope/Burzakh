@@ -83,6 +83,11 @@ class DocumentProcess extends DocumentDataSource {
         model.hospitalCertification.path,
         filename: model.hospitalCertification.path.split('/').last,
       ));
+      request.files.add(await http.MultipartFile.fromPath(
+        'passport_document',
+        model.pickPassportFile.path,
+        filename: model.pickPassportFile.path.split('/').last,
+      ));
 
       var response = await request.send();
       var result = await http.Response.fromStream(response);

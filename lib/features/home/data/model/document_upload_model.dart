@@ -12,6 +12,7 @@ class DocumentUploadModel {
   final String locationofdeath;
   final String age;
   final String gender;
+  File pickPassportFile;
 
   DocumentUploadModel({
     required this.userId,
@@ -25,5 +26,6 @@ class DocumentUploadModel {
     required this.locationofdeath,
     required this.age,
     required this.gender,
+    required this.pickPassportFile,
   });
 }

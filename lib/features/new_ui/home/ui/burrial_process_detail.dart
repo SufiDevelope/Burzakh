@@ -279,47 +279,57 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     onChanged: (value) {
                       setState(() {
                         selectedReligion = value;
+                        // Reset sect when religion changes and it's not Islam
+                        if (value != "islam") {
+                          selectedSect = null;
+                        } else {
+                          // Set default sect when Islam is selected
+                          selectedSect = "sunni";
+                        }
                       });
                     },
                   ),
                 ),
                 const SizedBox(height: 16),
 
-                // Sect
-                AppText(
-                  text: "Sect *",
-                  fontSize: 14,
-                  color: AppColor.black(),
-                  fontWeight: FontWeight.w500,
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: AppColor.greyLight1().withOpacity(0.23),
-                    borderRadius: BorderRadius.circular(8),
+                // Sect - Only visible when religion is Islam
+                if (selectedReligion == "islam") ...[
+                  AppText(
+                    text: "Sect *",
+                    fontSize: 14,
+                    color: AppColor.black(),
+                    fontWeight: FontWeight.w500,
                   ),
-                  child: DropdownButtonFormField<String>(
-                    value: selectedSect,
-                    decoration: const InputDecoration(
-                      hintText: "Sunni",
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                      border: InputBorder.none,
+                  const SizedBox(height: 8),
+                  Container(
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: AppColor.greyLight1().withOpacity(0.23),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    items: const [
-                      DropdownMenuItem(value: "sunni", child: Text("Sunni")),
-                      DropdownMenuItem(value: "shia", child: Text("Shia")),
-                      DropdownMenuItem(value: "sufi", child: Text("Sufi")),
-                      DropdownMenuItem(value: "other", child: Text("Other")),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSect = value;
-                      });
-                    },
+                    child: DropdownButtonFormField<String>(
+                      value: selectedSect,
+                      decoration: const InputDecoration(
+                        hintText: "Sunni",
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        border: InputBorder.none,
+                      ),
+                      items: const [
+                        DropdownMenuItem(value: "sunni", child: Text("Sunni")),
+                        DropdownMenuItem(value: "shia", child: Text("Shia")),
+                        DropdownMenuItem(value: "sufi", child: Text("Sufi")),
+                        DropdownMenuItem(value: "other", child: Text("Other")),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedSect = value;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
+                ],
+
                 AppText(
                   text: "Prefered Cemetery",
                   fontSize: 14,
@@ -395,6 +405,15 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                             content: Text("Please select a custom time")),
+                      );
+                      return;
+                    }
+
+                    // Validate sect if religion is Islam
+                    if (selectedReligion == "islam" && selectedSect == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text("Please select a sect")),
                       );
                       return;
                     }

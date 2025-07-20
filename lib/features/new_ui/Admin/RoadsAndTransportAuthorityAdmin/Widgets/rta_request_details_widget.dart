@@ -97,6 +97,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
   final Color? backgroundColor;
   final String? mourningStartDate;
   final String? mourningEndDate;
+  final String? passportDocumentUrl;
 
   const RtaRequestDetailsWidget({
     super.key,
@@ -142,7 +143,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
     this.primaryColor,
     this.backgroundColor,
     this.mourningStartDate,
-    this.mourningEndDate,
+    this.mourningEndDate, this.passportDocumentUrl,
   });
 
   @override
@@ -481,6 +482,16 @@ class RtaRequestDetailsWidget extends StatelessWidget {
               ),
               0.015.ph(context),
             ],
+            if (passportDocumentUrl != null) ...[
+              _buildDocumentRow(
+                context,
+                Icons.attach_file_outlined,
+                'Passport Document',
+                passportDocumentUrl!,
+                null,
+              ),
+              0.015.ph(context),
+            ],
 
             // Release Form
             if (releaseFormUrl != null) ...[
@@ -789,7 +800,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
         passportOrEmirateIdFrontUrl != null ||
         passportOrEmirateIdBackUrl != null ||
         additionalDocumentUploadUserUrl != null ||
-        releaseFormUrl != null;
+        releaseFormUrl != null || passportDocumentUrl != null;
   }
 
   Widget _buildDocumentRow(

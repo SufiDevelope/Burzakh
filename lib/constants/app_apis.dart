@@ -181,13 +181,12 @@ class AppApis {
 
   // Visitor Alert Case Api
   static String visitorAlertCaseApi(prayerTime, day, String? cemetery) {
-  String url = "$baseUrl/api/burzakh-visitors/alerts?prayer_time=$prayerTime&day=$day";
+    String url =
+        "$baseUrl/api/burzakh-visitors/alerts?prayer_time=$prayerTime&day=$day";
 
-  if (cemetery != null && cemetery.isNotEmpty) {
-    url += "&cemetery_location=$cemetery";
+    if (cemetery != null && cemetery.isNotEmpty) {
+      url += "&cemetery_location=$cemetery";
+    }
+    return url;
   }
-
-  return url;
-}
-
 }
