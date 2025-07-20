@@ -159,18 +159,6 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
       width: context.mw,
       height: context.mh * 0.13,
       margin: EdgeInsets.all(context.mw * 0.025),
-      // decoration: BoxDecoration(
-      //   color: Colors.white.withOpacity(0.95),
-      //   borderRadius: BorderRadius.circular(context.mw * 0.04),
-      //   border: Border.all(color: Colors.white.withOpacity(0.2)),
-      //   boxShadow: [
-      //     BoxShadow(
-      //       color: Colors.black.withOpacity(0.1),
-      //       blurRadius: context.mw * 0.03,
-      //       offset: Offset(0, context.mh * 0.005),
-      //     ),
-      //   ],
-      // ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -182,216 +170,238 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.circular(context.mw * 0.04),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: context.mw * 0.04,
+            offset: Offset(0, context.mh * 0.008),
+          ),
+        ],
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: context.mw * 0.04,
-          vertical: context.mh * 0.02,
+          vertical: context.mh * 0.015,
         ),
         child: Row(
           children: [
-            Flexible(
-              flex: 1,
+            // Left Side - Title Section
+            Expanded(
+              flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Cemetery\nAdmin\nDashboard",
+                    "Cemetery Admin Dashboard",
                     style: TextStyle(
-                      fontSize: context.mh * 0.02,
+                      fontSize: context.mh * 0.018,
                       fontWeight: FontWeight.w900,
                       color: Colors.white,
-                      height: 1.1,
+                      height: 1.2,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  0.01.ph(context),
+                  Text(
+                    adminname,
+                    style: TextStyle(
+                      fontSize: context.mh * 0.013,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white.withOpacity(0.9),
                     ),
                   ),
                 ],
               ),
             ),
-            0.05.pw(context),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                0.003.ph(context),
-                GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const CreateVisitorAlertDialog(),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.mw * 0.015,
-                      vertical: context.mh * 0.008,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF64748B),
-                      borderRadius: BorderRadius.circular(context.mw * 0.02),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF64748B).withOpacity(0.3),
-                          blurRadius: context.mw * 0.01,
-                          offset: Offset(0, context.mh * 0.003),
+
+            0.04.pw(context),
+
+            // Right Side - Action Buttons
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // First Row - Create Visitor Alert
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionButton(
+                          context: context,
+                          icon: Icons.chat_bubble_outline,
+                          text: 'Create Visitor Alert',
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  const CreateVisitorAlertDialog(),
+                            );
+                          },
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.chat_bubble_outline,
-                          size: context.mh * 0.016,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: context.mw * 0.008),
-                        Flexible(
-                          child: Text(
-                            'Create Visitor Alert',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.mh * 0.012,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-                0.009.ph(context),
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // showVisitorPortalDialog(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => VisitorAlertAdminDashboard(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.015,
-                          vertical: context.mh * 0.008,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF64748B),
-                          borderRadius:
-                              BorderRadius.circular(context.mw * 0.02),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF64748B).withOpacity(0.3),
-                              blurRadius: context.mw * 0.01,
-                              offset: Offset(0, context.mh * 0.003),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.remove_red_eye_outlined,
-                              size: context.mh * 0.016,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: context.mw * 0.008),
-                            Flexible(
-                              child: Text(
-                                'View Visitor Portal',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: context.mh * 0.012,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                overflow: TextOverflow.ellipsis,
+
+                  0.01.ph(context),
+
+                  // Second Row - Multiple Actions
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _buildActionButton(
+                          context: context,
+                          icon: Icons.remove_red_eye_outlined,
+                          text: 'Visitor Portal',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    VisitorAlertAdminDashboard(),
                               ),
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ),
-                    ),
-                    0.03.pw(context),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.015,
-                          vertical: context.mh * 0.008,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF64748B),
-                          borderRadius:
-                              BorderRadius.circular(context.mw * 0.02),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF64748B).withOpacity(0.3),
-                              blurRadius: context.mw * 0.01,
-                              offset: Offset(0, context.mh * 0.003),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.language,
-                              size: context.mh * 0.016,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: context.mw * 0.008),
-                            Text(
-                              'العربية',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: context.mh * 0.012,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+                      0.02.pw(context),
+                      _buildSquareIconButton(
+                        context: context,
+                        icon: Icons.language,
+                        text: 'العربية',
+                        onTap: () {
+                          // Language toggle functionality
+                        },
                       ),
-                    ),
-                    0.03.pw(context),
-                    GestureDetector(
-                      onTap: () {
-                        _showLogoutBottomSheet(context);
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.015,
-                          vertical: context.mh * 0.008,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF64748B),
-                          borderRadius:
-                              BorderRadius.circular(context.mw * 0.02),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF64748B).withOpacity(0.3),
-                              blurRadius: context.mw * 0.01,
-                              offset: Offset(0, context.mh * 0.003),
-                            ),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.logout,
-                          size: context.mh * 0.016,
-                          color: Colors.white,
-                        ),
+                      0.02.pw(context),
+                      _buildSquareIconButton(
+                        context: context,
+                        icon: Icons.logout,
+                        onTap: () {
+                          _showLogoutBottomSheet(context);
+                        },
                       ),
-                    ),
-                  ],
-                ),
-                0.005.ph(context),
-              ],
-            )
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+// Helper method for full action buttons
+  Widget _buildActionButton({
+    required BuildContext context,
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: context.mw * 0.02,
+          vertical: context.mh * 0.01,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(context.mw * 0.025),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.2),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: context.mw * 0.015,
+              offset: Offset(0, context.mh * 0.005),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: context.mh * 0.018,
+              color: Colors.white,
+            ),
+            SizedBox(width: context.mw * 0.01),
+            Flexible(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: context.mh * 0.013,
+                  fontWeight: FontWeight.w600,
+                ),
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+// Helper method for square icon buttons
+  Widget _buildSquareIconButton({
+    required BuildContext context,
+    required IconData icon,
+    required VoidCallback onTap,
+    String? text,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: context.mw * 0.1,
+        height: context.mw * 0.1,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.15),
+          borderRadius: BorderRadius.circular(context.mw * 0.02),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.3),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: context.mw * 0.015,
+              offset: Offset(0, context.mh * 0.005),
+            ),
+          ],
+        ),
+        child: text != null
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    size: context.mh * 0.014,
+                    color: Colors.white,
+                  ),
+                  0.003.ph(context),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: context.mh * 0.008,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              )
+            : Icon(
+                icon,
+                size: context.mh * 0.018,
+                color: Colors.white,
+              ),
       ),
     );
   }

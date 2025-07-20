@@ -425,6 +425,7 @@ class DubaiController extends GetxController {
         setSubmitLoading(false);
         log(value.toString());
         await _homeCubit.getCaseDetails(caseId);
+        await _homeCubit.getUserCases();
         showDialog(
           context: context,
           builder: (context) => BurialSuccessDialog(

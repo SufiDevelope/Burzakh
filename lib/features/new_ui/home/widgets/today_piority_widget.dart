@@ -142,17 +142,15 @@ class TodayPiorityWidget extends StatelessWidget {
             Row(
               children: [
                 AppText(
-                  text:
-                      'Admin has requested an additional document',
+                  text: 'Admin has requested an additional document',
                   fontSize: context.mh * 0.014,
-                 color: Color(0xff6a655d),
+                  color: Color(0xff6a655d),
                 ),
                 AppText(
-                  text:
-                      ': ${caseModel.additional_document}',
+                  text: ': ${caseModel.additional_document}',
                   fontSize: context.mh * 0.013,
                   maxLines: 3,
-                 color: Color(0xff6a655d),
+                  color: Color(0xff6a655d),
                 ),
               ],
             ),
@@ -164,7 +162,7 @@ class TodayPiorityWidget extends StatelessWidget {
             CustomElevatedButton(
               fontSize: context.mh * 0.016,
               text: 'Download Release Form',
-             bgColor: Color(0xffc29118),
+              bgColor: Color(0xffc29118),
               onPressed: () {
                 _downloadFile(caseModel.releaseForm);
               },
@@ -178,13 +176,23 @@ class TodayPiorityWidget extends StatelessWidget {
                 _downloadFile(caseModel.police_clearance!);
               },
             ),
+          0.01.ph(context),
+          caseModel.burial_submission_status == "Pending"
+              ? AppText(
+                  text: 'Please Continue With The Burial Process.',
+                  fontSize: context.mh * 0.015,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xffad8443),
+                )
+              : Text(""),
           if (!hasReleaseForm &&
               !hasPoliceClearance &&
               hasAdditionalDocRequired)
             CustomElevatedButton(
               fontSize: context.mh * 0.016,
               text: 'Upload Document',
-             bgColor: Color(0xffc29118),
+              bgColor: Color(0xffc29118),
               onPressed: () {
                 controller.pickImageUploadUser(
                     caseModel.id, caseModel.userId, context);

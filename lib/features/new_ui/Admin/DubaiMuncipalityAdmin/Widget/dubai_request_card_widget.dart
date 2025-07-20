@@ -17,6 +17,7 @@ class BurialCardWidget extends StatelessWidget {
   final bool isAmbulance;
   final VoidCallback? onCallTap;
   final String? statusAmbulance;
+  final String? graveStatus;
 
   const BurialCardWidget({
     super.key,
@@ -34,7 +35,7 @@ class BurialCardWidget extends StatelessWidget {
     this.ongraveAssign,
     this.isAmbulance = false,
     this.onCallTap,
-    this.statusAmbulance,
+    this.statusAmbulance, this.graveStatus,
   });
 
   @override
@@ -198,8 +199,7 @@ class BurialCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Visibility(
-                      visible: status == "grave-number-assigned" ||
-                              status == "Approve" ||
+                      visible: graveStatus == "Pending" ||
                               status == "Dispatched"
                           ? false
                           : true,
@@ -217,8 +217,7 @@ class BurialCardWidget extends StatelessWidget {
                     ),
                     0.02.pw(context),
                     Visibility(
-                      visible: status == "grave-number-assigned" ||
-                              status == "Approve" ||
+                      visible: graveStatus == "Pending" ||
                               status == "Dispatched"
                           ? false
                           : true,

@@ -53,9 +53,9 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
       controller.filterCassesApi();
     });
     ZegoUIKitPrebuiltCallInvitationService().init(
-      appID: 729062384,
+      appID: 1139162131,
       appSign:
-          "dbfef3c1d8cfba9970a6b4d43a6d42bf20d3d88b77887c6acaa44c82e8fac253",
+          "3699c15758ff0f0903bf250a8b0de2f9911e619d4fe89b8d9ae495b4dfb58b47",
       userID: "admin_1",
       userName: widget.name,
       plugins: [ZegoUIKitSignalingPlugin()],
@@ -433,9 +433,9 @@ class CallPage extends StatelessWidget {
     final String adminID = "admin_1";
     final String currentUserID = isCaller ? adminID : receiverID;
     return ZegoUIKitPrebuiltCall(
-      appID: 729062384,
+      appID: 1139162131,
       appSign:
-          "dbfef3c1d8cfba9970a6b4d43a6d42bf20d3d88b77887c6acaa44c82e8fac253",
+          "3699c15758ff0f0903bf250a8b0de2f9911e619d4fe89b8d9ae495b4dfb58b47",
       userID: currentUserID,
       userName: userName,
       callID: callID,

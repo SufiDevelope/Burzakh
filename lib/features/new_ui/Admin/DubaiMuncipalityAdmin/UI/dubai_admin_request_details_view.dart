@@ -110,7 +110,7 @@ class DubaiAdminRequestDetailsView extends StatelessWidget {
                   : model.caseDetails?.first.releaseForm ?? '',
               onApprove: () {
                 controller.approveGraveApi(model.id ?? -1, context, true);
-              },
+              }, graveStatus: model.grave_status ?? "",
             ),
             0.02.ph(context),
           ],

@@ -105,16 +105,8 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                     count: 3,
                   ),
                   TabItem(
-                    title: 'Approved',
+                    title: 'Approve',
                     count: 10,
-                  ),
-                  TabItem(
-                    title: 'Rejected',
-                    count: 2,
-                  ),
-                  TabItem(
-                    title: 'Completed',
-                    count: 2,
                   ),
                   TabItem(
                     title: 'Ambulance',
@@ -131,7 +123,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                 ),
                 child: Obx(
                   () {
-                    if (controller.selectedIndex.value == 5) {
+                    if (controller.selectedIndex.value == 3) {
                       return AmbulanceStatusCardWidget(
                         controller: controller,
                       );
@@ -151,11 +143,11 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                       padding:
                           EdgeInsets.symmetric(horizontal: context.mw * 0.02),
                       child: DubaiFilterWidget(
-                        searchHint: controller.selectedIndex.value == 5
+                        searchHint: controller.selectedIndex.value == 3
                             ? "Search by name or Id Vehicle Number or Status"
                             : "Search by name Cemetery or Id",
                         onSearchChanged: (value) {
-                          if (controller.selectedIndex.value == 5) {
+                          if (controller.selectedIndex.value == 3) {
                             controller.filterAmbulanceUsingSearchQurey(value);
                           } else {
                             controller.filterRequestUsingSearchQurey(value);
@@ -175,7 +167,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                   case Status.loading:
                     return SizedBox(height: 0);
                   case Status.completed:
-                    if (controller.selectedIndex.value == 5) {
+                    if (controller.selectedIndex.value == 3) {
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
@@ -307,7 +299,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               },
                             );
                           },
-                          
+                          graveStatus: data.grave_status ?? '',
                         );
                       },
                     );

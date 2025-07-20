@@ -26,6 +26,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
   final String? passportOrEmirateIdBackUrl;
   final String? passportOrEmirateIdBackStatus;
   final String? releaseFormUrl;
+  final String graveStatus;
   const DubaiRequestDetailWidget({
     super.key,
     required this.name,
@@ -39,7 +40,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
     this.onApprove,
     this.onAssignGrave,
     this.onOpenChat,
-    this.phoneNo, this.policeClassificationUrl, this.deathNotificationFileUrl, this.deathNotificationFileStatus, this.hospitalCertificateUrl, this.hospitalCertificateStatus, this.passportOrEmirateIdFrontUrl, this.passportOrEmirateIdFrontStatus, this.passportOrEmirateIdBackUrl, this.passportOrEmirateIdBackStatus, this.releaseFormUrl,
+    this.phoneNo, this.policeClassificationUrl, this.deathNotificationFileUrl, this.deathNotificationFileStatus, this.hospitalCertificateUrl, this.hospitalCertificateStatus, this.passportOrEmirateIdFrontUrl, this.passportOrEmirateIdFrontStatus, this.passportOrEmirateIdBackUrl, this.passportOrEmirateIdBackStatus, this.releaseFormUrl, required this.graveStatus,
   });
 
   @override
@@ -243,7 +244,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           Row(
             children: [
               Visibility(
-                visible: status == 'grave-number-assigned' || status == 'Approve' ? false : true,
+                visible: graveStatus == 'Pending' ? true : false,
                 child: Expanded(
                   child: _buildActionButton(
                     context,

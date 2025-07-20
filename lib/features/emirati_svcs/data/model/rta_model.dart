@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class RtaModel {
   String address;
-  String time;
+  // String time;
   DateTime dateTime;
   String userId;
   String requiredSign;
@@ -14,7 +14,7 @@ class RtaModel {
 
   RtaModel({
     required this.address,
-    required this.time,
+    // required this.time,
     required this.dateTime,
     required this.userId,
     required this.customSign,
@@ -28,7 +28,7 @@ class RtaModel {
       address: json['location_of_house'],
       requiredSign: json['sign_required'],
       customSign: json['custom_text_for_sign'],
-      time: json['time'],
+      // time: json['time'],
       dateTime: DateTime.parse(json['dateTime']),
       userId: json['user_id'],
       mourningEndDate: DateTime.parse(json['mourning_end_date']),
@@ -41,7 +41,7 @@ class RtaModel {
       'location_of_house': address,
       'signs_required': requiredSign,
       'custom_text_for_sign': customSign,
-      'time': time,
+      // 'time': time,
       'mourning_start_date': dateTime.toString(),
       'user_id': userId,
       'mourning_end_date': mourningEndDate.toString(),

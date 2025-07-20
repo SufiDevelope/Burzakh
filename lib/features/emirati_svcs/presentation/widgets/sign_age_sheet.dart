@@ -154,37 +154,35 @@ class _SignAgeSheetState extends State<SignAgeSheet> {
                           height: commonHeightS,
                         ),
 
-                        Text(
-                          'Time'.tr(),
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF5F5A51),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        CustomTextFormField(
-                          borderColor: AppColor.fieldYellowBorder(),
-                          hintTextStyle: AppTextStyle.hintTextStyleWithFont(),
-                          controller: timeController,
-                          onTap: () async {
-                            var value = await showTimePicker(
-                                context: context, initialTime: TimeOfDay.now());
-                            if (value != null) {
-                              _emiratiScvCubit.getTime(value);
-                            }
-                          },
-                          subTitle: _emiratiScvCubit.time != null
-                              ? "${_emiratiScvCubit.time!.hour}:${_emiratiScvCubit.time!.minute}"
-                              : 'Time',
-                          readOnly: true,
-                          sufixIcon: AppAssets.clockIcon,
-                        ),
-                        SizedBox(
-                          height: commonHeightS,
-                        ),
+                        // Text(
+                        //   'Time'.tr(),
+                        //   style: TextStyle(
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.w500,
+                        //     color: Color(0xFF5F5A51),
+                        //   ),
+                        // ),
+                        // SizedBox(
+                        //   height: 5,
+                        // ),
+                        // CustomTextFormField(
+                        //   borderColor: AppColor.fieldYellowBorder(),
+                        //   hintTextStyle: AppTextStyle.hintTextStyleWithFont(),
+                        //   controller: timeController,
+                        //   onTap: () async {
+                        //     var value = await showTimePicker(
+                        //         context: context, initialTime: TimeOfDay.now());
+                        //     if (value != null) {
+                        //       _emiratiScvCubit.getTime(value);
+                        //     }
+                        //   },
+                        //   subTitle: _emiratiScvCubit.time != null
+                        //       ? "${_emiratiScvCubit.time!.hour}:${_emiratiScvCubit.time!.minute}"
+                        //       : 'Time',
+                        //   readOnly: true,
+                        //   sufixIcon: AppAssets.clockIcon,
+                        // ),
+                       
                         Text(
                           'Case Name'.tr(),
                           style: TextStyle(

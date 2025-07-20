@@ -62,6 +62,7 @@ class DubaiMuncipalityReqestData {
   String? createdAt;
   String? updatedAt;
   DubaiUser? user;
+  String? grave_status;
   List<DubaiCaseDetails>? caseDetails;
 
   DubaiMuncipalityReqestData(
@@ -102,6 +103,7 @@ class DubaiMuncipalityReqestData {
         caseDetails!.add(new DubaiCaseDetails.fromJson(v));
       });
     }
+    grave_status = json['grave_status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -125,6 +127,7 @@ class DubaiMuncipalityReqestData {
     if (this.caseDetails != null) {
       data['case_details'] = this.caseDetails!.map((v) => v.toJson()).toList();
     }
+    data['grave_status'] = this.grave_status;
     return data;
   }
 }
