@@ -2,18 +2,21 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
 import 'package:burzakh/widgets/app_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 class BurrialProcessDetail extends StatefulWidget {
   final String caseName;
   final String userid;
   final String caseid;
-  const BurrialProcessDetail(
-      {super.key,
-      required this.caseName,
-      required this.userid,
-      required this.caseid});
+  const BurrialProcessDetail({
+    super.key,
+    required this.caseName,
+    required this.userid,
+    required this.caseid,
+  });
 
   @override
   State<BurrialProcessDetail> createState() => _BurrialProcessDetailState();
@@ -24,7 +27,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
 
   // Data variables
   String? selectedPrayerTime;
-  String? selectedNationality = "uae"; 
+  String? selectedNationality = "uae";
   String? selectedReligion = "islam";
   String? selectedSect = "sunni";
   String specialRequests = "";
@@ -124,19 +127,25 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                   ),
                   child: DropdownButtonFormField<String>(
                     value: selectedPrayerTime,
-                    decoration: const InputDecoration(
-                      hintText: "Select prayer time",
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                    decoration: InputDecoration(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
                     items: const [
-                      DropdownMenuItem(value: "fajr", child: Text("Fajr (Dawn Prayer)")),
-                      DropdownMenuItem(value: "dhuhr", child: Text("Dhuhr (Noon Prayer)")),
-                      DropdownMenuItem(value: "asr", child: Text("Asr (Afternoon Prayer)")),
                       DropdownMenuItem(
-                          value: "maghrib", child: Text("Maghrib (Sunset Prayer)")),
-                      DropdownMenuItem(value: "isha", child: Text("Isha (Night Prayer)")),
-                      DropdownMenuItem(value: "custom", child: Text("Custom Time")),
+                          value: "fajr", child: Text("Fajr (Dawn Prayer)")),
+                      DropdownMenuItem(
+                          value: "dhuhr", child: Text("Dhuhr (Noon Prayer)")),
+                      DropdownMenuItem(
+                          value: "asr", child: Text("Asr (Afternoon Prayer)")),
+                      DropdownMenuItem(
+                          value: "maghrib",
+                          child: Text("Maghrib (Sunset Prayer)")),
+                      DropdownMenuItem(
+                          value: "isha", child: Text("Isha (Night Prayer)")),
+                      DropdownMenuItem(
+                          value: "custom", child: Text("Custom Time")),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -148,7 +157,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     },
                   ),
                 ),
-                
+
                 if (selectedPrayerTime == "custom") ...[
                   const SizedBox(height: 16),
                   AppText(
@@ -177,11 +186,11 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: AppText(
-                              text: customTime != null 
+                              text: customTime != null
                                   ? _formatTime(customTime!)
                                   : "Select time",
                               fontSize: 14,
-                              color: customTime != null 
+                              color: customTime != null
                                   ? AppColor.black()
                                   : AppColor.grey(),
                             ),
@@ -196,7 +205,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     ),
                   ),
                 ],
-                
+
                 const SizedBox(height: 16),
 
                 // Nationality
@@ -216,19 +225,30 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                   child: DropdownButtonFormField<String>(
                     value: selectedNationality,
                     decoration: const InputDecoration(
-                      hintText: "United Arab Emirates",
+                      hintText: "",
                       contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
-                    items: const [
+                    items: [
                       DropdownMenuItem(
-                          value: "uae", child: Text("United Arab Emirates")),
+                          value: "uae",
+                          child: Text(
+                              StringTranslateExtension("United Arab Emirates")
+                                  .tr())),
                       DropdownMenuItem(
-                          value: "saudi", child: Text("Saudi Arabia")),
-                      DropdownMenuItem(value: "egypt", child: Text("Egypt")),
+                          value: "saudi",
+                          child: Text(
+                              StringTranslateExtension("Saudi Arabia").tr())),
                       DropdownMenuItem(
-                          value: "pakistan", child: Text("Pakistan")),
-                      DropdownMenuItem(value: "india", child: Text("India")),
+                          value: "egypt",
+                          child: Text(StringTranslateExtension("Egypt").tr())),
+                      DropdownMenuItem(
+                          value: "pakistan",
+                          child:
+                              Text(StringTranslateExtension("Pakistan").tr())),
+                      DropdownMenuItem(
+                          value: "india",
+                          child: Text(StringTranslateExtension("India").tr())),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -266,15 +286,25 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
-                    items: const [
-                      DropdownMenuItem(value: "islam", child: Text("Islam")),
+                    items: [
                       DropdownMenuItem(
-                          value: "christianity", child: Text("Christianity")),
+                          value: "islam",
+                          child: Text(StringTranslateExtension("Islam").tr())),
                       DropdownMenuItem(
-                          value: "hinduism", child: Text("Hinduism")),
+                          value: "christianity",
+                          child: Text(
+                              StringTranslateExtension("Christianity").tr())),
                       DropdownMenuItem(
-                          value: "buddhism", child: Text("Buddhism")),
-                      DropdownMenuItem(value: "other", child: Text("Other")),
+                          value: "hinduism",
+                          child:
+                              Text(StringTranslateExtension("Hinduism").tr())),
+                      DropdownMenuItem(
+                          value: "buddhism",
+                          child:
+                              Text(StringTranslateExtension("Buddhism").tr())),
+                      DropdownMenuItem(
+                          value: "other",
+                          child: Text(StringTranslateExtension("Other").tr())),
                     ],
                     onChanged: (value) {
                       setState(() {
@@ -375,9 +405,9 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                   child: TextFormField(
                     controller: specialRequestsController,
                     maxLines: 4,
-                    decoration: const InputDecoration(
+                    decoration:  InputDecoration(
                       hintText:
-                          "Any special requests or additional information",
+                          StringTranslateExtension("Any special requests or additional information").tr(),
                       contentPadding: EdgeInsets.all(16),
                       border: InputBorder.none,
                     ),
@@ -412,8 +442,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     // Validate sect if religion is Islam
                     if (selectedReligion == "islam" && selectedSect == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text("Please select a sect")),
+                        const SnackBar(content: Text("Please select a sect")),
                       );
                       return;
                     }

@@ -223,7 +223,7 @@ class _DocumnetProgressCaseDetailsState
                                                 text:
                                                     "Download Police Clearance",
                                                 color: AppColor.blue,
-                                                fontSize: 13,
+                                                fontSize: context.mh * 0.011,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ],

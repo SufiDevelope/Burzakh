@@ -180,7 +180,7 @@ class _AppDashboardState extends State<AppDashboard> {
 
                               // Subtitle
                               Text(
-                                'Special support services for UAE nationals during\ntheir time of need'
+                                'Special support services for UAE nationals during their time of need'
                                     .tr(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -215,7 +215,7 @@ class _AppDashboardState extends State<AppDashboard> {
 
                               // Description
                               Text(
-                                'As part of the UAE\'s commitment to its citizens, additional compassionate services are available exclusively for Emirati families. These services are provided to honor our national heritage and support our community during times of loss.'
+                                "As part of the UAE's commitment to its citizens, additional compassionate services are available exclusively for Emirati families. These services are provided to honor our national heritage and support our community during times of loss."
                                     .tr(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -385,7 +385,7 @@ class _AppDashboardState extends State<AppDashboard> {
                                 width: double.infinity,
                                 padding: EdgeInsets.all(16),
                                 child: Text(
-                                  '"And those who believed and whose families follow them in faith - We will join with them their families" — At-Tur 52:21'
+                                  "And those who believed and whose families follow them in faith - We will join with them their families — At-Tur 52:21"
                                       .tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
