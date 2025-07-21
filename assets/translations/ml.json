@@ -149,9 +149,6 @@
   "Upload police clearance graveyard supervisor": "കബർദുഗ്ഗ സമാധാനാധികാരിക്ക് പൊലീസ് ക്ലിയറൻസ് അപ്\u200Cലോഡ് ചെയ്യുക",
   "Graveyard Supervisor Approval": "കബർദുഗ്ഗ സമാധാനാധികാരിയുടെ അംഗീകാരം",
 
-
-
-
   "Skip": "ഒഴിവാക്കുക",
   "Compassionate Support When You Need It Most": "നിങ്ങൾക്ക് ഏറ്റവും ആവശ്യമുള്ള സമയത്ത് കരുണയോടെയുള്ള പിന്തുണ",
   "Honoring your loved one's journey with care, compassion, and Islamic guidance.": "പ്രിയപ്പെട്ടവരുടെ യാത്രയെ പരിചരണം, കരുണ, ഇസ്ലാമിക മാർഗ്ഗനിർദ്ദേശം എന്നിവയോടെ ആദരിക്കുന്നു.",
@@ -224,7 +221,7 @@
   "Step 1 of 1": "ഘട്ടം 1/1",
   "UAE pass *": "UAE പാസ് *",
   "UAE Citizens Only": "UAE നാട്ടിന്റെ നാസികൾക്ക് മാത്രമേ",
-  "This section is strictly for UAE Citizens only. Kindly confirm you are an Emirati to proceed." : "ഈ പാഠശൈലി എംഐഎ നാസികൾക്ക് മാത്രമേ സാധിക്കുന്നതാണ്. നിങ്ങൾ എംഐഎ നാസ�",
+  "This section is strictly for UAE Citizens only. Kindly confirm you are an Emirati to proceed.": "ഈ പാഠശൈലി എംഐഎ നാസികൾക്ക് മാത്രമേ സാധിക്കുന്നതാണ്. നിങ്ങൾ എംഐഎ നാസ�",
   "Don't show this again": "ഇത് മറ്റൊരു സമയം കാണില്ലാത്തത്തിനുള്ളു",
   "Confirm": "സ്ഥിരീകരിക്കുക",
   "App Settings": "പ്രോഗ്രാമിന്റെ സെറ്റിംഗ്സ്",
@@ -232,8 +229,6 @@
   "Sign Out": "പുറത്താക്കുക",
   "Welcome,": "വെള്ളി,",
   "Logging in...": "ലോഗിൻ ചെയ്യുന്നു...",
-
-
 
   "Docs": "ഡോക്സ്",
   "Emarati": "എമിറാറ്റി",
@@ -678,15 +673,15 @@
   "\"Verify, in the remembrance of Allah do hearts find rest\"": "\"മറക്കരുത്, അല്ലാഹുവിനെ ഓർക്കുമ്പോഴാണ് ഹൃദയങ്ങൾക്ക് ശാന്തി ലഭിക്കുന്നത്\"",
   "-Surah Ar-Ra'd13:28": "-സൂറത്ത് അൽ-റഅദ് 13:28",
   "Start Chat": "സംഭാഷണം ആരംഭിക്കുക",
-  "Deceased Information" : "മതിയുടെ വിവരങ്ങൾ",
-  "Name of Deceased" : "മതിയുടെ പേര്",
-  "Date of Death" : "മരണത്തെ ദിവസം",
-  "Cause of Death" : "മരണത്തിന്റെ കാരണം",
-  "Location of Death" : "മരണത്തിന്റെ സ്ഥലം",
-  "Release Form Available" : "വിട്ടുകളയ്ക്ക് പ്രേരണ സൂചിക്കുന്നത് ലഭ്യമാണ്",
-  "Police Clearance Available" : "പോലീസ് സ്വീകരണം ലഭ്യമാണ്",
-  "Additional Document Required" : "ഇതിനുശേഷം മറ്റൊരു സൂചിക്കൽ ആവശ്യമാണ്",
-  "Ready for download" : "ഡൗൺലോഡ് ചെയ്യാന് തയ്യാറാണ്",
+  "Deceased Information": "മതിയുടെ വിവരങ്ങൾ",
+  "Name of Deceased": "മതിയുടെ പേര്",
+  "Date of Death": "മരണത്തെ ദിവസം",
+  "Cause of Death": "മരണത്തിന്റെ കാരണം",
+  "Location of Death": "മരണത്തിന്റെ സ്ഥലം",
+  "Release Form Available": "വിട്ടുകളയ്ക്ക് പ്രേരണ സൂചിക്കുന്നത് ലഭ്യമാണ്",
+  "Police Clearance Available": "പോലീസ് സ്വീകരണം ലഭ്യമാണ്",
+  "Additional Document Required": "ഇതിനുശേഷം മറ്റൊരു സൂചിക്കൽ ആവശ്യമാണ്",
+  "Ready for download": "ഡൗൺലോഡ് ചെയ്യാന് തയ്യാറാണ്",
   "Upload required document": "ആവശ്യമായ സൂചിക്കൽ അപ്‌ലോഡ് ചെയ്യുക",
   "Your release form is ready for download. Please download and keep it safe.": "നിങ്ങളുടെ വിട്ടുകളയ്ക്ക് പ്രേരണ സൂചിക്കൽ ഡൗൺലോഡ് ചെയ്യാന് തയ്യാറാണ്. ഡൗൺലോഡ് ചെയ്യുകയും സുരക്ഷിതമാക്കുകയും ചെയ്യുക.",
   "Your Police Clearance Certificate is ready for download. Please save a copy for future reference.": "നിങ്ങളുടെ പോലീസ് സ്വീകരണ സർക്കുലാർ ഡൗൺലോഡ് ചെയ്യാന് തയ്യാറാണ്. വിവരങ്റെ പിന്നിലെ പരിശോധനക്കായി ഒരു കോപ്പി സൂക്ഷിക്കുക.",
@@ -697,9 +692,41 @@
   "Your request has been sent to the Road Transport Authority.": "നിങ്ങളുടെ അപേക്ഷ ౴ത്തിന് സംബന്ധിച്ച് സ്വാഗതം.",
   "Case Name": "കേസ് പേര്",
   "Rejection Reason: ": "വിജയിക്കൽ കാരണം:",
-  "Update Services": "സേവകൾ അപ്ഡേറ്റ് ചെയ്യുക"
+  "Update Services": "സേവകൾ അപ്ഡേറ്റ് ചെയ്യുക",
 
+  "May Allah grant them peace.": "അല്ലാഹു അവർക്ക് സമാധാനം നൽകട്ടെ.",
+  "We are here to guide you through this process with care and compassion": "ഈ പ്രക്രിയയിലൂടെ ശ്രദ്ധയോടെയും കാരുണ്യത്തോടെയും നിങ്ങളെ നയിക്കാൻ ഞങ്ങൾ ഇവിടെയുണ്ട്",
+  "To provide you with the most appropriate guidance": "നിങ്ങൾക്ക് ഏറ്റവും ഉചിതമായ മാർഗ്ഗനിർദ്ദേശം നൽകുന്നതിന്",
+  "Where did the passing occur?": "എവിടെയാണ് കടന്നുകയറ്റം സംഭവിച്ചത്?",
+  "At Home": "വീട്ടിൽ",
+  "Passed away at residence or private location": "വീട്ടിലോ സ്വകാര്യ സ്ഥലത്തോ അന്തരിച്ചു.",
+  "At Hospital": "ആശുപത്രിയിൽ",
+  "Passed away at medical facility or clinic": "മെഡിക്കൽ സൗകര്യത്തിലോ ക്ലിനിക്കിലോ വച്ച് മരണമടഞ്ഞു.",
+  "Indeed we belong to Allah, and indeed to Him we will return — Al-Baqarah 2:156": "തീർച്ചയായും നാം അല്ലാഹുവിന്റേതാണ്, തീർച്ചയായും അവനിലേക്ക് മടങ്ങുകയും ചെയ്യും - അൽ-ബഖറ 2:156",
 
+  "Additional Steps Required": "അധിക ഘട്ടങ്ങൾ ആവശ്യമാണ്",
+  "We will guide you through each step.": "ഓരോ ഘട്ടത്തിലൂടെയും ഞങ്ങൾ നിങ്ങളെ നയിക്കും.",
+  "Police Verification Required": "പോലീസ് വെരിഫിക്കേഷൻ ആവശ്യമാണ്",
+  "Since the passing occurred at home, Dubai Police must first verify the case as part of the standard procedure. This is a compassionate service to ensure all documentation is properly completed.": "മരണം വീട്ടിൽ വച്ചായതിനാൽ, സ്റ്റാൻഡേർഡ് നടപടിക്രമത്തിന്റെ ഭാഗമായി ദുബായ് പോലീസ് ആദ്യം കേസ് പരിശോധിക്കണം. എല്ലാ രേഖകളും ശരിയായി പൂർത്തിയാക്കിയിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുന്നതിനുള്ള കാരുണ്യകരമായ സേവനമാണിത്.",
+  "Your next steps:": "നിങ്ങളുടെ അടുത്ത ഘട്ടങ്ങൾ:",
+  "Contact Dubai Police at ": "ദുബായ് പോലീസുമായി ബന്ധപ്പെടുക",
+  "They will provide immediate assistance": "അവർ ഉടനടി സഹായം നൽകും",
+  "Follow their guidance for verification": "സ്ഥിരീകരണത്തിനായി അവരുടെ മാർഗ്ഗനിർദ്ദേശം പാലിക്കുക.",
+  "This ensures all procedures are completed properly": "ഇത് എല്ലാ നടപടിക്രമങ്ങളും ശരിയായി പൂർത്തിയാക്കുന്നുവെന്ന് ഉറപ്പാക്കുന്നു",
+  "Return to this app when ready": "തയ്യാറാകുമ്പോൾ ഈ ആപ്പിലേക്ക് മടങ്ങുക",
+  "We will be here to continue assisting you": "നിങ്ങളെ സഹായിക്കാൻ ഞങ്ങൾ ഇവിടെ ഉണ്ടാകും.",
+  "I Understand": "ഞാൻ മനസ്സിലാക്കുന്നു",
+  "May Allah ease this journey for you and your family": "അല്ലാഹു നിങ്ങളുടെയും നിങ്ങളുടെ പക്ഷത്തെയും ഈ പഥം സുഹൃത്തിയാക്കുക",
 
-
+  "Guidance for Your Journey": "നിങ്ങളുടെ പഥിന്റെ മാർഗ്ഗനിർദ്ദേശം",
+  "Your path has been prepared.": "നിങ്ങളുടെ പഥം തയ്യാറാക്കിയിട്ടുണ്ട്.",
+  "Streamlined Process Available": "സ്റ്റ്രോമ്ലിൻ പ്രോസ് ഉണ്ടാക്കിയിട്ടുണ്ട്",
+  "Hospital documentation is already available, which helps expedite the verification process with Dubai authorities. We can guide you through the next steps with care.": "ആശുപത്രി രേഖകൾ ഇതിനകം തന്നെ ലഭ്യമാണ്, ഇത് ദുബായ് അധികൃതരുമായുള്ള സ്ഥിരീകരണ പ്രക്രിയ വേഗത്തിലാക്കാൻ സഹായിക്കുന്നു. അടുത്ത ഘട്ടങ്ങളിലൂടെ ഞങ്ങൾക്ക് നിങ്ങളെ ശ്രദ്ധയോടെ നയിക്കാൻ കഴിയും.",
+  "What this means for you:": "ഇത് നിങ്ങൾക്ക് എന്താണ് അർത്ഥമാക്കുന്നത്:",
+  "Medical documentation is complete": "മെഡിക്കൽ ഡോക്യുമെൻ്റേഷൻ പൂർത്തിയായി",
+  "All necessary medical records are available" : "ആവശ്യമായ എല്ലാ മെഡിക്കൽ രേഖകളും ലഭ്യമാണ്.",
+  "Police verification will be expedited": "പോലീസ് വെരിഫിക്കേഷൻ വേഗത്തിലാക്കും.",
+  "The process will move more quickly" : "പ്രക്രിയ കൂടുതൽ വേഗത്തിൽ നീങ്ങും",
+  "You may proceed with the application": "നിങ്ങൾക്ക് അപേക്ഷയുമായി മുന്നോട്ട് പോകാം",
+  "We can begin the burial arrangements" : "നമുക്ക് ശവസംസ്കാര ചടങ്ങുകൾ ആരംഭിക്കാം."
 }

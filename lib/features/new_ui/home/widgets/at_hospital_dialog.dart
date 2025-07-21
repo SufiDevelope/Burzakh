@@ -1,5 +1,6 @@
 import 'package:burzakh/features/new_ui/home/ui/creat_case_screen.dart';
 import 'package:burzakh/features/new_ui/home/widgets/resting_dialog_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AtHospitalDialogWidget extends StatelessWidget {
@@ -73,7 +74,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
 
                       // Main title
                       Text(
-                        'Guidance for Your Journey',
+                        'Guidance for Your Journey'.tr(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: screenHeight * 0.018,
@@ -85,7 +86,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
 
                       // Subtitle
                       Text(
-                        'Your path has been prepared',
+                        'Your path has been prepared'.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
@@ -135,7 +136,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Streamlined Process Available',
+                                    'Streamlined Process Available'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.018,
                                       fontWeight: FontWeight.w600,
@@ -144,7 +145,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.01),
                                   Text(
-                                    'Hospital documentation is already available, which helps expedite the verification process with Dubai authorities. We can guide you through the next steps with care.',
+                                    'Hospital documentation is already available, which helps expedite the verification process with Dubai authorities. We can guide you through the next steps with care.'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.014,
                                       color: const Color(0xFF6B7280),
@@ -162,7 +163,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
 
                       // What this means for you title
                       Text(
-                        'What this means for you:',
+                        'What this means for you:'.tr(),
                         style: TextStyle(
                           fontSize: screenHeight * 0.020,
                           fontWeight: FontWeight.bold,
@@ -187,7 +188,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Medical documentation is complete',
+                                  'Medical documentation is complete'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.015,
                                     fontWeight: FontWeight.w600,
@@ -196,7 +197,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'All necessary medical records are available',
+                                  'All necessary medical records are available'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -225,7 +226,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Police verification will be expedited',
+                                  'Police verification will be expedited'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.015,
                                     fontWeight: FontWeight.w600,
@@ -234,7 +235,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'The process will move more quickly',
+                                  'The process will move more quickly'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -263,7 +264,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'You may proceed with the application',
+                                  'You may proceed with the application'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.015,
                                     fontWeight: FontWeight.w600,
@@ -272,7 +273,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'We can begin the burial arrangements',
+                                  'We can begin the burial arrangements'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -302,7 +303,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  'Back',
+                                  'Back'.tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: const Color(0xFF78716C),
@@ -333,7 +334,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  'I Understand',
+                                  'I Understand'.tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -352,7 +353,7 @@ class AtHospitalDialogWidget extends StatelessWidget {
                       // Bottom quote
                       Center(
                         child: Text(
-                          'May Allah ease this journey for you and your family',
+                          'May Allah ease this journey for you and your family'.tr(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: screenHeight * 0.013,

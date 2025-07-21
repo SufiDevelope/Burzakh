@@ -1,6 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/home/ui/creat_case_screen.dart';
 import 'package:burzakh/features/new_ui/home/widgets/resting_dialog_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AtHomeDialogWidget extends StatelessWidget {
@@ -76,7 +77,7 @@ class AtHomeDialogWidget extends StatelessWidget {
 
                       // Main title
                       Text(
-                        'Additional Steps Required',
+                        'Additional Steps Required'.tr(),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: screenHeight * 0.02,
@@ -88,7 +89,7 @@ class AtHomeDialogWidget extends StatelessWidget {
 
                       // Subtitle
                       Text(
-                        'We will guide you through each step',
+                        'We will guide you through each step.'.tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.9),
@@ -131,7 +132,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Police Verification Required',
+                                    'Police Verification Required'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.016,
                                       fontWeight: FontWeight.w600,
@@ -140,7 +141,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.01),
                                   Text(
-                                    'Since the passing occurred at home, Dubai Police must first verify the case as part of the standard procedure. This is a compassionate service to ensure all documentation is properly completed.',
+                                    'Since the passing occurred at home, Dubai Police must first verify the case as part of the standard procedure. This is a compassionate service to ensure all documentation is properly completed.'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.014,
                                       color: const Color(0xFF6B7280),
@@ -158,7 +159,7 @@ class AtHomeDialogWidget extends StatelessWidget {
 
                       // Your next steps title
                       Text(
-                        'Your next steps:',
+                        'Your next steps:'.tr(),
                         style: TextStyle(
                           fontSize: screenHeight * 0.020,
                           fontWeight: FontWeight.bold,
@@ -199,7 +200,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: 'Contact Dubai Police at ',
+                                        text: 'Contact Dubai Police at '.tr(),
                                         style: TextStyle(
                                           fontSize: screenHeight * 0.015,
                                           fontWeight: FontWeight.w600,
@@ -219,7 +220,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'They will provide immediate assistance',
+                                  'They will provide immediate assistance'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -261,7 +262,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Follow their guidance for verification',
+                                  'Follow their guidance for verification'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.015,
                                     fontWeight: FontWeight.w600,
@@ -270,7 +271,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'This ensures all procedures are completed properly',
+                                  'This ensures all procedures are completed properly'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -312,7 +313,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Return to this app when ready',
+                                  'Return to this app when ready'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.015,
                                     fontWeight: FontWeight.w600,
@@ -321,7 +322,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                 ),
                                 SizedBox(height: screenHeight * 0.005),
                                 Text(
-                                  'We will be here to continue assisting you',
+                                  'We will be here to continue assisting you'.tr(),
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.013,
                                     color: const Color(0xFF9CA3AF),
@@ -351,7 +352,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  'Back',
+                                  'Back'.tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: const Color(0xFF78716C),
@@ -382,7 +383,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  'I Understand',
+                                  'I Understand'.tr(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -401,7 +402,7 @@ class AtHomeDialogWidget extends StatelessWidget {
                       // Bottom quote
                       Center(
                         child: Text(
-                          'May Allah ease this journey for you and your family',
+                          'May Allah ease this journey for you and your family'.tr(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: screenHeight * 0.013,

@@ -9,7 +9,7 @@
   "SKIP": "تخطَّى",
   "NEXT": "التالي",
   "Ways We Are Here to Support You": "الطرق التي نحن هنا لدعمك بها",
-  "Barzakh brings every essential service together, guiding you through each step with simplicity.":"برزخ يجمع كل الخدمات الأساسية، ويُرشدك في كل خطوة ببساطة.",
+  "Barzakh brings every essential service together, guiding you through each step with simplicity.": "برزخ يجمع كل الخدمات الأساسية، ويُرشدك في كل خطوة ببساطة.",
   "Step-by-step Guidance": "إرشاد خطوة بخطوة",
   "Document Management": "إدارة المستندات",
   "Burial arrangement": "ترتيبات الدفن",
@@ -147,7 +147,6 @@
   "Upload police clearance graveyard supervisor": "تحميل شهادة تصريح الشرطة لمشرف المقبرة",
   "Graveyard Supervisor Approval": "موافقة مشرف المقبرة",
 
-
   "Skip": "تخطي",
   "Compassionate Support When You Need It Most": "دعم مفعم بالرحمة عندما تكون في أمس الحاجة إليه",
   "Honoring your loved one\\'s journey with care, compassion, and Islamic guidance.": "تكريم رحلة أحبائك بالعناية والرحمة والتوجيه الإسلامي.",
@@ -227,18 +226,8 @@
   "App Settings": "إعدادات التطبيق",
   "Help & Support": "المساعدة والدعم",
   "Sign Out": "تسجيل الخروج",
-  "Welcome,":"مرحباً،",
+  "Welcome,": "مرحباً،",
   "Logging in...": "تسجيل الدخول...",
-  
-
-
-
-
-
-
-
-
-
 
   "Docs": "وثائق",
   "Emarati": "إماراتي",
@@ -513,7 +502,7 @@
   "Sponsor someone who has never performed Umrah to visit the Holy Kaaba": "رعاية شخص لم يؤد العمرة لزيارة الكعبة المشرفة",
   "Ongoing Charity for the Hereafter": "صدقة جارية للآخرة",
   "'When a person dies, all their deeds come to an end except for three: ongoing charity, beneficial knowledge, or a righteous child who prays for them.'": "'إذا مات الإنسان انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له.'",
-  "— Prophet Muhammad ﷺ":"— النبي محمد ﷺ",
+  "— Prophet Muhammad ﷺ": "— النبي محمد ﷺ",
   "Choose a Sadaqah Jariyah Project:": "اختر مشروع صدقة جارية:",
   "AED": "درهم",
   "NEW": "جديد",
@@ -680,7 +669,6 @@
   "Every soul shall taste death. And only on the Day of Resurrection shall you be paid your wages in full.": "كل نفس ذائقة الموت وإنما توفون أجوركم يوم القيامة",
   "Quran 3:185": "القرآن 3:185",
 
-
   "Prohibited Actions": "الأفعال المحظورة",
 
   "If you wish to benefit your loved ones who have passed away, know that building structures on graves or placing flowers on them will not help them in their afterlife.": "إذا أردت أن تفيد أحباءك الذين ماتوا فاعلم أن بناء المباني على القبور أو وضع الزهور عليها لن ينفعهم في الآخرة.",
@@ -690,7 +678,6 @@
   "Comforting Hadiths": "أحاديث مُطمئنة",
   "When to Recite": "متى تقرأ",
 
-
   "Logout": "تسجيل الخروج",
   "Are you sure you want to log out?": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "You have no pending actions today.\nYour priorities will appear here after you register a case.": "ليس لديك أي إجراءات معلقة اليوم.\nستظهر أولوياتك هنا بعد تسجيل قضية.",
@@ -699,11 +686,11 @@
   "-Surah Ar-Ra'd13:28": "-سورة الرعد 13:28",
   "Start Chat": "ابدأ المحادثة",
 
-  "Deceased Information" : "معلومات المتوفى",
-  "Name of Deceased" : "اسم المتوفى",
-  "Date of Death" : "تاريخ الوفاة",
-  "Cause of Death" : "سبب الوفاة",
-  "Location of Death" : "محل الوفاة",
+  "Deceased Information": "معلومات المتوفى",
+  "Name of Deceased": "اسم المتوفى",
+  "Date of Death": "تاريخ الوفاة",
+  "Cause of Death": "سبب الوفاة",
+  "Location of Death": "محل الوفاة",
   "Release Form Available": "موجودة صورة الإفراج",
   "Police Clearance Available": "موجودة صورة الإخلاء الشرطي",
   "Additional Document Required": "وثيقة إضافية مطلوبة",
@@ -718,9 +705,40 @@
   "Your request has been sent to the Road Transport Authority.": "تم إرسال طلبك إلى هيئة النقل",
   "Case Name": "اسم الحالة",
   "Rejection Reason:": "سبب الرفض:",
-  "Update Service": "تحديث الخدمة"
+  "Update Service": "تحديث الخدمة",
+  "May Allah grant them peace.": "الله يرحمهم",
+  "We are here to guide you through this process with care and compassion": "نحن هنا لإرشادك خلال هذه العملية بعناية وتعاطف",
+  "To provide you with the most appropriate guidance": "لتزويدك بالإرشادات الأكثر ملاءمة",
+  "Where did the passing occur?": "أين حدث المرور؟",
+  "At Home": "في البيت",
+  "Passed away at residence or private location": "توفي في محل إقامته أو مكان خاص",
+  "At Hospital": "في المستشفى",
+  "Passed away at medical facility or clinic": "توفي في منشأة طبية أو عيادة",
+  "Indeed we belong to Allah, and indeed to Him we will return — Al-Baqarah 2:156": "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ — البقرة 2:156",
+  
+  "Additional Steps Required": "خطوات إضافية مطلوبة",
+  "We will guide you through each step.": "سوف نقوم بإرشادك في كل خطوة.",
+  "Police Verification Required": "التحقق الشرطي مطلوب",
+  "Since the passing occurred at home, Dubai Police must first verify the case as part of the standard procedure. This is a compassionate service to ensure all documentation is properly completed.": "بما أن الوفاة حدثت في المنزل، يتعين على شرطة دبي التحقق من الحالة أولاً كجزء من الإجراءات الاعتيادية. هذه خدمة إنسانية لضمان استكمال جميع الوثائق بشكل صحيح.",
+  "Your next steps:":"خطواتك التالية:",
+  "Contact Dubai Police at ":"اتصل بشرطة دبي على",
+  "They will provide immediate assistance":"وسوف يقدمون المساعدة الفورية",
+  "Follow their guidance for verification":"اتبع إرشاداتهم للتحقق",
+  "This ensures all procedures are completed properly":"وهذا يضمن إكمال جميع الإجراءات بشكل صحيح",
+  "Return to this app when ready":"العودة إلى هذا التطبيق عندما تكون جاهزًا",
+  "We will be here to continue assisting you":"سوف نكون هنا لمواصلة مساعدتك",
+  "I Understand": "أفهم",
+  "May Allah ease this journey for you and your family": "اللهم أهديك وعائلتك هذه الرحلة",
 
-
-
-
+  "Guidance for Your Journey": "الإرشادات لرحلتك",
+  "Your path has been prepared.": "تم تحضير طريقك.",
+  "Streamlined Process Available": "عملية مُبسطة متوفرة",
+  "Hospital documentation is already available, which helps expedite the verification process with Dubai authorities. We can guide you through the next steps with care.": "تم توفير الوثائق المستشارة بالمستشفى، مما يساعد على تسرع عملية التحقق مع السلطات في دبي. يمكننا إرشادك في الخطوات التالية بعناية.",
+  "What this means for you:": "ما يعنيه لك:",
+  "Medical documentation is complete": "تمت إكمال الوثائق الطبية",
+  "All necessary medical records are available" : "جميع السجلات الطبية المطلوبة متوفرة",
+  "Police verification will be expedited": "سيتم تسرع عملية التحقق الشرطي",
+  "The process will move more quickly" : "سيتم تسرع عملية التحقق الشرطي",
+  "You may proceed with the application": "يمكنك المضي قدمًا في الطلب",
+  "We can begin the burial arrangements" : "يمكننا بدء التوفيات"
 }

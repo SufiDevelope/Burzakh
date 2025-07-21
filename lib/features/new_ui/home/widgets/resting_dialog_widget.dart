@@ -1,5 +1,6 @@
 import 'package:burzakh/features/new_ui/home/widgets/at_home_dialog.dart';
 import 'package:burzakh/features/new_ui/home/widgets/at_hospital_dialog.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class RestingDialogWidget extends StatelessWidget {
@@ -68,7 +69,7 @@ class RestingDialogWidget extends StatelessWidget {
 
                     // Main title
                     Text(
-                      'May Allah grant them peace',
+                      'May Allah grant them peace.'.tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: screenHeight * 0.018,
@@ -80,7 +81,7 @@ class RestingDialogWidget extends StatelessWidget {
 
                     // Subtitle
                     Text(
-                      'We are here to guide you through this process with\ncare and compassion',
+                      'We are here to guide you through this process with care and compassion'.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.9),
@@ -99,7 +100,7 @@ class RestingDialogWidget extends StatelessWidget {
                   children: [
                     // Guidance text
                     Text(
-                      'To provide you with the most appropriate\nguidance',
+                      'To provide you with the most appropriate guidance'.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: screenHeight * 0.015,
@@ -113,7 +114,7 @@ class RestingDialogWidget extends StatelessWidget {
 
                     // Question
                     Text(
-                      'Where did the passing occur?',
+                      'Where did the passing occur?'.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: screenHeight * 0.012,
@@ -161,7 +162,7 @@ class RestingDialogWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'At Home',
+                                    'At Home'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.017,
                                       fontWeight: FontWeight.w600,
@@ -170,7 +171,7 @@ class RestingDialogWidget extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.003),
                                   Text(
-                                    'Passed away at residence or private location',
+                                    'Passed away at residence or private location'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.013,
                                       color: const Color(0xFF6B7280),
@@ -226,7 +227,7 @@ class RestingDialogWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'At Hospital',
+                                    'At Hospital'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.017,
                                       fontWeight: FontWeight.w600,
@@ -235,7 +236,7 @@ class RestingDialogWidget extends StatelessWidget {
                                   ),
                                   SizedBox(height: screenHeight * 0.003),
                                   Text(
-                                    'Passed away at medical facility or clinic',
+                                    'Passed away at medical facility or clinic'.tr(),
                                     style: TextStyle(
                                       fontSize: screenHeight * 0.012,
                                       color: const Color(0xFF6B7280),
@@ -261,7 +262,7 @@ class RestingDialogWidget extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(screenWidth * 0.04),
                       child: Text(
-                        '"Indeed we belong to Allah, and indeed to Him we will return" — Al-Baqarah 2:156',
+                        "Indeed we belong to Allah, and indeed to Him we will return — Al-Baqarah 2:156".tr(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: screenHeight * 0.013,
