@@ -1,5 +1,9 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class RTADashboardHeaderWidget extends StatelessWidget {
   final String title;
@@ -141,7 +145,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                       ),
                       0.02.pw(context),
                       Text(
-                        'Logout',
+                        StringTranslateExtension('Logout').tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
@@ -161,6 +165,18 @@ class RTADashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xFFbd4753),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -215,7 +231,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    StringTranslateExtension(title).tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.014,
@@ -225,7 +241,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                   ),
                   0.004.ph(context),
                   Text(
-                    subtitle,
+                    StringTranslateExtension(subtitle).tr(),
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: context.mh * 0.010,
@@ -257,7 +273,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Administrator',
+                      StringTranslateExtension('Administrator').tr(),
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
                         fontSize: context.mh * 0.014,
@@ -281,32 +297,36 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                           ),
                         ),
                         0.015.pw(context),
-
-                        // Profile Circle
-                        Container(
-                          width: context.mw * 0.09,
-                          height: context.mw * 0.09,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
+                        Obx(
+                          () {
+                            return GestureDetector(
+                              onTap: () => _showLanguageSelectionCustom(),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: context.mw * 0.015,
+                                  vertical: context.mh * 0.006,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                  controller.lang.value.languageCode != 'ar'
+                                      ? 'English'
+                                      : "العربية",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: context.mh * 0.012,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              initials,
-                              style: TextStyle(
-                                color: const Color(0xFFbd4753),
-                                fontSize: context.mh * 0.018,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                         0.015.pw(context),
 

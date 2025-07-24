@@ -64,7 +64,7 @@ class LanguageSelectionBottomSheet extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Text(
-                  StringTranslateExtension('select_language').tr(),
+                  StringTranslateExtension('Select Language').tr(),
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

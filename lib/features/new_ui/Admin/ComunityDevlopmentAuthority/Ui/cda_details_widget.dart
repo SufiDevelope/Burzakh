@@ -12,6 +12,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CdaRequestDetailView extends StatefulWidget {
   final int requestId;
@@ -38,7 +39,7 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Request Details',
+          StringTranslateExtension("Request Details").tr(),
           style: TextStyle(
             fontSize: context.mh * 0.018,
             color: Colors.white,
@@ -83,7 +84,7 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                             name:
                                 "${data?.user?.firstName} ${data?.user?.lastName}",
                             caseId:
-                                "Case ID: BUR-${DateTime.now().year}-${data?.id ?? ""}",
+                                "BUR-${DateTime.now().year}-${data?.id ?? ""}",
                             submittedDate: DateFormat('yyyy-MM-dd').format(
                               DateTime.parse(
                                 data?.createdAt ??

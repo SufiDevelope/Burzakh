@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class QuickActionsDialog extends StatelessWidget {
@@ -45,7 +46,7 @@ class QuickActionsDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Quick Actions",
+                    "Quick Actions".tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.022,
                       fontWeight: FontWeight.bold,
@@ -97,7 +98,7 @@ class QuickActionsDialog extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Video Call",
+                                  "Video Call".tr(),
                                   style: TextStyle(
                                     fontSize: context.mh * 0.018,
                                     fontWeight: FontWeight.bold,
@@ -106,7 +107,7 @@ class QuickActionsDialog extends StatelessWidget {
                                 ),
                                 0.005.ph(context),
                                 Text(
-                                  "Schedule a video verification call with the applicant",
+                                  "Schedule a video verification call with the applicant".tr(),
                                   style: TextStyle(
                                     fontSize: context.mh * 0.014,
                                     color: Colors.white.withOpacity(0.9),
@@ -199,7 +200,7 @@ class QuickActionsDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    title.tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.018,
                       fontWeight: FontWeight.bold,
@@ -208,7 +209,7 @@ class QuickActionsDialog extends StatelessWidget {
                   ),
                   0.005.ph(context),
                   Text(
-                    description,
+                    description.tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.014,
                       color: Colors.grey[600],

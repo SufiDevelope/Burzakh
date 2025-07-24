@@ -104,7 +104,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                               count: controller.model.value.pendingCount
                                   .toString(),
                               statusText: "Need Approval",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.check,
                               primaryColor: Colors.amber,
                               backgroundColor: Colors.grey[50],
@@ -116,7 +116,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                               count: controller.model.value.approvedCount
                                   .toString(),
                               statusText: "This Week",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.check_circle,
                               primaryColor: Colors.green,
                               backgroundColor: Colors.grey[50],
@@ -128,7 +128,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                               count: controller.model.value.rejectedCount
                                   .toString(),
                               statusText: "This Week",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.close,
                               primaryColor: Colors.red,
                               backgroundColor: Colors.grey[50],
@@ -195,7 +195,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
                           caseId:
-                              "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                              "BUR-${DateTime.now().year}-${data.id ?? ""}",
                           location: data.locationOfTent ?? "",
                           signCount: "",
                           messageCount: 2,

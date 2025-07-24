@@ -5,6 +5,7 @@ import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Co
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MapPatternPainter extends CustomPainter {
   @override
@@ -110,7 +111,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
     required this.location,
     required this.email,
     required this.phoneNumber,
-    this.signPreviewText = 'Standard RT direction sign',
+    this.signPreviewText = 'Sign Preview',
     this.signPreviewSubtext = '',
     this.signCount = "",
     this.mapPreviewText = 'Map Preview (Google Maps)',
@@ -143,7 +144,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
     this.primaryColor,
     this.backgroundColor,
     this.mourningStartDate,
-    this.mourningEndDate, this.passportDocumentUrl,
+    this.mourningEndDate,
+    this.passportDocumentUrl,
   });
 
   @override
@@ -188,13 +190,25 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                       ),
                     ),
                     0.005.ph(context),
-                    Text(
-                      'Submitted on $submittedDate',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: context.mh * 0.014,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          StringTranslateExtension('Submitted on ').tr(),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          '$submittedDate',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -202,13 +216,25 @@ class RtaRequestDetailsWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    caseId,
-                    style: TextStyle(
-                      color: mainColor,
-                      fontSize: context.mh * 0.014,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        StringTranslateExtension('Case ID:').tr(),
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        caseId,
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                   0.01.ph(context),
                   Container(
@@ -238,7 +264,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
 
           // User Contact Information Section
           Text(
-            'Contact Information',
+            StringTranslateExtension('Contact Information').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -280,7 +306,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
               mourningStartDate != null ||
               mourningEndDate != null) ...[
             Text(
-              'Case Details',
+              StringTranslateExtension('Case Details').tr(),
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: context.mh * 0.016,
@@ -367,7 +393,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
 
           // Request Details Section
           Text(
-            'Request Details',
+            StringTranslateExtension('Request Details').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -401,7 +427,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
           // Documents Section
           if (_hasDocuments()) ...[
             Text(
-              'Documents',
+              StringTranslateExtension('Documents').tr(),
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: context.mh * 0.016,
@@ -510,7 +536,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
 
           // Sign Preview Section
           Text(
-            'Sign Preview',
+            StringTranslateExtension('Sign Preview').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -542,7 +568,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                 ),
                 0.01.ph(context),
                 Text(
-                  signPreviewText,
+                  StringTranslateExtension(signPreviewText).tr(),
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: context.mh * 0.014,
@@ -558,7 +584,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
           0.03.ph(context),
           // Location Preview Section
           Text(
-            'Location Preview',
+            StringTranslateExtension('Location Preview').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -652,7 +678,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                               ),
                               0.01.pw(context),
                               Text(
-                                mapPreviewText,
+                                StringTranslateExtension(mapPreviewText).tr(),
                                 style: TextStyle(
                                   color: Colors.blue[700],
                                   fontSize: context.mh * 0.014,
@@ -703,7 +729,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                               )
                             : Center(
                                 child: Text(
-                                  'Approve Request',
+                                  StringTranslateExtension('Approve Request')
+                                      .tr(),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: context.mh * 0.014,
@@ -742,7 +769,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                                 )
                               : Center(
                                   child: Text(
-                                    'Reject Request',
+                                    StringTranslateExtension('Reject Request')
+                                        .tr(),
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: context.mh * 0.014,
@@ -774,7 +802,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Open Chat',
+                          StringTranslateExtension('Open Chat').tr(),
                           style: TextStyle(
                             color: Colors.grey[700],
                             fontSize: context.mh * 0.014,
@@ -800,7 +828,8 @@ class RtaRequestDetailsWidget extends StatelessWidget {
         passportOrEmirateIdFrontUrl != null ||
         passportOrEmirateIdBackUrl != null ||
         additionalDocumentUploadUserUrl != null ||
-        releaseFormUrl != null || passportDocumentUrl != null;
+        releaseFormUrl != null ||
+        passportDocumentUrl != null;
   }
 
   Widget _buildDocumentRow(
@@ -861,7 +890,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    StringTranslateExtension(title).tr(),
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: context.mh * 0.015,
@@ -870,7 +899,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
                   ),
                   0.005.ph(context),
                   Text(
-                    'Tap to view document',
+                    StringTranslateExtension('Tap to view document').tr(),
                     style: TextStyle(
                       color: Color(0xFFbd4753),
                       fontSize: context.mh * 0.012,
@@ -955,7 +984,7 @@ class RtaRequestDetailsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                StringTranslateExtension(title).tr(),
                 style: TextStyle(
                   color: Colors.grey[800],
                   fontSize: context.mh * 0.015,

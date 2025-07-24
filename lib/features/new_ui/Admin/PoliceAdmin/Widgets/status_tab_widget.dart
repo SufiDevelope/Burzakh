@@ -75,36 +75,6 @@ class StatusTabsWidget extends StatelessWidget {
                               : FontWeight.w500,
                         ),
                       ),
-                      
-                      // // Badge with count
-                      // if (tab.count != null) ...[
-                      //   SizedBox(height: context.mh * 0.006),
-                      //   Container(
-                      //     constraints: BoxConstraints(
-                      //       minWidth: context.mw * 0.05,
-                      //       maxWidth: context.mw * 0.1,
-                      //     ),
-                      //     padding: EdgeInsets.symmetric(
-                      //       horizontal: context.mw * 0.015,
-                      //       vertical: context.mh * 0.003,
-                      //     ),
-                      //     decoration: BoxDecoration(
-                      //       color: isSelected
-                      //           ? const Color(0xFF4A7C59)
-                      //           : Colors.grey[400],
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     child: Text(
-                      //       '${tab.count}',
-                      //       textAlign: TextAlign.center,
-                      //       style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: context.mh * 0.012,
-                      //         fontWeight: FontWeight.w600,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ],
                     ],
                   ),
                 ),

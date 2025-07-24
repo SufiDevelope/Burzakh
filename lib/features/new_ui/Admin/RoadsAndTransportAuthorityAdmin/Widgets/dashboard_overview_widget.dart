@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 enum TimeRange { day, week, month }
@@ -45,7 +46,7 @@ class GenericDashboardOverviewWidget extends StatelessWidget {
           // Title
           Expanded(
             child: Text(
-              title,
+              title.tr(),
               style: TextStyle(
                 color: textColor ?? const Color(0xFF2C3E50),
                 fontSize: context.mh * 0.018,
@@ -130,7 +131,7 @@ class GenericDashboardOverviewWidget extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            label,
+            label.tr(),
             style: TextStyle(
               color: isSelected ? Colors.white : Colors.grey[600],
               fontSize: context.mh * 0.014,

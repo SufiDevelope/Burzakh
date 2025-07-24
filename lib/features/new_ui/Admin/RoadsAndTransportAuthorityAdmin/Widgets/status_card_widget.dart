@@ -1,5 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenericStatusCardWidget extends StatelessWidget {
@@ -117,7 +118,7 @@ class GenericStatusCardWidget extends StatelessWidget {
                       0.03.pw(context),
                       Expanded(
                         child: Text(
-                          title,
+                          title.tr(),
                           style: TextStyle(
                             color: mainColor,
                             fontSize: context.mh * 0.016,
@@ -145,7 +146,7 @@ class GenericStatusCardWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              statusText,
+                              statusText.tr(),
                               style: TextStyle(
                                 color: mainColor,
                                 fontSize: context.mh * 0.014,

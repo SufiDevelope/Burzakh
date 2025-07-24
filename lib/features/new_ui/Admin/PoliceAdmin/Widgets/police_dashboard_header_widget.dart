@@ -1,7 +1,9 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:get/get.dart';
 
 class PoliceDashboardHeaderWidget extends StatelessWidget {
   final String title;
@@ -139,7 +141,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                       ),
                       0.02.pw(context),
                       Text(
-                        'Logout',
+                        StringTranslateExtension('Logout').tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
@@ -159,12 +161,13 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
     void _showLanguageSelectionCustom() {
       LanguageSelectionBottomSheet.show(
         context,
         backgroundColor: Colors.white,
         textColor: Colors.black,
-        selectedColor:  Color(0xFF00734B),
+        selectedColor: Color(0xFF00734B),
         borderColor: Colors.white.withOpacity(0.3),
         borderRadius: 20,
       );
@@ -211,7 +214,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title.tr(),
+                    StringTranslateExtension(title).tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.02,
@@ -220,7 +223,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                   ),
                   0.004.ph(context),
                   Text(
-                    subtitle.tr(),
+                    StringTranslateExtension(subtitle).tr(),
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: context.mh * 0.015,
@@ -253,7 +256,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                   children: [
                     // Administrator Label
                     Text(
-                      'Administrator'.tr(),
+                      StringTranslateExtension('Administrator').tr(),
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
                         fontSize: context.mh * 0.014,
@@ -287,30 +290,36 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             // Arabic Language Button
-                            GestureDetector(
-                              onTap: () => _showLanguageSelectionCustom(),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: context.mw * 0.015,
-                                  vertical: context.mh * 0.006,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Colors.white.withOpacity(0.3),
-                                    width: 1,
+                            Obx(
+                              () {
+                                return GestureDetector(
+                                  onTap: () => _showLanguageSelectionCustom(),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: context.mw * 0.015,
+                                      vertical: context.mh * 0.006,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      controller.lang.value.languageCode != 'ar'
+                                          ? 'English'
+                                          : "العربية",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: context.mh * 0.012,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  "العربية",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: context.mh * 0.012,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
 
                             SizedBox(width: context.mw * 0.01),

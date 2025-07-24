@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleCallDialog extends StatefulWidget {
@@ -89,7 +90,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Schedule Video Call",
+                        "Schedule Video Call".tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.024,
                           fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                   children: [
                     // Meeting ID Section
                     Text(
-                      "Meeting Details",
+                      "Meeting Details".tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
@@ -139,7 +140,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
 
                     // Meeting ID Field
                     Text(
-                      "Meeting ID",
+                      "Meeting ID".tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.016,
                         fontWeight: FontWeight.w500,
@@ -167,7 +168,6 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                           fontWeight: FontWeight.w500,
                         ),
                         decoration: InputDecoration(
-                          hintText: "Enter meeting ID",
                           hintStyle: TextStyle(
                             fontSize: context.mh * 0.016,
                             color: Colors.grey[500],
@@ -219,7 +219,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                           0.03.pw(context),
                           Expanded(
                             child: Text(
-                              "The applicant will receive a notification with the meeting details and link.",
+                              "The applicant will receive a notification with the meeting details and link.".tr(),
                               style: TextStyle(
                                 fontSize: context.mh * 0.014,
                                 color: const Color(0xFF00734B),
@@ -269,7 +269,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                         ),
                         child: Center(
                           child: Text(
-                            "Cancel",
+                            "Cancel".tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.016,
                               fontWeight: FontWeight.w600,
@@ -309,7 +309,7 @@ class _ScheduleCallDialogState extends State<ScheduleCallDialog> {
                                   ),
                                 )
                               : Text(
-                                  "Call",
+                                  "Call".tr(),
                                   style: TextStyle(
                                     fontSize: context.mh * 0.016,
                                     fontWeight: FontWeight.w600,

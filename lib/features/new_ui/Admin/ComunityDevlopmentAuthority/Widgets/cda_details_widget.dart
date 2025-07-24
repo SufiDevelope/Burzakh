@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Controller/cda_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MapPatternPainter extends CustomPainter {
   @override
@@ -185,13 +186,25 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                       ),
                     ),
                     0.005.ph(context),
-                    Text(
-                      'Submitted on $submittedDate',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                        fontSize: context.mh * 0.014,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          StringTranslateExtension('Submitted on ').tr(),
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          '$submittedDate',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -199,13 +212,25 @@ class CdaRequestDetailsWidget extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    caseId,
-                    style: TextStyle(
-                      color: mainColor,
-                      fontSize: context.mh * 0.014,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        StringTranslateExtension('Case ID:').tr(),
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        caseId,
+                        style: TextStyle(
+                          color: mainColor,
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                   0.01.ph(context),
                   Container(
@@ -234,7 +259,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
           0.03.ph(context),
           // User Contact Information Section
           Text(
-            'Contact Information',
+            StringTranslateExtension('Contact Information').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -276,7 +301,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
               mourningStartDate != null ||
               mourningEndDate != null) ...[
             Text(
-              'Case Details',
+              StringTranslateExtension('Case Details').tr(),
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: context.mh * 0.016,
@@ -363,7 +388,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
 
           if (_hasDocuments()) ...[
             Text(
-              'Documents',
+              StringTranslateExtension('Documents').tr(),
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: context.mh * 0.016,
@@ -474,7 +499,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
 
           // Request Details Section
           Text(
-            'Request Details',
+            StringTranslateExtension('Request Details').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -497,7 +522,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
           0.03.ph(context),
           // Location Preview Section
           Text(
-            'Location Preview',
+            StringTranslateExtension('Location Preview').tr(),
             style: TextStyle(
               color: Colors.grey[700],
               fontSize: context.mh * 0.016,
@@ -591,7 +616,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                               ),
                               0.01.pw(context),
                               Text(
-                                mapPreviewText,
+                                StringTranslateExtension(mapPreviewText).tr(),
                                 style: TextStyle(
                                   color: Colors.blue[700],
                                   fontSize: context.mh * 0.014,
@@ -643,7 +668,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                                 )
                               : Center(
                                   child: Text(
-                                    'Approve Request',
+                                    StringTranslateExtension('Approve Request').tr(),
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: context.mh * 0.014,
@@ -683,7 +708,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                                 )
                               : Center(
                                   child: Text(
-                                    'Reject Request',
+                                    StringTranslateExtension('Reject Request').tr(),
                                     style: TextStyle(
                                       color: Colors.grey[700],
                                       fontSize: context.mh * 0.014,
@@ -715,7 +740,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Open Chat',
+                          StringTranslateExtension('Open Chat').tr(),
                           style: TextStyle(
                             color: Colors.grey[700],
                             fontSize: context.mh * 0.014,
@@ -792,7 +817,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    StringTranslateExtension(title).tr(),
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: context.mh * 0.015,
@@ -801,7 +826,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                   ),
                   0.005.ph(context),
                   Text(
-                    'Tap to view document',
+                    StringTranslateExtension('Tap to view document').tr(),
                     style: TextStyle(
                       color: Color(0xFF1e40af),
                       fontSize: context.mh * 0.012,
@@ -886,7 +911,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                StringTranslateExtension(title).tr(),
                 style: TextStyle(
                   color: Colors.grey[800],
                   fontSize: context.mh * 0.015,

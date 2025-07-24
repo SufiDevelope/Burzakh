@@ -1,6 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AdditionalDocsRequirementsDialog extends StatelessWidget {
   final String caseNumber;
@@ -44,7 +45,7 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
-        padding:  EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: Colors.white,
@@ -58,7 +59,7 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Additional Docs Requirements',
+                  StringTranslateExtension('Additional Docs Requirements').tr(),
                   style: TextStyle(
                     fontSize: context.mh * 0.018,
                     fontWeight: FontWeight.bold,
@@ -79,7 +80,6 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
 
             0.016.ph(context),
 
-
             // Case Information
             Container(
               padding: const EdgeInsets.all(12),
@@ -91,31 +91,55 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Case: $caseNumber',
-                    style:  TextStyle(
-                      fontSize: context.mh * 0.014,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF495057),
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        StringTranslateExtension('Case: ').tr(),
+                        style: TextStyle(
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF495057),
+                        ),
+                      ),
+                      Text(
+                        '$caseNumber',
+                        style: TextStyle(
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF495057),
+                        ),
+                      ),
+                    ],
                   ),
                   0.005.ph(context),
-                  Text(
-                    'Applicant: $personName',
-                    style:  TextStyle(
-                      fontSize: context.mh * 0.014,
-                      color: Color(0xFF6C757D),
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        StringTranslateExtension('Applicant: ').tr(),
+                        style: TextStyle(
+                          fontSize: context.mh * 0.014,
+                          color: Color(0xFF6C757D),
+                        ),
+                      ),
+                      Text(
+                        '$personName',
+                        style: TextStyle(
+                          fontSize: context.mh * 0.014,
+                          color: Color(0xFF6C757D),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
             0.02.ph(context),
 
-
             // Requirements Input Field
-             Text(
-              'Specify Additional Document Requirements:',
+            Text(
+              StringTranslateExtension(
+                      'Specify Additional Document Requirements:')
+                  .tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.016,
                 fontWeight: FontWeight.w600,
@@ -125,14 +149,14 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
 
             0.012.ph(context),
 
-
             TextFormField(
               controller: requirementsController,
               maxLines: 4,
               decoration: InputDecoration(
-                hintText:
-                    'Please specify the additional documents required for this case...',
-                hintStyle:  TextStyle(
+                hintText: StringTranslateExtension(
+                        'Please specify the additional documents required for this case...')
+                    .tr(),
+                hintStyle: TextStyle(
                   color: Color(0xFF6C757D),
                   fontSize: context.mh * 0.014,
                 ),
@@ -153,7 +177,7 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white,
               ),
-              style:  TextStyle(
+              style: TextStyle(
                 fontSize: context.mh * 0.014,
                 color: Color(0xFF2E3A59),
               ),
@@ -161,8 +185,6 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
             ),
 
             0.024.ph(context),
-
-
 
             // Action Buttons
             Row(
@@ -177,8 +199,8 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child:  Text(
-                      'Cancel',
+                    child: Text(
+                      StringTranslateExtension('Cancel').tr(),
                       style: TextStyle(
                         color: Color(0xFF6C757D),
                         fontWeight: FontWeight.w600,
@@ -212,8 +234,8 @@ class AdditionalDocsRequirementsDialog extends StatelessWidget {
                       ),
                       elevation: 0,
                     ),
-                    child:  Text(
-                      'Send Request',
+                    child: Text(
+                      StringTranslateExtension('Send Request').tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,

@@ -57,13 +57,25 @@ class RecentCaseWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                caseNumber,
-                style: TextStyle(
-                  fontSize: context.mh * 0.018,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[700],
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Case ID:".tr(),
+                    style: TextStyle(
+                      fontSize: context.mh * 0.018,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  Text(
+                    caseNumber,
+                    style: TextStyle(
+                      fontSize: context.mh * 0.018,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
               ),
               Container(
                 padding: EdgeInsets.symmetric(
@@ -138,12 +150,23 @@ class RecentCaseWidget extends StatelessWidget {
                 color: Colors.grey[600],
               ),
               0.02.pw(context),
-              Text(
-                location,
-                style: TextStyle(
-                  fontSize: context.mh * 0.016,
-                  color: Colors.black87,
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Deceased in".tr(),
+                    style: TextStyle(
+                      fontSize: context.mh * 0.016,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    location,
+                    style: TextStyle(
+                      fontSize: context.mh * 0.016,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -159,12 +182,23 @@ class RecentCaseWidget extends StatelessWidget {
                 color: Colors.grey[600],
               ),
               0.02.pw(context),
-              Text(
-                "Issue Date: $issueDate",
-                style: TextStyle(
-                  fontSize: context.mh * 0.016,
-                  color: Colors.black87,
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Issue Date: ".tr(),
+                    style: TextStyle(
+                      fontSize: context.mh * 0.016,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    "$issueDate",
+                    style: TextStyle(
+                      fontSize: context.mh * 0.016,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

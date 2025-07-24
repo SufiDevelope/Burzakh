@@ -35,7 +35,7 @@ class _RtaChatViewState extends State<RtaChatView> {
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
-          "RTA Chat",
+          StringTranslateExtension("RTA Chat").tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: context.mh * 0.018,
@@ -115,7 +115,7 @@ class _RtaChatViewState extends State<RtaChatView> {
                         controller: messageController,
                         maxLines: null,
                         decoration: InputDecoration(
-                          hintText: "Type your message...",
+                          hintText: StringTranslateExtension("Type your message...").tr(),
                           hintStyle: TextStyle(
                             color: Colors.grey[500],
                             fontSize: context.mh * 0.016,

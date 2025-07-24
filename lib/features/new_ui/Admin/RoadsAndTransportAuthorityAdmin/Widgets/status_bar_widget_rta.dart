@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class StatusBarWidgetRta extends StatelessWidget {
   final List<TabItem> tabs;
@@ -52,7 +53,7 @@ class StatusBarWidgetRta extends StatelessWidget {
                     children: [
                       // Title with proper overflow handling
                       Text(
-                        tab.title,
+                        StringTranslateExtension(tab.title).tr(),
                         textAlign: TextAlign.center,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

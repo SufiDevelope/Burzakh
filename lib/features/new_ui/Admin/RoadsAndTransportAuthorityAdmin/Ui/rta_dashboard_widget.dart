@@ -104,7 +104,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                               count: controller.model.value.approvedCount
                                   .toString(),
                               statusText: "Approved",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.check,
                               primaryColor: Colors.green,
                               backgroundColor: Colors.grey[50],
@@ -116,7 +116,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                               count: controller.model.value.rejectedCount
                                   .toString(),
                               statusText: "This Week",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.close,
                               primaryColor: Color(0xFFbd4753),
                               backgroundColor: Colors.grey[50],
@@ -128,7 +128,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                               count:
                                   controller.model.value.todayTent.toString(),
                               statusText: "This Week",
-                              lastUpdated: "Last updated: 30 min ago",
+                              lastUpdated: "",
                               icon: Icons.timer_outlined,
                               primaryColor: Colors.amber,
                               backgroundColor: Colors.grey[50],
@@ -195,7 +195,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                         return FilterListCardWidget(
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId: "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                          caseId: " BUR-${DateTime.now().year}-${data.id ?? ""}",
                           location: data.locationOfHouse ?? "",
                           signCount: data.signsRequired.toString(),
                           rta: 'rta',

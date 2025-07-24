@@ -215,17 +215,17 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                                 },
                                 child: RecentCaseWidget(
                                   caseNumber:
-                                      "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                                      "BUR-${DateTime.now().year}-${data.id ?? ""}",
                                   submittedTime:
                                       DateFormat('yyyy-MM-dd').format(
                                     DateTime.parse(data.createdAt ?? ""),
                                   ),
                                   personName: "${data.nameOfDeceased ?? ""}",
-                                  location:
-                                      "Deceased in ${data.restingPlace ?? ""}",
-                                  issueDate: DateFormat('yyyy-MM-dd').format(
+                                  location: " ${data.restingPlace ?? ""}",
+                                  issueDate:
+                                      " ${DateFormat('yyyy-MM-dd').format(
                                     DateTime.parse(data.createdAt ?? ""),
-                                  ),
+                                  )}",
                                   status: data.caseStatus ?? "",
                                   statusColor: Colors.grey[200],
                                   onViewDetails: () {
@@ -256,7 +256,8 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                                               final receiverUserID =
                                                   data.user?.id.toString() ??
                                                       "user123";
-                                              dev.log("Call Id when the admin invites the user ${meetingId}");
+                                              dev.log(
+                                                  "Call Id when the admin invites the user ${meetingId}");
                                               notificationService
                                                   .sendNotification(
                                                 "Incoming Video Call",
@@ -429,7 +430,6 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
           "Hospital Report": data.hospitalCertificate,
           "Passport Copy": data.user.passportCopy,
         },
-        
       ),
     );
   }

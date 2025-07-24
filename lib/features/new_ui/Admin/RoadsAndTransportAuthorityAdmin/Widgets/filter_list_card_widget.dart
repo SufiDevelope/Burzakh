@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class FilterListCardWidget extends StatelessWidget {
@@ -72,13 +73,25 @@ class FilterListCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
-                  caseId,
-                  style: TextStyle(
-                    color: mainColor,
-                    fontSize: context.mh * 0.014,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "Case ID:".tr(),
+                      style: TextStyle(
+                        color: mainColor,
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      caseId,
+                      style: TextStyle(
+                        color: mainColor,
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -120,13 +133,25 @@ class FilterListCardWidget extends StatelessWidget {
                     size: context.mh * 0.018,
                   ),
                   0.01.pw(context),
-                  Text(
-                    'Sign Count: $signCount',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: context.mh * 0.014,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'Sign Count: '.tr(),
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Text(
+                        '$signCount',
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: context.mh * 0.014,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -159,7 +184,7 @@ class FilterListCardWidget extends StatelessWidget {
                       ),
                       0.015.pw(context),
                       Text(
-                        'Messages',
+                        'Messages'.tr(),
                         style: TextStyle(
                           color: primaryColor,
                           fontSize: context.mh * 0.014,

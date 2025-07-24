@@ -5,6 +5,7 @@ import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widget
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CdaChatView extends StatefulWidget {
   final int userId;
@@ -35,7 +36,7 @@ class _CdaChatViewState extends State<CdaChatView> {
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
-          "CDA Chat",
+          StringTranslateExtension("CDA Chat").tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: context.mh * 0.018,
@@ -119,7 +120,9 @@ class _CdaChatViewState extends State<CdaChatView> {
                         controller: messageController,
                         maxLines: null,
                         decoration: InputDecoration(
-                          hintText: "Type your message...",
+                          hintText:
+                              StringTranslateExtension("Type your message...")
+                                  .tr(),
                           hintStyle: TextStyle(
                             color: Colors.grey[500],
                             fontSize: context.mh * 0.016,

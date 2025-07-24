@@ -2,7 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CdaFilterWidget extends StatelessWidget {
   final String searchHint;
   final String selectedFilter;
@@ -67,7 +67,7 @@ class CdaFilterWidget extends StatelessWidget {
                     color: Colors.grey[800],
                   ),
                   decoration: InputDecoration(
-                    hintText: searchHint,
+                    hintText: StringTranslateExtension(searchHint).tr(),
                     hintStyle: TextStyle(
                       color: Colors.grey[500],
                       fontSize: context.mh * 0.016,
@@ -118,7 +118,7 @@ class CdaFilterWidget extends StatelessWidget {
                         items: controller.filterLabels.map((label) {
                           return DropdownMenuItem<String>(
                             value: controller.filterOptions[label],
-                            child: Text(label),
+                            child: Text(StringTranslateExtension(label).tr()),
                           );
                         }).toList(),
                         onChanged: (value) {

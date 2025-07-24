@@ -5,6 +5,7 @@ import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Controller/police_admi
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CaseDetailsDialog extends StatelessWidget {
   final String? submittedBy;
@@ -228,7 +229,7 @@ class CaseDetailsDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Case Details",
+                    StringTranslateExtension("Case Details").tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.024,
                       fontWeight: FontWeight.bold,
@@ -256,7 +257,7 @@ class CaseDetailsDialog extends StatelessWidget {
                   children: [
                     // Applicant Information Section
                     Text(
-                      "Applicant Information",
+                      StringTranslateExtension("Applicant Information").tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
@@ -320,7 +321,7 @@ class CaseDetailsDialog extends StatelessWidget {
                                     additionalDocument ?? "");
                               },
                               child: Text(
-                                "(Tap to view)",
+                                StringTranslateExtension("(Tap to view)").tr(),
                                 style: TextStyle(
                                   fontSize: context.mh * 0.012,
                                   fontStyle: FontStyle.italic,
@@ -337,7 +338,7 @@ class CaseDetailsDialog extends StatelessWidget {
 
                     // Deceased Information Section
                     Text(
-                      "Deceased Information",
+                      StringTranslateExtension("Deceased Information").tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
@@ -357,7 +358,7 @@ class CaseDetailsDialog extends StatelessWidget {
 
                     // Documents Submitted Section
                     Text(
-                      "Documents Submitted",
+                      StringTranslateExtension("Documents Submitted").tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
@@ -556,7 +557,7 @@ class CaseDetailsDialog extends StatelessWidget {
         SizedBox(
           width: context.mw * 0.35,
           child: Text(
-            label,
+            StringTranslateExtension(label).tr(),
             style: TextStyle(
               fontSize: context.mh * 0.016,
               color: Colors.grey[600],

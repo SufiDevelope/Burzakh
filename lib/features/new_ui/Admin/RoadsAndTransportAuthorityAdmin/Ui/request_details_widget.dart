@@ -35,7 +35,7 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Request Details',
+          StringTranslateExtension("Request Details").tr(),
           style: TextStyle(fontSize: context.mh * 0.018, color: Colors.white),
         ),
         backgroundColor: Color(0xFFbd4753),
@@ -84,7 +84,7 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
                           caseId:
-                              "Case ID: BUR-${DateTime.now().year}-${data.id ?? ""}",
+                              "BUR-${DateTime.now().year}-${data.id ?? ""}",
                           submittedDate: DateFormat('yyyy-MM-dd').format(
                             DateTime.parse(data.createdAt ??
                                 DateTime.now().toIso8601String()),
