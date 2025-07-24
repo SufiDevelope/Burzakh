@@ -194,7 +194,7 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                         Status.completed) {
                       if (controller.filterDataForSearch.isEmpty) {
                         return Text(
-                          'No Data Found',
+                          StringTranslateExtension('No Data Found').tr(),
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: context.mh * 0.014,

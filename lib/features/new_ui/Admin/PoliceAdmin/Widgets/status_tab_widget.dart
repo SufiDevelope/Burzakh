@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Controller/police_admin_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class StatusTabsWidget extends StatelessWidget {
   final List<TabItem> tabs;
@@ -60,7 +61,7 @@ class StatusTabsWidget extends StatelessWidget {
                     children: [
                       // Title with proper overflow handling
                       Text(
-                        tab.title,
+                        StringTranslateExtension("${tab.title}").tr(),
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

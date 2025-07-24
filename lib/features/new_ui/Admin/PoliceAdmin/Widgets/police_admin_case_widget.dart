@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Controller/police_admin_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PoliceAdminCaseWidget extends StatelessWidget {
   final String? searchHint;
@@ -69,7 +70,7 @@ class PoliceAdminCaseWidget extends StatelessWidget {
                 color: Colors.black87,
               ),
               decoration: InputDecoration(
-                hintText: searchHint,
+                hintText: StringTranslateExtension(searchHint!).tr(),
                 hintStyle: TextStyle(
                   fontSize: context.mh * 0.016,
                   color: Colors.grey[500],
@@ -163,7 +164,7 @@ class PoliceAdminCaseWidget extends StatelessWidget {
                       ),
                       0.02.pw(context),
                       Text(
-                        "Filter",
+                        StringTranslateExtension("Filter").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.016,
                           fontWeight: FontWeight.w500,

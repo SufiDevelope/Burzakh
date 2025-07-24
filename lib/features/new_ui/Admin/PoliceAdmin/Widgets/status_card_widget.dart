@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class StatusCardWidget extends StatelessWidget {
@@ -132,7 +133,7 @@ class StatusCardWidget extends StatelessWidget {
 
             // Title with improved styling
             Text(
-              title,
+              title.tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.016,
                 fontWeight: FontWeight.w600,

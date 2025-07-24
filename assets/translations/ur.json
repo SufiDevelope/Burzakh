@@ -740,17 +740,17 @@
   "I Understand": "میں سمجھتا ہوں۔",
   "May Allah ease this journey for you and your family": "اللہ آپ اور آپ کی خاندان کے لیے یہ سفر کو سہا سہا کرے",
 
-   "Guidance for Your Journey": "آپ کے سفر کے لیے رہنمائی",
+  "Guidance for Your Journey": "آپ کے سفر کے لیے رہنمائی",
   "Your path has been prepared.": "آپ کا پاتا تیار ہوا ہے۔",
   "Streamlined Process Available": "مکمل کی ضرورت ہے۔",
   "Hospital documentation is already available, which helps expedite the verification process with Dubai authorities. We can guide you through the next steps with care.": "ہسپتال کی دستاویزیات پہلے ہی ممکن ہے، جو دبئی اداروں کے ساتھ تصدیق کا عمل تسریع کرتی ہے۔ ہم آپ کو اگلے قدموں پر دیکھ بھال کے ساتھ رہنمائی",
   "What this means for you:": "",
   "Medical documentation is complete": "طبی دستاویزیات کامیاب ہو گئی ہیں۔",
-  "All necessary medical records are available" : "تمام ضروری طبی ریکارڈز دستیاب ہیں۔",
+  "All necessary medical records are available": "تمام ضروری طبی ریکارڈز دستیاب ہیں۔",
   "Police verification will be expedited": "پولیس کی تصدیق تسریع ہوگی۔",
-  "The process will move more quickly" : "پروسیس تسریع ہوگی۔",
+  "The process will move more quickly": "پروسیس تسریع ہوگی۔",
   "You may proceed with the application": "آپ اپلیکیشن کے ساتھ پرچلے جا سکتے ہیں۔",
-  "We can begin the burial arrangements" : "ہم گھسٹی کی ترتیبات کو شروع کر سکتے ہیں۔",
+  "We can begin the burial arrangements": "ہم گھسٹی کی ترتیبات کو شروع کر سکتے ہیں۔",
 
   "Emirati Citizen Services": "اماراتی شہری خدمات",
   "Special support services for UAE nationals during their time of need": "ضرورت کے وقت متحدہ عرب امارات کے شہریوں کے لیے خصوصی معاونت کی خدمات",
@@ -799,5 +799,11 @@
   "Select prefered cemetery": "پسندیدہ قبرستان منتخب کریں",
   "Special Requests": "خصوصی درخواستیں",
   "Any special requests or additional information": "کوئی خصوصی درخواست یا اضافی معلومات",
-  "Submit Burial Permit Request": "تدفین کی اجازت کی درخواست جمع کروائیں"
+  "Submit Burial Permit Request": "تدفین کی اجازت کی درخواست جمع کروائیں",
+  "Continue as Visitor": "وزیٹر کے طور پر جاری رکھیں",
+  "Continue as": "جاری رکھیں کے طور پر",
+  "Visitor": "وزیٹر",
+  "Ref: ": "حوالہ:",
+  "Case ID: ": "کیس کی شناخت:",
+  "Dubai Muncipality":"دبئی میونسپلٹی"
 }

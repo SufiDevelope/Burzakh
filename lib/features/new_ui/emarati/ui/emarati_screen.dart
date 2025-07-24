@@ -2,17 +2,14 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/emarati/ui/my_service_request_screen.dart';
 import 'package:burzakh/features/new_ui/emarati/ui/rta_service_request_Screen.dart';
-import 'package:burzakh/features/new_ui/emarati/ui/send_cda_screen.dart';
 import 'package:burzakh/features/new_ui/emarati/ui/service_request_confirmation_screen.dart';
 import 'package:burzakh/features/new_ui/emarati/widgets/request_shimmer.dart';
 import 'package:burzakh/features/new_ui/emarati/widgets/service_request_widget.dart';
 import 'package:burzakh/features/new_ui/emarati/widgets/service_widget.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:burzakh/widgets/verse_widget.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../constants/media_query.dart';
 import '../../../../core/app/di_container.dart';
 import '../../../emirati_svcs/presentation/controller/cubit.dart';
@@ -212,7 +209,7 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                             .cdaGetModel?.locationOfTent ??
                                         "",
                                     ref:
-                                        "Case ID: BUR-${DateTime.now().year}-${_emiratiScvCubit.cdaGetModel?.id ?? ""}",
+                                        "BUR-${DateTime.now().year}-${_emiratiScvCubit.cdaGetModel?.id ?? ""}",
                                     emiratiScvCubit: _emiratiScvCubit,
                                   )
                                 : SizedBox(),
@@ -225,7 +222,7 @@ class _EmaratiScreenState extends State<EmaratiScreen> {
                                             "",
                                     text1: "Road Signage",
                                     ref:
-                                        "Case ID: BUR-${DateTime.now().year}-${_emiratiScvCubit.rtaGetModel?.id ?? ""}",
+                                        "BUR-${DateTime.now().year}-${_emiratiScvCubit.rtaGetModel?.id ?? ""}",
                                     emiratiScvCubit: _emiratiScvCubit,
                                   )
                                 : SizedBox(),

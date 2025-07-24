@@ -120,7 +120,7 @@ class _RecentChatWidgetState extends State<RecentChatWidget> {
                           id: "send-support-message",
                           name: "Dubai Muncipality",
                           time: '10:52 AM',
-                          image: "assets/images/png/dubailogo.png",
+                          image: "assets/images/jpg/dmlogo.jpeg",
                           lastMessage:
                               "👋 Welcome! Let us know how we can assist you. We're here to help!",
                         ),

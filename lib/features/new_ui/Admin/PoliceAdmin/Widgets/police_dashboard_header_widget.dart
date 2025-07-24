@@ -1,5 +1,7 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PoliceDashboardHeaderWidget extends StatelessWidget {
   final String title;
@@ -157,6 +159,17 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor:  Color(0xFF00734B),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -198,7 +211,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    title.tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.02,
@@ -207,7 +220,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                   ),
                   0.004.ph(context),
                   Text(
-                    subtitle,
+                    subtitle.tr(),
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.9),
                       fontSize: context.mh * 0.015,
@@ -224,8 +237,8 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
               child: Container(
                 width: context.mw * 0.42,
                 padding: EdgeInsets.symmetric(
-                  horizontal: context.mw * 0.02,
-                  vertical: context.mh * 0.01,
+                  horizontal: context.mw * 0.025,
+                  vertical: context.mh * 0.012,
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
@@ -238,23 +251,27 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Administrator Label
                     Text(
-                      'Administrator',
+                      'Administrator'.tr(),
                       style: TextStyle(
                         color: Colors.white.withOpacity(0.8),
                         fontSize: context.mh * 0.014,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
-                    0.005.ph(context),
+                    SizedBox(height: context.mh * 0.008),
+
+                    // Main Content Row
                     Row(
-                      mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Officer Name - Takes available space
                         Expanded(
+                          flex: 3,
                           child: Text(
                             officerName,
                             maxLines: 2,
-                            textAlign: TextAlign.end,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: context.mh * 0.015,
@@ -262,56 +279,64 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        0.015.pw(context),
 
-                        // Profile Circle
-                        Container(
-                          width: context.mw * 0.09,
-                          height: context.mw * 0.09,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              initials,
-                              style: TextStyle(
-                                color: const Color(0xFF8B4A5C),
-                                fontSize: context.mh * 0.018,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                        0.015.pw(context),
+                        SizedBox(width: context.mw * 0.02),
 
-                        // Logout Button
-                        GestureDetector(
-                          onTap: () => _showLogoutBottomSheet(context),
-                          child: Container(
-                            width: context.mw * 0.08,
-                            height: context.mw * 0.08,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.white.withOpacity(0.3),
-                                width: 1,
+                        // Action Buttons Row
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Arabic Language Button
+                            GestureDetector(
+                              onTap: () => _showLanguageSelectionCustom(),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: context.mw * 0.015,
+                                  vertical: context.mh * 0.006,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                  "العربية",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: context.mh * 0.012,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
-                            child: Icon(
-                              Icons.logout,
-                              color: Colors.white,
-                              size: context.mh * 0.018,
+
+                            SizedBox(width: context.mw * 0.01),
+
+                            // Logout Button
+                            GestureDetector(
+                              onTap: () => _showLogoutBottomSheet(context),
+                              child: Container(
+                                width: context.mw * 0.08,
+                                height: context.mw * 0.08,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.3),
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.logout,
+                                  color: Colors.white,
+                                  size: context.mh * 0.018,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),

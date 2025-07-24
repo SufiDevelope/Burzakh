@@ -72,17 +72,34 @@ class ServiceRequestWidget extends StatelessWidget {
                         color: AppColor.black(),
                       ),
                       const SizedBox(height: 4),
-                      AppText(
-                        text: "Ref: $ref",
-                        fontSize: context.mh * 0.012,
-                        color: Colors.grey[500],
-                      ),
+                      Row(
+                        children: [
+                          AppText(
+                            text: "Ref: ",
+                            fontSize: context.mh * 0.012,
+                            color: Colors.grey[500],
+                          ),
+                          AppText(
+                            text: "Case ID: ",
+                            fontSize: context.mh * 0.012,
+                            color: Colors.grey[500],
+                          ),
+                          AppText(
+                            text: "$ref",
+                            fontSize: context.mh * 0.012,
+                            color: Colors.grey[500],
+                          ),
+                          
+                        ],
+                      )
                     ],
                   ),
                 ],
               ),
               Container(
-                padding:  EdgeInsets.symmetric(horizontal: context.mw * 0.015, vertical: context.mh * 0.005),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.mw * 0.015,
+                    vertical: context.mh * 0.005),
                 decoration: BoxDecoration(
                   color: approved == 1
                       ? const Color(0x1434C759)
