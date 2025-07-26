@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class DubaiFilterWidget extends StatelessWidget {
@@ -65,7 +66,7 @@ class DubaiFilterWidget extends StatelessWidget {
                       color: Colors.grey[800],
                     ),
                     decoration: InputDecoration(
-                      hintText: searchHint,
+                      hintText: searchHint.tr(),
                       hintStyle: TextStyle(
                         color: Colors.grey[500],
                         fontSize: context.mh * 0.016,

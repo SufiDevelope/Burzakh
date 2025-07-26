@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/Model/AdminModels/AmbulanceCassesModel/ambulance_casses_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TodaysScheduleWidget extends StatelessWidget {
   final List<DispatchInfo> scheduleItems;
@@ -36,7 +37,7 @@ class TodaysScheduleWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Today's Schedule",
+            StringTranslateExtension("Today's Schedule").tr(),
             style: TextStyle(
               fontSize: context.mh * 0.02,
               fontWeight: FontWeight.w600,

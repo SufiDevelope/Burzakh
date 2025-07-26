@@ -1,3 +1,4 @@
+
 import 'dart:developer';
 
 import 'package:burzakh/core/app/di_container.dart';
@@ -65,7 +66,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                 adminName: widget.name,
                 initials: widget.name.substring(0, 2),
                 email: "ahmed.alkaabi@dm.gov.ae",
-                role: "Adminstrator",
+                role: "Administration",
                 notificationCount: 3,
                 isArabicSelected: false,
                 onDMLogoPressed: () {},
@@ -273,7 +274,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               ),
                             );
                           },
-                          relative: "Name of Deceased : ${caseDetail?.nameOfDeceased ?? ''}",
+                          relative: "${caseDetail?.nameOfDeceased ?? ''}",
                           documents: [
                             if (caseDetail?.deathNotificationFile != null)
                               "Death Notification",

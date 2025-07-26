@@ -33,7 +33,7 @@ class DubaiAdminRequestDetailsView extends StatelessWidget {
         ),
         backgroundColor: dashboardcolor,
         title: Text(
-          'Request Details',
+          StringTranslateExtension('Request Details').tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: context.mh * 0.02,

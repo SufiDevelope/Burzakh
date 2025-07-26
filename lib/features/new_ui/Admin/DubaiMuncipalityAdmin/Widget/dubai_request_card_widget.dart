@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BurialCardWidget extends StatelessWidget {
   final String name;
@@ -93,19 +94,69 @@ class BurialCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  relative,
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: context.mh * 0.016,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "${"Name of Deceased".tr()} ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.016,
+                      ),
+                    ),
+                    Text(
+                      relative,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.016,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  "Age: ${age} . Sect: ${sect} . Religion: ${religion}",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: context.mh * 0.012,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "Age: ".tr(),
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                    Text(
+                      "${age} ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                    Text(
+                      "Sect: ".tr(),
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                    Text(
+                      "${sect} ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                    Text(
+                      "Religion: ".tr(),
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                    Text(
+                      "${religion} ",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: context.mh * 0.012,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -204,7 +255,7 @@ class BurialCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      isAmbulance == false ? 'Messages' : "Contact",
+                      StringTranslateExtension(isAmbulance == false ? 'Messages' : "Contact").tr(),
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
@@ -368,7 +419,7 @@ class _DocumentChip extends StatelessWidget {
           Icon(Icons.check, color: Colors.green, size: context.mh * 0.015),
           0.01.pw(context),
           Text(
-            label,
+            StringTranslateExtension(label).tr(),
             style: TextStyle(
               color: Colors.green,
               fontSize: context.mh * 0.014,

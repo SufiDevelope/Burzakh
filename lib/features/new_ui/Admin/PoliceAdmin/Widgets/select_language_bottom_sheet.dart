@@ -24,7 +24,7 @@ class LanguageSelectionBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    // final LocalizationGetx controller = Get.find<LocalizationGetx>();
     
     // Dynamic color scheme based on theme
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -85,7 +85,7 @@ class LanguageSelectionBottomSheet extends StatelessWidget {
                       subtitle: 'English',
                       locale: Locale('en'),
                       controller: controller,
-                      textColor: defaultTextColor!,
+                      textColor: defaultTextColor,
                       selectedColor: defaultSelectedColor!,
                       borderColor: defaultBorderColor!,
                     ),

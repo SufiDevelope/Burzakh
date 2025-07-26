@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class StatCardWidget extends StatelessWidget {
@@ -45,7 +46,7 @@ class StatCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      title.tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.012,
                         fontWeight: FontWeight.w500,

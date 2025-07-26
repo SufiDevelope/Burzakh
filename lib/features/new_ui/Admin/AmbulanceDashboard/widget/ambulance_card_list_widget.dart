@@ -3,6 +3,7 @@ import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambu
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AmbulanceListCardWidget extends StatelessWidget {
   final String driverName;
@@ -80,7 +81,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Current Assignment",
+                StringTranslateExtension("Current Assignment").tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.02,
                   fontWeight: FontWeight.w600,
@@ -107,12 +108,30 @@ class AmbulanceListCardWidget extends StatelessWidget {
                     ),
                   ),
                   0.005.ph(context),
-                  Text(
-                    "Vehicle No: $ambulanceId • Case: $caseId",
-                    style: TextStyle(
-                      fontSize: context.mh * 0.011,
-                      color: Colors.grey[600],
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        StringTranslateExtension("Vehicle No: ").tr(),
+                        style: TextStyle(
+                          fontSize: context.mh * 0.011,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "$ambulanceId",
+                        style: TextStyle(
+                          fontSize: context.mh * 0.011,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      Text(
+                        "$caseId",
+                        style: TextStyle(
+                          fontSize: context.mh * 0.011,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -197,7 +216,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Pickup From",
+                        StringTranslateExtension("Pickup From").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.016,
                           color: Colors.grey[600],
@@ -249,7 +268,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Deliver To",
+                        StringTranslateExtension("Deliver To").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.016,
                           color: Colors.grey[600],
@@ -293,7 +312,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Scheduled Time",
+                        StringTranslateExtension("Scheduled Time").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.016,
                           color: Colors.grey[600],
@@ -337,7 +356,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Dispatch",
+                        StringTranslateExtension("Dispatch").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.016,
                           color: Colors.grey[600],
@@ -385,7 +404,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                         ),
                         0.02.pw(context),
                         Text(
-                          "Navigate",
+                          StringTranslateExtension("Navigate").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.018,
@@ -424,7 +443,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                         ),
                         0.02.pw(context),
                         Text(
-                          "Arrived",
+                          StringTranslateExtension("Arrived").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.018,
@@ -469,7 +488,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                         ),
                         0.02.pw(context),
                         Text(
-                          "Picked Up",
+                          StringTranslateExtension("Picked Up").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.018,
@@ -508,7 +527,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                         ),
                         0.02.pw(context),
                         Text(
-                          "Delivered",
+                          StringTranslateExtension("Delivered").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.018,
@@ -546,7 +565,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                   ),
                   0.02.pw(context),
                   Text(
-                    "Call Dispatch",
+                    StringTranslateExtension("Call Dispatch").tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.018,

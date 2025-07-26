@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BurialScheduleTile extends StatelessWidget {
@@ -41,7 +42,7 @@ class BurialScheduleTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                title.tr(),
                 style: TextStyle(
                   color: title == "Sect & Region"
                       ? Colors.grey

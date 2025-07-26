@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambulance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TabSelectionWidget extends StatelessWidget {
   final String driverId;
@@ -38,7 +39,7 @@ class TabSelectionWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    ambulanceController.selectedStatus.value,
+                    StringTranslateExtension(ambulanceController.selectedStatus.value).tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.015,
@@ -66,7 +67,7 @@ class TabSelectionWidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "Available",
+                          StringTranslateExtension("Available").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.015,
@@ -94,7 +95,7 @@ class TabSelectionWidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "\t\tOn\nRoute",
+                         StringTranslateExtension("On Route").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.015,
@@ -122,7 +123,7 @@ class TabSelectionWidget extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "Busy",
+                          StringTranslateExtension("Busy").tr(),
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: context.mh * 0.015,

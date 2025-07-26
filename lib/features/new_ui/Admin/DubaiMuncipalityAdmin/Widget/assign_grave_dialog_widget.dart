@@ -2,6 +2,7 @@ import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/d
 import 'package:flutter/material.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AssignGraveDialogWidget extends StatefulWidget {
   final String cemetery;
@@ -54,7 +55,7 @@ class _AssignGraveDialogWidgetState extends State<AssignGraveDialogWidget> {
           children: [
             /// Title
             Text(
-              'Assign Grave Number',
+              StringTranslateExtension('Assign Grave Number').tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.018,
                 fontWeight: FontWeight.bold,
@@ -66,7 +67,7 @@ class _AssignGraveDialogWidgetState extends State<AssignGraveDialogWidget> {
 
             /// Cemetery Section
             Text(
-              'Cemetery',
+              StringTranslateExtension('Cemetery').tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.016,
                 fontWeight: FontWeight.w600,
@@ -97,7 +98,7 @@ class _AssignGraveDialogWidgetState extends State<AssignGraveDialogWidget> {
 
             /// Grave Number Section
             Text(
-              'Grave Number',
+              StringTranslateExtension('Grave Number').tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.016,
                 fontWeight: FontWeight.w600,
@@ -194,13 +195,13 @@ class _AssignGraveDialogWidgetState extends State<AssignGraveDialogWidget> {
           ),
           child: controller.graveBtnLoading.value
               ? Center(
-                child: CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              )
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                )
               : Center(
                   child: Text(
-                    text,
+                    StringTranslateExtension(text).tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.016,
                       color: textColor,

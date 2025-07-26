@@ -39,7 +39,7 @@ class _DubaiChatViewState extends State<DubaiChatView> {
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(
-          "Dubai Municipality Chat",
+          StringTranslateExtension("Dubai Municipality Chat").tr(),
           style: TextStyle(
             color: Colors.white,
             fontSize: context.mh * 0.018,
@@ -126,7 +126,7 @@ class _DubaiChatViewState extends State<DubaiChatView> {
                         controller: messageController,
                         maxLines: null,
                         decoration: InputDecoration(
-                          hintText: "Type your message...",
+                          hintText: StringTranslateExtension("Type your message...").tr(),
                           hintStyle: TextStyle(
                             color: Colors.grey[500],
                             fontSize: context.mh * 0.016,

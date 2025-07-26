@@ -1,5 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/BurrialScheduleTimeWidget/burrial_schedule_time_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CaseCardWidget extends StatelessWidget {
@@ -78,12 +79,37 @@ class CaseCardWidget extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 4),
-                    Text(
-                      'Age:${age}, Gender:${gender}',
-                      style: TextStyle(
-                        fontSize: context.mh * 0.013,
-                        color: Color(0xFF6B7280),
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          'Age'.tr(),
+                          style: TextStyle(
+                            fontSize: context.mh * 0.013,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                        Text(
+                          '  ${age},',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.013,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                        Text(
+                          'Gender'.tr(),
+                          style: TextStyle(
+                            fontSize: context.mh * 0.013,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                        Text(
+                          '  $gender',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.013,
+                            color: Color(0xFF6B7280),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -119,7 +145,7 @@ class CaseCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Ghusl Progress",
+                    "Ghusl Progress".tr(),
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -149,7 +175,7 @@ class CaseCardWidget extends StatelessWidget {
 
           // Special Instructions
           Text(
-            "Special Instructions",
+            "Special Instructions".tr(),
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
@@ -178,7 +204,7 @@ class CaseCardWidget extends StatelessWidget {
                     color: Color(0xFF374151),
                   ),
                   label: Text(
-                    "Start Ghusl",
+                    "Start Ghusl".tr(),
                     style: TextStyle(
                       color: Color(0xFF374151),
                       fontWeight: FontWeight.w500,
@@ -204,7 +230,7 @@ class CaseCardWidget extends StatelessWidget {
                     color: Colors.white,
                   ),
                   label: Text(
-                    "Complete Ghusl",
+                    "Complete Ghusl".tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,

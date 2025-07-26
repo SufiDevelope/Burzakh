@@ -2,6 +2,7 @@ import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_adm
 import 'package:flutter/material.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DubaiRequestDetailWidget extends StatelessWidget {
   final String name;
@@ -103,7 +104,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           ),
           0.04.ph(context),
           Text(
-            'Burial Details',
+            StringTranslateExtension('Burial Details').tr(),
             style: TextStyle(
               fontSize: context.mh * 0.018,
               fontWeight: FontWeight.bold,
@@ -133,7 +134,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           ),
           0.04.ph(context),
           Text(
-            'Requester Information',
+            'Requester Information'.tr(),
             style: TextStyle(
               fontSize: context.mh * 0.018,
               fontWeight: FontWeight.bold,
@@ -144,7 +145,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           _buildDetailRow(
             context,
             Icons.person_outline,
-            'Name',
+            'Name:',
             requesterName,
           ),
           0.01.ph(context),
@@ -156,7 +157,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           ),
           if (_hasDocuments()) ...[
             Text(
-              'Documents',
+              'Documents'.tr(),
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: context.mh * 0.016,
@@ -248,7 +249,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                 child: Expanded(
                   child: _buildActionButton(
                     context,
-                    'Assign Grave',
+                    'Assign Grave'.tr(),
                     Colors.deepOrange,
                     Colors.white,
                     onAssignGrave,
@@ -261,7 +262,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                 child: Expanded(
                   child: _buildActionButton(
                     context,
-                    'Approve',
+                    'Approve'.tr(),
                     Colors.green,
                     Colors.white,
                     onApprove,
@@ -272,7 +273,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
               Expanded(
                 child: _buildActionButton(
                   context,
-                  'Open Chat',
+                  'Open Chat'.tr(),
                   Colors.white,
                   Colors.black87,
                   onOpenChat,
@@ -339,7 +340,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  label,
+                  StringTranslateExtension(label).tr(),
                   style: TextStyle(
                     fontSize: context.mh * 0.016,
                     color: Colors.grey.shade600,
@@ -463,7 +464,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    title.tr(),
                     style: TextStyle(
                       color: Colors.grey[800],
                       fontSize: context.mh * 0.015,
@@ -472,7 +473,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
                   ),
                   0.005.ph(context),
                   Text(
-                    'Tap to view document',
+                    'Tap to view document'.tr(),
                     style: TextStyle(
                       color: dashboardcolor,
                       fontSize: context.mh * 0.012,

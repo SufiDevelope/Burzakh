@@ -1,5 +1,9 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MorticianDashboardHeaderWidget extends StatelessWidget {
   final String title;
@@ -15,7 +19,6 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
   final VoidCallback? onLogoutPressed;
   final String? imageurl;
   final bool isArabic;
-
 
   const MorticianDashboardHeaderWidget({
     super.key,
@@ -170,6 +173,18 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xff2d4159),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.02, vertical: context.mh * 0.03),
@@ -197,7 +212,7 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    StringTranslateExtension(title).tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.018,
                       fontWeight: FontWeight.bold,
@@ -205,7 +220,7 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    subtitle,
+                    StringTranslateExtension(subtitle).tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.016,
                       color: Color(0xFF6B7280),
@@ -223,21 +238,30 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
             //   child: Icon(Icons.phone_outlined, color: Colors.white, size: 16),
             // ),
             0.01.pw(context),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Color(0xFFD1D5DB)),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'عربي',
-                style: TextStyle(
-                  fontSize: context.mh * 0.013,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF374151),
-                ),
-              ),
+            Obx(
+              () {
+                return GestureDetector(
+                  onTap: _showLanguageSelectionCustom,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Color(0xFFD1D5DB)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      controller.lang.value.languageCode != 'ar'
+                          ? 'English'
+                          : 'عربي',
+                      style: TextStyle(
+                        fontSize: context.mh * 0.013,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF374151),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
             0.01.pw(context),
             GestureDetector(

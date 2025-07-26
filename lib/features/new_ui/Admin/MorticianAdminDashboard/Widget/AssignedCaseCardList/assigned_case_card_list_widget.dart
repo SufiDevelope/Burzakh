@@ -5,6 +5,7 @@ import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/Cas
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/controller/mortician_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AssignedCaseCardList extends StatelessWidget {
   final List<CemeteryCases> assignedCases;
@@ -62,7 +63,7 @@ class AssignedCaseCardList extends StatelessWidget {
                 ),
                 SizedBox(width: 12),
                 Text(
-                  'Assigned Cases',
+                  StringTranslateExtension("Assigned Cases").tr(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

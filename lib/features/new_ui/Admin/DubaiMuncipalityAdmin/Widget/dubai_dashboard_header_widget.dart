@@ -1,7 +1,11 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DMCemeteryHeaderWidget extends StatelessWidget {
   final String adminName;
@@ -108,7 +112,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
 
               // Role
               Text(
-                role,
+                StringTranslateExtension(role).tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.016,
                   color: Colors.grey[600],
@@ -153,7 +157,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       ),
                       0.02.pw(context),
                       Text(
-                        'Logout',
+                        StringTranslateExtension('Logout').tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
@@ -173,8 +177,20 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xff2d4159),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Container(
-      height: context.mh * 0.22,
+      height: context.mh * 0.25,
       width: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -259,7 +275,9 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Dubai Municipality Cemetery Services',
+                          StringTranslateExtension(
+                                  'Dubai Municipality Cemetery Services')
+                              .tr(),
                           style: GoogleFonts.inter(
                             color: Colors.white,
                             fontSize: context.mh * 0.018,
@@ -270,7 +288,9 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                         ),
                         SizedBox(height: context.mh * 0.002),
                         Text(
-                          'Burial Supervisor Dashboard',
+                          StringTranslateExtension(
+                                  'Burial Supervisor Dashboard')
+                              .tr(),
                           style: GoogleFonts.inter(
                             color: Colors.white.withOpacity(0.85),
                             fontSize: context.mh * 0.013,
@@ -283,56 +303,89 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                   ),
 
                   // Language Switcher - Compact
-                  Container(
-                    height: context.mw * 0.09,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: context.mw * 0.025),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: Colors.white.withOpacity(0.2),
-                        width: 1.5,
-                      ),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xff596e84),
-                          Color(0xff617890),
-                        ],
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: context.mw * 0.02,
-                            vertical: context.mh * 0.003,
+                  Obx(
+                    () => GestureDetector(
+                      onTap: () {
+                        _showLanguageSelectionCustom();
+                      },
+                      child: Container(
+                        height: context.mw * 0.09,
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.mw * 0.025),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.2),
+                            width: 1.5,
                           ),
-                          decoration: BoxDecoration(
-                            color: Color(0xff828f9e),
-                            borderRadius: BorderRadius.circular(8),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xff596e84),
+                              Color(0xff617890),
+                            ],
                           ),
-                          child: Text(
-                            'EN',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: context.mw * 0.028,
-                              fontWeight: FontWeight.w600,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // EN
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.02,
+                                vertical: context.mh * 0.003,
+                              ),
+                              decoration: BoxDecoration(
+                                color:
+                                    controller.lang.value.languageCode != 'ar'
+                                        ? const Color(0xff828f9e)
+                                        : Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'EN',
+                                style: TextStyle(
+                                  color:
+                                      controller.lang.value.languageCode != 'ar'
+                                          ? Colors.white
+                                          : Colors.white.withOpacity(0.8),
+                                  fontSize: context.mw * 0.028,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
-                          ),
+
+                            SizedBox(width: context.mw * 0.015),
+
+                            // العربية
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: context.mw * 0.02,
+                                vertical: context.mh * 0.003,
+                              ),
+                              decoration: BoxDecoration(
+                                color:
+                                    controller.lang.value.languageCode == 'ar'
+                                        ? const Color(0xff828f9e)
+                                        : Colors.transparent,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'العربية',
+                                style: TextStyle(
+                                  color:
+                                      controller.lang.value.languageCode == 'ar'
+                                          ? Colors.white
+                                          : Colors.white.withOpacity(0.8),
+                                  fontSize: context.mw * 0.028,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: context.mw * 0.015),
-                        Text(
-                          'العربية',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.8),
-                            fontSize: context.mw * 0.025,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -402,7 +455,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Cemetery Admin',
+                            StringTranslateExtension('Cemetery Admin').tr(),
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: context.mh * 0.011,

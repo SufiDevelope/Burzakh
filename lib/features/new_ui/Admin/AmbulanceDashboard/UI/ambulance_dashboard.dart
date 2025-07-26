@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/app/di_container.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
@@ -10,9 +11,11 @@ import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/Controller/ambu
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/widget/ambulance_card_list_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/widget/tab_selection_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/widget/today_schedule_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AmbulanceDashboard extends StatefulWidget {
   final String name;
@@ -96,7 +99,7 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
 
               // Role
               Text(
-                "Ambulance Admin",
+                StringTranslateExtension("Ambulance Admin").tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.016,
                   color: Colors.grey[600],
@@ -145,7 +148,7 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
                       ),
                       0.02.pw(context),
                       Text(
-                        'Logout',
+                        StringTranslateExtension('Logout').tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
@@ -173,6 +176,18 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xff2d4159),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Scaffold(
       backgroundColor: Color(0xfff9fafb),
       appBar: PreferredSize(
@@ -212,7 +227,7 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Driver Dashboard',
+                      StringTranslateExtension('Driver Dashboard').tr(),
                       style: GoogleFonts.inter(
                         fontSize: context.mh * 0.02,
                         fontWeight: FontWeight.w600,
@@ -230,36 +245,48 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
                   ],
                 ),
               ),
-              Container(
-                width: context.mw * 0.2,
-                height: context.mw * 0.09,
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.mw * 0.02, vertical: context.mw * 0.01),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4b5563),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.language,
-                      color: Colors.white,
-                      size: 14,
-                    ),
-                    SizedBox(width: 6),
-                    Text(
-                      'عربي',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
+              Obx(
+                () {
+                  return GestureDetector(
+                    onTap: () {
+                      _showLanguageSelectionCustom();
+                    },
+                    child: Container(
+                      width: context.mw * 0.2,
+                      height: context.mw * 0.09,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.mw * 0.02,
+                          vertical: context.mw * 0.01),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4b5563),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.language,
+                            color: Colors.white,
+                            size: 14,
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            controller.lang.value.languageCode != 'ar'
+                                ? 'English'
+                                : 'عربي',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
               0.01.pw(context),
               // Logout Container

@@ -2,6 +2,7 @@ import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DispatchAmbulanceDialogWidget extends StatelessWidget {
   final String ambulanceId;
@@ -41,13 +42,25 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Title
-              Text(
-                'Dispatch Ambulance $ambulanceId',
-                style: TextStyle(
-                  fontSize: context.mh * 0.018,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              Row(
+                children: [
+                  Text(
+                    StringTranslateExtension('Dispatch Ambulance ').tr(),
+                    style: TextStyle(
+                      fontSize: context.mh * 0.018,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Text(
+                    '$ambulanceId',
+                    style: TextStyle(
+                      fontSize: context.mh * 0.018,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
               ),
 
               0.03.ph(context),
@@ -99,20 +112,42 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                       ],
                     ),
                     0.02.ph(context),
-                    Text(
-                      'Driver: $driverName',
-                      style: TextStyle(
-                        fontSize: context.mh * 0.016,
-                        color: Colors.grey.shade600,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          StringTranslateExtension('Driver: ').tr(),
+                          style: TextStyle(
+                            fontSize: context.mh * 0.016,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        Text(
+                          '$driverName',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.016,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
                     ),
                     0.01.ph(context),
-                    Text(
-                      'Current Location: $currentLocation',
-                      style: TextStyle(
-                        fontSize: context.mh * 0.016,
-                        color: Colors.grey.shade600,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          StringTranslateExtension('Current Location: ').tr(),
+                          style: TextStyle(
+                            fontSize: context.mh * 0.016,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                        Text(
+                          '$currentLocation',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.016,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -122,7 +157,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
 
               /// Assignment Type Section
               Text(
-                'Select Assignment Type:',
+                StringTranslateExtension('Select Assignment Type:').tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.017,
                   fontWeight: FontWeight.w600,
@@ -163,7 +198,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                       children: [
                         0.02.ph(context),
                         Text(
-                          'Select Burial Case:',
+                          StringTranslateExtension('Select Burial Case:').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             fontWeight: FontWeight.w600,
@@ -188,7 +223,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedBurialCase.value,
                               hint: Text(
-                                'Select a burial case...',
+                                StringTranslateExtension("Select a burial case...").tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -225,7 +260,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                       children: [
                         0.02.ph(context),
                         Text(
-                          'Select Burial Case:',
+                          StringTranslateExtension('Select Burial Case:').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             fontWeight: FontWeight.w600,
@@ -250,7 +285,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedBurialCase.value,
                               hint: Text(
-                                'Select a burial case...',
+                                StringTranslateExtension("Select a burial case...").tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -278,7 +313,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                         ),
                         0.02.ph(context),
                         Text(
-                          'Select Mosque:',
+                          StringTranslateExtension('Select Mosque:').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             fontWeight: FontWeight.w600,
@@ -303,7 +338,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedMosque.value,
                               hint: Text(
-                                'Select a mosque...',
+                               StringTranslateExtension( 'Select a mosque...').tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -336,7 +371,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
               0.03.ph(context),
 
               Text(
-                'Additional Instructions:',
+                StringTranslateExtension('Additional Instructions:').tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.017,
                   fontWeight: FontWeight.w600,
@@ -359,7 +394,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText:
-                        'Enter any special instructions for the driver...',
+                        StringTranslateExtension("Enter any special instructions for the driver...").tr(),
                     hintStyle: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: context.mh * 0.016,
@@ -395,7 +430,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                         ),
                         0.02.pw(context),
                         Text(
-                          'Estimated Arrival:',
+                          StringTranslateExtension('Estimated Arrival:').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             fontWeight: FontWeight.w600,
@@ -406,7 +441,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                     ),
                     0.01.ph(context),
                     Text(
-                      'Will be calculated after destination selection',
+                      StringTranslateExtension('Will be calculated after destination selection').tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.014,
                         color: Colors.blue.shade600,
@@ -513,7 +548,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      StringTranslateExtension(title).tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.016,
                         fontWeight: FontWeight.w600,
@@ -522,7 +557,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                     ),
                     0.01.ph(context),
                     Text(
-                      description,
+                      StringTranslateExtension(description).tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.014,
                         color: Colors.grey.shade600,
@@ -571,7 +606,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                text,
+                StringTranslateExtension(text).tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.014,
                   color: textColor,

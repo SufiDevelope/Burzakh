@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class DutyStatusCountWidget extends StatelessWidget {
@@ -34,7 +35,7 @@ class DutyStatusCountWidget extends StatelessWidget {
           ),
         ),
         Text(
-          label,
+          label.tr(),
           style: TextStyle(
             fontSize: context.mh * 0.011,
             color: const Color(0xFF6B7280),

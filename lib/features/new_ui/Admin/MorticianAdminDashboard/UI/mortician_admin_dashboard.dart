@@ -11,6 +11,7 @@ import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/Widget/Mor
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/controller/mortician_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class MorticianAdminDashboard extends StatefulWidget {
   final String id, name, phoneNo;
@@ -116,7 +117,7 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
                                     Row(
                                       children: [
                                         Text(
-                                          controller.selectedStatus.value,
+                                          StringTranslateExtension(controller.selectedStatus.value).tr(),
                                           style: TextStyle(
                                             fontSize: context.mh * 0.018,
                                             fontWeight: FontWeight.w600,
@@ -134,7 +135,7 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
                                             controller.setStatus(
                                               newStatus,
                                               context,
-                                              "49",
+                                              widget.id,
                                             );
                                           },
                                           child: Container(
@@ -175,8 +176,8 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
                                                 ),
                                                 0.008.pw(context),
                                                 Text(
-                                                  controller
-                                                      .selectedStatus.value,
+                                                  StringTranslateExtension(controller
+                                                      .selectedStatus.value).tr(),
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                     color: controller
