@@ -47,9 +47,10 @@ class _VisitorAlertAdminDashboardState
           physics: AlwaysScrollableScrollPhysics(),
           child: Column(
             children: [
+              0.015.ph(context),
               VisitorAlertHeadingWidget(
                 title: 'Janazah Alerts',
-                subtitle: 'Community prayer schedules and\nspiritual reminders',
+                subtitle: 'Community prayer schedules and spiritual reminders',
                 onNotificationPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => NotifsScreen()));

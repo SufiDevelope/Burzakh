@@ -1,7 +1,11 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/create_visitor_alert_dialog.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/visitor_alert_admin_dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CementryDashboardHeaderWidget extends StatelessWidget {
   final String initails;
@@ -90,7 +94,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
 
               // Role
               Text(
-                "Cemetery Admin",
+                StringTranslateExtension("Cemetery Admin").tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.016,
                   color: Colors.grey[600],
@@ -135,7 +139,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                       ),
                       0.02.pw(context),
                       Text(
-                        'Logout',
+                        StringTranslateExtension("Logout").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           fontWeight: FontWeight.w600,
@@ -155,6 +159,18 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xff2d4159),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
+
     return Container(
       width: context.mw,
       height: context.mh * 0.13,
@@ -193,7 +209,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Cemetery Admin Dashboard",
+                    StringTranslateExtension("Cemetery Admin Dashboard").tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.018,
                       fontWeight: FontWeight.w900,
@@ -258,21 +274,27 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    VisitorAlertAdminDashboard(isDashboard: true,),
+                                    VisitorAlertAdminDashboard(
+                                  isDashboard: true,
+                                ),
                               ),
                             );
                           },
                         ),
                       ),
                       0.02.pw(context),
-                      _buildSquareIconButton(
-                        context: context,
-                        icon: Icons.language,
-                        text: 'العربية',
-                        onTap: () {
-                          // Language toggle functionality
-                        },
-                      ),
+                      Obx(() {
+                        return _buildSquareIconButton(
+                          context: context,
+                          icon: Icons.language,
+                          text: controller.lang.value.languageCode != 'ar'
+                              ? 'English'
+                              : 'العربية',
+                          onTap: () {
+                            _showLanguageSelectionCustom();
+                          },
+                        );
+                      }),
                       0.02.pw(context),
                       _buildSquareIconButton(
                         context: context,
@@ -333,7 +355,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
             SizedBox(width: context.mw * 0.01),
             Flexible(
               child: Text(
-                text,
+                StringTranslateExtension(text).tr(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: context.mh * 0.013,

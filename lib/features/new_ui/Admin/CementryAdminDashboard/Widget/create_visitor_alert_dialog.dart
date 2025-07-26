@@ -2,7 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CreateVisitorAlertDialog extends StatelessWidget {
   const CreateVisitorAlertDialog({Key? key}) : super(key: key);
 
@@ -77,7 +77,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Create Visitor\nAlert',
+            StringTranslateExtension("Create Visitor Alert").tr(),
             style: TextStyle(
               fontSize: context.mh * 0.022,
               fontWeight: FontWeight.w600,
@@ -110,7 +110,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     return _buildTextField(
       label: 'Name (English)',
       controller: controller.nameEnglishController,
-      textDirection: TextDirection.ltr,
       context: context,
     );
   }
@@ -140,7 +139,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     return _buildTextField(
       label: 'Mosque Name',
       controller: controller.mosqueNameController,
-      textDirection: TextDirection.ltr,
       context: context,
     );
   }
@@ -150,7 +148,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     return _buildTextField(
       label: 'Description (English)',
       controller: controller.descriptionEnglishController,
-      textDirection: TextDirection.ltr,
       maxLines: 3,
       context: context,
     );
@@ -161,7 +158,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     return _buildTextField(
       label: 'Description (Arabic)',
       controller: controller.descriptionArabicController,
-      textDirection: TextDirection.rtl,
       maxLines: 3,
       context: context,
     );
@@ -170,7 +166,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
   Widget _buildTextField({
     required String label,
     required TextEditingController controller,
-    required TextDirection textDirection,
     int maxLines = 1,
     required BuildContext context,
   }) {
@@ -178,7 +173,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          StringTranslateExtension(label).tr(),
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
@@ -188,7 +183,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
         const SizedBox(height: 8),
         TextField(
           controller: controller,
-          textDirection: textDirection,
           maxLines: maxLines,
           style: TextStyle(
             fontSize: context.mh * 0.015,
@@ -263,7 +257,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          StringTranslateExtension(label).tr(),
           style: TextStyle(
             fontSize: context.mh * 0.015,
             fontWeight: FontWeight.w500,
@@ -332,7 +326,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
             ),
             0.01.pw(context),
             Text(
-              'Mark as Important Alert',
+              StringTranslateExtension('Mark as Important Alert').tr(),
               style: TextStyle(
                 fontSize: context.mh * 0.015,
                 color: Colors.black87,
@@ -361,7 +355,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Cancel',
+              StringTranslateExtension('Cancel').tr(),
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: context.mh * 0.015,
@@ -390,7 +384,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                     strokeWidth: 2,
                   )
                 : Text(
-                    'Publish Alert',
+                    StringTranslateExtension('Publish Alert').tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.015,
                       fontWeight: FontWeight.w500,
@@ -408,7 +402,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Alert Time',
+          StringTranslateExtension('Alert Time').tr(),
           style: TextStyle(
             fontSize: context.mh * 0.015,
             fontWeight: FontWeight.w500,

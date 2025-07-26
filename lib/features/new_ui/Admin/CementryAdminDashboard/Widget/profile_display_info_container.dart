@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ProfileDisplayInfoContainer extends StatelessWidget {
@@ -156,7 +157,7 @@ class ProfileDisplayInfoContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          title.tr(),
           style: TextStyle(
             fontSize: context.mh * 0.015,
             fontWeight: FontWeight.w500,

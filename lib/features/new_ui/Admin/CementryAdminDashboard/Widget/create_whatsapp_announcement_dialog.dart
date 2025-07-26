@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CreateWhatsappAnnouncementDialog extends StatelessWidget {
   const CreateWhatsappAnnouncementDialog({super.key});
@@ -46,14 +47,29 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Send WhatsApp\nAnnouncement',
-                    style: TextStyle(
-                      fontSize: context.mh * 0.018,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                      height: 1.2,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        StringTranslateExtension('Send WhatsApp ').tr(),
+                        style: TextStyle(
+                          fontSize: context.mh * 0.018,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          height: 1.2,
+                        ),
+                      ),
+                      Text(
+                        StringTranslateExtension('Announcement').tr(),
+                        style: TextStyle(
+                          fontSize: context.mh * 0.018,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                          height: 1.2,
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -89,7 +105,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                         border: Border.all(color: Colors.green.shade200),
                       ),
                       child: Text(
-                        'Family Preferred Time: After Maghrib Prayer',
+                        StringTranslateExtension('Family Preferred Time: After Maghrib Prayer').tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.015,
                           color: Colors.green.shade700,
@@ -105,7 +121,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                     SizedBox(height: 8),
                     _buildTextField(
                       controller: controller.whatsappDeceasedNameController,
-                      hintText: 'Enter deceased name',
+                      hintText: '',
                       prefixIcon: Icons.person,
                       context: context,
                     ),
@@ -118,7 +134,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                     Obx(() => Column(
                           children: [
                             RadioListTile<String>(
-                              title: Text('Male',
+                              title: Text(StringTranslateExtension('Male').tr(),
                                   style:
                                       TextStyle(fontSize: context.mh * 0.012)),
                               value: 'Male',
@@ -131,7 +147,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                             ),
                             RadioListTile<String>(
                               title: Text(
-                                'Female',
+                                StringTranslateExtension('Female').tr(),
                                 style: TextStyle(fontSize: context.mh * 0.012),
                               ),
                               value: 'Female',
@@ -152,7 +168,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                     SizedBox(height: 8),
                     _buildTextField(
                       controller: controller.whatsappNationalityController,
-                      hintText: 'Enter nationality',
+                      hintText: '',
                       prefixIcon: Icons.flag,
                       context: context,
                     ),
@@ -197,7 +213,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                     SizedBox(height: 8),
                     _buildTextField(
                       controller: controller.whatsappOptionalNoteController,
-                      hintText: 'Additional information...',
+                      hintText: '',
                       maxLines: 3,
                       prefixIcon: Icons.note,
                       context: context,
@@ -222,7 +238,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                               Icon(Icons.group, color: Colors.green.shade600),
                               0.01.pw(context),
                               Text(
-                                'Dubai Funerals Group',
+                                StringTranslateExtension('Dubai Funerals Group').tr(),
                                 style: TextStyle(
                                   fontSize: context.mh * 0.018,
                                   fontWeight: FontWeight.bold,
@@ -260,7 +276,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              'Cancel',
+                              StringTranslateExtension('Cancel').tr(),
                               style: TextStyle(
                                 fontSize: context.mh * 0.012,
                                 fontWeight: FontWeight.w600,
@@ -296,7 +312,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
                                   ),
                                 )
                               : Text(
-                                  'Send Announcement',
+                                  StringTranslateExtension('Send Announcement').tr(),
                                   style: TextStyle(
                                     fontSize: context.mh * 0.012,
                                     fontWeight: FontWeight.w600,
@@ -317,7 +333,7 @@ class CreateWhatsappAnnouncementDialog extends StatelessWidget {
 
   Widget _buildSectionTitle(String title, BuildContext context) {
     return Text(
-      title,
+      StringTranslateExtension(title).tr(),
       style: TextStyle(
         fontSize: context.mh * 0.015,
         fontWeight: FontWeight.w600,

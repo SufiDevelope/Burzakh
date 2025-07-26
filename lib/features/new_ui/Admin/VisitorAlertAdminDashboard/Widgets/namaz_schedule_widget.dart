@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Controller/visitor_alert_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class PrayerScheduleWidget extends StatelessWidget {
   final VoidCallback? onLocationPressed;
@@ -43,7 +44,7 @@ class PrayerScheduleWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Next Prayer',
+                    StringTranslateExtension('Next Prayer').tr(),
                     style: TextStyle(
                       fontSize: context.mh * 0.016,
                       color: Colors.white.withOpacity(0.9),
@@ -105,7 +106,7 @@ class PrayerScheduleWidget extends StatelessWidget {
                         margin: EdgeInsets.only(
                           right: index < controller.prayerTimes.length - 1
                               ? context.mw * 0.02
-                              : 0,
+                              : context.mw * 0.02,
                         ),
                         padding: EdgeInsets.symmetric(
                           vertical: context.mh * 0.015,

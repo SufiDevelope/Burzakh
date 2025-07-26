@@ -1,6 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CementryFilterWidget extends StatefulWidget {
   final String searchHint;
   final String dropdownValue;
@@ -94,9 +94,8 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                   controller: _searchController,
                   onChanged: widget.onSearchChanged,
                   textAlignVertical: TextAlignVertical.center,
-                  
                   decoration: InputDecoration(
-                    hintText: widget.searchHint,
+                    hintText: StringTranslateExtension(widget.searchHint).tr(),
                     hintStyle: TextStyle(
                       color: Colors.grey[500],
                       fontSize: context.mh * 0.018,
@@ -194,7 +193,7 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                             horizontal: context.mw * 0.04,
                           ),
                           child: Text(
-                            item,
+                            StringTranslateExtension(item).tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.018,
                               fontWeight: FontWeight.w600,

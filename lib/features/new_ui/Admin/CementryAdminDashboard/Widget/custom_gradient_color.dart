@@ -1,5 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CustomGradientButton extends StatelessWidget {
   final String text;
@@ -35,7 +36,7 @@ class CustomGradientButton extends StatelessWidget {
             Icon(icon, color: Colors.white),
             0.02.pw(context),
             Text(
-              text,
+              StringTranslateExtension(text).tr(),
               style: TextStyle(
                 color:  primaryColor == Colors.white70 ? Colors.black : Colors.white,
                 fontSize: context.mh * 0.015,

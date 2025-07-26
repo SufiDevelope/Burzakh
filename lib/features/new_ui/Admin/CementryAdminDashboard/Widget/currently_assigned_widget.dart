@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CurrentlyAssignedWidget extends StatelessWidget {
@@ -50,7 +51,7 @@ class CurrentlyAssignedWidget extends StatelessWidget {
                 ),
                 SizedBox(height: context.mh * 0.005),
                 Text(
-                  status,
+                  status.tr(),
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: context.mh * 0.014,

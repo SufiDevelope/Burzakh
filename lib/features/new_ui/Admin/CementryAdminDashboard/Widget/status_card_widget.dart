@@ -1,4 +1,5 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class GenericStatsContainerWidget extends StatelessWidget {
@@ -99,7 +100,7 @@ class GenericStatsContainerWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  title,
+                  title.tr(),
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontSize: context.mh * 0.012,

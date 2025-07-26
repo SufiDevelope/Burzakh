@@ -1,5 +1,6 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/Model/AdminModels/MorticianModel/mortician_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MorticiansStatusWidget extends StatelessWidget {
@@ -30,7 +31,8 @@ class MorticiansStatusWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min, // This makes the column take minimum space
+        mainAxisSize:
+            MainAxisSize.min, // This makes the column take minimum space
         children: [
           // Header
           Row(
@@ -42,7 +44,7 @@ class MorticiansStatusWidget extends StatelessWidget {
               ),
               SizedBox(width: context.mw * 0.02),
               Text(
-                'Morticians Status',
+                'Morticians Status'.tr(),
                 style: TextStyle(
                   color: Colors.grey[700],
                   fontSize: context.mh * 0.018,
@@ -56,14 +58,14 @@ class MorticiansStatusWidget extends StatelessWidget {
 
           // Morticians List
           ListView.builder(
-            shrinkWrap: true, // This makes ListView take only the space it needs
-            physics: const NeverScrollableScrollPhysics(), // Disable scrolling since parent will handle it
+            shrinkWrap:
+                true, // This makes ListView take only the space it needs
+            physics:
+                const NeverScrollableScrollPhysics(), // Disable scrolling since parent will handle it
             itemCount: morticians.morticians?.length ?? 0,
             itemBuilder: (context, index) {
-              return _buildMorticianItem(
-                  context,
-                  morticians.morticians?[index] ?? MorticiansListData(),
-                  index);
+              return _buildMorticianItem(context,
+                  morticians.morticians?[index] ?? MorticiansListData(), index);
             },
           )
         ],
@@ -111,13 +113,25 @@ class MorticiansStatusWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: context.mh * 0.005),
-                Text(
-                  'Specialization: Male • ${mortician.caseName == null || mortician.caseName == '' ? 'No Case' : mortician.caseName}',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: context.mh * 0.014,
-                    fontWeight: FontWeight.w400,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      'Specialization: '.tr(),
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      '${mortician.caseName == null || mortician.caseName == '' ? 'No Case' : mortician.caseName}'.tr(),
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: context.mh * 0.014,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -159,11 +173,12 @@ class MorticiansStatusWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    mortician.status == "busy"
-                        ? 'ON DUTY'
-                        : mortician.status == "Active"
-                            ? 'Available'
-                            : "OFF DUTY",
+                    StringTranslateExtension(mortician.status == "busy"
+                            ? 'ON DUTY'
+                            : mortician.status == "Active"
+                                ? 'Available'
+                                : "OFF DUTY")
+                        .tr(),
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: context.mh * 0.014,

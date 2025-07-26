@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class JanazaScheduleCardWidget extends StatelessWidget {
   final String name;
@@ -74,7 +75,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
 
                       // Mercy Text
                       Text(
-                        mercyText,
+                        StringTranslateExtension(mercyText).tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.018,
                           color: Color(0xFF7B68EE),
@@ -94,7 +95,6 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           height: 1.5,
                         ),
-                        textDirection: TextDirection.rtl,
                       ),
                     ],
                   ),
@@ -155,7 +155,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                 ),
               ),
               child: Text(
-                description,
+                StringTranslateExtension(description).tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.018,
                   color: Colors.black87,
@@ -199,7 +199,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Cemetery',
+                          StringTranslateExtension('Cemetery').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             color: Color(0xFF64748b),
@@ -261,7 +261,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Time',
+                          StringTranslateExtension('Time').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             color: Color(0xFF857f76),
@@ -323,7 +323,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Mosque',
+                          StringTranslateExtension('Mosque').tr(),
                           style: TextStyle(
                             fontSize: context.mh * 0.016,
                             color: Color(0xFF857f76),
@@ -378,7 +378,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                           ),
                           0.02.pw(context),
                           Text(
-                            'Directions',
+                            StringTranslateExtension('Directions').tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.018,
                               color: Color(0xFF475569),
@@ -433,7 +433,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                           ),
                           0.02.pw(context),
                           Text(
-                            'Share',
+                           StringTranslateExtension( 'Share').tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.018,
                               color: Color(0xFF475569),

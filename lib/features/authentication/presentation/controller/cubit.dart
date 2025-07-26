@@ -123,12 +123,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     var deviceToken = await service.getDeviceToken();
     log("device token is $deviceToken");
 
-    if (deviceToken == null || deviceToken == "") {
-      log("device token is null");
-      return;
-    }
+    // if (deviceToken == null || deviceToken == "") {
+    //   log("device token is null");
+    //   return;
+    // }
     var response = await _useCaseName.login(
-        email: email, password: password, deviceToken: deviceToken);
+        email: email, password: password, deviceToken: deviceToken ?? "");
 
     if (response.isRight()) {
       var data = response.asRight();

@@ -1,5 +1,9 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/core/localization/localization_getx.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VisitorAlertHeadingWidget extends StatelessWidget {
   final String title;
@@ -23,6 +27,17 @@ class VisitorAlertHeadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final LocalizationGetx controller = Get.find<LocalizationGetx>();
+    void _showLanguageSelectionCustom() {
+      LanguageSelectionBottomSheet.show(
+        context,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        selectedColor: Color(0xFFad8443),
+        borderColor: Colors.white.withOpacity(0.3),
+        borderRadius: 20,
+      );
+    }
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(
@@ -40,7 +55,7 @@ class VisitorAlertHeadingWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      title,
+                      StringTranslateExtension(title).tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.022,
                         fontWeight: FontWeight.bold,
@@ -48,24 +63,27 @@ class VisitorAlertHeadingWidget extends StatelessWidget {
                       ),
                     ),
                     0.01.pw(context),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.mw * 0.03,
-                          vertical: context.mh * 0.01),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFf1eade),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
+                    GestureDetector(
+                      onTap: _showLanguageSelectionCustom,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: context.mw * 0.03,
+                            vertical: context.mh * 0.01),
+                        decoration: BoxDecoration(
                           color: const Color(0xFFf1eade),
-                          width: 1,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: const Color(0xFFf1eade),
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'عر',
-                        style: TextStyle(
-                          fontSize: context.mh * 0.014,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFFad8443),
+                        child: Text(
+                           controller.lang.value.languageCode != 'ar' ? 'EN' : 'عر',
+                          style: TextStyle(
+                            fontSize: context.mh * 0.014,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xFFad8443),
+                          ),
                         ),
                       ),
                     ),
@@ -74,7 +92,7 @@ class VisitorAlertHeadingWidget extends StatelessWidget {
                 0.005.ph(context),
                 // Subtitle
                 Text(
-                  subtitle,
+                  StringTranslateExtension(subtitle).tr(),
                   style: TextStyle(
                     fontSize: context.mh * 0.016,
                     color: const Color(0xFF6B7280),

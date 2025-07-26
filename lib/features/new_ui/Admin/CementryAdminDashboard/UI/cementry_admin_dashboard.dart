@@ -43,7 +43,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(context.mh * 0.18),
         child: Padding(
-          padding: EdgeInsets.only(top: context.mh * 0.03),
+          padding: EdgeInsets.only(top: context.mh * 0.05),
           child: CementryDashboardHeaderWidget(
             initails: widget.name[0],
             adminname: widget.name,

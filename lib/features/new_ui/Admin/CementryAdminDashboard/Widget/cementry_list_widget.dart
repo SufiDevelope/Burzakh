@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../data/Response/status.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CementryListWidget extends StatelessWidget {
   final String name;
@@ -70,7 +71,7 @@ class CementryListWidget extends StatelessWidget {
     final controller = Get.find<CementryController>();
     log(controller.isMorticainEdited.value.toString());
     return Container(
-      height: mortiId != null ? context.mh * 0.8 : context.mh * 0.75,
+      height: mortiId != null ? context.mh * 0.85 : context.mh * 0.75,
       width: context.mw,
       margin: EdgeInsets.symmetric(
           horizontal: context.mw * 0.02, vertical: context.mh * 0.01),
@@ -155,7 +156,7 @@ class CementryListWidget extends StatelessWidget {
                                 color: Colors.blue.shade100,
                               ),
                               child: Text(
-                                "Police Cleared",
+                                StringTranslateExtension("Police Cleared").tr(),
                                 style: TextStyle(
                                   fontSize: context.mh * 0.013,
                                   color: Color(0xff243b53),
@@ -193,7 +194,7 @@ class CementryListWidget extends StatelessWidget {
                                       "Muncipality Cleared".toUpperCase(),
                                       style: TextStyle(
                                         fontSize: context.mh * 0.013,
-                                         color: Color(0xff243b53),
+                                        color: Color(0xff243b53),
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -249,7 +250,7 @@ class CementryListWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "ASSIGN MORTICIAN",
+                        StringTranslateExtension("ASSIGN MORTICIAN").tr(),
                         style: TextStyle(
                           fontSize: context.mh * 0.015,
                           color: Color(0xFF9CA3AF),
@@ -309,7 +310,9 @@ class CementryListWidget extends StatelessWidget {
                                                     horizontal:
                                                         context.mw * 0.04),
                                                 child: Text(
-                                                  "Select Mortician",
+                                                  StringTranslateExtension(
+                                                          "Select Mortician")
+                                                      .tr(),
                                                   style: TextStyle(
                                                     fontSize:
                                                         context.mh * 0.016,
