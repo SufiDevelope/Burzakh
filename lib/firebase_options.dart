@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAkDjuMy_gwKvAwwho9CShPjexXuLqFfdI',
-    appId: '1:66616310517:android:5f6d45c579759e0af763bc',
+    appId: '1:66616310517:android:d24f15ec6c634c73f763bc',
     messagingSenderId: '66616310517',
     projectId: 'burzakh-5a5a8',
     storageBucket: 'burzakh-5a5a8.firebasestorage.app',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAlfehdVwLl_6KH1SUnDfqgU6T3NI7brkU',
-    appId: '1:66616310517:ios:05bcdb9617ffe971f763bc',
+    appId: '1:66616310517:ios:27d8158d8f196718f763bc',
     messagingSenderId: '66616310517',
     projectId: 'burzakh-5a5a8',
     storageBucket: 'burzakh-5a5a8.firebasestorage.app',
-    iosBundleId: 'com.example.burzakh',
+    iosBundleId: 'com.sufidev.burzakh',
   );
+
 }

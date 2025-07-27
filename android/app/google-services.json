@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:66616310517:android:5f6d45c579759e0af763bc",
+        "mobilesdk_app_id": "1:66616310517:android:d24f15ec6c634c73f763bc",
         "android_client_info": {
-          "package_name": "com.example.burzakh"
+          "package_name": "com.sufidev.burzakh"
         }
       },
       "oauth_client": [],
