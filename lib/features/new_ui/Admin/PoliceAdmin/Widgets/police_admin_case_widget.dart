@@ -126,7 +126,7 @@ class PoliceAdminCaseWidget extends StatelessWidget {
                         items: controller.filterLabels.map((label) {
                           return DropdownMenuItem<String>(
                             value: controller.filterOptions[label],
-                            child: Text(label),
+                            child: Text(StringTranslateExtension(label).tr()),
                           );
                         }).toList(),
                         onChanged: (value) {

@@ -411,7 +411,8 @@ class CaseDetailsDialog extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          document,
+                                          StringTranslateExtension(document)
+                                              .tr(),
                                           style: TextStyle(
                                             fontSize: context.mh * 0.016,
                                             color: Colors.black87,
@@ -427,7 +428,9 @@ class CaseDetailsDialog extends StatelessWidget {
                                             vertical: 4,
                                           ),
                                           child: Text(
-                                            "(Tap to view)",
+                                            StringTranslateExtension(
+                                                    "(Tap to view)")
+                                                .tr(),
                                             style: TextStyle(
                                               fontStyle: FontStyle.italic,
                                               fontSize: context.mh * 0.012,

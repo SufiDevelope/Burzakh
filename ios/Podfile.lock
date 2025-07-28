@@ -340,7 +340,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 3b26e2cee503815e01c3701236b020aa9b576f09
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_callkit_incoming: cb8138af67cda6dd981f7101a5d709003af21502
-  flutter_local_notifications: a5a732f069baa862e728d839dd2ebb904737effb
+  flutter_local_notifications: ad39620c743ea4c15127860f4b5641649a988100
   flutter_logs: 30a36079651dcdfb260dbff875bf882bbbcaa22e
   flutter_native_splash: 6cad9122ea0fad137d23137dd14b937f3e90b145
   flutter_ringtone_player: a77c42464250845611eaa44c27e8714acc800138
