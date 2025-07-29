@@ -27,6 +27,15 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(DubaiController());
 
+    final Map<String, String> mosqueNameMap = {
+      'Grand Mosque Dubai': StringTranslateExtension('Grand Mosque Dubai').tr(),
+      'Jumeirah Mosque': StringTranslateExtension('Jumeirah Mosque').tr(),
+      'Al Farooq Omar Mosque':
+          StringTranslateExtension('Al Farooq Omar Mosque').tr(),
+      'Blue Mosque': StringTranslateExtension('Blue Mosque').tr(),
+      'Zabeel Mosque': StringTranslateExtension('Zabeel Mosque').tr(),
+    };
+
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
@@ -223,7 +232,9 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedBurialCase.value,
                               hint: Text(
-                                StringTranslateExtension("Select a burial case...").tr(),
+                                StringTranslateExtension(
+                                        "Select a burial case...")
+                                    .tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -285,7 +296,9 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedBurialCase.value,
                               hint: Text(
-                                StringTranslateExtension("Select a burial case...").tr(),
+                                StringTranslateExtension(
+                                        "Select a burial case...")
+                                    .tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -338,7 +351,8 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                   ? null
                                   : controller.selectedMosque.value,
                               hint: Text(
-                               StringTranslateExtension( 'Select a mosque...').tr(),
+                                StringTranslateExtension('Select a mosque...')
+                                    .tr(),
                                 style: TextStyle(
                                   color: Colors.grey.shade500,
                                   fontSize: context.mh * 0.016,
@@ -352,7 +366,7 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                                       DropdownMenuItem<String>(
                                         value: mosque,
                                         child: Text(
-                                          mosque,
+                                          mosqueNameMap[mosque] ?? mosque,
                                           style: TextStyle(
                                             fontSize: context.mh * 0.016,
                                             color: Colors.black87,
@@ -393,8 +407,9 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                   controller: controller.instructionsController,
                   maxLines: 3,
                   decoration: InputDecoration(
-                    hintText:
-                        StringTranslateExtension("Enter any special instructions for the driver...").tr(),
+                    hintText: StringTranslateExtension(
+                            "Enter any special instructions for the driver...")
+                        .tr(),
                     hintStyle: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: context.mh * 0.016,
@@ -441,7 +456,9 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
                     ),
                     0.01.ph(context),
                     Text(
-                      StringTranslateExtension('Will be calculated after destination selection').tr(),
+                      StringTranslateExtension(
+                              'Will be calculated after destination selection')
+                          .tr(),
                       style: TextStyle(
                         fontSize: context.mh * 0.014,
                         color: Colors.blue.shade600,
@@ -503,7 +520,6 @@ class DispatchAmbulanceDialogWidget extends StatelessWidget {
       controller.instructionsController.text.trim(),
       selectedOption,
     );
-
   }
 
   Widget _buildAssignmentOption(

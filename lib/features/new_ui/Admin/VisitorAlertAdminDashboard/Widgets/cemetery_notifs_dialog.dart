@@ -1,11 +1,11 @@
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Controller/visitor_alert_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CemeteryDropdownDialog extends StatefulWidget {
   @override
-  _CemeteryDropdownDialogState createState() =>
-      _CemeteryDropdownDialogState();
+  _CemeteryDropdownDialogState createState() => _CemeteryDropdownDialogState();
 }
 
 class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
@@ -14,6 +14,15 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
     final controller = Get.find<VisitorAlertController>();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    final Map<String, String> cemeteryMap = {
+      '': StringTranslateExtension('Select Cemetery').tr(),
+      'Al Qusais Cemetery': StringTranslateExtension('Al Qusais Cemetery').tr(),
+      'Al Warqa Cemetery': StringTranslateExtension('Al Warqa Cemetery').tr(),
+      'Jumeirah Cemetery': StringTranslateExtension('Jumeirah Cemetery').tr(),
+      'Dubai Silicon Oasis Cemetery': StringTranslateExtension('Dubai Silicon Oasis Cemetery').tr(),
+      'Other Cemetery': StringTranslateExtension('Other Cemetery').tr(),
+    };
 
     return Dialog(
       backgroundColor: Colors.white,
@@ -31,7 +40,7 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Notification Settings',
+                  StringTranslateExtension('Notification Settings').tr(),
                   style: TextStyle(
                     fontSize: height * 0.018,
                     fontWeight: FontWeight.w600,
@@ -41,7 +50,7 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
                 IconButton(
                   icon: Icon(Icons.close, size: height * 0.02),
                   onPressed: () {
-                   Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
@@ -54,7 +63,7 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Preferred Cemetery',
+                  StringTranslateExtension('Preferred Cemetery').tr(),
                   style: TextStyle(
                     fontSize: height * 0.018,
                     fontWeight: FontWeight.w500,
@@ -87,7 +96,7 @@ class _CemeteryDropdownDialogState extends State<CemeteryDropdownDialog> {
                         return DropdownMenuItem<String>(
                           value: cemetery,
                           child: Text(
-                            cemetery,
+                            cemeteryMap[cemetery]!,
                             style: TextStyle(
                               fontSize: height * 0.018,
                               color: Colors.black87,

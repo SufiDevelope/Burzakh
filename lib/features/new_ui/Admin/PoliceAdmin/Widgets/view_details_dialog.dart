@@ -491,7 +491,7 @@ class CaseDetailsDialog extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "Close",
+                            StringTranslateExtension("Close").tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.016,
                               fontWeight: FontWeight.w600,
@@ -531,7 +531,7 @@ class CaseDetailsDialog extends StatelessWidget {
                                   )
                                 : Center(
                                     child: Text(
-                                      "Approve",
+                                      StringTranslateExtension("Approve").tr(),
                                       style: TextStyle(
                                         fontSize: context.mh * 0.016,
                                         fontWeight: FontWeight.w600,

@@ -804,5 +804,14 @@
   "Visitor": "Посетитель",
   "Ref: ": "Ссылка:",
   "Case ID: ": "Идентификатор дела:",
-  "Dubai Muncipality": "Муниципалитет Дубая"
+  "Dubai Muncipality": "Муниципалитет Дубая",
+  "Case Process": "Процесс дела",
+  "sunni": "Суннит",
+  "shia": "Шиит",
+  "sufi": "Суфий",
+  "other": "Другое",
+  "Select Case": "Выберите дело",
+  "Choose an existing case or create a new one": "Выберите существующее дело или создайте новое",
+  "Create New Case": "Создать новое дело",
+  "Burzakh": "Бурзах"
 }

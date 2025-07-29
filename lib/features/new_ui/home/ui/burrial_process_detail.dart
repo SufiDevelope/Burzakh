@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/Controller/dubai_controller.dart';
@@ -5,7 +7,6 @@ import 'package:burzakh/widgets/app_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get/get.dart';
 
 class BurrialProcessDetail extends StatefulWidget {
   final String caseName;
@@ -24,6 +25,39 @@ class BurrialProcessDetail extends StatefulWidget {
 
 class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
   final controller = Get.put(DubaiController());
+
+  // Map-based dropdown data
+  final Map<String, String> prayerTimes = {
+    "fajr": "Fajr (Dawn Prayer)",
+    "dhuhr": "Dhuhr (Noon Prayer)",
+    "asr": "Asr (Afternoon Prayer)",
+    "maghrib": "Maghrib (Sunset Prayer)",
+    "isha": "Isha (Night Prayer)",
+    "custom": "Custom Time",
+  };
+
+  final Map<String, String> nationalities = {
+    "uae": "United Arab Emirates",
+    "saudi": "Saudi Arabia",
+    "egypt": "Egypt",
+    "pakistan": "Pakistan",
+    "india": "India",
+  };
+
+  final Map<String, String> religions = {
+    "islam": "Islam",
+    "christianity": "Christianity",
+    "hinduism": "Hinduism",
+    "buddhism": "Buddhism",
+    "other": "Other",
+  };
+
+  final Map<String, String> sects = {
+    "sunni": "Sunni",
+    "shia": "Shia",
+    "sufi": "Sufi",
+    "other": "Other",
+  };
 
   // Data variables
   String? selectedPrayerTime;
@@ -62,6 +96,22 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
       return _formatTime(customTime!);
     }
     return selectedPrayerTime ?? "";
+  }
+
+  // Helper method to build dropdown items from map
+  List<DropdownMenuItem<String>> _buildDropdownItems(
+      Map<String, String> items, {bool translateValues = false}) {
+        log(items.values.toString());
+    return items.entries.map((entry) {
+      return DropdownMenuItem<String>(
+        value: entry.key,
+        child: Text(
+          translateValues 
+            ? StringTranslateExtension(entry.value).tr()
+            : entry.value
+        ),
+      );
+    }).toList();
   }
 
   @override
@@ -132,21 +182,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                           const EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
-                    items: const [
-                      DropdownMenuItem(
-                          value: "fajr", child: Text("Fajr (Dawn Prayer)")),
-                      DropdownMenuItem(
-                          value: "dhuhr", child: Text("Dhuhr (Noon Prayer)")),
-                      DropdownMenuItem(
-                          value: "asr", child: Text("Asr (Afternoon Prayer)")),
-                      DropdownMenuItem(
-                          value: "maghrib",
-                          child: Text("Maghrib (Sunset Prayer)")),
-                      DropdownMenuItem(
-                          value: "isha", child: Text("Isha (Night Prayer)")),
-                      DropdownMenuItem(
-                          value: "custom", child: Text("Custom Time")),
-                    ],
+                    items: _buildDropdownItems(prayerTimes, translateValues: true),
                     onChanged: (value) {
                       setState(() {
                         selectedPrayerTime = value;
@@ -229,27 +265,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
-                    items: [
-                      DropdownMenuItem(
-                          value: "uae",
-                          child: Text(
-                              StringTranslateExtension("United Arab Emirates")
-                                  .tr())),
-                      DropdownMenuItem(
-                          value: "saudi",
-                          child: Text(
-                              StringTranslateExtension("Saudi Arabia").tr())),
-                      DropdownMenuItem(
-                          value: "egypt",
-                          child: Text(StringTranslateExtension("Egypt").tr())),
-                      DropdownMenuItem(
-                          value: "pakistan",
-                          child:
-                              Text(StringTranslateExtension("Pakistan").tr())),
-                      DropdownMenuItem(
-                          value: "india",
-                          child: Text(StringTranslateExtension("India").tr())),
-                    ],
+                    items: _buildDropdownItems(nationalities, translateValues: true),
                     onChanged: (value) {
                       setState(() {
                         selectedNationality = value;
@@ -286,26 +302,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                       contentPadding: EdgeInsets.symmetric(horizontal: 16),
                       border: InputBorder.none,
                     ),
-                    items: [
-                      DropdownMenuItem(
-                          value: "islam",
-                          child: Text(StringTranslateExtension("Islam").tr())),
-                      DropdownMenuItem(
-                          value: "christianity",
-                          child: Text(
-                              StringTranslateExtension("Christianity").tr())),
-                      DropdownMenuItem(
-                          value: "hinduism",
-                          child:
-                              Text(StringTranslateExtension("Hinduism").tr())),
-                      DropdownMenuItem(
-                          value: "buddhism",
-                          child:
-                              Text(StringTranslateExtension("Buddhism").tr())),
-                      DropdownMenuItem(
-                          value: "other",
-                          child: Text(StringTranslateExtension("Other").tr())),
-                    ],
+                    items: _buildDropdownItems(religions, translateValues: true),
                     onChanged: (value) {
                       setState(() {
                         selectedReligion = value;
@@ -344,12 +341,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                         contentPadding: EdgeInsets.symmetric(horizontal: 16),
                         border: InputBorder.none,
                       ),
-                      items: const [
-                        DropdownMenuItem(value: "sunni", child: Text("Sunni")),
-                        DropdownMenuItem(value: "shia", child: Text("Shia")),
-                        DropdownMenuItem(value: "sufi", child: Text("Sufi")),
-                        DropdownMenuItem(value: "other", child: Text("Other")),
-                      ],
+                      items: _buildDropdownItems(sects, translateValues: true),
                       onChanged: (value) {
                         setState(() {
                           selectedSect = value;
@@ -376,7 +368,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                     controller: preferedCemeteryController,
                     maxLines: 1,
                     decoration: const InputDecoration(
-                      hintText: "Select prefered cemetery",
+                      hintText: "",
                       contentPadding: EdgeInsets.all(16),
                       border: InputBorder.none,
                     ),
@@ -405,7 +397,7 @@ class _BurrialProcessDetailState extends State<BurrialProcessDetail> {
                   child: TextFormField(
                     controller: specialRequestsController,
                     maxLines: 4,
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                       hintText:
                           StringTranslateExtension("Any special requests or additional information").tr(),
                       contentPadding: EdgeInsets.all(16),

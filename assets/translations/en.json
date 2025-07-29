@@ -799,5 +799,12 @@
   "Visitor": "Visitor",
   "Ref: ": "Ref: ",
   "Case ID: ": "Case ID: ",
-  "Dubai Muncipality": "Dubai Muncipality"
+  "Dubai Muncipality": "Dubai Muncipality",
+  "Case Process": "Case Process",
+  "Select Case": "Select Case",
+  "Choose an existing case or create a new one": "Choose an existing case or create a new one",
+  "Create New Case": "Create New Case",
+  "Burzakh": "Burzakh",
+  "Fajr": "Fajr",
+  "Maghrib": "Maghrib"
 }

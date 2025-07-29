@@ -22,6 +22,7 @@ class BurialCardWidget extends StatelessWidget {
   final String? age;
   final String? sect;
   final String? religion;
+  final String? ambStatus;
 
   const BurialCardWidget({
     super.key,
@@ -40,7 +41,11 @@ class BurialCardWidget extends StatelessWidget {
     this.isAmbulance = false,
     this.onCallTap,
     this.statusAmbulance,
-    this.graveStatus, this.age, this.sect, this.religion,
+    this.graveStatus,
+    this.age,
+    this.sect,
+    this.religion,
+    this.ambStatus,
   });
 
   @override
@@ -168,12 +173,14 @@ class BurialCardWidget extends StatelessWidget {
                   Icon(Icons.local_shipping_outlined,
                       size: context.mh * 0.015, color: Colors.grey),
                   0.01.pw(context),
-                  Text(
-                    statusAmbulance!,
-                    maxLines: 3,
-                    style: TextStyle(
-                      fontSize: context.mh * 0.013,
-                      color: Colors.black54,
+                  Expanded(
+                    child: Text(
+                      statusAmbulance!,
+                      maxLines: 3,
+                      style: TextStyle(
+                        fontSize: context.mh * 0.013,
+                        color: Colors.black54,
+                      ),
                     ),
                   ),
                 ],
@@ -255,7 +262,9 @@ class BurialCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      StringTranslateExtension(isAmbulance == false ? 'Messages' : "Contact").tr(),
+                      StringTranslateExtension(
+                              isAmbulance == false ? 'Messages' : "Contact")
+                          .tr(),
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
@@ -267,10 +276,7 @@ class BurialCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Visibility(
-                      visible:
-                          graveStatus == "Pending"
-                              ? true
-                              : false,
+                      visible: graveStatus == "Pending" ? true : false,
                       child: _circleButton(
                         isAmbulance == true ? Icons.trending_up : Icons.add,
                         isAmbulance == true
@@ -300,8 +306,7 @@ class BurialCardWidget extends StatelessWidget {
                     0.02.pw(context),
                     Visibility(
                       visible:
-                          graveStatus == "Pending"||
-                                  status == "Dispatched"
+                          graveStatus == "Pending" || status == "Dispatched"
                               ? true
                               : false,
                       child: _circleButton(
@@ -313,7 +318,6 @@ class BurialCardWidget extends StatelessWidget {
                         isGradient: false,
                       ),
                     ),
-                    
                   ],
                 )
               ],
@@ -327,6 +331,21 @@ class BurialCardWidget extends StatelessWidget {
   Widget _buildBadge(
       BuildContext context, String text, Color bg, Color textColor,
       {bool isId = false}) {
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'All':
+          return StringTranslateExtension('All').tr();
+        case 'pending':
+          return StringTranslateExtension('Pending').tr();
+        case 'approve':
+          return StringTranslateExtension('Approved').tr();
+        case 'rejected':
+          return StringTranslateExtension('Rejected').tr();
+        default:
+          return key;
+      }
+    }
+
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: context.mw * 0.025, vertical: context.mh * 0.005),
@@ -341,7 +360,7 @@ class BurialCardWidget extends StatelessWidget {
         color: isId == false ? null : bg,
       ),
       child: Text(
-        text,
+        _getLocalizedStatus(text),
         style: TextStyle(
           fontSize: context.mh * 0.013,
           color: textColor,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Controller/visitor_alert_controller.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,14 @@ class PrayerScheduleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<VisitorAlertController>();
+
+    final Map<String, String> prayerNameMap = {
+      "Fajr": StringTranslateExtension('Fajr').tr(),
+      "Dhuhr": StringTranslateExtension('Dhuhr').tr(),
+      "Asr": StringTranslateExtension('Asr').tr(),
+      "Maghrib": StringTranslateExtension('Maghrib').tr(),
+      "Isha": StringTranslateExtension('Isha').tr(),
+    };
 
     return Obx(() => Container(
           margin: EdgeInsets.symmetric(
@@ -71,7 +81,7 @@ class PrayerScheduleWidget extends StatelessWidget {
               0.015.ph(context),
 
               Text(
-                '${controller.currentPrayer.value} - ${controller.currentTime.value}',
+                '${prayerNameMap[controller.currentPrayer.value] ?? controller.currentPrayer.value} - ${controller.currentTime.value}',
                 style: TextStyle(
                   fontSize: context.mh * 0.032,
                   color: Colors.white,
@@ -80,7 +90,7 @@ class PrayerScheduleWidget extends StatelessWidget {
               ),
               0.01.ph(context),
               Text(
-                "",
+                "", // Optional subtitle or next prayer info
                 style: TextStyle(
                   fontSize: context.mh * 0.018,
                   color: Colors.white.withOpacity(0.9),
@@ -96,11 +106,13 @@ class PrayerScheduleWidget extends StatelessWidget {
                   final prayer = entry.value;
                   final isActive =
                       prayer.name == controller.currentPrayer.value;
-
                   return Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        controller.updateCurrentPrayer(prayer.name, prayer.time, '');
+                        log("prayer name ${prayer.name}");
+                        controller.updateCurrentPrayer(
+                          prayer.name, prayer.time, '',
+                        );
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -119,13 +131,15 @@ class PrayerScheduleWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12),
                           border: isActive
                               ? Border.all(
-                                  color: Colors.white.withOpacity(0.3), width: 1)
+                                  color: Colors.white.withOpacity(0.3),
+                                  width: 1,
+                                )
                               : null,
                         ),
                         child: Column(
                           children: [
                             Text(
-                              prayer.name,
+                              prayerNameMap[prayer.name] ?? prayer.name,
                               style: TextStyle(
                                 fontSize: context.mh * 0.011,
                                 color: Colors.white,

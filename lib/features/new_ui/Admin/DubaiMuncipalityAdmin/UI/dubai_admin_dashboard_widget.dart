@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:burzakh/core/app/di_container.dart';
@@ -180,13 +179,21 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
 
                           // Build a combined string of "Status for CaseName"
                           String statusAmbulance = "Not Assigned";
+                          String ambStatus = "Not Assigned";
                           if (data.dispatchedInfo != null &&
                               data.dispatchedInfo!.isNotEmpty) {
                             statusAmbulance =
                                 data.dispatchedInfo!.map((dispatch) {
-                              final status = dispatch.status;
                               final caseName = dispatch.caseName;
-                              return "$status for $caseName";
+                               final status = dispatch.status;
+                              return "$status For $caseName";
+                            }).join(", ");
+                          }
+                          if (data.dispatchedInfo != null &&
+                              data.dispatchedInfo!.isNotEmpty) {
+                            ambStatus = data.dispatchedInfo!.map((dispatch) {
+                              final caseName = dispatch.status;
+                              return "$caseName";
                             }).join(", ");
                           }
 
@@ -223,6 +230,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                               );
                             },
                             statusAmbulance: statusAmbulance,
+                            ambStatus: ambStatus,
                           );
                         },
                       );

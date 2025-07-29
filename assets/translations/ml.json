@@ -783,5 +783,14 @@
   "Visitor": "വിജിറ്റർ",
   "Ref: ": "റഫർ:",
   "Case ID: ": "കേസ് ഐഡി:",
-  "Dubai Muncipality": "ദുബായ് മുൻസിപ്പാലിറ്റി"
+  "Dubai Muncipality": "ദുബായ് മുൻസിപ്പാലിറ്റി",
+  "Case Process": "കേസ് പ്രോസസ്",
+  "sunni": "സുന്നി",
+  "shia": "ശിയ",
+  "sufi": "സൂഫി",
+  "other": "മറ്റുള്ളത്",
+  "Select Case": "കേസ് തിരഞ്ഞെടുക്കുക",
+  "Choose an existing case or create a new one": "ഒരു നിലവിലുള്ള കേസ് തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ ഒരു പുതിയത് സൃഷ്ടിക്കുക",
+  "Create New Case": "പുതിയ കേസ് സൃഷ്ടിക്കുക",
+  "Burzakh": "ബുഴക്ക്"
 }

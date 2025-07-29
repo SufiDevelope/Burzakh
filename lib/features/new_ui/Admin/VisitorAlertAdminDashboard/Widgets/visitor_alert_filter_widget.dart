@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/Controller/visitor_alert_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 class VistorFilterWidget extends StatelessWidget {
@@ -11,6 +12,11 @@ class VistorFilterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final VisitorAlertController controller =
         Get.find<VisitorAlertController>();
+    // Map for internal (English) keys → UI-translated labels
+    final Map<String, String> dayLabelMap = {
+      'Today': StringTranslateExtension("Today").tr(),
+      'Tomorrow': StringTranslateExtension('Tomorrow').tr(),
+    };
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: context.mw * 0.04),
@@ -19,14 +25,14 @@ class VistorFilterWidget extends StatelessWidget {
           children: [
             _buildSelectableButton(
               context,
-              label: 'Today',
+              label: dayLabelMap['Today']!,
               isSelected: controller.selectedDay.value == 'Today',
               onTap: () => controller.setSelectedDay('Today'),
             ),
             0.01.pw(context),
             _buildSelectableButton(
               context,
-              label: 'Tomorrow',
+              label: dayLabelMap['Tomorrow']!,
               isSelected: controller.selectedDay.value == 'Tomorrow',
               onTap: () => controller.setSelectedDay('Tomorrow'),
             ),

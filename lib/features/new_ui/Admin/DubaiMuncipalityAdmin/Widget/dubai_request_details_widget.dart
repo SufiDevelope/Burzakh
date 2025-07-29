@@ -54,6 +54,8 @@ class DubaiRequestDetailWidget extends StatelessWidget {
           passportOrEmirateIdBackUrl != null ||
           releaseFormUrl != null;
     }
+
+    
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(context.mw * 0.05),
@@ -288,6 +290,20 @@ class DubaiRequestDetailWidget extends StatelessWidget {
   }
 
   Widget _buildStatusBadge(BuildContext context) {
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'All':
+          return StringTranslateExtension('All').tr();
+        case 'pending':
+          return StringTranslateExtension('Pending').tr();
+        case 'approve':
+          return StringTranslateExtension('Approved').tr();
+        case 'rejected':
+          return StringTranslateExtension('Rejected').tr();
+        default:
+          return key;
+      }
+    }
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: context.mw * 0.04,
@@ -298,7 +314,7 @@ class DubaiRequestDetailWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        status,
+        _getLocalizedStatus(status),
         style: TextStyle(
           fontSize: context.mh * 0.014,
           color: Color(0xff856404),

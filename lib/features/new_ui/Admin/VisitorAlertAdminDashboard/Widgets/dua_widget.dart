@@ -177,7 +177,7 @@ class DuaWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            currentDua.category,
+                            StringTranslateExtension(currentDua.category).tr(),
                             style: TextStyle(
                               fontSize: context.mh * 0.014,
                               color: Color(0xFFad8443),
@@ -195,7 +195,7 @@ class DuaWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '${currentDua.source}',
+                              StringTranslateExtension('${currentDua.source}').tr(),
                               style: TextStyle(
                                 fontSize: context.mh * 0.014,
                                 color: Colors.grey[600],

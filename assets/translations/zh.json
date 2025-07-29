@@ -873,5 +873,14 @@
   "Visitor": "访客",
   "Ref: ": "参考：",
   "Case ID: ": "案例编号：",
-  "Dubai Muncipality": "迪拜市政府"
+  "Dubai Muncipality": "迪拜市政府",
+  "Case Process": "案件流程",
+  "sunni": "逊尼派",
+  "shia": "什叶派",
+  "sufi": "苏菲派",
+  "other": "其他",
+  "Select Case": "选择案件",
+  "Choose an existing case or create a new one": "选择现有案件或创建新案件",
+  "Create New Case": "创建新案件",
+  "Burzakh": "布尔扎克"
 }

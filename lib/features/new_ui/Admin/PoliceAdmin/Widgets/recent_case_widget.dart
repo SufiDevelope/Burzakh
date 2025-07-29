@@ -28,6 +28,30 @@ class RecentCaseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'all':
+          return 'All'.tr();
+        case 'pending':
+          return 'Pending'.tr();
+        case 'permit_issued':
+          return 'Permit Issued'.tr();
+        case 'schedule_call':
+          return 'Schedule Call'.tr();
+        case 'approved':
+          return 'Approval'.tr();
+        case 'new':
+          return 'New'.tr();
+        case 'rejected':
+          return 'Rejected'.tr();
+        case 'closed':
+          return 'Closed'.tr();
+        default:
+          return key.tr();
+      }
+    }
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(context.mw * 0.04),
@@ -87,7 +111,7 @@ class RecentCaseWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  status,
+                  _getLocalizedStatus(status),
                   style: TextStyle(
                     fontSize: context.mh * 0.014,
                     fontWeight: FontWeight.w500,

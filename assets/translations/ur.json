@@ -805,5 +805,14 @@
   "Visitor": "وزیٹر",
   "Ref: ": "حوالہ:",
   "Case ID: ": "کیس کی شناخت:",
-  "Dubai Muncipality":"دبئی میونسپلٹی"
+  "Dubai Muncipality":"دبئی میونسپلٹی",
+  "Case Process": "کیس کا عمل",
+  "sunni": "سنی",
+  "shia": "شیعہ",
+  "sufi": "صوفی",
+  "other": "دیگر",
+  "Select Case": "کیس منتخب کریں",
+  "Choose an existing case or create a new one": "ایک موجودہ کیس کا انتخاب کریں یا ایک نئی بنائیں",
+  "Create New Case": "نئی کیس بنائیں",
+  "Burzakh": "بُرزاخ"
 }

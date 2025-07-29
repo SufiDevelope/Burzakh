@@ -153,6 +153,21 @@ class CdaRequestDetailsWidget extends StatelessWidget {
     final Color badgeColor = statusBadgeColor ?? Colors.orange[100]!;
     final controller = Get.find<CdaController>();
 
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'All':
+          return StringTranslateExtension('All').tr();
+        case 'pending':
+          return StringTranslateExtension('Pending').tr();
+        case 'approved':
+          return StringTranslateExtension('Approved').tr();
+        case 'rejected':
+          return StringTranslateExtension('Rejected').tr();
+        default:
+          return key;
+      }
+    }
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(context.mw * 0.04),
@@ -243,7 +258,7 @@ class CdaRequestDetailsWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      statusBadgeText,
+                      _getLocalizedStatus(statusBadgeText),
                       style: TextStyle(
                         color: Colors.orange[800],
                         fontSize: context.mh * 0.011,
