@@ -905,7 +905,7 @@
   "Police Cleared": "تطهير الشرطة",
   "ASSIGN MORTICIAN": "تعيين نفيس",
   "Select Mortician": "حدد نفيس",
-  "Send WhatsApp": "إرسال WhatsApp",
+  "Send WhatsApp": "أرسل واتساب",
   "Call Family": "اتصل بالعائلة",
   "Send to Portal": "إرسال إلى البوابة",
   "Currently assigned": "مخصص حاليًا",
@@ -1070,5 +1070,14 @@
   "Jumeirah Mosque": "مسجد جميرا",
   "Al Farooq Omar Mosque": "مسجد الفاروق عمر",
   "Blue Mosque": "المسجد الأزرق",
-  "Zabeel Mosque": "مسجد زعبيل"
+  "Zabeel Mosque": "مسجد زعبيل",
+  "Confirmed": "مؤكد",
+  "Cancelled": "ملغى",
+  "Ghusal Completed": "الغسل مكتمل",
+  "Ghusal Started": "الغسل بدأ",
+  "High": "عالي",
+  "Medium": "متوسط",
+  "Low": "منخفض",
+  "No Schedule for Today": "لا يوجد جدول لليوم",
+  "You have no cases scheduled for today": "ليس لديك أي حالات مجدولة لهذا اليوم"
 }

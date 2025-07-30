@@ -54,6 +54,26 @@ class AmbulanceListCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ambulanceController = Get.find<AmbulanceController>();
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'All':
+          return StringTranslateExtension('All').tr();
+        case 'pending':
+          return StringTranslateExtension('Pending').tr();
+        case 'approve':
+          return StringTranslateExtension('Approved').tr();
+        case 'rejected':
+          return StringTranslateExtension('Rejected').tr();
+        case 'high':
+          return StringTranslateExtension('High').tr();
+        case 'medium':
+          return StringTranslateExtension('Medium').tr();
+        case 'low':
+          return StringTranslateExtension('Low').tr();
+        default:
+          return key;
+      }
+    }
 
     return Container(
       margin: EdgeInsets.symmetric(
@@ -147,7 +167,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      status,
+                      _getLocalizedStatus(status),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: context.mh * 0.014,
@@ -177,7 +197,7 @@ class AmbulanceListCardWidget extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      priority,
+                      _getLocalizedStatus(priority),
                       style: TextStyle(
                         color: priority == "High"
                             ? Colors.red

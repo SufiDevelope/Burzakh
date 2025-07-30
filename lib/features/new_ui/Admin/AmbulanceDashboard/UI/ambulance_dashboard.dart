@@ -469,7 +469,9 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
                                     ),
                                     SizedBox(height: 8),
                                     Text(
-                                      "No Schedule for Today",
+                                      StringTranslateExtension(
+                                              "No Schedule for Today")
+                                          .tr(),
                                       style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -478,7 +480,9 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
                                     ),
                                     SizedBox(height: 4),
                                     Text(
-                                      "You have no ambulance cases scheduled for today.",
+                                      StringTranslateExtension(
+                                              "You have no cases scheduled for today")
+                                          .tr(),
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.grey[500],

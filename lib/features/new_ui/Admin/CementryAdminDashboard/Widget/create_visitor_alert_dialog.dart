@@ -3,12 +3,33 @@ import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class CreateVisitorAlertDialog extends StatelessWidget {
   const CreateVisitorAlertDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<CementryController>();
+
+    final Map<String, String> genderMap = {
+      'Male': StringTranslateExtension("Male").tr(),
+      'Female': StringTranslateExtension("Female").tr(),
+    };
+
+    final Map<String, String> cemeteryMap = {
+      'Al Qusais Cemetery': StringTranslateExtension('Al Qusais Cemetery').tr(),
+      'Al Warqa Cemetery': StringTranslateExtension('Al Warqa Cemetery').tr(),
+      'Jumeirah Cemetery': StringTranslateExtension('Jumeirah Cemetery').tr(),
+      'Dubai Silicon Oasis Cemetery':
+          StringTranslateExtension('Dubai Silicon Oasis Cemetery').tr(),
+      'Other Cemetery': StringTranslateExtension('Other Cemetery').tr(),
+    };
+
+    final Map<String, String> statusMap = {
+      'Confirmed': StringTranslateExtension('Confirmed').tr(),
+      'Pending': StringTranslateExtension('Pending').tr(),
+      'Cancelled': StringTranslateExtension('Cancelled').tr(),
+    };
 
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -27,7 +48,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5),
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -39,19 +60,27 @@ class CreateVisitorAlertDialog extends StatelessWidget {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                 child: Column(
-                  spacing: context.mh * 0.02,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: context.mh * 0.02),
                     _buildNameEnglishField(controller, context),
-                    _buildGenderDropdown(controller, context),
-                    // _buildAlertTimeField(controller, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildGenderDropdown(controller, context, genderMap),
+                    SizedBox(height: context.mh * 0.02),
                     _buildAlertTimeDropdown(controller, context),
-                    _buildCemeteryLocationDropdown(controller, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildCemeteryLocationDropdown(
+                        controller, context, cemeteryMap),
+                    SizedBox(height: context.mh * 0.02),
                     _buildMosqueNameField(controller, context),
+                    SizedBox(height: context.mh * 0.02),
                     _buildDescriptionEnglishField(controller, context),
+                    SizedBox(height: context.mh * 0.02),
                     _buildDescriptionArabicField(controller, context),
-                    _buildStatusDropdown(controller, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildStatusDropdown(controller, context, statusMap),
+                    SizedBox(height: context.mh * 0.02),
                     _buildImportantAlertCheckbox(controller, context),
+                    SizedBox(height: context.mh * 0.02),
                     _buildActionButtons(controller, context),
                   ],
                 ),
@@ -68,7 +97,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
@@ -96,8 +125,8 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.close, color: Colors.red, size: 20),
-              padding: EdgeInsets.all(8),
-              constraints: BoxConstraints(minWidth: 36, minHeight: 36),
+              padding: const EdgeInsets.all(8),
+              constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
             ),
           ),
         ],
@@ -113,26 +142,6 @@ class CreateVisitorAlertDialog extends StatelessWidget {
       context: context,
     );
   }
-
-  // Widget _buildNameArabicField(
-  //     CementryController controller, BuildContext context) {
-  //   return _buildTextField(
-  //     label: 'Name (Arabic)',
-  //     controller: controller.nameArabicController,
-  //     textDirection: TextDirection.rtl,
-  //     context: context,
-  //   );
-  // }
-
-  // Widget _buildAlertTimeField(
-  //     CementryController controller, BuildContext context) {
-  //   return _buildTextField(
-  //     label: 'Alert Time',
-  //     controller: controller.alertTimeController,
-  //     textDirection: TextDirection.ltr,
-  //     context: context,
-  //   );
-  // }
 
   Widget _buildMosqueNameField(
       CementryController controller, BuildContext context) {
@@ -213,34 +222,34 @@ class CreateVisitorAlertDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildGenderDropdown(
-      CementryController controller, BuildContext context) {
+  Widget _buildGenderDropdown(CementryController controller,
+      BuildContext context, Map<String, String> genderMap) {
     return _buildDropdown(
       label: 'Gender',
       value: controller.selectedGender,
-      items: controller.genderOptions,
+      items: genderMap,
       onChanged: (value) => controller.selectedGender.value = value!,
       context: context,
     );
   }
 
-  Widget _buildCemeteryLocationDropdown(
-      CementryController controller, BuildContext context) {
+  Widget _buildCemeteryLocationDropdown(CementryController controller,
+      BuildContext context, Map<String, String> cemeteryMap) {
     return _buildDropdown(
       label: 'Cemetery Location',
       value: controller.selectedCemeteryLocation,
-      items: controller.cemeteryOptions,
+      items: cemeteryMap,
       onChanged: (value) => controller.selectedCemeteryLocation.value = value!,
       context: context,
     );
   }
 
-  Widget _buildStatusDropdown(
-      CementryController controller, BuildContext context) {
+  Widget _buildStatusDropdown(CementryController controller,
+      BuildContext context, Map<String, String> statusMap) {
     return _buildDropdown(
       label: 'Status',
       value: controller.selectedStatus,
-      items: controller.statusOptions,
+      items: statusMap,
       onChanged: (value) => controller.selectedStatus.value = value!,
       context: context,
     );
@@ -249,7 +258,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
   Widget _buildDropdown({
     required String label,
     required RxString value,
-    required List<String> items,
+    required Map<String, String> items,
     required Function(String?) onChanged,
     required BuildContext context,
   }) {
@@ -266,7 +275,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Obx(() => DropdownButtonFormField<String>(
-              value: value.value,
+              value: items.keys.contains(value.value) ? value.value : null,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
@@ -285,11 +294,11 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.grey.shade50,
               ),
-              items: items.map((String item) {
+              items: items.entries.map((entry) {
                 return DropdownMenuItem<String>(
-                  value: item,
+                  value: entry.key,
                   child: Text(
-                    item,
+                    entry.value,
                     style: TextStyle(
                       fontSize: context.mh * 0.015,
                       color: Colors.black87,
@@ -324,7 +333,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                 ),
               ),
             ),
-            0.01.pw(context),
+            SizedBox(width: context.mw * 0.01),
             Text(
               StringTranslateExtension('Mark as Important Alert').tr(),
               style: TextStyle(
@@ -363,7 +372,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
               ),
             ),
           ),
-          0.02.pw(context),
+          SizedBox(width: context.mw * 0.02),
           ElevatedButton(
             onPressed: () {
               controller.sendVisitorAlertApi(context);
@@ -398,6 +407,13 @@ class CreateVisitorAlertDialog extends StatelessWidget {
 
   Widget _buildAlertTimeDropdown(
       CementryController controller, BuildContext context) {
+    // Create a map for alert time options with translated values
+    final Map<String, String> alertTimeMap = {
+      for (String option in controller.alertTimeOptions)
+        option: StringTranslateExtension(option).tr(),
+      'Custom Time': StringTranslateExtension('Custom Time').tr(),
+    };
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -414,7 +430,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DropdownButtonFormField<String>(
-                  value: controller.alertTimeOptions
+                  value: alertTimeMap.keys
                           .contains(controller.selectedAlertTime.value)
                       ? controller.selectedAlertTime.value
                       : 'Custom Time',
@@ -434,11 +450,11 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                     }
                     controller.selectedAlertTime.value = value!;
                   },
-                  items: controller.alertTimeOptions.map((String item) {
+                  items: alertTimeMap.entries.map((entry) {
                     return DropdownMenuItem<String>(
-                      value: item,
+                      value: entry.key,
                       child: Text(
-                        item,
+                        entry.value,
                         style: TextStyle(
                           fontSize: context.mh * 0.015,
                           color: Colors.black87,
@@ -473,7 +489,7 @@ class CreateVisitorAlertDialog extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Text(
-                      'Selected Time: ${controller.customAlertTime.value}',
+                      '${StringTranslateExtension("Selected Time").tr()}: ${controller.customAlertTime.value}',
                       style: TextStyle(
                         fontSize: context.mh * 0.015,
                         color: Colors.blueGrey,

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/Response/status.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CementryAdminDashboard extends StatefulWidget {
   final String name;
@@ -64,16 +65,16 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
         height: context.mh,
         width: context.mw,
         decoration: const BoxDecoration(
-          // gradient: RadialGradient(
-          //   center: Alignment.topCenter,
-          //   radius: 2.0,
-          //   colors: [
-          //     Color(0xFFF8FAFC),
-          //     Color(0xFFE2E8F0),
-          //     Color(0xFFCBD5E1),
-          //   ],
-          // ),
-        ),
+            // gradient: RadialGradient(
+            //   center: Alignment.topCenter,
+            //   radius: 2.0,
+            //   colors: [
+            //     Color(0xFFF8FAFC),
+            //     Color(0xFFE2E8F0),
+            //     Color(0xFFCBD5E1),
+            //   ],
+            // ),
+            ),
         child: RefreshIndicator(
           onRefresh: () async {
             controller.getAllCementryRequest();
@@ -83,8 +84,9 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
           },
           child: SafeArea(
             child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: Obx(() {
+              physics: AlwaysScrollableScrollPhysics(),
+              child: Obx(
+                () {
                   switch (
                       controller.rxRequestStatusForAllCementryRequest.value) {
                     case Status.loading:
@@ -100,11 +102,13 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                                 searchHint: "Search by name or case ID...",
                                 dropdownValue:
                                     controller.selectedFilterText.value,
-                                dropdownItems: [
-                                  "All",
-                                  "Pending",
-                                  "Assigned",
-                                ],
+                                dropdownItems: {
+                                  "All": StringTranslateExtension("All").tr(),
+                                  "Pending":
+                                      StringTranslateExtension("Pending").tr(),
+                                  "Assigned":
+                                      StringTranslateExtension("Assigned").tr(),
+                                },
                                 searchController: _searchController,
                                 onSearchChanged: (value) {
                                   controller
@@ -204,7 +208,9 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                     default:
                       return SizedBox.shrink();
                   }
-                })),
+                },
+              ),
+            ),
           ),
         ),
       ),

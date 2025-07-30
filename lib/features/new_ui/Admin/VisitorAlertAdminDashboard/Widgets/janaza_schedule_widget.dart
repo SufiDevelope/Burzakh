@@ -131,7 +131,7 @@ class JanazaScheduleCardWidget extends StatelessWidget {
                 ),
               ),
               child: Text(
-                timeLabel,
+                StringTranslateExtension(timeLabel).tr(),
                 style: TextStyle(
                   fontSize: context.mh * 0.016,
                   color: isToday ? Color(0xFF228B22) : Color(0xFF556B2F),

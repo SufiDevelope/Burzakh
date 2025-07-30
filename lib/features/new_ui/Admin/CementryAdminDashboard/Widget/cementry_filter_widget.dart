@@ -1,10 +1,11 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class CementryFilterWidget extends StatefulWidget {
   final String searchHint;
   final String dropdownValue;
-  final List<String> dropdownItems;
+  final Map<String, String> dropdownItems;
   final ValueChanged<String>? onSearchChanged;
   final ValueChanged<String>? onDropdownChanged;
   final TextEditingController? searchController;
@@ -12,7 +13,7 @@ class CementryFilterWidget extends StatefulWidget {
   const CementryFilterWidget({
     super.key,
     this.searchHint = "Search by name or case ID...",
-    this.dropdownValue = "All Cases",
+    this.dropdownValue = "All",
     required this.dropdownItems,
     this.onSearchChanged,
     this.onDropdownChanged,
@@ -122,7 +123,7 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                 ),
               ),
 
-              0.02.ph(context),
+              SizedBox(height: context.mh * 0.02),
 
               // Dropdown
               Container(
@@ -144,7 +145,9 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
-                    value: _selectedDropdownValue,
+                    value: widget.dropdownItems.keys.contains(_selectedDropdownValue) 
+                        ? _selectedDropdownValue 
+                        : null,
                     isExpanded: true,
                     icon: Icon(
                       Icons.keyboard_arrow_down,
@@ -159,15 +162,15 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                     dropdownColor: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     elevation: 8,
-                    items: widget.dropdownItems.map((String item) {
+                    items: widget.dropdownItems.entries.map((entry) {
                       return DropdownMenuItem<String>(
-                        value: item,
+                        value: entry.key,
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: context.mw * 0.04,
                           ),
                           child: Text(
-                            item,
+                            entry.value,
                             style: TextStyle(
                               fontSize: context.mh * 0.018,
                               fontWeight: FontWeight.w500,
@@ -186,14 +189,14 @@ class _CementryFilterWidgetState extends State<CementryFilterWidget> {
                       }
                     },
                     selectedItemBuilder: (BuildContext context) {
-                      return widget.dropdownItems.map((String item) {
+                      return widget.dropdownItems.entries.map((entry) {
                         return Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.symmetric(
                             horizontal: context.mw * 0.04,
                           ),
                           child: Text(
-                            StringTranslateExtension(item).tr(),
+                            entry.value,
                             style: TextStyle(
                               fontSize: context.mh * 0.018,
                               fontWeight: FontWeight.w600,

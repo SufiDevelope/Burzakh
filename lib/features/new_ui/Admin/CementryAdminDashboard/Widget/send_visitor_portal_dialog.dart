@@ -2,6 +2,7 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Controller/cementry_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SendtoVisitorAlertDialog extends StatefulWidget {
   final String? nameEnglish;
@@ -68,6 +69,14 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, String> genderMap = {
+      for (String option in controller.genderOptions) option: option,
+    };
+
+    final Map<String, String> statusMap = {
+      for (String option in controller.statusOptions) option: option,
+    };
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: Colors.transparent,
@@ -81,7 +90,7 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               blurRadius: 10,
-              offset: Offset(0, 5),
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -93,29 +102,33 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                 child: Column(
-                  spacing: context.mh * 0.02,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildTextField('Name (English)', nameEnglishController,
-                        TextDirection.ltr, context),
-                    _buildGenderDropdown(context),
-                    _buildTextField('Alert Time', alertTimeController,
-                        TextDirection.ltr, context),
-                    _buildTextField('Cemetery Location',
-                        cemeteryLoactionController, TextDirection.ltr, context),
-                    _buildTextField('Mosque Name', mosqueNameController,
-                        TextDirection.ltr, context),
+                    SizedBox(height: context.mh * 0.02),
                     _buildTextField(
-                        'Description (English)',
-                        descriptionEnglishController,
-                        TextDirection.ltr,
-                        context,
+                        'Name (English)', nameEnglishController, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildGenderDropdown(context, genderMap),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildTextField('Alert Time', alertTimeController, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildTextField('Cemetery Location',
+                        cemeteryLoactionController, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildTextField(
+                        'Mosque Name', mosqueNameController, context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildTextField('Description (English)',
+                        descriptionEnglishController, context,
                         maxLines: 3),
+                    SizedBox(height: context.mh * 0.02),
                     _buildTextField('Description (Arabic)',
-                        descriptionArabicController, TextDirection.rtl, context,
+                        descriptionArabicController, context,
                         maxLines: 3),
-                    _buildStatusDropdown(context),
+                    SizedBox(height: context.mh * 0.02),
+                    _buildStatusDropdown(context, statusMap),
+                    SizedBox(height: context.mh * 0.02),
                     _buildImportantAlertCheckbox(context),
+                    SizedBox(height: context.mh * 0.02),
                     _buildActionButtons(context, controller),
                   ],
                 ),
@@ -132,7 +145,7 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.grey.shade50,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
@@ -160,8 +173,8 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.close, color: Colors.red, size: 20),
-              padding: EdgeInsets.all(8),
-              constraints: BoxConstraints(minWidth: 36, minHeight: 36),
+              padding: const EdgeInsets.all(8),
+              constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
             ),
           ),
         ],
@@ -169,18 +182,17 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller,
-      TextDirection direction, BuildContext context,
+  Widget _buildTextField(
+      String label, TextEditingController controller, BuildContext context,
       {int maxLines = 1}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+        Text(StringTranslateExtension(label).tr(),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
         const SizedBox(height: 8),
         TextField(
           controller: controller,
-          textDirection: direction,
           maxLines: maxLines,
           style: TextStyle(fontSize: context.mh * 0.015),
           decoration: InputDecoration(
@@ -209,33 +221,49 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
   Widget _buildDropdown({
     required String label,
     required RxString value,
-    required List<String> items,
+    required Map<String, String> items,
     required Function(String?) onChanged,
     required BuildContext context,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
+        Text(StringTranslateExtension(label).tr(),
             style: TextStyle(
                 fontSize: context.mh * 0.015, fontWeight: FontWeight.w500)),
         const SizedBox(height: 8),
         Obx(() => DropdownButtonFormField<String>(
-              value: value.value,
+              value: items.keys.contains(value.value) ? value.value : null,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(6),
                   borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(color: Colors.grey.shade300),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                  borderSide: BorderSide(color: Colors.blue.shade400, width: 2),
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 filled: true,
                 fillColor: Colors.grey.shade50,
               ),
-              items: items
-                  .map((item) =>
-                      DropdownMenuItem(value: item, child: Text(item)))
-                  .toList(),
+              items: items.entries.map((entry) {
+                return DropdownMenuItem<String>(
+                  value: entry.key,
+                  child: Text(
+                    StringTranslateExtension(entry.value).tr(),
+                    style: TextStyle(
+                      fontSize: context.mh * 0.015,
+                      color: Colors.black87,
+                    ),
+                  ),
+                );
+              }).toList(),
               onChanged: onChanged,
               icon:
                   Icon(Icons.keyboard_arrow_down, color: Colors.grey.shade600),
@@ -244,31 +272,23 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
     );
   }
 
-  Widget _buildGenderDropdown(BuildContext context) {
+  Widget _buildGenderDropdown(
+      BuildContext context, Map<String, String> genderMap) {
     return _buildDropdown(
       label: 'Gender',
       value: controller.selectedGender,
-      items: controller.genderOptions,
+      items: genderMap,
       onChanged: (val) => controller.selectedGender.value = val!,
       context: context,
     );
   }
 
-  // Widget _buildCemeteryLocationDropdown(BuildContext context) {
-  //   return _buildDropdown(
-  //     label: 'Cemetery Location',
-  //     value: controller.selectedCemeteryLocation,
-  //     items: controller.cemeteryOptions,
-  //     onChanged: (val) => controller.selectedCemeteryLocation.value = val!,
-  //     context: context,
-  //   );
-  // }
-
-  Widget _buildStatusDropdown(BuildContext context) {
+  Widget _buildStatusDropdown(
+      BuildContext context, Map<String, String> statusMap) {
     return _buildDropdown(
       label: 'Status',
       value: controller.selectedStatus,
-      items: controller.statusOptions,
+      items: statusMap,
       onChanged: (val) => controller.selectedStatus.value = val!,
       context: context,
     );
@@ -288,8 +308,8 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
                     borderRadius: BorderRadius.circular(3)),
               ),
             ),
-            0.01.pw(context),
-            Text('Mark as Important Alert',
+            SizedBox(width: context.mw * 0.01),
+            Text(StringTranslateExtension('Mark as Important Alert').tr(),
                 style: TextStyle(fontSize: context.mh * 0.015)),
           ],
         ));
@@ -302,11 +322,11 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
           children: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel',
+              child: Text(StringTranslateExtension('Cancel').tr(),
                   style: TextStyle(
                       color: Colors.grey, fontSize: context.mh * 0.015)),
             ),
-            0.02.pw(context),
+            SizedBox(width: context.mw * 0.02),
             ElevatedButton(
               onPressed: () {
                 if (nameEnglishController.text.isEmpty ||
@@ -338,7 +358,7 @@ class _SendtoVisitorAlertDialogState extends State<SendtoVisitorAlertDialog> {
               child: controller.publishLoading.value
                   ? const CircularProgressIndicator(
                       color: Colors.white, strokeWidth: 2)
-                  : Text('Publish Alert',
+                  : Text(StringTranslateExtension('Publish Alert').tr(),
                       style: TextStyle(fontSize: context.mh * 0.015)),
             ),
           ],

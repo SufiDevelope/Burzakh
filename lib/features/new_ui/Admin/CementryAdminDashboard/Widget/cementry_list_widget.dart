@@ -70,6 +70,25 @@ class CementryListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<CementryController>();
     log(controller.isMorticainEdited.value.toString());
+    String _getLocalizedStatus(String key) {
+      switch (key.toLowerCase()) {
+        case 'All':
+          return StringTranslateExtension('All').tr();
+        case 'pending':
+          return StringTranslateExtension('Pending').tr();
+        case 'approve':
+          return StringTranslateExtension('Approved').tr();
+        case 'rejected':
+          return StringTranslateExtension('Rejected').tr();
+        case 'ghusal-completed':
+          return StringTranslateExtension('Ghusal Completed').tr();
+        case 'ghusal-started':
+          return StringTranslateExtension('Ghusal Started').tr();
+        default:
+          return key;
+      }
+    }
+
     return Container(
       height: mortiId != null ? context.mh * 0.85 : context.mh * 0.75,
       width: context.mw,
@@ -219,7 +238,7 @@ class CementryListWidget extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                status.toUpperCase(),
+                                _getLocalizedStatus(status),
                                 style: TextStyle(
                                   fontSize: context.mh * 0.013,
                                   color: Color(0xff243b53),
