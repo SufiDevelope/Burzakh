@@ -4,12 +4,12 @@ import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Controller/rta_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_chat_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_map_view.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/reject_reason_dialog.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/rta_request_details_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class RtaRequestDetailView extends StatefulWidget {
   final int requestId;
@@ -69,7 +69,6 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                       Status.completed) {
                     final dataList =
                         controller.rtaDetailsModel.value.data ?? [];
-
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -83,8 +82,7 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                           statusBadgeText: data.status ?? "",
                           name:
                               "${data.user?.firstName} ${data.user?.lastName}",
-                          caseId:
-                              "BUR-${DateTime.now().year}-${data.id ?? ""}",
+                          caseId: "BUR-${DateTime.now().year}-${data.id ?? ""}",
                           submittedDate: DateFormat('yyyy-MM-dd').format(
                             DateTime.parse(data.createdAt ??
                                 DateTime.now().toIso8601String()),
@@ -116,9 +114,18 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                                 ));
                           },
                           onMapTap: () {
-                            Uri url = Uri.parse(
-                                "https://www.google.com/maps/search/?api=1&query=${data.locationOfHouse}");
-                            launchUrl(url);
+                            // Uri url = Uri.parse(
+                            //     "https://www.google.com/maps/search/?api=1&query=${data.locationOfHouse}");
+                            // launchUrl(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RtaMapView(
+                                  lat: data.latitude,
+                                  long: data.longitude,
+                                ),
+                              ),
+                            );
                           },
                           nameOfDeceased:
                               data.caseDetail?[index].nameOfDeceased ?? "",
@@ -148,6 +155,8 @@ class _RtaRequestDetailViewState extends State<RtaRequestDetailView> {
                           passportDocumentUrl: data.caseDetail?[index]
                                   .passportOrEmirateIdFront ??
                               "",
+                          lat: data.latitude,
+                          long: data.longitude,
                         );
                       },
                     );

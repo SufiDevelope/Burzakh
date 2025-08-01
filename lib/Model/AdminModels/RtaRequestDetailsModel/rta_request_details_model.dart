@@ -38,6 +38,8 @@ class RequestDetailsData {
   User? user;
   List<CaseDetail>? caseDetail;
   String? mourningEndDate;
+  dynamic latitude;
+  dynamic longitude;
 
   RequestDetailsData(
       {this.id,
@@ -51,7 +53,7 @@ class RequestDetailsData {
       this.createdAt,
       this.updatedAt,
       this.user,
-      this.caseDetail, this.mourningEndDate});
+      this.caseDetail, this.mourningEndDate, this.latitude, this.longitude});
 
   RequestDetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -72,6 +74,8 @@ class RequestDetailsData {
       });
     }
     mourningEndDate = json['mourning_end_date'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
   }
 
   Map<String, dynamic> toJson() {
@@ -93,6 +97,8 @@ class RequestDetailsData {
       data['case_details'] = this.caseDetail!.map((v) => v.toJson()).toList();
     }
     data['mourning_end_date'] = this.mourningEndDate;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     return data;
   }
 }

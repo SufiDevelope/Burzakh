@@ -28,6 +28,8 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
   DateTime? mourningEndDate = DateTime.now();
   TimeOfDay? time = TimeOfDay.now();
   String? userLocation;
+  String? latitude;
+  String? longitude;
   CdaGetModel? cdaGetModel;
   RtaGetModel? rtaGetModel;
   bool isCdaLoading = false;
@@ -85,6 +87,8 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
   }
 
   TextEditingController locationController = TextEditingController();
+  TextEditingController latController = TextEditingController();
+  TextEditingController longController = TextEditingController();
 
   Future<void> getCurrentLocation() async {
     await Permission.location.isGranted;
@@ -136,6 +140,13 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
     userLocation =
         "${address.subLocality} ${address.locality} ${address.administrativeArea} ${address.postalCode} ${address.country}";
     locationController.text = userLocation ?? "";
+
+    latitude = location.latitude.toString();
+    longitude = location.longitude.toString();
+
+    latController.text = latitude ?? "";
+    longController.text = longitude ?? "";
+
     emit(EmirateSvcsLoaded());
   }
 
@@ -223,6 +234,8 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
       userId: _authenticationCubit.userModel!.id.toString(),
       case_name: selectedCaseName ?? "",
       mourningEndDate: mourningEndDate,
+      latitude: latitude,
+      longitude: longitude,
     );
     var response = await _useCase.uploadCda(model: model);
     if (response is Left) {
@@ -279,7 +292,8 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
       dateTime: mourningStartDate!,
       userId: _authenticationCubit.userModel!.id.toString(),
       mourningEndDate: mourningEndDate!,
-      case_name: selectedCaseName!,
+      case_name: selectedCaseName!, latitude: latitude,
+      longitude: longitude,
     );
     var response = await _useCase.uploadRta(model: model);
     if (response is Left) {

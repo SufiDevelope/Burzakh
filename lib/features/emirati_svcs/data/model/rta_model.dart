@@ -11,6 +11,8 @@ class RtaModel {
   String customSign;
   DateTime mourningEndDate;
   String case_name;
+  dynamic latitude;
+  dynamic longitude;
 
   RtaModel({
     required this.address,
@@ -20,7 +22,9 @@ class RtaModel {
     required this.customSign,
     required this.requiredSign,
     required this.mourningEndDate,
-    required this.case_name
+    required this.case_name,
+     this.latitude,
+     this.longitude,
   });
 
   factory RtaModel.fromJson(Map<String, dynamic> json) {
@@ -32,7 +36,9 @@ class RtaModel {
       dateTime: DateTime.parse(json['dateTime']),
       userId: json['user_id'],
       mourningEndDate: DateTime.parse(json['mourning_end_date']),
-      case_name: json['case_name']
+      case_name: json['case_name'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
     );
   }
 
@@ -45,7 +51,9 @@ class RtaModel {
       'mourning_start_date': dateTime.toString(),
       'user_id': userId,
       'mourning_end_date': mourningEndDate.toString(),
-      'case_name': case_name
+      'case_name': case_name,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

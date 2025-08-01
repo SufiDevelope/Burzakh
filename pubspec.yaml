@@ -89,6 +89,7 @@ dependencies:
   # zego_uikit_signaling_plugin: ^2.8.2
   rename: ^3.1.0
   zego_zim: ^2.21.1+1
+  google_maps_flutter: ^2.12.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

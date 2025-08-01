@@ -247,6 +247,56 @@ class _TentRequestSheetState extends State<TentRequestSheet> {
                       readOnly: false,
                       sufixIcon: AppAssets.locationPinIcon,
                     ),
+                     SizedBox(
+                      height: commonHeightM1,
+                    ),
+                     Text(
+                      'Longitude'.tr(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF5F5A51),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextFormField(
+                      maxLines: 1,
+                      borderColor: AppColor.fieldYellowBorder(),
+                      hintTextStyle: AppTextStyle.fieldTextStyle(),
+                      controller: _emiratiScvCubit.latController,
+                      subTitle: _emiratiScvCubit.userLocation != null
+                          ? "${_emiratiScvCubit.userLocation}"
+                          : 'Precise location of the tent',
+                      readOnly: true,
+                      sufixIcon: AppAssets.locationPinIcon,
+                    ),
+                     SizedBox(
+                      height: commonHeightM1,
+                    ),
+                     Text(
+                      'Latitude'.tr(),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF5F5A51),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextFormField(
+                      maxLines: 1,
+                      borderColor: AppColor.fieldYellowBorder(),
+                      hintTextStyle: AppTextStyle.fieldTextStyle(),
+                      controller: _emiratiScvCubit.longController,
+                      subTitle: _emiratiScvCubit.userLocation != null
+                          ? "${_emiratiScvCubit.userLocation}"
+                          : 'Precise location of the tent',
+                      readOnly: true,
+                      sufixIcon: AppAssets.locationPinIcon,
+                    ),
                     SizedBox(
                       height: commonHeightM1,
                     ),

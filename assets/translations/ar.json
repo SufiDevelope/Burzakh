@@ -1079,5 +1079,9 @@
   "Medium": "متوسط",
   "Low": "منخفض",
   "No Schedule for Today": "لا يوجد جدول لليوم",
-  "You have no cases scheduled for today": "ليس لديك أي حالات مجدولة لهذا اليوم"
+  "You have no cases scheduled for today": "ليس لديك أي حالات مجدولة لهذا اليوم",
+  "No Preview Available": "لا يوجد معاينة متاحة",
+  "Latitude": "خط العرض: ",
+  "Longitude": "خط الطول: ",
+  "Map View": "عرض الخريطة"
 }

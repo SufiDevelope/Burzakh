@@ -6,6 +6,7 @@ import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Controller/cda_controller.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_chat_view.dart';
+import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_map_view.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Widgets/cda_details_widget.dart';
 import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Widgets/reject_reason_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -116,9 +117,18 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                                   ));
                             },
                             onMapTap: () {
-                              Uri url = Uri.parse(
-                                  "https://www.google.com/maps/search/?api=1&query=${data?.locationOfTent}");
-                              launchUrl(url);
+                              // Uri url = Uri.parse(
+                              //     "https://www.google.com/maps/search/?api=1&query=${data?.locationOfTent}");
+                              // launchUrl(url);
+                               Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CdaMapView(
+                                  lat: data?.latitude,
+                                  long: data?.longitude,
+                                ),
+                              ),
+                            );
                             },
                             signText: '',
                             location: data?.locationOfTent ?? '',
@@ -158,6 +168,8 @@ class _CdaRequestDetailViewState extends State<CdaRequestDetailView> {
                             passportDocumentUrl: data?.caseDetail?[index]
                                     .passportOrEmirateIdFront ??
                                 "",
+                            lat: data?.latitude ?? "",
+                            long: data?.longitude ?? "",
                             
                           );
                         }),

@@ -80,5 +80,17 @@
 	<string>We require camera access to connect to a call</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We require microphone access to connect to a call</string>
+	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
+	<string>App app want's to access your location to get address</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App app want's to access your location to get address.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App app want's to access your location to get address.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string> App want's to access your location to get address.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+  		<string>location</string>
+	</array>
 </dict>
 </plist>

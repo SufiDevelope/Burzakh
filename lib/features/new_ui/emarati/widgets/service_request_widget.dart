@@ -66,7 +66,7 @@ class ServiceRequestWidget extends StatelessWidget {
                       AppText(
                         text: text1,
                         overflow: TextOverflow.ellipsis,
-                        fontSize: context.mh * 0.013,
+                        fontSize: context.mh * 0.011,
                         fontFamily: 'ns',
                         fontWeight: FontWeight.w500,
                         color: AppColor.black(),

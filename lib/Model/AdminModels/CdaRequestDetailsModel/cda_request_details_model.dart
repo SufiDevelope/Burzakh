@@ -39,6 +39,8 @@ class CdaRequestData {
 
   List<CaseDetail>? caseDetail;
   String? mourning_end_date;
+  dynamic latitude;
+  dynamic longitude;
   CdaRequestData(
       {this.id,
       this.mourningStartDate,
@@ -50,7 +52,7 @@ class CdaRequestData {
       this.updatedAt,
       this.user,
       this.caseDetail,
-      this.mourning_end_date});
+      this.mourning_end_date, this.latitude, this.longitude});
 
   CdaRequestData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -69,6 +71,8 @@ class CdaRequestData {
       });
     }
     mourning_end_date = json['mourning_end_date'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
   }
 
   Map<String, dynamic> toJson() {
@@ -88,6 +92,8 @@ class CdaRequestData {
       data['case_details'] = this.caseDetail!.map((v) => v.toJson()).toList();
     }
     data['mourning_end_date'] = this.mourning_end_date;
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     return data;
   }
 }

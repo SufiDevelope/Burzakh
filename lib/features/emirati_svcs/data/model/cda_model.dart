@@ -5,6 +5,8 @@ class CdaModel {
   String userId;
   String case_name;
   DateTime? mourningEndDate;
+  dynamic latitude;
+  dynamic longitude;
 
   CdaModel({
     required this.address,
@@ -13,6 +15,8 @@ class CdaModel {
     required this.userId,
     required this.case_name,
     this.mourningEndDate,
+    this.latitude,
+    this.longitude,
   });
 
   factory CdaModel.fromJson(Map<String, dynamic> json) {
@@ -25,6 +29,9 @@ class CdaModel {
       mourningEndDate: json['mourning_end_date'] != null
           ? DateTime.parse(json['mourning_end_date'])
           : null,
+
+      latitude: json['latitude'],
+      longitude: json['longitude'],
     );
   }
 
@@ -37,6 +44,8 @@ class CdaModel {
       'case_name': case_name,
       'mourning_end_date':
           mourningEndDate != null ? mourningEndDate!.toString() : null,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

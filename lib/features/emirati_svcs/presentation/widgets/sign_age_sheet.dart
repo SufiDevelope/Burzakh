@@ -3,10 +3,7 @@
 import 'dart:ui';
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/app_widgets_size.dart';
-import 'package:burzakh/features/case/presentation/widgets/submission_recieved_dialog.dart';
-import 'package:burzakh/features/home/presentation/widgets/call_dialog.dart';
 import 'package:burzakh/widgets/app_text.dart';
-import 'package:burzakh/widgets/custom_radio_button.dart';
 import 'package:burzakh/widgets/custom_text_form.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -263,6 +260,56 @@ class _SignAgeSheetState extends State<SignAgeSheet> {
                               ? "${_emiratiScvCubit.userLocation}"
                               : 'Precise location of the tent',
                           readOnly: false,
+                          sufixIcon: AppAssets.locationPinIcon,
+                        ),
+                        SizedBox(
+                          height: commonHeightS,
+                        ),
+                        Text(
+                          'Latitude'.tr(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF5F5A51),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        CustomTextFormField(
+                          borderColor: AppColor.fieldYellowBorder(),
+                          hintTextStyle: AppTextStyle.hintTextStyleWithFont(),
+                          maxLines: 1,
+                          controller: _emiratiScvCubit.latController,
+                          subTitle: _emiratiScvCubit.userLocation != null
+                              ? "${_emiratiScvCubit.userLocation}"
+                              : 'Precise location of the tent',
+                          readOnly: true,
+                          sufixIcon: AppAssets.locationPinIcon,
+                        ),
+                        SizedBox(
+                          height: commonHeightS,
+                        ),
+                        Text(
+                          'Longitude'.tr(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF5F5A51),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        CustomTextFormField(
+                          borderColor: AppColor.fieldYellowBorder(),
+                          hintTextStyle: AppTextStyle.hintTextStyleWithFont(),
+                          maxLines: 1,
+                          controller: _emiratiScvCubit.longController,
+                          subTitle: _emiratiScvCubit.userLocation != null
+                              ? "${_emiratiScvCubit.userLocation}"
+                              : 'Precise location of the tent',
+                          readOnly: true,
                           sufixIcon: AppAssets.locationPinIcon,
                         ),
                         SizedBox(
