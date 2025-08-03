@@ -27,7 +27,8 @@ const dashboardcolor = Color(0xFF6B7A8F);
 
 class DubaiAdminDashboardView extends StatefulWidget {
   final String name;
-  const DubaiAdminDashboardView({super.key, required this.name});
+  final bool flag;
+  const DubaiAdminDashboardView({super.key, required this.name, required this.flag});
 
   @override
   State<DubaiAdminDashboardView> createState() =>
@@ -92,7 +93,7 @@ class _DubaiAdminDashboardViewState extends State<DubaiAdminDashboardView> {
                 },
                 onAmbulancePressed: () {
                   controller.selectedIndex.value = 3;
-                },
+                }, flag: widget.flag,
               ),
               StatusBarWidgetDubai(
                 tabs: <TabItem>[

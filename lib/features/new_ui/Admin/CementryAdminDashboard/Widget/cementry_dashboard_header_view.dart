@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/Widget/create_visitor_alert_dialog.dart';
@@ -11,11 +13,13 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
   final String initails;
   final String adminname;
   final VoidCallback? onLogoutPressed;
+  final bool flag;
   const CementryDashboardHeaderWidget(
       {super.key,
       required this.initails,
       required this.adminname,
-      this.onLogoutPressed});
+      this.onLogoutPressed,
+      required this.flag});
 
   void _showLogoutBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -201,6 +205,18 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Platform.isIOS
+                          ? Icons.arrow_back_ios_new
+                          : Icons.arrow_back,
+                    ),
+                  )
+                : Container(),
             // Left Side - Title Section
             Expanded(
               flex: 2,

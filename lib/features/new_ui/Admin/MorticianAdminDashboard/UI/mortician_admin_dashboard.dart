@@ -15,11 +15,12 @@ import 'package:easy_localization/easy_localization.dart';
 
 class MorticianAdminDashboard extends StatefulWidget {
   final String id, name, phoneNo;
+  final bool flag;
   const MorticianAdminDashboard({
     super.key,
     required this.id,
     required this.name,
-    required this.phoneNo,
+    required this.phoneNo, required this.flag,
   });
 
   @override
@@ -60,6 +61,7 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
             physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
+                0.02.ph(context),
                 MorticianDashboardHeaderWidget(
                   title: widget.name,
                   subtitle: 'Mortician Dashboard',
@@ -82,7 +84,7 @@ class _MorticianAdminDashboardState extends State<MorticianAdminDashboard> {
                         MaterialPageRoute(builder: (context) {
                       return MorticianNotifs();
                     }));
-                  },
+                  }, flag: widget.flag,
                 ),
                 Obx(() {
                   switch (

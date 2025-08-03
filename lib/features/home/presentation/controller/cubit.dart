@@ -63,7 +63,7 @@ class HomeCubit extends Cubit<HomeState> {
     recentActivity();
     _emiratiScvCubit.getCdaModel();
     var response = await _useCase.getCases(
-        userId: _authenticationCubit.userModel!.id.toString());
+        userId: userModel!.id.toString());
     if (response is Left) {
       showMessage(response.asLeft(), isError: true);
       if (retryCaseFunction < 3) {
@@ -105,7 +105,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeInit());
     isLoadingCasesDetail(true);
     var response = await _useCase.caseDetail(
-        userId: _authenticationCubit.userModel!.id.toString(), caseId: caseId);
+        userId: userModel!.id.toString(), caseId: caseId);
     if (response is Left) {
       showMessage(response.asLeft(), isError: true);
       if (retryCaseFunction < 3) {
@@ -140,7 +140,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<String> recentActivity() async {
     emit(HomeInit());
     var response = await _useCase.recentActivity(
-        userId: _authenticationCubit.userModel!.id.toString());
+        userId: userModel!.id.toString());
     log("74893232443");
     if (response is Right) {
       var data = response.asRight();
@@ -176,7 +176,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     isLoadingGraveyardDetail(true);
     var response = await _useCase.caseGraveyardDetail(
-        userId: _authenticationCubit.userModel!.id.toString(), caseId: caseId);
+        userId: userModel!.id.toString(), caseId: caseId);
     if (response is Left) {
       showMessage(response.asLeft(), isError: true);
       if (retryCaseFunction < 3) {
@@ -327,7 +327,7 @@ class HomeCubit extends Cubit<HomeState> {
     } else {
       isLoading(true);
       DocumentUploadModel model = DocumentUploadModel(
-        userId: "${_authenticationCubit.userModel!.id}",
+        userId: "${userModel!.id}",
         restingPlace: restingPlace == 1 ? "Hospital" : "Home",
         deathNotificationFile: deathNoti!,
         hospitalCertification: hospitalCerti!,
@@ -372,7 +372,7 @@ class HomeCubit extends Cubit<HomeState> {
       log("843722398 ${caseDetailModel?.id.toString()}");
       isLoadingGraveyardDocUpload(true);
       GraveyardModel model = GraveyardModel(
-        userId: "${_authenticationCubit.userModel!.id}",
+        userId: "${userModel!.id}",
         burialTiming: burialTime ?? "",
         caseId: caseDetailModel?.id.toString() ?? "",
         lovedcitizen: lovedCitizan ?? "",

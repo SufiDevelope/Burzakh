@@ -189,4 +189,10 @@ class AppApis {
     }
     return url;
   }
+
+  // Super Admin All User
+  static String superAdminAllUserApi = "$baseUrl/api/burzakh-super-admin/all-users";
+
+  // Get Super Admin login Any User
+  static String superAdminLoginUserApi = "$baseUrl/api/burzakh-super-admin/login-users";
 }

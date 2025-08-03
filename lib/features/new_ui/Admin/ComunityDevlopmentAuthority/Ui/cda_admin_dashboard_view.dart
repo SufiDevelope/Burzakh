@@ -18,7 +18,8 @@ import 'package:get/get.dart';
 
 class CdaAdminDashboardView extends StatefulWidget {
   final String name;
-  const CdaAdminDashboardView({super.key, required this.name});
+  final bool flag;
+  const CdaAdminDashboardView({super.key, required this.name, required this.flag});
 
   @override
   State<CdaAdminDashboardView> createState() => _CdaAdminDashboardViewState();
@@ -60,7 +61,7 @@ class _CdaAdminDashboardViewState extends State<CdaAdminDashboardView> {
                     (route) => false,
                   );
                 },
-                imageUrl: "assets/images/png/cdalogo.png",
+                imageUrl: "assets/images/png/cdalogo.png", flag: widget.flag,
               ),
               Obx(() {
                 return GenericDashboardOverviewWidget(

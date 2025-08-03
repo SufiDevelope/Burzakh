@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
@@ -15,6 +17,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
   final VoidCallback? onrtaLogoPressed;
   final VoidCallback? onLogoutPressed;
   final String? imageurl;
+  final bool flag;
 
   const RTADashboardHeaderWidget({
     super.key,
@@ -27,6 +30,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
     this.onrtaLogoPressed,
     this.onLogoutPressed,
     this.imageurl,
+    required this.flag,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -187,42 +191,53 @@ class RTADashboardHeaderWidget extends StatelessWidget {
         child: Row(
           children: [
             // RTA Logo/Icon Container
-            GestureDetector(
-              onTap: onrtaLogoPressed,
-              child: Container(
-                width: context.mw * 0.12,
-                height: context.mw * 0.12,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Platform.isIOS
+                          ? Icons.arrow_back_ios_new
+                          : Icons.arrow_back,
                     ),
-                  ],
-                ),
-                child: imageurl == null
-                    ? Center(
-                        child: Text(
-                          'RTA',
-                          style: TextStyle(
-                            color: const Color(0xFFbd4753),
-                            fontSize: context.mh * 0.018,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    : ClipRRect(
+                  )
+                : GestureDetector(
+                    onTap: onrtaLogoPressed,
+                    child: Container(
+                      width: context.mw * 0.12,
+                      height: context.mw * 0.12,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          imageurl ?? "",
-                          fit: BoxFit.cover,
-                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-              ),
-            ),
+                      child: imageurl == null
+                          ? Center(
+                              child: Text(
+                                'RTA',
+                                style: TextStyle(
+                                  color: const Color(0xFFbd4753),
+                                  fontSize: context.mh * 0.018,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                imageurl ?? "",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                    ),
+                  ),
             0.03.pw(context),
 
             // Title and Subtitle

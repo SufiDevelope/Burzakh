@@ -11,105 +11,110 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/model/chat_model.dart';
 
-class ChatCubit extends Cubit<ChatState>{
+class ChatCubit extends Cubit<ChatState> {
   final ChatUsecase usecase;
   final AuthenticationCubit authenticationCubit;
-  ChatCubit({required this.usecase,required this.authenticationCubit}):super(ChatInit());
+  ChatCubit({required this.usecase, required this.authenticationCubit})
+      : super(ChatInit());
 
+  bool isSendingMessage = false;
+  bool isLoadingChat = false;
 
-  bool isSendingMessage=false;
-  bool isLoadingChat=false;
+  List<ChatModel> chatList = [];
 
-  List<ChatModel> chatList=[];
-
-  void isSendingMessageLoading(bool val){
+  void isSendingMessageLoading(bool val) {
     emit(ChatLoading());
-    isSendingMessage=val;
-    emit(ChatLoaded());
-
-  }
-
-  emptyChatList(){
-    emit(ChatLoading());
-    chatList=[];
+    isSendingMessage = val;
     emit(ChatLoaded());
   }
-  void isLoadingChatLoading(bool val){
-    emit(ChatLoading());
-    isLoadingChat=val;
-    emit(ChatLoaded());
 
+  emptyChatList() {
+    emit(ChatLoading());
+    chatList = [];
+    emit(ChatLoaded());
   }
 
-  Future<String> sendChat(String id,String adminType, String message)async{
+  void isLoadingChatLoading(bool val) {
+    emit(ChatLoading());
+    isLoadingChat = val;
+    emit(ChatLoaded());
+  }
+
+  Future<String> sendChat(String id, String adminType, String message) async {
     isSendingMessageLoading(true);
     emit(ChatLoading());
-   var response=await usecase.sendChat(id: id, userId: authenticationCubit.userModel!.id.toString(), adminType: adminType, message: message);
-   if(response is Left){
-     showMessage(response.asLeft(),isError: true);
-     isSendingMessageLoading(false);
-     emit(ChatLoaded());
-     return "400";
-   }else{
-     var data=response.asRight();
-     if(data.statusCode>=200&&data.statusCode<=300){
-       log("83624  ${data.body}");
-       isSendingMessageLoading(false);
-       emit(ChatLoaded());
-       return "200";
-     }else{
-       var value=jsonDecode(data.body);
-       showMessage('${value['errors']}',isError: true);
-       isSendingMessageLoading(false);
-       emit(ChatLoaded());
-       return "400";
-     }
-   }
-
+    var response = await usecase.sendChat(
+        id: id,
+        userId: userModel!.id.toString(),
+        adminType: adminType,
+        message: message);
+    if (response is Left) {
+      showMessage(response.asLeft(), isError: true);
+      isSendingMessageLoading(false);
+      emit(ChatLoaded());
+      return "400";
+    } else {
+      var data = response.asRight();
+      if (data.statusCode >= 200 && data.statusCode <= 300) {
+        log("83624  ${data.body}");
+        isSendingMessageLoading(false);
+        emit(ChatLoaded());
+        return "200";
+      } else {
+        var value = jsonDecode(data.body);
+        showMessage('${value['errors']}', isError: true);
+        isSendingMessageLoading(false);
+        emit(ChatLoaded());
+        return "400";
+      }
+    }
   }
 
-  Future<String>  receiveChat({required String id,bool isFirstTime=false})async{
-    if(isFirstTime){
-      chatList=[];
+  Future<String> receiveChat(
+      {required String id, bool isFirstTime = false}) async {
+    if (isFirstTime) {
+      chatList = [];
       isLoadingChatLoading(true);
     }
     log("398274 $isFirstTime");
 
     emit(ChatLoading());
-    var response=await usecase.receiveChat(id: id, userId: authenticationCubit.userModel!.id.toString(),);
-    if(response is Left){
-      showMessage(response.asLeft(),isError: true);
-      if(isFirstTime){
+    var response = await usecase.receiveChat(
+      id: id,
+      userId: userModel!.id.toString(),
+    );
+    if (response is Left) {
+      showMessage(response.asLeft(), isError: true);
+      if (isFirstTime) {
         isLoadingChatLoading(false);
       }
       emit(ChatLoaded());
       return '400';
-    }else{
-      var data=response.asRight();
-      if(data.statusCode>=200&&data.statusCode<=300){
-        var value=jsonDecode(data.body);
-        var messageList=value['data'];
-        if(messageList is List){
-          chatList=messageList.map((e) => ChatModel.fromJson(e),).toList();
+    } else {
+      var data = response.asRight();
+      if (data.statusCode >= 200 && data.statusCode <= 300) {
+        var value = jsonDecode(data.body);
+        var messageList = value['data'];
+        if (messageList is List) {
+          chatList = messageList
+              .map(
+                (e) => ChatModel.fromJson(e),
+              )
+              .toList();
         }
         isLoadingChatLoading(false);
         emit(ChatLoaded());
 
         return '200';
-      }else{
-        var value=jsonDecode(data.body);
-        showMessage('${value['errors']}',isError: true);
-        if(isFirstTime){
+      } else {
+        var value = jsonDecode(data.body);
+        showMessage('${value['errors']}', isError: true);
+        if (isFirstTime) {
           isLoadingChatLoading(false);
         }
         emit(ChatLoaded());
         return '400';
       }
     }
-
-
   }
-
-
-
 }

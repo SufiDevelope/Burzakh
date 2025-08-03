@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/features/authentication/presentation/controller/cubit.dart';
@@ -16,7 +17,8 @@ import '../../../../widgets/app_text.dart';
 import '../../../../widgets/logout_bottom_sheet.dart';
 
 class HomeTopbar extends StatelessWidget {
-  const HomeTopbar({super.key});
+  final bool flag;
+  const HomeTopbar({super.key, required this.flag});
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +39,21 @@ class HomeTopbar extends StatelessWidget {
 
   Widget _buildWelcomeSection(BuildContext context) {
     final userName =
-        '${authCubit.userModel!.firstName} ${authCubit.userModel!.lastName}';
+        '${userModel?.firstName ?? ""} ${userModel?.lastName ?? ""}';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(Platform.isIOS ? Icons.arrow_back_ios_new : Icons.arrow_back),
+                  )
+                : Container(),
             _buildProfileMenuButton(context),
             0.03.pw(context),
             Column(
@@ -195,13 +205,13 @@ class HomeTopbar extends StatelessWidget {
                     children: [
                       AppText(
                         text:
-                            '${authCubit.userModel!.firstName} ${authCubit.userModel!.lastName}',
+                            '${userModel?.firstName ?? ""} ${userModel?.lastName ?? ""}',
                         fontSize: context.mh * 0.016,
                         fontWeight: FontWeight.bold,
                       ),
                       const SizedBox(height: 4),
                       AppText(
-                        text: authCubit.userModel!.email,
+                        text: userModel?.email ?? "",
                         fontSize: context.mh * 0.014,
                         color: AppColor.greyLight(),
                       ),
@@ -307,8 +317,8 @@ class HomeTopbar extends StatelessWidget {
   }
 
   String _getUserInitials() {
-    final firstName = authCubit.userModel!.firstName;
-    final lastName = authCubit.userModel!.lastName;
+    final firstName = userModel?.firstName ?? "";
+    final lastName = userModel?.lastName ?? "";
     return '${firstName.isNotEmpty ? firstName[0] : ''}${lastName.isNotEmpty ? lastName[0] : ''}'
         .toUpperCase();
   }

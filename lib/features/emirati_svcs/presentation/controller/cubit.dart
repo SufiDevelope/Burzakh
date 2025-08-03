@@ -154,8 +154,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
     isGetCdaLoad(true);
     getRtaModel();
     emit(EmirateSvcsLoading());
-    var response = await _useCase.getCda(
-        userId: _authenticationCubit.userModel!.id.toString());
+    var response = await _useCase.getCda(userId: userModel!.id.toString());
     if (response is Right) {
       var data = response.asRight();
       log("89234232 ${data.body}");
@@ -182,8 +181,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
   Future<void> getRtaModel() async {
     isGetRtaLoad(true);
     emit(EmirateSvcsLoading());
-    var response = await _useCase.getRta(
-        userId: _authenticationCubit.userModel!.id.toString());
+    var response = await _useCase.getRta(userId: userModel!.id.toString());
     if (response is Right) {
       var data = response.asRight();
       log("89234232 ${data.body}");
@@ -231,7 +229,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
       address: locationController.text.isEmpty ? "" : locationController.text,
       // time: "${time!.hour}:${time!.minute}",
       dateTime: mourningStartDate ?? DateTime.now(),
-      userId: _authenticationCubit.userModel!.id.toString(),
+      userId: userModel!.id.toString(),
       case_name: selectedCaseName ?? "",
       mourningEndDate: mourningEndDate,
       latitude: latitude,
@@ -290,7 +288,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
       address: locationController.text.isEmpty ? "" : locationController.text,
       // time: "${time!.hour}:${time!.minute}",
       dateTime: mourningStartDate!,
-      userId: _authenticationCubit.userModel!.id.toString(),
+      userId: userModel!.id.toString(),
       mourningEndDate: mourningEndDate!,
       case_name: selectedCaseName!, latitude: latitude,
       longitude: longitude,
@@ -338,8 +336,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
     emit(EmirateSvcsLoading());
     log("836328 ${cdaGetModel!.id.toString()}");
     var response = await _useCase.cancelCda(
-        id: cdaGetModel!.id.toString(),
-        userId: _authenticationCubit.userModel!.id.toString());
+        id: cdaGetModel!.id.toString(), userId: userModel!.id.toString());
 
     if (response.isLeft()) {
       getCancelCdaLoading(false);
@@ -372,8 +369,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
     emit(EmirateSvcsLoading());
     log("43623   ${rtaGetModel!.id.toString()}");
     var response = await _useCase.cancelRta(
-        id: rtaGetModel!.id.toString(),
-        userId: _authenticationCubit.userModel!.id.toString());
+        id: rtaGetModel!.id.toString(), userId: userModel!.id.toString());
 
     if (response.isLeft()) {
       getCancelRtaLoading(false);
@@ -409,8 +405,7 @@ class EmirateSvcsCubit extends Cubit<EmirateSvcsState> {
 
   void getCaseName() async {
     getCaseNameLoading(true);
-    var response = await _useCase.getCaseName(
-        userId: _authenticationCubit.userModel!.id.toString());
+    var response = await _useCase.getCaseName(userId: userModel!.id.toString());
     if (response is Right) {
       var data = response.asRight();
       log("89234232 ${data.body}");

@@ -1,6 +1,7 @@
 // ignore_for_file: constant_pattern_never_matches_value_type
 
 import 'dart:developer';
+import 'dart:io';
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/app/di_container.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
@@ -20,7 +21,9 @@ import 'package:easy_localization/easy_localization.dart';
 class AmbulanceDashboard extends StatefulWidget {
   final String name;
   final dynamic id;
-  const AmbulanceDashboard({super.key, required this.name, this.id});
+  final bool flag;
+  const AmbulanceDashboard(
+      {super.key, required this.name, this.id, required this.flag});
 
   @override
   State<AmbulanceDashboard> createState() => _AmbulanceDashboardState();
@@ -206,19 +209,30 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
           ),
           child: Row(
             children: [
-              Container(
-                width: context.mw * 0.1,
-                height: context.mw * 0.1,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4b5563),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.directions_car,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
+              widget.flag == true
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Platform.isIOS
+                            ? Icons.arrow_back_ios_new
+                            : Icons.arrow_back,
+                      ),
+                    )
+                  : Container(
+                      width: context.mw * 0.1,
+                      height: context.mw * 0.1,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF4b5563),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(
+                        Icons.directions_car,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
               0.05.pw(context),
               // Middle - Text content
               Expanded(

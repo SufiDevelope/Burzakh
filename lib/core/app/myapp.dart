@@ -3,18 +3,8 @@ import 'package:burzakh/core/theme/theme.dart';
 import 'package:burzakh/features/admin_dashboard/presentation/page/admin_dashboard.dart';
 import 'package:burzakh/features/authentication/presentation/page/sign_up.dart';
 import 'package:burzakh/features/dashboard/presentation/page/dashboard.dart';
-import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/UI/ambulance_dashboard.dart';
-import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
-import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
-import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
-import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/UI/mortician_admin_dashboard.dart';
-import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
-import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
-import 'package:burzakh/features/new_ui/Admin/RoadsAndTransportAuthorityAdmin/Ui/rta_dashboard_widget.dart';
-import 'package:burzakh/features/new_ui/Admin/VisitorAlertAdminDashboard/UI/visitor_alert_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/chat/Controller/AppStateController/app_state_controller.dart';
 import 'package:burzakh/features/onboarding/presentation/page/onboarding_1.dart';
-import 'package:burzakh/main.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +66,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          'appDashBoard': (context) => AppDashboard(),
+          'appDashBoard': (context) => AppDashboard(flag: false,),
           '/': (context) => SplashScreen(),
           'onboarding1': (context) => Onboarding1(),
           'onboarding01': (context) => Onboarding01(),
@@ -88,6 +78,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           'BurzakhEnhancedLogin': (context) => BurzakhEnhancedLogin(),
           'VerifyOtpForResetpassword': (context) => VerifyOtpForResetpassword(),
         },
+        // home: MasterAdmin(),
         // home: RtaDashboardView(),
         // home: CdaAdminDashboardView(),
         // home: DubaiAdminDashboardView(),

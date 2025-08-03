@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
@@ -13,6 +15,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
   final String email;
   final VoidCallback? onLogoutPressed;
   final String? imageurl;
+  final bool flag;
 
   const PoliceDashboardHeaderWidget({
     super.key,
@@ -22,7 +25,7 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
     required this.initials,
     required this.email,
     this.onLogoutPressed,
-    this.imageurl,
+    this.imageurl, required this.flag,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -183,7 +186,18 @@ class PoliceDashboardHeaderWidget extends StatelessWidget {
         child: Row(
           children: [
             // Shield Icon
-            Container(
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Platform.isIOS
+                          ? Icons.arrow_back_ios_new
+                          : Icons.arrow_back,
+                    ),
+                  )
+                :    Container(
               width: context.mw * 0.1,
               height: context.mw * 0.1,
               decoration: BoxDecoration(

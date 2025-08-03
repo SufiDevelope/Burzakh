@@ -24,7 +24,8 @@ import '../home/ui/home_screen1.dart';
 import '../settings/ui/setting_screen.dart';
 
 class AppDashboard extends StatefulWidget {
-  const AppDashboard({super.key});
+  final bool flag ;
+  const AppDashboard({super.key, required this.flag});
 
   @override
   State<AppDashboard> createState() => _AppDashboardState();
@@ -723,7 +724,7 @@ class _AppDashboardState extends State<AppDashboard> {
                 : dashboardCubit.screenIndex == 1
                     ? _getDocumentScreen()
                     : dashboardCubit.screenIndex == 2
-                        ? HomeScreen1()
+                        ? HomeScreen1(flag: widget.flag,)
                         : dashboardCubit.screenIndex == 3
                             ? RehmaScreen()
                             : SettingScreen(),

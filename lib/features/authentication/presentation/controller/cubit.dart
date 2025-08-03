@@ -14,6 +14,7 @@ import 'package:burzakh/features/new_ui/Admin/AmbulanceDashboard/UI/ambulance_da
 import 'package:burzakh/features/new_ui/Admin/CementryAdminDashboard/UI/cementry_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/ComunityDevlopmentAuthority/Ui/cda_admin_dashboard_view.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
+import 'package:burzakh/features/new_ui/Admin/MasterAdmin/master_admin.dart';
 import 'package:burzakh/features/new_ui/Admin/MorticianAdminDashboard/UI/mortician_admin_dashboard.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Service/NotificationService.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/UI/police_admin_dashboard_view.dart';
@@ -23,6 +24,8 @@ import '../../domain/usecase/usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../page/forgot_otp_screen.dart';
+
+UserModel? userModel;
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthenticationUseCase _useCaseName;
@@ -35,7 +38,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   bool isLoginLoading = false;
   bool isSendOtp = false;
   bool isResetPassword = false;
-  UserModel? userModel;
+  // UserModel? userModel;
 
   Future<void> signup(
       {required String fname,
@@ -134,16 +137,19 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       var data = response.asRight();
 
       if (data.statusCode >= 200 && data.statusCode <= 300) {
-        userModel = UserModel.fromJson(jsonDecode(data.body)['user']);
-        UserShareprefController pref = UserShareprefController();
-        pref.setData(userModel!);
+        if ((jsonDecode(data.body)['user']['admin_type'] != "superadmin")) {
+          log("69869689 ${jsonDecode(data.body)}");
+          userModel = UserModel.fromJson(jsonDecode(data.body)['user']);
+          UserShareprefController pref = UserShareprefController();
+          pref.setData(userModel!);
+        }
         if (userModel?.admin_type == "police") {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PoliceAdminDashboardView(
                 name: "${userModel?.firstName}${userModel?.lastName}",
-                adminId: userModel?.id.toString() ?? "",
+                adminId: userModel?.id.toString() ?? "", flag: false,
               ),
             ),
           );
@@ -152,7 +158,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             context,
             MaterialPageRoute(
                 builder: (context) => RtaDashboardView(
-                      name: '${userModel?.firstName}${userModel?.lastName}',
+                      name: '${userModel?.firstName}${userModel?.lastName}', flag: false,
                     )),
           );
         } else if (userModel?.admin_type == "cda") {
@@ -161,6 +167,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             MaterialPageRoute(
                 builder: (context) => CdaAdminDashboardView(
                       name: '${userModel?.firstName}${userModel?.lastName}',
+                      flag: false,
                     )),
           );
         } else if (userModel?.admin_type == "mancipality") {
@@ -169,14 +176,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               MaterialPageRoute(
                   builder: (context) => DubaiAdminDashboardView(
                         name: "${userModel?.firstName}${userModel?.lastName}",
+                        flag: false,
                       )));
         } else if (userModel?.admin_type == "cemetery") {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CementryAdminDashboard(
-                        name: "${userModel?.firstName}${userModel?.lastName}",
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => CementryAdminDashboard(
+                name: "${userModel?.firstName}${userModel?.lastName}",
+                flag: false,
+              ),
+            ),
+          );
         } else if (userModel?.admin_type == "ambulance") {
           Navigator.push(
             navigatorKey.currentContext!,
@@ -184,6 +195,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               builder: (context) => AmbulanceDashboard(
                 name: "${userModel?.firstName}${userModel?.lastName}",
                 id: userModel?.id.toString() ?? "",
+                flag: false,
               ),
             ),
           );
@@ -195,6 +207,19 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
                 name: "${userModel?.firstName}${userModel?.lastName}",
                 id: userModel?.id.toString() ?? "",
                 phoneNo: userModel?.phoneNumber ?? "",
+                flag: false,
+              ),
+            ),
+          );
+        } else if ((jsonDecode(data.body)['user']['admin_type'] ==
+            "superadmin")) {
+          Navigator.push(
+            navigatorKey.currentContext!,
+            MaterialPageRoute(
+              builder: (context) => MasterAdmin(
+                name: "${userModel?.firstName}${userModel?.lastName}",
+                // id: userModel?.id.toString() ?? "",
+                // phoneNo: userModel?.phoneNumber ?? "",
               ),
             ),
           );
@@ -335,7 +360,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           MaterialPageRoute(
             builder: (context) => PoliceAdminDashboardView(
               name: "${userModel?.firstName}${userModel?.lastName}",
-              adminId: userModel?.id.toString() ?? "",
+              adminId: userModel?.id.toString() ?? "", flag: false,
             ),
           ),
         );
@@ -344,7 +369,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           navigatorKey.currentContext!,
           MaterialPageRoute(
               builder: (context) => RtaDashboardView(
-                    name: "${userModel?.firstName}${userModel?.lastName}",
+                    name: "${userModel?.firstName}${userModel?.lastName}", flag: false,
                   )),
         );
       } else if (model.admin_type == "cda") {
@@ -353,6 +378,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           MaterialPageRoute(
               builder: (context) => CdaAdminDashboardView(
                     name: '${userModel?.firstName}${userModel?.lastName}',
+                    flag: false,
                   )),
         );
       } else if (model.admin_type == "mancipality") {
@@ -361,6 +387,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           MaterialPageRoute(
               builder: (context) => DubaiAdminDashboardView(
                     name: "${userModel?.firstName}${userModel?.lastName}",
+                    flag: false,
                   )),
         );
       } else if (model.admin_type == "cemetery") {
@@ -369,6 +396,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           MaterialPageRoute(
             builder: (context) => CementryAdminDashboard(
               name: "${userModel?.firstName}${userModel?.lastName}",
+              flag: false,
             ),
           ),
         );
@@ -379,6 +407,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
             builder: (context) => AmbulanceDashboard(
               name: "${userModel?.firstName}${userModel?.lastName}",
               id: userModel?.id.toString() ?? "",
+              flag: false,
             ),
           ),
         );
@@ -390,6 +419,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
               name: "${userModel?.firstName}${userModel?.lastName}",
               id: userModel?.id.toString() ?? "",
               phoneNo: userModel?.phoneNumber ?? "",
+              flag: false,
+            ),
+          ),
+        );
+      } else if (model.admin_type == "superadmin") {
+        Navigator.push(
+          navigatorKey.currentContext!,
+          MaterialPageRoute(
+            builder: (context) => MasterAdmin(
+              name: "${userModel?.firstName}${userModel?.lastName}",
+              // id: userModel?.id.toString() ?? "",
+              // phoneNo: userModel?.phoneNumber ?? "",
             ),
           ),
         );

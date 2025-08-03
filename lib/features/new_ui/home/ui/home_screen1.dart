@@ -18,7 +18,8 @@ import '../../../home/presentation/widgets/home_case_shimmer.dart';
 import '../../../home/presentation/widgets/start_first_time_case.dart';
 
 class HomeScreen1 extends StatefulWidget {
-  const HomeScreen1({super.key});
+  final bool flag;
+  const HomeScreen1({super.key, required this.flag});
 
   @override
   State<HomeScreen1> createState() => _HomeScreen1State();
@@ -94,7 +95,9 @@ class _HomeScreen1State extends State<HomeScreen1> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Header
-                        const HomeTopbar(),
+                        HomeTopbar(
+                          flag: widget.flag,
+                        ),
                         0.02.ph(context),
 
                         // Case Info
@@ -233,12 +236,12 @@ class _HomeScreen1State extends State<HomeScreen1> {
                                                             0xff6a655d),
                                                       ),
                                                       0.01.ph(context),
-                                                      
                                                       AppText(
-                                                        text:
-                                                            caseList[selectedCaseIndex].restingPlace == "Hospital"
-                                                                ? "Please Proceed to your Perfered Cemetery. We wil arrange an ambulance to pick up the deceased from the hospital."
-                                                                :  "",
+                                                        text: caseList[selectedCaseIndex]
+                                                                    .restingPlace ==
+                                                                "Hospital"
+                                                            ? "Please Proceed to your Perfered Cemetery. We wil arrange an ambulance to pick up the deceased from the hospital."
+                                                            : "",
                                                         fontSize:
                                                             context.mh * 0.015,
                                                         fontStyle:

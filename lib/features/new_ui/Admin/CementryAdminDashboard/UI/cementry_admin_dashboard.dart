@@ -17,7 +17,8 @@ import 'package:easy_localization/easy_localization.dart';
 
 class CementryAdminDashboard extends StatefulWidget {
   final String name;
-  const CementryAdminDashboard({super.key, required this.name});
+  final bool flag;
+  const CementryAdminDashboard({super.key, required this.name, required this.flag});
 
   @override
   State<CementryAdminDashboard> createState() => _CementryAdminDashboardState();
@@ -57,7 +58,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
                 ),
                 (route) => false,
               );
-            },
+            }, flag: widget.flag,
           ),
         ),
       ),

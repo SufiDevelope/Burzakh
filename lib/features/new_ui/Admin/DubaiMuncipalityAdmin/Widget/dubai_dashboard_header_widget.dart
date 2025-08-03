@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/DubaiMuncipalityAdmin/UI/dubai_admin_dashboard_widget.dart';
@@ -22,6 +24,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
   final String? imageurl;
   final bool isArabicSelected;
   final VoidCallback? onAmbulancePressed;
+  final bool flag;
 
   const DMCemeteryHeaderWidget({
     super.key,
@@ -39,6 +42,7 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
     this.imageurl,
     this.isArabicSelected = false,
     this.onAmbulancePressed,
+    required this.flag,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -215,56 +219,67 @@ class DMCemeteryHeaderWidget extends StatelessWidget {
               Row(
                 children: [
                   // Logo Section
-                  Container(
-                    width: context.mw * 0.12, // Slightly smaller
-                    height: context.mw * 0.12,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xFF8A9AAE),
-                          Color(0xFF6B7A8F),
-                          Color(0xFF5A6B7D),
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.15),
-                          blurRadius: 6,
-                          offset: const Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.all(3),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: imageurl == null
-                          ? Center(
-                              child: Text(
-                                'DM',
-                                style: TextStyle(
-                                  color: const Color(0xFF6B7A8F),
-                                  fontSize: context.mh * 0.018,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                            )
-                          : ClipOval(
-                              child: Image.asset(
-                                imageurl!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                              ),
+                  flag == true
+                      ? IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Platform.isIOS
+                                ? Icons.arrow_back_ios_new
+                                : Icons.arrow_back,
+                          ),
+                        )
+                      : Container(
+                          width: context.mw * 0.12, // Slightly smaller
+                          height: context.mw * 0.12,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color(0xFF8A9AAE),
+                                Color(0xFF6B7A8F),
+                                Color(0xFF5A6B7D),
+                              ],
                             ),
-                    ),
-                  ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.15),
+                                blurRadius: 6,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(3),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                            child: imageurl == null
+                                ? Center(
+                                    child: Text(
+                                      'DM',
+                                      style: TextStyle(
+                                        color: const Color(0xFF6B7A8F),
+                                        fontSize: context.mh * 0.018,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
+                                  )
+                                : ClipOval(
+                                    child: Image.asset(
+                                      imageurl!,
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
+                                  ),
+                          ),
+                        ),
 
                   SizedBox(width: context.mw * 0.03),
 

@@ -26,8 +26,12 @@ import 'package:zego_uikit_signaling_plugin/zego_uikit_signaling_plugin.dart';
 class PoliceAdminDashboardView extends StatefulWidget {
   final String name;
   final String adminId;
+  final bool flag;
   const PoliceAdminDashboardView(
-      {super.key, required this.name, required this.adminId});
+      {super.key,
+      required this.name,
+      required this.adminId,
+      required this.flag});
 
   @override
   State<PoliceAdminDashboardView> createState() =>
@@ -108,6 +112,7 @@ class _PoliceAdminDashboardViewState extends State<PoliceAdminDashboardView> {
                   );
                 },
                 imageurl: "assets/images/jpg/dubaipolice.jpeg",
+                flag: widget.flag,
               ),
               StatusTabsWidget(tabs: tabs),
               Column(

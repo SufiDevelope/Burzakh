@@ -4,6 +4,7 @@ import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_languag
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'dart:io';
 
 class MorticianDashboardHeaderWidget extends StatelessWidget {
   final String title;
@@ -19,6 +20,7 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
   final VoidCallback? onLogoutPressed;
   final String? imageurl;
   final bool isArabic;
+  final bool flag;
 
   const MorticianDashboardHeaderWidget({
     super.key,
@@ -35,6 +37,7 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
     this.onLogoutPressed,
     this.imageurl,
     this.isArabic = false,
+    required this.flag,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -197,15 +200,26 @@ class MorticianDashboardHeaderWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: context.mw * 0.05),
         child: Row(
           children: [
-            Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Color(0xFF475569),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child:
-                  Icon(Icons.person_2_outlined, color: Colors.white, size: 24),
-            ),
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Platform.isIOS
+                          ? Icons.arrow_back_ios_new
+                          : Icons.arrow_back,
+                    ),
+                  )
+                : Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF475569),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(Icons.person_2_outlined,
+                        color: Colors.white, size: 24),
+                  ),
             0.02.pw(context),
             Expanded(
               child: Column(

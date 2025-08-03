@@ -121,7 +121,7 @@ class RequestDetailWidget extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildDetailRow(
                       "Name:",
-                      "${_authCubit.userModel!.firstName} ${_authCubit.userModel!.lastName}",
+                      "${userModel?.firstName ?? ""} ${userModel?.lastName ?? ""}",
                       context,
                     ),
                     const SizedBox(height: 12),

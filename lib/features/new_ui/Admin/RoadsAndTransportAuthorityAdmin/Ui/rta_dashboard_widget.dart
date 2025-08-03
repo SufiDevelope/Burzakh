@@ -18,7 +18,8 @@ import 'package:get/get.dart';
 
 class RtaDashboardView extends StatefulWidget {
   final String name;
-  const RtaDashboardView({super.key, required this.name});
+  final bool flag;
+  const RtaDashboardView({super.key, required this.name, required this.flag});
 
   @override
   State<RtaDashboardView> createState() => _RtaDashboardViewState();
@@ -60,7 +61,7 @@ class _RtaDashboardViewState extends State<RtaDashboardView> {
                   );
                 },
                 email: '',
-                imageurl: "assets/images/png/rtalogo.png",
+                imageurl: "assets/images/png/rtalogo.png", flag: widget.flag,
               ),
               Obx(() {
                 return GenericDashboardOverviewWidget(

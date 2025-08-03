@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/localization/localization_getx.dart';
 import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Widgets/select_language_bottom_sheet.dart';
@@ -15,6 +17,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
   final VoidCallback? onLogoutPressed;
   final String email;
   final String? imageUrl;
+  final bool flag;
 
   const CDADashboardHeaderWidget({
     super.key,
@@ -27,6 +30,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
     this.onLogoutPressed,
     required this.email,
     this.imageUrl,
+    required this.flag,
   });
 
   void _showLogoutBottomSheet(BuildContext context) {
@@ -176,6 +180,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
         borderRadius: 20,
       );
     }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -186,42 +191,53 @@ class CDADashboardHeaderWidget extends StatelessWidget {
         child: Row(
           children: [
             // RTA Logo/Icon Container
-            GestureDetector(
-              onTap: onrtaLogoPressed,
-              child: Container(
-                width: context.mw * 0.12,
-                height: context.mw * 0.12,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
+            flag == true
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Platform.isIOS
+                          ? Icons.arrow_back_ios_new
+                          : Icons.arrow_back,
                     ),
-                  ],
-                ),
-                child: imageUrl == null
-                    ? Center(
-                        child: Text(
-                          'CDA',
-                          style: TextStyle(
-                            color: const Color(0xFF1e40af),
-                            fontSize: context.mh * 0.018,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    : ClipRRect(
+                  )
+                : GestureDetector(
+                    onTap: onrtaLogoPressed,
+                    child: Container(
+                      width: context.mw * 0.12,
+                      height: context.mw * 0.12,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          imageUrl ?? "",
-                          fit: BoxFit.cover,
-                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
-              ),
-            ),
+                      child: imageUrl == null
+                          ? Center(
+                              child: Text(
+                                'CDA',
+                                style: TextStyle(
+                                  color: const Color(0xFF1e40af),
+                                  fontSize: context.mh * 0.018,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                imageUrl ?? "",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                    ),
+                  ),
             0.03.pw(context),
 
             // Title and Subtitle
@@ -297,7 +313,7 @@ class CDADashboardHeaderWidget extends StatelessWidget {
                         ),
                         0.015.pw(context),
 
-                       Obx(
+                        Obx(
                           () {
                             return GestureDetector(
                               onTap: () => _showLanguageSelectionCustom(),
