@@ -164,6 +164,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final LocalizationGetx controller = Get.find<LocalizationGetx>();
+
     void _showLanguageSelectionCustom() {
       LanguageSelectionBottomSheet.show(
         context,
@@ -177,7 +178,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
 
     return Container(
       width: context.mw,
-      height: context.mh * 0.13,
+      height: context.mh * 0.15,
       margin: EdgeInsets.all(context.mw * 0.025),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -397,8 +398,8 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: context.mw * 0.1,
-        height: context.mw * 0.1,
+        width: context.mw * 0.07,
+        height: context.mw * 0.07,
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.15),
           borderRadius: BorderRadius.circular(context.mw * 0.02),
@@ -420,7 +421,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: context.mh * 0.014,
+                    size: context.mh * 0.012,
                     color: Colors.white,
                   ),
                   0.003.ph(context),
@@ -437,7 +438,7 @@ class CementryDashboardHeaderWidget extends StatelessWidget {
               )
             : Icon(
                 icon,
-                size: context.mh * 0.018,
+                size: context.mh * 0.014,
                 color: Colors.white,
               ),
       ),

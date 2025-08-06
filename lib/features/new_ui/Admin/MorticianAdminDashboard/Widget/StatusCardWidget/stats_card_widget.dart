@@ -48,7 +48,7 @@ class StatCardWidget extends StatelessWidget {
                     Text(
                       title.tr(),
                       style: TextStyle(
-                        fontSize: context.mh * 0.012,
+                        fontSize: context.mh * 0.01,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF6B7280),
                       ),
@@ -56,7 +56,7 @@ class StatCardWidget extends StatelessWidget {
                     Text(
                       value,
                       style: TextStyle(
-                        fontSize: context.mh * 0.02,
+                        fontSize: context.mh * 0.018,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF1F2937),
                       ),

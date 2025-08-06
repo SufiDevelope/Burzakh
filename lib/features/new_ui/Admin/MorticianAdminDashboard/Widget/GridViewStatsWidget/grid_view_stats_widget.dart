@@ -26,7 +26,7 @@ class StatisticsCardsGrid extends StatelessWidget {
       crossAxisCount: MediaQuery.of(context).size.width < 768 ? 2 : 4,
       crossAxisSpacing: 16,
       mainAxisSpacing: 16,
-      childAspectRatio: 1.7,
+      childAspectRatio: 1.6,
       children: [
         StatCardWidget(
           icon: Icons.people,

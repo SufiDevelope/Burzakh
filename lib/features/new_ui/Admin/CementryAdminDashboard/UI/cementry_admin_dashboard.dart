@@ -43,7 +43,7 @@ class _CementryAdminDashboardState extends State<CementryAdminDashboard> {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(context.mh * 0.18),
+        preferredSize: Size.fromHeight(context.mh * 0.2),
         child: Padding(
           padding: EdgeInsets.only(top: context.mh * 0.05),
           child: CementryDashboardHeaderWidget(

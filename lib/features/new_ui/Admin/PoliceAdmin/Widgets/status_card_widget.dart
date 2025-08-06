@@ -70,8 +70,8 @@ class StatusCardWidget extends StatelessWidget {
               children: [
                 // Enhanced icon container
                 Container(
-                  width: context.mw * 0.14,
-                  height: context.mw * 0.14,
+                  width: context.mw * 0.08,
+                  height: context.mw * 0.08,
                   decoration: BoxDecoration(
                     // Gradient background for icon
                     gradient: LinearGradient(
@@ -96,7 +96,7 @@ class StatusCardWidget extends StatelessWidget {
                   child: Icon(
                     icon,
                     color: iconColor ?? Colors.white,
-                    size: context.mh * 0.03,
+                    size: context.mh * 0.025,
                   ),
                 ),
                 // Optional: Add a small trend indicator
@@ -122,7 +122,7 @@ class StatusCardWidget extends StatelessWidget {
             Text(
               count.toString(),
               style: TextStyle(
-                fontSize: context.mh * 0.028,
+                fontSize: context.mh * 0.025,
                 fontWeight: FontWeight.w800,
                 color: const Color(0xFF1A1A1A),
                 letterSpacing: -0.5,

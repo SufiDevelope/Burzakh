@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/constants/app_assets.dart';
 import 'package:burzakh/constants/media_query.dart';
 import 'package:burzakh/core/app/di_container.dart';
@@ -9,6 +10,7 @@ import 'package:burzakh/features/authentication/presentation/controller/cubit.da
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -177,9 +179,7 @@ class _SplashScreenState extends State<SplashScreen>
       body: Container(
         height: mdHeight(context),
         width: mdWidth(context),
-        decoration: BoxDecoration(
-            gradient: AppColor.bgGradient
-        ),
+        decoration: BoxDecoration(gradient: AppColor.bgGradient),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -213,7 +213,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: ScaleTransition(
                 scale: animationArabic,
                 child: Container(
-                  margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                  margin: EdgeInsets.only(left: 20, right: 20),
                   padding:
                       EdgeInsets.symmetric(horizontal: mdWidth(context) * .25),
                   child: Image.asset(AppAssets.burzakhArabic),
@@ -226,7 +226,11 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: mdWidth(context) * .25),
-                  child: Image.asset(AppAssets.burzakhEnglish),
+                  child: Image.asset(
+                    "assets/images/animation/burzakhlower.jpeg",
+                    height: context.mh * 0.1,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -250,7 +254,9 @@ class _SplashScreenState extends State<SplashScreen>
                     },
                   )
                 : SizedBox(),
-            SizedBox(height: 150,),
+            SizedBox(
+              height: 150,
+            ),
           ],
         ),
       ),

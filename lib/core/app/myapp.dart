@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           'BurzakhEnhancedLogin': (context) => BurzakhEnhancedLogin(),
           'VerifyOtpForResetpassword': (context) => VerifyOtpForResetpassword(),
         },
+        // home: SplashScreen(),
         // home: MasterAdmin(),
         // home: RtaDashboardView(),
         // home: CdaAdminDashboardView(),

@@ -349,8 +349,8 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                         GestureDetector(
                           onTap: () => _showLogoutBottomSheet(context),
                           child: Container(
-                            width: context.mw * 0.08,
-                            height: context.mw * 0.08,
+                            width: context.mw * 0.06,
+                            height: context.mw * 0.06,
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),
@@ -362,7 +362,7 @@ class RTADashboardHeaderWidget extends StatelessWidget {
                             child: Icon(
                               Icons.logout,
                               color: Colors.white,
-                              size: context.mh * 0.018,
+                              size: context.mh * 0.013,
                             ),
                           ),
                         ),

@@ -350,8 +350,8 @@ class CDADashboardHeaderWidget extends StatelessWidget {
                         GestureDetector(
                           onTap: () => _showLogoutBottomSheet(context),
                           child: Container(
-                            width: context.mw * 0.08,
-                            height: context.mw * 0.08,
+                            width: context.mw * 0.05,
+                            height: context.mw * 0.05,
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(8),

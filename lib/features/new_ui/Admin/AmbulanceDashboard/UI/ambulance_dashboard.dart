@@ -195,7 +195,7 @@ class _AmbulanceDashboardState extends State<AmbulanceDashboard> {
       backgroundColor: Color(0xfff9fafb),
       appBar: PreferredSize(
         preferredSize:
-            Size.fromHeight(50.0 + MediaQuery.of(context).padding.top),
+            Size.fromHeight(80.0 + MediaQuery.of(context).padding.top),
         child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFFffffff),
