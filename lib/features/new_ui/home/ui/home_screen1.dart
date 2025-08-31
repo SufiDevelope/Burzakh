@@ -85,11 +85,11 @@ class _HomeScreen1State extends State<HomeScreen1> {
                     log("state $state");
                     log("selected case index ${_homeCubit.selectedCaseIndex}");
 
-                    final caseList = _homeCubit.caseList ?? [];
+                    final caseList = _homeCubit.caseList;
                     final recentActivityList =
-                        _homeCubit.recentActivityList ?? [];
-                    final selectedCaseIndex = _homeCubit.selectedCaseIndex ?? 0;
-                    final isFetchingCases = _homeCubit.isFetchingCases ?? false;
+                        _homeCubit.recentActivityList;
+                    final selectedCaseIndex = _homeCubit.selectedCaseIndex;
+                    final isFetchingCases = _homeCubit.isFetchingCases;
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

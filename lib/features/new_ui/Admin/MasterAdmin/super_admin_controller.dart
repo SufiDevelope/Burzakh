@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:burzakh/Model/AdminModels/SuperAdminAllCasesModel/super_admin_all_casesModel.dart';
 import 'package:burzakh/Model/AdminModels/SuperAdminAllUserModel/super_admin_all_user_model.dart';
 import 'package:burzakh/Repository/AdminRepos/SuperAdminRepo/super_admin_http_repo.dart';
 import 'package:burzakh/Repository/AdminRepos/SuperAdminRepo/super_admin_repo.dart';
@@ -177,6 +178,51 @@ class SuperAdminController extends GetxController {
       });
     } catch (e) {
       setLoading(false);
+      log(e.toString());
+    }
+  }
+
+  // Cases List
+  var casesModel = SuperAdminAllCases().obs;
+  final rxRequestStatusForAllCases = Status.loading.obs;
+
+  void setRxRequestStatusForAllCases(Status value) =>
+      rxRequestStatusForAllCases.value = value;
+  void setGetRequestApiResponseForCases(SuperAdminAllCases data) {
+    casesModel.value = data;
+  }
+
+  void getAllCases() async {
+    try {
+      repo.getAllCases().then((response) {
+        setGetRequestApiResponseForCases(response);
+        setRxRequestStatusForAllCases(Status.completed);
+      }).onError((error, stackTrace) {
+        log(error.toString());
+        setRxRequestStatusForAllCases(Status.error);
+      });
+    } catch (e) {
+      log(e.toString());
+      setRxRequestStatusForAllCases(Status.error);
+    }
+  }
+
+  // Loading
+  RxBool isLoadingForDelete = false.obs;
+  void setLoadingForDelete(bool value) => isLoadingForDelete.value = value;
+
+  void deleteCaseById(caseId) async {
+    try {
+      setLoadingForDelete(true);
+      repo.deleteCaseById(caseId).then((response) {
+        setLoadingForDelete(false);
+        getAllCases();
+      }).onError((error, stackTrace) {
+        setLoadingForDelete(false);
+        log(error.toString());
+      });
+    } catch (e) {
+      setLoadingForDelete(false);
       log(e.toString());
     }
   }

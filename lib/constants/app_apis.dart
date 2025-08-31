@@ -191,8 +191,21 @@ class AppApis {
   }
 
   // Super Admin All User
-  static String superAdminAllUserApi = "$baseUrl/api/burzakh-super-admin/all-users";
+  static String superAdminAllUserApi =
+      "$baseUrl/api/burzakh-super-admin/all-users";
 
   // Get Super Admin login Any User
-  static String superAdminLoginUserApi = "$baseUrl/api/burzakh-super-admin/login-users";
+  static String superAdminLoginUserApi =
+      "$baseUrl/api/burzakh-super-admin/login-users";
+
+  // Bypass Police Clearance
+  static String bypassPoliceClearance(caseId, userId) =>
+      "$baseUrl/api/burzakh/cases/$caseId/bypass-police/$userId";
+
+  // Super Admin All Cases List
+  static String superAdminAllCasesApi = "$baseUrl/api/burzakh/cases";
+
+  // Super Admin Cases Delete
+  static String superAdminCasesDeleteApi(caseId) =>
+      "$baseUrl/api/burzakh/case/$caseId";
 }

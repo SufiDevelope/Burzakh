@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:burzakh/Model/AdminModels/SuperAdminAllCasesModel/super_admin_all_casesModel.dart';
 import 'package:burzakh/Model/AdminModels/SuperAdminAllUserModel/super_admin_all_user_model.dart';
 import 'package:burzakh/Repository/AdminRepos/SuperAdminRepo/super_admin_repo.dart';
 import 'package:burzakh/constants/app_apis.dart';
@@ -20,6 +21,20 @@ class SuperAdminHttpRepo implements SuperAdminRepo {
     final response = await _api.getPostApiResponse(
         AppApis.superAdminLoginUserApi, data, false);
     log(response['user']['admin_type'].toString());
+    return response;
+  }
+
+  @override
+  Future<SuperAdminAllCases> getAllCases() async {
+    final response =
+        await _api.getGetApiResponse(AppApis.superAdminAllCasesApi);
+    return SuperAdminAllCases.fromJson(response);
+  }
+
+  @override
+  Future deleteCaseById(caseId) async {
+    final response = await _api
+        .getdeleteApiResponse(AppApis.superAdminCasesDeleteApi(caseId));
     return response;
   }
 }

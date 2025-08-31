@@ -1,19 +1,23 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:burzakh/Extenshion/extenshion.dart';
+import 'package:burzakh/features/new_ui/Admin/PoliceAdmin/Controller/police_admin_provider.dart';
 import 'package:burzakh/features/new_ui/home/ui/burrial_process_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:burzakh/widgets/app_text.dart';
 import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/app/di_container.dart';
 import '../../../home/presentation/controller/cubit.dart';
 
 class DocumnetProgressCaseDetails extends StatefulWidget {
-  DocumnetProgressCaseDetails({super.key, required this.caseId});
+  DocumnetProgressCaseDetails(
+      {super.key, required this.caseId, required this.user_id});
   String caseId;
+  String user_id;
   @override
   State<DocumnetProgressCaseDetails> createState() =>
       _DocumnetProgressCaseDetailsState();
@@ -31,6 +35,7 @@ class _DocumnetProgressCaseDetailsState
 
   @override
   Widget build(BuildContext context) {
+    final policeController = Get.put(PoliceAdminController());
     Future<void> _downloadFile(String url) async {
       try {
         final Uri uri = Uri.parse(url);
@@ -187,14 +192,23 @@ class _DocumnetProgressCaseDetailsState
                                       // ),
                                       const SizedBox(height: 12),
                                       _documentItem(
-                                          "Police Clearance",
-                                          _homeCubit.caseDetailModel?.caseStatus
-                                                  .toString() ??
-                                              "",
-                                          Icons.security,
-                                          AppColor.lightOrange1,
-                                          AppColor.orange,
-                                          subtitle: "Dubai Police"),
+                                        "Police Clearance",
+                                        _homeCubit.caseDetailModel?.caseStatus
+                                                .toString() ??
+                                            "",
+                                        Icons.security,
+                                        AppColor.lightOrange1,
+                                        AppColor.orange,
+                                        subtitle: "Dubai Police",
+                                        onTap: () {
+                                          policeController
+                                              .bypassPoliceClearance(
+                                            widget.caseId,
+                                            widget.user_id,
+                                            context,
+                                          );
+                                        },
+                                      ),
                                       const SizedBox(height: 6),
                                       Visibility(
                                         visible: _homeCubit
@@ -507,7 +521,7 @@ class _DocumnetProgressCaseDetailsState
   /// Reusable Document Item
   Widget _documentItem(String title, String status, IconData icon,
       Color bgColor, Color statusColor,
-      {String? subtitle}) {
+      {String? subtitle, VoidCallback? onTap}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
       decoration: BoxDecoration(
@@ -542,18 +556,46 @@ class _DocumnetProgressCaseDetailsState
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: statusColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(7),
-            ),
-            child: AppText(
-              text: status,
-              fontSize: 12,
-              color: statusColor,
-              fontWeight: FontWeight.w500,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: statusColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                child: AppText(
+                  text: status,
+                  fontSize: 12,
+                  color: statusColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              0.01.ph(context),
+              Visibility(
+                visible: title == "Police Clearance" && status == "pending" ? true : false,
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: AppColor.buttonColor,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: AppText(
+                      text: "Skip Police Clearance",
+                      fontSize: 12,
+                      color: AppColor.white(),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),

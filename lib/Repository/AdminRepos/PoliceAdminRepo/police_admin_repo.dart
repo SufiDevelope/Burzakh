@@ -18,7 +18,8 @@ abstract class PoliceAdminRepo {
   );
 
   Future<dynamic> approvePoliceCaseApi(caseId, userId, File clearanceForm);
-  Future<dynamic> uploadAdditionalDocument(caseId, userid, File additionalDocument);
+  Future<dynamic> uploadAdditionalDocument(
+      caseId, userid, File additionalDocument);
 
-
+  Future<dynamic> bypassPoliceClearance(caseId, userId);
 }

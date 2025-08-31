@@ -13,6 +13,7 @@ analyzer:
     deprecated_member_use: ignore
     invalid_use_of_protected_member: ignore
     constant_pattern_never_matches_value_type: ignore
+    unnecessary_null_comparison: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

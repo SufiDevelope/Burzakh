@@ -102,4 +102,11 @@ class PoliceAdminHttpRepo implements PoliceAdminRepo {
         AppApis.uploadAdditionalDoc(caseId), data, true);
     return response["message"];
   }
+
+  @override
+  Future bypassPoliceClearance(caseId, userId) async {
+    final response = await _api.getPostApiResponse(
+        AppApis.bypassPoliceClearance(caseId, userId), {}, false);
+    return response["message"];
+  }
 }

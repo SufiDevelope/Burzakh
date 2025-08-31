@@ -111,7 +111,9 @@ class _HomeCaseWidgetState extends State<HomeCaseWidget> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DocumnetProgressCaseDetails(
-                        caseId: widget.caseModel.id.toString()),
+                      caseId: widget.caseModel.id.toString(),
+                      user_id: widget.caseModel.userId.toString(),
+                    ),
                   ));
             },
             iconColor: Colors.white,

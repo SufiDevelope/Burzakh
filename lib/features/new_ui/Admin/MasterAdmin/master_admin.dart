@@ -1,9 +1,11 @@
 import 'package:burzakh/Extenshion/extenshion.dart';
 import 'package:burzakh/core/app/di_container.dart';
+import 'package:burzakh/core/theme/AppColor.dart';
 import 'package:burzakh/data/Response/status.dart';
 import 'package:burzakh/features/authentication/presentation/page/login_01.dart';
 import 'package:burzakh/features/home/presentation/controller/cubit.dart';
 import 'package:burzakh/features/new_ui/Admin/MasterAdmin/super_admin_controller.dart';
+import 'package:burzakh/features/new_ui/Admin/MasterAdmin/view_all_casses.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -274,36 +276,73 @@ class _MasterAdminState extends State<MasterAdmin> {
             child: Column(
               children: [
                 // Search Bar
-                Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF1F5F9),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: const Color(0xFFE2E8F0),
-                      width: 1,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFFE2E8F0),
+                            width: 1,
+                          ),
+                        ),
+                        child: TextField(
+                          onChanged: (value) {
+                            controller.filterUser(value);
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Search users by name or email...',
+                            hintStyle: TextStyle(
+                              color: const Color(0xFF64748B),
+                              fontSize: context.mh * 0.016,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.search_rounded,
+                              color: Color(0xFF64748B),
+                            ),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: context.mw * 0.04,
+                              vertical: context.mh * 0.015,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: TextField(
-                    onChanged: (value) {
-                      controller.filterUser(value);
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Search users by name or email...',
-                      hintStyle: TextStyle(
-                        color: const Color(0xFF64748B),
-                        fontSize: context.mh * 0.016,
+                    0.02.pw(context),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewAllCases(),
+                            ));
+                      },
+                      child: Container(
+                        width: context.mw * 0.3,
+                        height: context.mw * 0.1,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: const Color(0xFFE2E8F0),
+                            width: 1,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "View Casess",
+                            style: TextStyle(
+                              fontSize: context.mh * 0.015,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                      prefixIcon: const Icon(
-                        Icons.search_rounded,
-                        color: Color(0xFF64748B),
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: context.mw * 0.04,
-                        vertical: context.mh * 0.015,
-                      ),
-                    ),
-                  ),
+                    )
+                  ],
                 ),
                 SizedBox(height: context.mh * 0.015),
               ],
@@ -311,7 +350,6 @@ class _MasterAdminState extends State<MasterAdmin> {
           ),
 
           Expanded(child: Obx(() {
-           
             switch (controller.rxRequestStatusForAllUser.value) {
               case Status.loading:
                 return const Center(child: CircularProgressIndicator());
