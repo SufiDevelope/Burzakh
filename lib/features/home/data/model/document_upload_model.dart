@@ -3,16 +3,16 @@ import 'dart:io';
 class DocumentUploadModel {
   String userId;
   String restingPlace;
-  File deathNotificationFile;
-  File hospitalCertification;
-  File passportOrEmirateIdFront;
-  File passportOrEmirateIdBack;
+  File? deathNotificationFile;
+  File? hospitalCertification;
+  File? passportOrEmirateIdFront;
+  File? passportOrEmirateIdBack;
   final String nameofdeceased;
   final String dateofdeath;
   final String locationofdeath;
   final String age;
   final String gender;
-  File pickPassportFile;
+  File? pickPassportFile;
 
   DocumentUploadModel({
     required this.userId,

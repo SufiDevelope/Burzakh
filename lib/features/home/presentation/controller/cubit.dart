@@ -62,8 +62,7 @@ class HomeCubit extends Cubit<HomeState> {
     isLoadingCases(true);
     recentActivity();
     _emiratiScvCubit.getCdaModel();
-    var response = await _useCase.getCases(
-        userId: userModel!.id.toString());
+    var response = await _useCase.getCases(userId: userModel!.id.toString());
     if (response is Left) {
       showMessage(response.asLeft(), isError: true);
       if (retryCaseFunction < 3) {
@@ -139,8 +138,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<String> recentActivity() async {
     emit(HomeInit());
-    var response = await _useCase.recentActivity(
-        userId: userModel!.id.toString());
+    var response =
+        await _useCase.recentActivity(userId: userModel!.id.toString());
     log("74893232443");
     if (response is Right) {
       var data = response.asRight();
@@ -318,34 +317,32 @@ class HomeCubit extends Cubit<HomeState> {
       restingPlace,
       TextEditingController age,
       TextEditingController gender) async {
-    if (deathNoti == null ||
-        hospitalCerti == null ||
-        passportBack == null ||
-        passportFront == null) {
-      showMessage("Please add all fields");
-      return "400";
-    } else {
+    try {
+      log("Here");
       isLoading(true);
       DocumentUploadModel model = DocumentUploadModel(
         userId: "${userModel!.id}",
         restingPlace: restingPlace == 1 ? "Hospital" : "Home",
-        deathNotificationFile: deathNoti!,
-        hospitalCertification: hospitalCerti!,
-        passportOrEmirateIdFront: passportFront!,
-        passportOrEmirateIdBack: passportBack!,
+        deathNotificationFile: deathNoti,
+        hospitalCertification: hospitalCerti,
+        passportOrEmirateIdFront: passportFront,
+        passportOrEmirateIdBack: passportBack,
         nameofdeceased: nameOfDeceased.text,
         dateofdeath: deathDate.text,
         locationofdeath: deathLocation.text,
         age: age.text,
         gender: gender.text,
-        pickPassportFile: pickPassportFile!,
+        pickPassportFile: pickPassportFile,
       );
+      log("Here 2");
       var response = await _useCase.uploadDocument(model: model);
       if (response is Left) {
+        log("Here 3");
         showMessage(response.asLeft(), isError: true);
         isLoading(false);
         return "400";
       } else {
+        log("Here 4 ${response}");
         var data = response.asRight();
         if (data.statusCode >= 200 && data.statusCode <= 300) {
           log("92743 ${data.body}");
@@ -356,11 +353,18 @@ class HomeCubit extends Cubit<HomeState> {
           isLoading(false);
           return "200";
         } else {
-          showMessage("${jsonDecode(data.body)['errors']}", isError: true);
+          log("Here 5");
           isLoading(false);
+          log("92743 ${jsonDecode(data.body)}");
+          showMessage("${jsonDecode(data.body)['errors']}", isError: true);
           return "400";
         }
       }
+    } catch (e) {
+      log("Here 6");
+      isLoading(false);
+      log("92743 $e");
+      return "400";
     }
   }
 

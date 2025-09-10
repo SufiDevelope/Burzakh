@@ -390,6 +390,8 @@ class PoliceAdminController extends GetxController {
     }
   }
 
+  final _homeCubit = DiContainer().sl<HomeCubit>();
+
   void bypassPoliceClearance(caseId, userId, BuildContext context) {
     try {
       repo.bypassPoliceClearance(caseId, userId).then((value) {
@@ -403,6 +405,7 @@ class PoliceAdminController extends GetxController {
             behavior: SnackBarBehavior.floating,
           ),
         );
+        _homeCubit.getUserCases();
       }).onError((error, stackTrace) {
         log("error ${error.toString()}");
         ScaffoldMessenger.of(context).showSnackBar(

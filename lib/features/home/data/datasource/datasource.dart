@@ -62,32 +62,46 @@ class DocumentProcess extends DocumentDataSource {
       request.fields['age'] = model.age;
       request.fields['gender'] = model.gender;
 
-      // Add files
-      request.files.add(await http.MultipartFile.fromPath(
-        'death_notification_file',
-        model.deathNotificationFile.path,
-        filename: model.deathNotificationFile.path.split('/').last,
-      ));
-      request.files.add(await http.MultipartFile.fromPath(
-        'passport_or_emirate_id_front',
-        model.passportOrEmirateIdFront.path,
-        filename: model.passportOrEmirateIdFront.path.split('/').last,
-      ));
-      request.files.add(await http.MultipartFile.fromPath(
-        'passport_or_emirate_id_back',
-        model.passportOrEmirateIdBack.path,
-        filename: model.passportOrEmirateIdBack.path.split('/').last,
-      ));
-      request.files.add(await http.MultipartFile.fromPath(
-        'hospital_certificate',
-        model.hospitalCertification.path,
-        filename: model.hospitalCertification.path.split('/').last,
-      ));
-      request.files.add(await http.MultipartFile.fromPath(
-        'passport_document',
-        model.pickPassportFile.path,
-        filename: model.pickPassportFile.path.split('/').last,
-      ));
+      // Add files only if not null
+      if (model.deathNotificationFile != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'death_notification_file',
+          model.deathNotificationFile!.path,
+          filename: model.deathNotificationFile!.path.split('/').last,
+        ));
+      }
+
+      if (model.passportOrEmirateIdFront != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'passport_or_emirate_id_front',
+          model.passportOrEmirateIdFront!.path,
+          filename: model.passportOrEmirateIdFront!.path.split('/').last,
+        ));
+      }
+
+      if (model.passportOrEmirateIdBack != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'passport_or_emirate_id_back',
+          model.passportOrEmirateIdBack!.path,
+          filename: model.passportOrEmirateIdBack!.path.split('/').last,
+        ));
+      }
+
+      if (model.hospitalCertification != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'hospital_certificate',
+          model.hospitalCertification!.path,
+          filename: model.hospitalCertification!.path.split('/').last,
+        ));
+      }
+
+      if (model.pickPassportFile != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'passport_document',
+          model.pickPassportFile!.path,
+          filename: model.pickPassportFile!.path.split('/').last,
+        ));
+      }
 
       var response = await request.send();
       var result = await http.Response.fromStream(response);
